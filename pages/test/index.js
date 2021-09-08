@@ -1,6 +1,10 @@
+import HomeLayout from "../../Layouts/HomeLayout";
+
 const Test = () => {
     return (
-        <h2 className="text-center">Test Page</h2>
+        <HomeLayout>
+            hello
+        </HomeLayout>
     )
 }
 
