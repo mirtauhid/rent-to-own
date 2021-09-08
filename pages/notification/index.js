@@ -1,8 +1,12 @@
 import Notification from "../../Components/Notification"
+import Header from "../../Layouts/HomeLayout/Header"
 
 const NotificationPage = () => {
     return (
-        <Notification/>
+        <div>
+            <Header/>
+            <Notification/>
+        </div>
     )
 }
 
