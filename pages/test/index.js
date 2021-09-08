@@ -1,6 +1,8 @@
+import Notification from "../../Components/Notification"
+
 const Test = () => {
     return (
-        <h2 className="text-center">Test Page</h2>
+        <Notification/>
     )
 }
 
