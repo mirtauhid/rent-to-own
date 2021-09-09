@@ -43,11 +43,11 @@ const ForgetPasswordModal = ({isOpen}) => {
 
             <form onSubmit={formik.handleSubmit} className="mb-10">
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="newPassword">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="newPassword">
                     New password
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="newPassword"
                         type="password"
                         placeholder="Enter your new password here"
@@ -63,11 +63,11 @@ const ForgetPasswordModal = ({isOpen}) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confPassword">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="confPassword">
                     Confirm password
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="confPassword"
                         type="password"
                         placeholder="Confirm your password here"
@@ -84,7 +84,7 @@ const ForgetPasswordModal = ({isOpen}) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Submit</button>
+                    <button type="submit" className="w-full bg-primary text-white rounded py-2">Submit</button>
                 </div>
             </form>
         </CustomModal>

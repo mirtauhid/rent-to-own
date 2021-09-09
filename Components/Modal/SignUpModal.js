@@ -57,11 +57,11 @@ const SignUpModal = ({ isOpen }) => {
 
             <form onSubmit={formik.handleSubmit}>
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="email">
                         Email
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         type="text"
                         placeholder="Email"
@@ -78,11 +78,11 @@ const SignUpModal = ({ isOpen }) => {
 
                 <div className="flex mb-2">
                     <div className="w-1/2 p-2">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                        <label className="block text-secondary text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                             id="firstName"
                             type="text"
                             placeholder="First Name"
@@ -97,11 +97,11 @@ const SignUpModal = ({ isOpen }) => {
                         }
                     </div>
                     <div className="w-1/2 p-2">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                        <label className="block text-secondary text-sm font-bold mb-2" htmlFor="lastName">
                             Last Name
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                             id="lastName"
                             type="text"
                             placeholder="Last Name"
@@ -118,11 +118,11 @@ const SignUpModal = ({ isOpen }) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="acountType">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="acountType">
                         Account Type
                     </label>
                     <select
-                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="acountType"
                         placeholder="Acount Type"
                         name="acountType"
@@ -140,11 +140,11 @@ const SignUpModal = ({ isOpen }) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="password">
                         Password
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="password"
                         type="password"
                         placeholder="Password"
@@ -178,11 +178,11 @@ const SignUpModal = ({ isOpen }) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign up</button>
+                    <button type="submit" className="w-full bg-primary text-white rounded py-2">Sign up</button>
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <p>Already have an account? <span className="text-green-400 font-bold">Login</span>
+                    <p>Already have an account? <span className="text-primary font-bold">Login</span>
                     </p>
                 </div>
             </form>
