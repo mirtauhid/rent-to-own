@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import CustomModal from './CustomModal';
 
-const ForgetPasswordModal = () => {
+const ForgetPasswordModal = ({isOpen}) => {
 
     const validate = values => {
         const errors = {};
@@ -38,7 +38,7 @@ const ForgetPasswordModal = () => {
         },
     });
     return (
-        <CustomModal isOpen={true}>
+        <CustomModal isOpen={isOpen}>
             <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Change Password</h2>
 
             <form onSubmit={formik.handleSubmit} className="mb-10">
