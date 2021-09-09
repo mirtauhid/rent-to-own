@@ -1,30 +1,6 @@
 import { useFormik } from 'formik';
 import React from 'react';
-import Modal from 'react-modal';
-
-const customStyles = {
-    overlay: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.2)'
-    },
-    content: {
-        border: 0,
-        width: '100%',
-        padding: 0,
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: 'rgba(0, 0, 0, 0)'
-    },
-};
-
+import CustomModal from './CustomModal';
 
 const SignUpModal = ({ isOpen }) => {
 
@@ -52,7 +28,7 @@ const SignUpModal = ({ isOpen }) => {
         if (!values.password) {
             errors.password = 'Password required';
         }
-        
+
         if (values.isAgree === false) {
             errors.isAgree = 'You must agree';
         }
@@ -75,151 +51,142 @@ const SignUpModal = ({ isOpen }) => {
             alert(JSON.stringify(values, null, 2));
         },
     });
-    console.log(formik.errors);
-    console.log(formik.values);
-    const handleOnChange = (e) => { console.log(e); }
     return (
-        <div>
-            <Modal
-                style={customStyles}
-                isOpen={isOpen}>
-                <div className="rounded-2xl px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 m-auto bg-white">
-                    <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
+        <CustomModal isOpen={isOpen}>
+            <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
 
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="w-full mb-2 p-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                Email
-                            </label>
-                            <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="email"
-                                type="text"
-                                placeholder="Email"
-                                name="email"
-                                value={formik.values.email}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {
-                                formik.touched.email && formik.errors.email &&
-                                <div className="text-red-500 mt-2">{formik.errors.email}</div>
-                            }
-                        </div>
-
-                        <div className="flex mb-2">
-                            <div className="w-1/2 p-2">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
-                                    First Name
-                                </label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="firstName"
-                                    type="text"
-                                    placeholder="First Name"
-                                    name="firstName"
-                                    value={formik.values.firstName}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                />
-                                {
-                                    formik.touched.firstName && formik.errors.firstName &&
-                                    <div className="text-red-500 mt-2">{formik.errors.firstName}</div>
-                                }
-                            </div>
-                            <div className="w-1/2 p-2">
-                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
-                                    Last Name
-                                </label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="lastName"
-                                    type="text"
-                                    placeholder="Last Name"
-                                    name="lastName"
-                                    value={formik.values.lastName}
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                />
-                                {
-                                    formik.touched.lastName && formik.errors.lastName &&
-                                    <div className="text-red-500 mt-2">{formik.errors.lastName}</div>
-                                }
-                            </div>
-                        </div>
-
-                        <div className="w-full mb-2 p-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="acountType">
-                                Account Type
-                            </label>
-                            <select
-                                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="acountType"
-                                placeholder="Acount Type"
-                                name="acountType"
-                                onChange={(e)=>formik.setFieldValue("accountType", e.target.value)}
-                            >
-                                <option value="">Select a type</option>
-                                <option value="type-1">Type 1</option>
-                                <option value="type-2">Type 2</option>
-                                <option value="type-3">Type 3</option>
-                            </select>
-                            {
-                                formik.errors.accountType &&
-                                <div className="text-red-500 mt-2">{formik.errors.accountType}</div>
-                            }
-                        </div>
-
-                        <div className="w-full mb-2 p-2">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                Password
-                            </label>
-                            <input
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password"
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                value={formik.values.password}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                            />
-                            {
-                                formik.touched.password && formik.errors.password &&
-                                <div className="text-red-500 mt-2">{formik.errors.password}</div>
-                            }
-                        </div>
-
-                        <div className="mb-6 p-2">
-                            <label className=" block text-gray-500 font-bold">
-                                <input 
-                                className="mr-2 leading-tight" 
-                                type="checkbox" 
-                                name="isAgree"
-                                checked={formik.values.isAgree}
-                                onChange={formik.handleChange}/>
-                                <span class="text-sm">
-                                    I agree to RealEstate privacy policy and terms of use
-                                </span>
-                            </label>
-                            {
-                                formik.errors.isAgree &&
-                                <div className="text-red-500 mt-2">{formik.errors.isAgree}</div>
-                            }
-                        </div>
-
-                        <div className="w-full mb-2 p-2">
-                            <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign up</button>
-                        </div>
-
-                        <div className="w-full mb-2 p-2">
-                            <p>Already have an account? <span className="text-green-400 font-bold">Login</span>
-                            </p>
-                        </div>
-                    </form>
+            <form onSubmit={formik.handleSubmit}>
+                <div className="w-full mb-2 p-2">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                        Email
+                    </label>
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email"
+                        type="text"
+                        placeholder="Email"
+                        name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.email && formik.errors.email &&
+                        <div className="text-red-500 mt-2">{formik.errors.email}</div>
+                    }
                 </div>
-            </Modal>
-        </div>
+
+                <div className="flex mb-2">
+                    <div className="w-1/2 p-2">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
+                            First Name
+                        </label>
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="firstName"
+                            type="text"
+                            placeholder="First Name"
+                            name="firstName"
+                            value={formik.values.firstName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        {
+                            formik.touched.firstName && formik.errors.firstName &&
+                            <div className="text-red-500 mt-2">{formik.errors.firstName}</div>
+                        }
+                    </div>
+                    <div className="w-1/2 p-2">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+                            Last Name
+                        </label>
+                        <input
+                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="lastName"
+                            type="text"
+                            placeholder="Last Name"
+                            name="lastName"
+                            value={formik.values.lastName}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        {
+                            formik.touched.lastName && formik.errors.lastName &&
+                            <div className="text-red-500 mt-2">{formik.errors.lastName}</div>
+                        }
+                    </div>
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="acountType">
+                        Account Type
+                    </label>
+                    <select
+                        className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="acountType"
+                        placeholder="Acount Type"
+                        name="acountType"
+                        onChange={(e) => formik.setFieldValue("accountType", e.target.value)}
+                    >
+                        <option value="">Select a type</option>
+                        <option value="type-1">Type 1</option>
+                        <option value="type-2">Type 2</option>
+                        <option value="type-3">Type 3</option>
+                    </select>
+                    {
+                        formik.errors.accountType &&
+                        <div className="text-red-500 mt-2">{formik.errors.accountType}</div>
+                    }
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                        Password
+                    </label>
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.password && formik.errors.password &&
+                        <div className="text-red-500 mt-2">{formik.errors.password}</div>
+                    }
+                </div>
+
+                <div className="mb-6 p-2">
+                    <label className=" block text-gray-500 font-bold">
+                        <input
+                            className="mr-2 leading-tight"
+                            type="checkbox"
+                            name="isAgree"
+                            checked={formik.values.isAgree}
+                            onChange={formik.handleChange} />
+                        <span class="text-sm">
+                            I agree to RealEstate privacy policy and terms of use
+                        </span>
+                    </label>
+                    {
+                        formik.errors.isAgree &&
+                        <div className="text-red-500 mt-2">{formik.errors.isAgree}</div>
+                    }
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign up</button>
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <p>Already have an account? <span className="text-green-400 font-bold">Login</span>
+                    </p>
+                </div>
+            </form>
+        </CustomModal>
     );
 };
 
