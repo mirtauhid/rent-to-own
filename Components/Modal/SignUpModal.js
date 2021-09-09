@@ -46,11 +46,15 @@ const SignUpModal = ({ isOpen }) => {
         }
 
         if (!values.accountType) {
-            errors.accountType = 'Last name required';
+            errors.accountType = 'Account type required';
         }
 
         if (!values.password) {
-            errors.password = 'Last name required';
+            errors.password = 'Password required';
+        }
+        
+        if (values.isAgree === false) {
+            errors.isAgree = 'You must agree';
         }
 
         return errors;
@@ -63,7 +67,7 @@ const SignUpModal = ({ isOpen }) => {
             lastName: '',
             accountType: '',
             password: '',
-            isAgree: true
+            isAgree: false
         },
         validate,
         onSubmit: values => {
@@ -72,6 +76,7 @@ const SignUpModal = ({ isOpen }) => {
         },
     });
     console.log(formik.errors);
+    console.log(formik.values);
     const handleOnChange = (e) => { console.log(e); }
     return (
         <div>
@@ -94,9 +99,10 @@ const SignUpModal = ({ isOpen }) => {
                                 name="email"
                                 value={formik.values.email}
                                 onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
                             {
-                                formik.errors.email &&
+                                formik.touched.email && formik.errors.email &&
                                 <div className="text-red-500 mt-2">{formik.errors.email}</div>
                             }
                         </div>
@@ -114,9 +120,10 @@ const SignUpModal = ({ isOpen }) => {
                                     name="firstName"
                                     value={formik.values.firstName}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                 />
                                 {
-                                    formik.errors.firstName &&
+                                    formik.touched.firstName && formik.errors.firstName &&
                                     <div className="text-red-500 mt-2">{formik.errors.firstName}</div>
                                 }
                             </div>
@@ -132,9 +139,10 @@ const SignUpModal = ({ isOpen }) => {
                                     name="lastName"
                                     value={formik.values.lastName}
                                     onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
                                 />
                                 {
-                                    formik.errors.lastName &&
+                                    formik.touched.lastName && formik.errors.lastName &&
                                     <div className="text-red-500 mt-2">{formik.errors.lastName}</div>
                                 }
                             </div>
@@ -149,16 +157,16 @@ const SignUpModal = ({ isOpen }) => {
                                 id="acountType"
                                 placeholder="Acount Type"
                                 name="acountType"
-                                onChange={formik.handleChange}
+                                onChange={(e)=>formik.setFieldValue("accountType", e.target.value)}
                             >
-                                <option>Select a type</option>
-                                <option>Type 1</option>
-                                <option>Type 2</option>
-                                <option>Type 3</option>
+                                <option value="">Select a type</option>
+                                <option value="type-1">Type 1</option>
+                                <option value="type-2">Type 2</option>
+                                <option value="type-3">Type 3</option>
                             </select>
                             {
-                                formik.errors.acountType &&
-                                <div className="text-red-500 mt-2">{formik.errors.acountType}</div>
+                                formik.errors.accountType &&
+                                <div className="text-red-500 mt-2">{formik.errors.accountType}</div>
                             }
                         </div>
 
@@ -174,9 +182,10 @@ const SignUpModal = ({ isOpen }) => {
                                 name="password"
                                 value={formik.values.password}
                                 onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                             />
                             {
-                                formik.errors.password &&
+                                formik.touched.password && formik.errors.password &&
                                 <div className="text-red-500 mt-2">{formik.errors.password}</div>
                             }
                         </div>
