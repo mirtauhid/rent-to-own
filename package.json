@@ -7,10 +7,12 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
+    "formik": "^2.2.9",
     "next": "latest",
     "rc-tabs": "^11.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-modal": "^3.14.3",
     "react-redux": "^7.2.5"
   },
   "devDependencies": {
