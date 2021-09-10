@@ -8,21 +8,12 @@
   "dependencies": {
     "@react-google-maps/api": "^2.2.0",
     "@reduxjs/toolkit": "^1.6.1",
-<<<<<<< HEAD
-    "google-map-react": "^2.1.10",
-    "i": "^0.3.6",
-    "next": "^11.1.2",
-    "npm": "^7.22.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
-=======
     "formik": "^2.2.9",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
->>>>>>> cf056db7f8f394c709d89666bb4a1b1c0613688f
     "react-redux": "^7.2.5"
   },
   "devDependencies": {

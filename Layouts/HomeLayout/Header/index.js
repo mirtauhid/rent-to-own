@@ -17,7 +17,7 @@ const Header = () => {
                     <div className={'flex justify-center items-center smd:justify-end'}>
                         <ul className="flex items-center">
                             <li className={'mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1'}>List your property</li>
-                            <li className={'mx-3 mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1'}>Sign up</li>
+                            <li className={'mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1'}>Sign up</li>
                             <li className={'mx-3 text-xs xs:text-sm px-4 cursor-pointer py-1 border-gray-400 border rounded hover:bg-primary hover:text-white transition-all duration-300 font-semibold'}>Login</li>
                         </ul>
                     </div>
