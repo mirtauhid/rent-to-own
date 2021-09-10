@@ -1,12 +1,15 @@
 import { Provider } from "react-redux";
-import store from '../redux/store'
+import store from '../redux/store';
+import Layout from '../Layouts/HomeLayout';
 
 import '../styles/global.css'
 
 const App = ({ Component, pageProps }) => {
   return (
       <Provider store={store}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
       )
 
