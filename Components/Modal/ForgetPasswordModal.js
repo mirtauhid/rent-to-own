@@ -58,7 +58,7 @@ const ForgetPasswordModal = ({isOpen}) => {
                     />
                     {
                         formik.touched.newPassword && formik.errors.newPassword &&
-                        <div className="text-red-500 mt-2">{formik.errors.newPassword}</div>
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.newPassword}</div>
                     }
                 </div>
 
@@ -79,7 +79,7 @@ const ForgetPasswordModal = ({isOpen}) => {
                     />
                     {
                         formik.touched.confPassword && formik.errors.confPassword &&
-                        <div className="text-red-500 mt-2">{formik.errors.confPassword}</div>
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.confPassword}</div>
                     }
                 </div>
 

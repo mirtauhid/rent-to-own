@@ -54,7 +54,7 @@ const SignInModal = ({ isOpen }) => {
                     />
                     {
                         formik.touched.email && formik.errors.email &&
-                        <div className="text-red-500 mt-2">{formik.errors.email}</div>
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.email}</div>
                     }
                 </div>
 
@@ -75,7 +75,7 @@ const SignInModal = ({ isOpen }) => {
                     />
                     {
                         formik.touched.password && formik.errors.password &&
-                        <div className="text-red-500 mt-2">{formik.errors.password}</div>
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.password}</div>
                     }
                 </div>
 
