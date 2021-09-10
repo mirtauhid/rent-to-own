@@ -25,12 +25,12 @@ const customStyles = {
 };
 
 
-const CustomModal = ({children,isOpen}) => {
+const CustomModal = ({children,isOpen,customClasses}) => {
     return (
         <Modal
             style={customStyles}
             isOpen={isOpen}>
-            <div className="rounded-2xl px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 m-auto bg-white">
+            <div className={customClasses ? customClasses : "rounded-2xl px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3"} >
                 {/* Children goes here */}
                 {children}
             </div>
