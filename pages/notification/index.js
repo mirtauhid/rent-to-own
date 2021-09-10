@@ -1,6 +1,6 @@
-import HomeLayout from "../../Layouts/HomeLayout"
+import HomeLayout from "../../Layouts/HomeLayout";
 
-const NotificationPage = () => {
+const Notification = () => {
     return (
         <HomeLayout>
             <div className="lg:w-1/2 md:w-2/3 mx-auto my-24 text-center px-4">
@@ -8,7 +8,7 @@ const NotificationPage = () => {
                 <p className="lg:text-xl md:text-lg text-md mt-5">However, we realize things may change for you down the road.  When you do meet our minimum requirements, please complete another application at that time.</p>
             </div>
         </HomeLayout>
-    )
-}
+    );
+};
 
-export default NotificationPage
+export default Notification;
