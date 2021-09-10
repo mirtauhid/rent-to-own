@@ -37,56 +37,56 @@ const ForgetPasswordModal = () => {
         },
     });
     return (
-            <div className="rounded-2xl border px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 mx-auto my-12 bg-white">
-                <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Change Password</h2>
+        <div className="rounded-2xl border px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 mx-auto my-12 bg-white">
+            <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Change Password</h2>
 
-                <form onSubmit={formik.handleSubmit} className="mb-10">
-                    <div className="w-full mb-2 p-2">
-                        <label className="block text-secondary text-sm font-bold mb-2" htmlFor="newPassword">
-                            New password
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                            id="newPassword"
-                            type="password"
-                            placeholder="Enter your new password here"
-                            name="newPassword"
-                            value={formik.values.newPassword}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {
-                            formik.touched.newPassword && formik.errors.newPassword &&
-                            <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.newPassword}</div>
-                        }
-                    </div>
+            <form onSubmit={formik.handleSubmit} className="mb-10">
+                <div className="w-full mb-2 p-2">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="newPassword">
+                        New password
+                    </label>
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                        id="newPassword"
+                        type="password"
+                        placeholder="Enter your new password here"
+                        name="newPassword"
+                        value={formik.values.newPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.newPassword && formik.errors.newPassword &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.newPassword}</div>
+                    }
+                </div>
 
-                    <div className="w-full mb-2 p-2">
-                        <label className="block text-secondary text-sm font-bold mb-2" htmlFor="confPassword">
-                            Confirm password
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                            id="confPassword"
-                            type="password"
-                            placeholder="Confirm your password here"
-                            autoComplete="off"
-                            name="confPassword"
-                            value={formik.values.confPassword}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
-                        {
-                            formik.touched.confPassword && formik.errors.confPassword &&
-                            <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.confPassword}</div>
-                        }
-                    </div>
+                <div className="w-full mb-2 p-2">
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="confPassword">
+                        Confirm password
+                    </label>
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                        id="confPassword"
+                        type="password"
+                        placeholder="Confirm your password here"
+                        autoComplete="off"
+                        name="confPassword"
+                        value={formik.values.confPassword}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.confPassword && formik.errors.confPassword &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.confPassword}</div>
+                    }
+                </div>
 
-                    <div className="w-full mb-2 p-2">
-                        <button type="submit" className="w-full bg-primary text-white rounded py-2">Submit</button>
-                    </div>
-                </form>
-            </div>
+                <div className="w-full mb-2 p-2">
+                    <button type="submit" className="w-full bg-primary text-white rounded py-2">Submit</button>
+                </div>
+            </form>
+        </div>
     );
 };
 

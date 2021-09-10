@@ -3,9 +3,9 @@ import HomeLayout from "../../Layouts/HomeLayout"
 
 const ForgetPassword = () => {
     return (
-            <HomeLayout>
-            <ForgetPasswordModal/>
-            </HomeLayout>
+        <HomeLayout>
+            <ForgetPasswordModal />
+        </HomeLayout>
     )
 }
 
