@@ -2,8 +2,8 @@ import React from 'react'
 
 const index = ({title, host, price}) => {
     return (
-        <div className="w-52">
-            <img src="https://picsum.photos/200/300" alt="" className="h-40 max-w-full sm:w-60 w-72 rounded" />
+        <div className="w-full">
+            <img src="https://picsum.photos/200/300" alt="" className="h-40 w-full object-center object-cover rounded" />
             <div className="flex flex-row pt-3">
                 <div className="flex-1"> 
                     <h1 className="text-sm flex-1 text-primary">${price}</h1>
