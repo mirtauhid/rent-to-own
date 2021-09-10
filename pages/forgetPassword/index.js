@@ -1,12 +1,11 @@
 import ForgetPasswordModal from "../../Components/Modal/ForgetPassword"
-import Header from "../../Layouts/HomeLayout/Header"
+import HomeLayout from "../../Layouts/HomeLayout"
 
 const ForgetPassword = () => {
     return (
-        <div>
-            <Header/>
+            <HomeLayout>
             <ForgetPasswordModal/>
-        </div>
+            </HomeLayout>
     )
 }
 

@@ -37,8 +37,7 @@ const ForgetPasswordModal = () => {
         },
     });
     return (
-        <div className="h-100 flex justify-center">
-            <div className="rounded-2xl border px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 m-auto bg-white">
+            <div className="rounded-2xl border px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 mx-auto my-12 bg-white">
                 <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Change Password</h2>
 
                 <form onSubmit={formik.handleSubmit} className="mb-10">
@@ -88,7 +87,6 @@ const ForgetPasswordModal = () => {
                     </div>
                 </form>
             </div>
-        </div>
     );
 };
 
