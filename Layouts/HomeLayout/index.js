@@ -1,11 +1,12 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import Header from "./Header";
+import Footer from './Footer'
 
 const HomeLayout = ({children}) => {
     return (
         <>
             <Head>
-                <title>Rent-to-Own Realty - Explore available rent-to-owns in your area</title>
+                <title>Canada’s Only Rent-to-Own Marketplace</title>
                 <meta name="description" content="Why wait? With Rent-to-Own Realty, you get the ability to buy your dream home today." />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="shortcut icon" type="image/jpg" href="/images/fav.jpg"/>
@@ -17,6 +18,7 @@ const HomeLayout = ({children}) => {
             {
                 children
             }
+            <Footer />
         </>
     )
 }
