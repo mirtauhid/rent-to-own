@@ -1,0 +1,31 @@
+.settings-wrapper{
+    height:2000px;
+   @apply w-full md:w-2/3 lg:w-1/2 font-kum md:ml-32 mt-10 md:mt-20 relative overflow-hidden;
+}
+
+.settings-tab{
+ @apply flex gap-5 mt-10 mb-1;
+}
+
+.settings-tab-underline{
+    background: rgb(212, 211, 211);
+    height:2px;
+    @apply w-full relative;
+}
+
+.settings-tab-active-underline{
+    position: absolute;
+    top:-1px;
+    left:0;
+    background-color: green;
+    height:5px;
+    @apply w-24 bg-primary rounded-sm;
+}
+
+.settings-profile-clock-icon{
+    
+}
+
+
+
+

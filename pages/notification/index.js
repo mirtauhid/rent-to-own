@@ -1,13 +1,14 @@
 import Notification from "../../Components/Notification"
-import Header from "../../Layouts/HomeLayout/Header"
+import HomeLayout from "../../Layouts/HomeLayout"
 
 const NotificationPage = () => {
     return (
-        <div>
-            <Header/>
-            <Notification/>
-        </div>
-    )
+      <div>
+        <HomeLayout>
+          <Notification />
+        </HomeLayout>
+      </div>
+    );
 }
 
 export default NotificationPage
