@@ -15,8 +15,8 @@ const BuyerSignUpModal = ({ isOpen }) => {
             isOpen={!isClose}
             customClasses={
                 steps.first && steps.second
-                    ? "rounded-lg px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 border-b-8 border-green-500"
-                    : "rounded m-auto bg-white w-3/4 md:w-2/3 lg:w-5/7 xl:2/3"
+                    ? "rounded-lg px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 border-b-8 border-green-500 my-16"
+                    : "rounded m-auto bg-white w-3/4 md:w-2/3 lg:w-5/7 xl:2/3 my-6"
             }>
 
             {/* For first & second steps only */}
