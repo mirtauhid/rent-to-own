@@ -6,7 +6,7 @@ import { TiSocialGooglePlus } from "react-icons/ti";
 import CustomModal from './CustomModal';
 
 const BuyerSignUpModal = ({ isOpen }) => {
-    const [steps, setSteps] = useState({ first: false, second: false, third: false })
+    const [steps, setSteps] = useState({ first: true, second: false, third: false })
     const [isClose, setIsClose] = useState(!isOpen)
 
     return (
