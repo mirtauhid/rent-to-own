@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Amenities from './Amenities';
 import Description from './Description';
 import HouseRules from './HouseRules';
+import Location from './Location';
 import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
@@ -16,11 +17,11 @@ const ListPropertyPages = ({ children }) => {
     })
     return (
         <div className="container mx-auto py-7">
-            <div className="flex">
-                <div className="w-1/4">
+            <div className="md:flex">
+                <div className="md:w-1/4 px-3">
                     <TimeLine steps={steps} />
                 </div>
-                <div className="w-3/4 shadow-md border border-gray-100">
+                <div className="md:w-3/4 shadow-md border border-gray-100">
                     {/* This is for the 1st step (Description Page) */}
                     {
                         !steps.first &&
@@ -46,8 +47,9 @@ const ListPropertyPages = ({ children }) => {
                     {
                         steps.first &&
                         steps.second &&
-                        !steps.third &&
-                        <HouseRules steps={steps} setSteps={setSteps} />
+                        steps.third &&
+                        !steps.fourth &&
+                        <Location steps={steps} setSteps={setSteps} />
                     }
                 </div>
             </div>
