@@ -1,12 +1,13 @@
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { FaEnvelope, FaTimes } from "react-icons/fa";
+import { FaEnvelope, FaFacebookF, FaTimes } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { TiSocialGooglePlus } from "react-icons/ti";
 import CustomModal from './CustomModal';
 
 const BuyerSignUpModal = ({ isOpen }) => {
-    const [steps, setSteps] = useState({ first: false, second: false, third: false });
+    const [steps, setSteps] = useState({ first: true, second: false, third: false });
     const [isClose, setIsClose] = useState(!isOpen);
     const [isLogin, setIsLogin] = useState(false)
 
@@ -66,10 +67,10 @@ const CommonPart = ({ steps, setSteps, setIsClose, isLogin, setIsLogin }) => {
                 <div className="px-20">
                     <div className="flex px-5">
                         <button
-                        onClick={()=>setIsLogin(false)}
+                            onClick={() => setIsLogin(false)}
                             className={"w-1/2 border-b-4 text-xl font-medium pb-1 " + (!isLogin ? "border-primary" : "border-white")}>Join</button>
                         <button
-                        onClick={()=>setIsLogin(true)}
+                            onClick={() => setIsLogin(true)}
                             className={"w-1/2 border-b-4 text-xl font-medium pb-1 " + (isLogin ? "border-primary" : "border-white")}>Log In</button>
                     </div>
                 </div>
@@ -88,8 +89,8 @@ const CommonPart = ({ steps, setSteps, setIsClose, isLogin, setIsLogin }) => {
 
                 {/* This is for Login  */}
                 {
-                    isLogin && 
-                    <LogIn/>
+                    isLogin &&
+                    <LogIn />
                 }
             </div>
         </div>
@@ -130,7 +131,7 @@ const SecondStep = ({ steps, setSteps }) => {
         const errors = {};
 
         if (!values.email) {
-            errors.email = 'Required';
+            errors.email = 'Email is required';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
             errors.email = 'Invalid email address';
         }
@@ -308,9 +309,99 @@ const ThirdStep = ({ setIsClose }) => {
 };
 
 const LogIn = () => {
+    const validate = values => {
+        const errors = {};
+
+        if (!values.email) {
+            errors.email = 'Eamil is equired';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+
+        if (!values.password) {
+            errors.password = 'Password required';
+        }
+        return errors;
+    };
+
+    const formik = useFormik({
+        initialValues: {
+            email: 'abc@gmail.com',
+            password: '12345678',
+        },
+        validate,
+        onSubmit: values => {
+            console.log(values);
+        },
+    });
+
+    console.log(formik.values);
     return (
         <div>
-            Sign in
+            <form
+                onSubmit={formik.handleSubmit}
+                className="p-6">
+                {/* For login Form */}
+                <div className="w-full mb-2 p-2">
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Email"
+                        name="email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.email && formik.errors.email &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.email}</div>
+                    }
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Password"
+                        name="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {
+                        formik.touched.password && formik.errors.password &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.password}</div>
+                    }
+                </div>
+
+                <div className="flex px-2 mb-4">
+                    <label className="w-1/2 block text-gray-500 font-bold text-left">
+                        <input
+                            className="mr-2 leading-tight"
+                            type="checkbox"
+                            name="save" />
+                        <span class="text-sm">
+                            Keep me signed in
+                        </span>
+                    </label>
+                    <div className="w-1/2 text-right">
+                        <a href="#" className="text-right inline-block text-primary">Forget Password</a>
+                    </div>
+                </div>
+
+                <div className="flex mb-4">
+                    <div className="w-1/2 px-2">
+                        <button className="rounded-full w-full bg-blue-600 hover:bg-blue-800 text-white border border-blue-600 py-3 px-3"><FaFacebookF className="inline mr-2" style={{ fill: 'white' }} /> Facebook</button>
+                    </div>
+                    <div className="w-1/2 px-2">
+                        <button className="rounded-full w-full bg-white hover:bg-gray-100 border py-3 px-3"><FcGoogle className="inline mr-2" /> Google</button>
+                    </div>
+                </div>
+
+                <div className="w-full mb-2 p-2">
+                    <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign In</button>
+                </div>
+            </form>
         </div>
     );
 };
