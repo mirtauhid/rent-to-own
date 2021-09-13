@@ -27,6 +27,8 @@ const SignUpModal = ({ isOpen }) => {
 
         if (!values.password) {
             errors.password = 'Password required';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            errors.password = 'Password must be at least 8 character, a capital & a small letter, a number & a special character required!'
         }
 
         if (values.isAgree === false) {

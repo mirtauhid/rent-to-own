@@ -146,6 +146,8 @@ const SecondStep = ({ steps, setSteps }) => {
 
         if (!values.password) {
             errors.password = 'Password required';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            errors.password = 'Password must be at least 8 character, a capital & a small letter, a number & a special character required!'
         }
 
         if (!values.phone) {
@@ -197,7 +199,7 @@ const SecondStep = ({ steps, setSteps }) => {
                         />
                         {
                             formik.touched.firstName && formik.errors.firstName &&
-                            <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.firstName}</div>
+                            <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.firstName}</div>
                         }
                     </div>
 
@@ -213,7 +215,7 @@ const SecondStep = ({ steps, setSteps }) => {
                         />
                         {
                             formik.touched.lastName && formik.errors.lastName &&
-                            <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.lastName}</div>
+                            <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.lastName}</div>
                         }
                     </div>
                 </div>
@@ -230,7 +232,7 @@ const SecondStep = ({ steps, setSteps }) => {
                     />
                     {
                         formik.touched.email && formik.errors.email &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.email}</div>
+                        <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.email}</div>
                     }
                 </div>
 
@@ -246,7 +248,7 @@ const SecondStep = ({ steps, setSteps }) => {
                     />
                     {
                         formik.touched.password && formik.errors.password &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.password}</div>
+                        <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.password}</div>
                     }
                 </div>
 
@@ -265,7 +267,7 @@ const SecondStep = ({ steps, setSteps }) => {
                     </div>
                     {
                         formik.touched.phone && formik.errors.phone &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.phone}</div>
+                        <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.phone}</div>
                     }
                 </div>
 
@@ -320,7 +322,10 @@ const LogIn = () => {
 
         if (!values.password) {
             errors.password = 'Password required';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            errors.password = 'Password must be at least 8 character, a capital & a small letter, a number & a special character required!'
         }
+
         return errors;
     };
 
@@ -335,7 +340,6 @@ const LogIn = () => {
         },
     });
 
-    console.log(formik.values);
     return (
         <div>
             <form
@@ -354,7 +358,7 @@ const LogIn = () => {
                     />
                     {
                         formik.touched.email && formik.errors.email &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.email}</div>
+                        <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.email}</div>
                     }
                 </div>
 
@@ -370,7 +374,7 @@ const LogIn = () => {
                     />
                     {
                         formik.touched.password && formik.errors.password &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.password}</div>
+                        <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.password}</div>
                     }
                 </div>
 
