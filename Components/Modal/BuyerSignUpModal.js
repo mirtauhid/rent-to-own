@@ -254,7 +254,7 @@ const SecondStep = ({ steps, setSteps }) => {
 
                 <div className="w-full mb-2 p-2">
                     <div className="relative shadow border rounded h-10 py-2 px-3 text-gray-700 leading-tight overflow-hidden">
-                        <span class="absolute top-0 left-0 text-center inline-block h-full bg-gray-200 p-2">+1</span>
+                        <span className="absolute top-0 left-0 text-center inline-block h-full bg-gray-200 p-2">+1</span>
                         <input
                             className="absolute block left-10 w-full appearance-none focus:outline-none focus:shadow-outline"
                             type="text"
@@ -384,7 +384,7 @@ const LogIn = () => {
                             className="mr-2 leading-tight"
                             type="checkbox"
                             name="save" />
-                        <span class="text-sm">
+                        <span className="text-sm">
                             Keep me signed in
                         </span>
                     </label>
