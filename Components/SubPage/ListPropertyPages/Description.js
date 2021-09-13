@@ -74,7 +74,7 @@ const Description = ({ steps, setSteps }) => {
     });
     return (
         <div className="p-6">
-            <h2 className="text-center text-2xl font-bold my-5">Add Your Home</h2>
+            <h2 className="uppercase text-center text-2xl font-bold my-5">Add Your Home</h2>
             <form onSubmit={formik.handleSubmit} >
 
                 <div className="w-full mb-2 p-2">

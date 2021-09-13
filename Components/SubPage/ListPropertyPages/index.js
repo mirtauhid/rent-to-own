@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Amenities from './Amenities';
 import Description from './Description';
 import TimeLine from './TimeLine';
 
@@ -23,6 +24,12 @@ const ListPropertyPages = ({ children }) => {
                     {
                         !steps.first &&
                         <Description steps={steps} setSteps={setSteps} />
+                    }
+
+                    {/* This is for the first step (Description Page) */}
+                    {
+                        steps.first &&
+                        <Amenities steps={steps} setSteps={setSteps} />
                     }
                 </div>
             </div>
