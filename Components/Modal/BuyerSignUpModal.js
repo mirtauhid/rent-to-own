@@ -6,8 +6,9 @@ import { TiSocialGooglePlus } from "react-icons/ti";
 import CustomModal from './CustomModal';
 
 const BuyerSignUpModal = ({ isOpen }) => {
-    const [steps, setSteps] = useState({ first: false, second: false, third: false })
-    const [isClose, setIsClose] = useState(!isOpen)
+    const [steps, setSteps] = useState({ first: false, second: false, third: false });
+    const [isClose, setIsClose] = useState(!isOpen);
+    const [isLogin, setIsLogin] = useState(false)
 
     return (
         <CustomModal
@@ -24,12 +25,14 @@ const BuyerSignUpModal = ({ isOpen }) => {
                 <CommonPart
                     steps={steps}
                     setSteps={setSteps}
-                    setIsClose={setIsClose} />
+                    setIsClose={setIsClose}
+                    isLogin={isLogin}
+                    setIsLogin={setIsLogin} />
             }
 
             {/* For third step */}
             {
-                steps.first && steps.second &&
+                !isLogin && steps.first && steps.second &&
                 <ThirdStep setIsClose={setIsClose} />
             }
         </CustomModal>
@@ -39,7 +42,7 @@ const BuyerSignUpModal = ({ isOpen }) => {
 export default BuyerSignUpModal;
 
 
-const CommonPart = ({ steps, setSteps, setIsClose }) => {
+const CommonPart = ({ steps, setSteps, setIsClose, isLogin, setIsLogin }) => {
     return (
         <div className="md:flex">
             <div className="hidden lg:block lg:w-1/2 relative">
@@ -59,17 +62,34 @@ const CommonPart = ({ steps, setSteps, setIsClose }) => {
                         <FaTimes />
                     </button>
                 </div>
+                {/* For switching form */}
+                <div className="px-20">
+                    <div className="flex px-5">
+                        <button
+                        onClick={()=>setIsLogin(false)}
+                            className={"w-1/2 border-b-4 text-xl font-medium pb-1 " + (!isLogin ? "border-primary" : "border-white")}>Join</button>
+                        <button
+                        onClick={()=>setIsLogin(true)}
+                            className={"w-1/2 border-b-4 text-xl font-medium pb-1 " + (isLogin ? "border-primary" : "border-white")}>Log In</button>
+                    </div>
+                </div>
 
                 {/* This is the first step of signup  */}
                 {
-                    !steps.first &&
+                    !isLogin && !steps.first &&
                     <FirstStep steps={steps} setSteps={setSteps} />
                 }
 
                 {/* This is the second step of signup  */}
                 {
-                    steps.first && !steps.second &&
+                    !isLogin && steps.first && !steps.second &&
                     <SecondStep steps={steps} setSteps={setSteps} />
+                }
+
+                {/* This is for Login  */}
+                {
+                    isLogin && 
+                    <LogIn/>
                 }
             </div>
         </div>
@@ -80,13 +100,6 @@ const CommonPart = ({ steps, setSteps, setIsClose }) => {
 const FirstStep = ({ steps, setSteps }) => {
     return (
         <>
-            {/* For switching form */}
-            <div className="px-20">
-                <div className="flex px-5 border-b border-primary">
-                    <button className="w-1/2 border-b-4 border-primary text-xl font-medium pb-1">Join</button>
-                    <button className="w-1/2 border-b-4 border-white text-xl font-medium pb-1">Log In</button>
-                </div>
-            </div>
             <div className="p-16 lg:p-12 xl:px-16 xl:py-24">
                 <Link href="#">
                     <a className="block py-4 xl:py-5 text-center text-white bg-red-500 rounded-full mb-4">
@@ -290,6 +303,14 @@ const ThirdStep = ({ setIsClose }) => {
                     </p>
                 </div>
             </div>
+        </div>
+    );
+};
+
+const LogIn = () => {
+    return (
+        <div>
+            Sign in
         </div>
     );
 };
