@@ -15,11 +15,11 @@ const ListPropertyPages = ({ children }) => {
     })
     return (
         <div className="container mx-auto py-7">
-            <div className="flex">
-                <div className="w-1/4">
+            <div className="md:flex">
+                <div className="md:w-1/4 px-3">
                     <TimeLine steps={steps} />
                 </div>
-                <div className="w-3/4 shadow-md border border-gray-100">
+                <div className="md:w-3/4 shadow-md border border-gray-100">
                     {/* This is for the first step (Description Page) */}
                     {
                         !steps.first &&
