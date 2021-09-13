@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Amenities from './Amenities';
 import Description from './Description';
+import HouseRules from './HouseRules';
 import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
@@ -20,16 +21,33 @@ const ListPropertyPages = ({ children }) => {
                     <TimeLine steps={steps} />
                 </div>
                 <div className="w-3/4 shadow-md border border-gray-100">
-                    {/* This is for the first step (Description Page) */}
+                    {/* This is for the 1st step (Description Page) */}
                     {
                         !steps.first &&
                         <Description steps={steps} setSteps={setSteps} />
                     }
 
-                    {/* This is for the first step (Description Page) */}
+                    {/* This is for the 2nd step (Amenities Page) */}
                     {
                         steps.first &&
+                        !steps.second &&
                         <Amenities steps={steps} setSteps={setSteps} />
+                    }
+
+                    {/* This is for the 3rd step (House Rules Page) */}
+                    {
+                        steps.first &&
+                        steps.second &&
+                        !steps.third &&
+                        <HouseRules steps={steps} setSteps={setSteps} />
+                    }
+
+                    {/* This is for the 4th step (House Rules Page) */}
+                    {
+                        steps.first &&
+                        steps.second &&
+                        !steps.third &&
+                        <HouseRules steps={steps} setSteps={setSteps} />
                     }
                 </div>
             </div>
