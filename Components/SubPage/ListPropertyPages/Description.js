@@ -64,7 +64,7 @@ const Description = ({ steps, setSteps }) => {
             petPolicy: 'demo',
             amOwner: true,
             isAgree: true,
-            isInsurance: true,
+            isInsurance: true
         },
         validate,
         onSubmit: values => {
