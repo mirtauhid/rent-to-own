@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Amenities from './Amenities';
 import Description from './Description';
 import HouseRules from './HouseRules';
+import Location from './Location';
+import Pricing from './Pricing';
 import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
@@ -47,7 +49,17 @@ const ListPropertyPages = ({ children }) => {
                         steps.second &&
                         steps.third &&
                         !steps.fourth &&
-                        <HouseRules steps={steps} setSteps={setSteps} />
+                        <Location steps={steps} setSteps={setSteps} />
+                    }
+
+                    {/* This is for the 5th step (Pricing Page) */}
+                    {
+                        steps.first &&
+                        steps.second &&
+                        steps.third &&
+                        steps.fourth &&
+                        !steps.fifth &&
+                        <Pricing steps={steps} setSteps={setSteps} />
                     }
                 </div>
             </div>

@@ -5,7 +5,7 @@ const HouseRules = ({ steps, setSteps }) => {
     const validate = values => {
         const errors = {};
 
-        if (!values.houseRules) { errors.houseRules = 'Required' }
+        if (!values.houseRules) { errors.houseRules = 'You have to write your house rules!' }
 
         return errors;
     };
@@ -41,7 +41,7 @@ const HouseRules = ({ steps, setSteps }) => {
                         onBlur={formik.handleBlur}
                     ></textarea>
                     {
-                        formik.touched.name && formik.errors.houseRules &&
+                        formik.touched.houseRules && formik.errors.houseRules &&
                         <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.houseRules}</div>
                     }
                 </div>
