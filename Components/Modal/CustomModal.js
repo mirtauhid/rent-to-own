@@ -24,9 +24,10 @@ const customStyles = {
 const CustomModal = ({children,isOpen,customClasses}) => {
     return (
         <Modal
+        ariaHideApp={false}
             style={customStyles}
             isOpen={isOpen}>
-            <div className={customClasses ? customClasses : "rounded-2xl px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3"} >
+            <div className={customClasses ? customClasses : "rounded-2xl px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 my-6"} >
                 {/* Children goes here */}
                 {children}
             </div>
