@@ -67,6 +67,7 @@ const Photos = ({ steps, setSteps }) => {
                             type="file"
                             placeholder="Please enter your upload here..."
                             name="upload"
+                            accept="image/*"
                             onChange={onSelectFile}
                         />
                     </label>
