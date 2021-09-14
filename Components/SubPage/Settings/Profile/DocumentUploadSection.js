@@ -32,7 +32,7 @@ const DocumentUploadSection = () => {
 
   // };
   return (
-    <section className="border-2 mt-10 mb-10 px-5 py-8">
+    <section className="border-2 mt-10 mb-10 px-5 py-8 rounded-lg">
       <p className="text-lg font-bold">For Rent-to-Own Applicants:</p>
       <p className="text-gray-400 mt-2">Upload the following documents</p>
 

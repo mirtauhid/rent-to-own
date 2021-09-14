@@ -7,7 +7,7 @@ const ContactInfo = () => {
   const [showNumberField, setShowNumberField] = useState(false);
 
   return (
-    <div className="border-2 px-5 py-5">
+    <div className="border-2 px-5 py-5 rounded-lg">
       <p className="text-lg font-bold mb-2">Contact info</p>
 
       <div className="flex border-2 rounded-md px-2">
@@ -55,7 +55,7 @@ const ContactInfo = () => {
             </div>
             <Field
               type="text"
-              placeholder="joe00008@gmail.com"
+              placeholder="1234567890"
               className="focus:outline-none p-2 w-full  rounded-md text-gray-500"
               name="secondaryPhoneNumber"
             />

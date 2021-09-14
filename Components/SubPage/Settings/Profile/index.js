@@ -8,7 +8,7 @@ import Requirement from "./Requirement";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import "yup-phone";
+
 
 //formik properties starts
 
@@ -71,7 +71,7 @@ const Profile = ({ tab }) => {
         tab === "profile"
           ? "transform translate-x-0"
           : "transform -translate-x-full"
-      } mb-10`}
+      } mb-10 `}
     >
       <Formik
         initialValues={initialValues}
@@ -79,7 +79,7 @@ const Profile = ({ tab }) => {
         onSubmit={onSubmit}
       >
         <Form>
-          <div className="border-2 px-5 ">
+          <div className="border-2 px-5 rounded-lg">
             <div className="flex gap-5 mt-7">
               <div className="w-16 h-16 rounded-full overflow-hidden">
                 <img

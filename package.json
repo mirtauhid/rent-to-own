@@ -18,8 +18,7 @@
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
     "react-redux": "^7.2.5",
-    "yup": "^0.32.9",
-    "yup-phone": "^1.2.19"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.4",
