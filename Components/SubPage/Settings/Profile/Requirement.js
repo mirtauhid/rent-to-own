@@ -3,10 +3,12 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { FaCheckCircle } from "react-icons/fa";
 import style from "../style.module.css";
 
-const Requirement = ({formik,setYesButtonClicked}) => {
+const Requirement = ({setYesButtonClicked}) => {
+
+  
 
   const handleSubmit = () =>{
-    formik.handleSubmit();
+    
     setYesButtonClicked(true);
   }
 
@@ -56,6 +58,7 @@ const Requirement = ({formik,setYesButtonClicked}) => {
           </p>
           <div className="flex justify-center mt-3 mb-4">
             <button
+              type="button"
               className="bg-primary text-white px-3 py-1 rounded-3xl uppercase"
               onClick={()=>handleSubmit()}
             >
