@@ -11,8 +11,7 @@ const ListPropertyPages = ({ children }) => {
         third: false,
         fourth: false,
         fifth: false,
-        sixth: false,
-        seventh: false
+        sixth: false
     })
     return (
         <div className="container mx-auto py-7">
@@ -46,7 +45,8 @@ const ListPropertyPages = ({ children }) => {
                     {
                         steps.first &&
                         steps.second &&
-                        !steps.third &&
+                        steps.third &&
+                        !steps.fourth &&
                         <HouseRules steps={steps} setSteps={setSteps} />
                     }
                 </div>
