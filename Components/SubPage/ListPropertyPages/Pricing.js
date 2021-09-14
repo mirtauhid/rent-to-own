@@ -41,7 +41,7 @@ const Pricing = ({ steps, setSteps }) => {
         validate,
         onSubmit: values => {
             console.log(values);
-            setSteps({ ...steps, fourth: true })
+            setSteps({ ...steps, fifth: true })
         },
     });
 

@@ -35,7 +35,7 @@ const TimeLine = ({ steps }) => {
             </li>
             <li className="flex items-center h-12 cursor-pointer ">
                 <div className="relative w-7 h-5">
-                    <span className={"block absolute  rounded-full text-white text-sm text-center w-5 h-5 z-10 " + (steps.fifth ? "bg-primary" : "bg-gray-500")}>7</span>
+                    <span className={"block absolute  rounded-full text-white text-sm text-center w-5 h-5 z-10 " + (steps.fifth ? "bg-primary" : "bg-gray-500")}>6</span>
                 </div> Photos
             </li>
         </ul>

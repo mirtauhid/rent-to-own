@@ -3,16 +3,17 @@ import Amenities from './Amenities';
 import Description from './Description';
 import HouseRules from './HouseRules';
 import Location from './Location';
+import Photos from './Photos';
 import Pricing from './Pricing';
 import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
     const [steps, setSteps] = useState({
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
-        fifth: false,
+        first: true,
+        second: true,
+        third: true,
+        fourth: true,
+        fifth: true,
         sixth: false
     })
     return (
@@ -60,6 +61,17 @@ const ListPropertyPages = ({ children }) => {
                         steps.fourth &&
                         !steps.fifth &&
                         <Pricing steps={steps} setSteps={setSteps} />
+                    }
+
+                    {/* This is for the 6th step (Photos Page) */}
+                    {
+                        steps.first &&
+                        steps.second &&
+                        steps.third &&
+                        steps.fourth &&
+                        steps.fifth &&
+                        !steps.sixth &&
+                        <Photos steps={steps} setSteps={setSteps} />
                     }
                 </div>
             </div>
