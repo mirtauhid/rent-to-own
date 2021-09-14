@@ -9,7 +9,7 @@ const index = () => {
   const [tab, setTab] = useState("profile");
   return (
     <HomeLayout>
-      <div className={style["settings-wrapper"]}>
+      <div className={`${style["settings-wrapper"]} ${tab === "account" ? style["seetings-wrapper-for-account"]:null}`}>
         <p className="text-3xl text-gray-700 font-extrabold ml-5">
           Profile Settings
         </p>
@@ -33,7 +33,7 @@ const index = () => {
           <div
             className={`${style["settings-tab-active-underline"]} transform ${
               tab === "profile" ? "translate-x-0" : "translate-x-full"
-            } transition duration-500`}
+            } transition duration-300`}
           ></div>
         </div>
 

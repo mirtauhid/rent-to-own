@@ -1,6 +1,9 @@
 .settings-wrapper{
-    height:2000px;
    @apply w-full md:w-2/3 lg:w-1/2 font-kum md:ml-32 mt-10 md:mt-20 relative overflow-hidden;
+}
+
+.seetings-wrapper-for-account{
+    height:500px;
 }
 
 .settings-tab{
@@ -21,11 +24,6 @@
     height:5px;
     @apply w-24 bg-primary rounded-sm;
 }
-
-.settings-profile-clock-icon{
-    
-}
-
 
 
 
