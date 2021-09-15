@@ -54,17 +54,17 @@ const Description = ({ steps, setSteps }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            description: '',
-            homeType: '',
-            bedRooms: '',
-            bathRooms: '',
-            accomodates: '',
-            footage: '',
-            petPolicy: '',
-            amOwner: false,
-            isAgree: '',
-            isInsurance: '',
+            name: 'piash',
+            description: 'demo des',
+            homeType: 'demo',
+            bedRooms: 'demo',
+            bathRooms: 'demo',
+            accomodates: 'demo',
+            footage: 'demo',
+            petPolicy: 'demo',
+            amOwner: true,
+            isAgree: true,
+            isInsurance: true
         },
         validate,
         onSubmit: values => {
