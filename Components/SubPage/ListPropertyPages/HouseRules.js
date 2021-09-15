@@ -16,7 +16,6 @@ const HouseRules = ({ steps, setSteps }) => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
             setSteps({ ...steps, third: true })
         },
     });

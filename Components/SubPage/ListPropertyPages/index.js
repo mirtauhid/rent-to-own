@@ -9,11 +9,11 @@ import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
     const [steps, setSteps] = useState({
-        first: true,
-        second: true,
-        third: true,
-        fourth: true,
-        fifth: true,
+        first: false,
+        second: false,
+        third: false,
+        fourth: false,
+        fifth: false,
         sixth: false
     })
     return (

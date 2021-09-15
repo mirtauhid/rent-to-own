@@ -22,11 +22,11 @@ const Photos = ({ steps, setSteps }) => {
     const onSelectFile = async (e) => {
         // setFileName(e.target.files[0]?.name);
         const base64 = await convertBase64(e.target.files[0]);
-        console.log(base64);
+
         if (base64 instanceof Error) {
             return;
         }
-        console.log(base64)
+
         setPhotos([...photos, base64])
         setFiles([...files, e.target.files[0]])
     };
