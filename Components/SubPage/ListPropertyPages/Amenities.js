@@ -33,7 +33,6 @@ const Amenities = ({ steps, setSteps }) => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
             setSteps({ ...steps, second: true })
         },
     });
