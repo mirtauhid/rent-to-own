@@ -68,7 +68,6 @@ const Description = ({ steps, setSteps }) => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
             setSteps({ ...steps, first: true })
         },
     });
