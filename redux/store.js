@@ -1,9 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import counterReducer from "./slices/counter";
+import settingsFormReducer from "./slices/settingsForm";
 
 
 const RootReducer = combineReducers({
-  counter: counterReducer
+  counter: counterReducer,
+  settingsForm:settingsFormReducer
 })
 
 
