@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1, "state": "Calgary", "areas": 
+        [
+            {
+                "id": 18,
+                "location": "British Columbia"
+            },
+            {
+                "id": 19,
+                "location": "New York City"
+            }
+        ]
+    },
+    {
+        "id": 2, "state": "Columbia", "areas": 
+        [
+            {
+                "id": 31,
+                "location": "British Columbia"
+            },
+            {
+                "id": 41,
+                "location": "New York City"
+            }
+        ]
+    },
+    {
+        "id": 3, "state": "New South wales", "areas": 
+        [
+            {
+                "id": 51,
+                "location": "British Columbia"
+            },
+            {
+                "id": 61,
+                "location": "New York City"
+            }
+        ]
+    },
+    {
+        "id": 4, "state": "Vancovour", "areas": 
+        [
+            {
+                "id": 71,
+                "location": "British Columbia"
+            },
+            {
+                "id": 81,
+                "location": "New York City"
+            }
+        ]
+    }
+] 

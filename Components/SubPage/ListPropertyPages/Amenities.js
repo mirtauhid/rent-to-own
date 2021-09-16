@@ -5,7 +5,7 @@ const Amenities = ({ steps, setSteps }) => {
     const validate = values => {
         const errors = {};
 
-        if (!values.wifi) { errors.wifi = 'Required' }
+        // if (!values.wifi) { errors.wifi = 'Required' }
 
         return errors;
     };
@@ -33,7 +33,6 @@ const Amenities = ({ steps, setSteps }) => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
             setSteps({ ...steps, second: true })
         },
     });
