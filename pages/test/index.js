@@ -1,9 +1,10 @@
+import MakeAnOffer from "../../Components/Modal/MakeAnOffer";
 import HomeLayout from "../../Layouts/HomeLayout";
 
 const Test = () => {
     return (
         <HomeLayout>
-            hello
+            <MakeAnOffer isOpen={true}/>
         </HomeLayout>
     )
 }
