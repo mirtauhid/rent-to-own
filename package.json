@@ -8,7 +8,6 @@
   "dependencies": {
     "@react-google-maps/api": "^2.2.0",
     "@reduxjs/toolkit": "^1.6.1",
-    "react-icons": "^4.2.0",
     "formik": "^2.2.9",
     "next": "latest",
     "rc-tabs": "^11.10.1",

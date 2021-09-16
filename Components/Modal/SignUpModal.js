@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { FaTimes } from "react-icons/fa";
 import CustomModal from './CustomModal';
 
 const SignUpModal = ({ isOpen }) => {
+    const [isClose, setIsClose] = useState(!isOpen);
 
     const validate = values => {
         const errors = {};
@@ -27,6 +29,8 @@ const SignUpModal = ({ isOpen }) => {
 
         if (!values.password) {
             errors.password = 'Password required';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            errors.password = 'Password must be at least 8 character, a capital & a small letter, a number & a special character required!'
         }
 
         if (values.isAgree === false) {
@@ -52,7 +56,15 @@ const SignUpModal = ({ isOpen }) => {
         },
     });
     return (
-        <CustomModal isOpen={isOpen}>
+        <CustomModal isOpen={!isClose}>
+            {/* For cross button  */}
+            <div className="text-right px-4">
+                <button
+                    className="p-2 rounded hover:bg-gray-200 text-2xl"
+                    onClick={() => setIsClose(true)}>
+                    <FaTimes />
+                </button>
+            </div>
             <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
 
             <form onSubmit={formik.handleSubmit}>
@@ -118,14 +130,14 @@ const SignUpModal = ({ isOpen }) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="acountType">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="accountType">
                         Account Type
                     </label>
                     <select
                         className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="acountType"
+                        id="accountType"
                         placeholder="Acount Type"
-                        name="acountType"
+                        name="accountType"
                         onChange={(e) => formik.setFieldValue("accountType", e.target.value)}
                     >
                         <option value="">Select a type</option>
