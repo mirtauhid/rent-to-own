@@ -5,35 +5,83 @@ import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import HomeLayout from '../../Layouts/HomeLayout';
 
 const index = () => {
-    const data = require('./data.json');
+    const stateData = require('./locations');
     const [areaData, setAreaData] = React.useState();
-    //addind selection and checkbox property in data
-    React.useEffect(() => {
-        const stateData = require('./locations');
-        setAreaData(
-            stateData.map(d => {
-                return {
-                    select: false,
-                    id: d.id,
-                    state: d.state,
-                    areas: d.areas.map(d => {
-                        return {
-                            id: d.id,
-                            location: d.location,
-                            checkbox: false,
-                        }
-                    }),
-                }
-            })
-        )
-    }, [])
     const [filterState, setFilterState] = React.useState(true);
-    //checkbox
-    const onChangeValue = input => e => {
-        
+    const [filterOptions, setFilterOptions] = React.useState();
+    const [listingType, setListingType] = React.useState(2);
+
+    const resetAll = () => {
+        setAreaData(stateData.map(d => {
+            return {
+                select: false,
+                id: d.id,
+                state: d.state,
+                areas: d.areas.map(d => {
+                    return {
+                        id: d.id,
+                        location: d.location,
+                        checkbox: false,
+                        places: d.places
+                    }
+                }),
+            }
+        }))
+    }
+
+    const initialData = () => {
+        const dummy = [];
+        areaData?.map(step1 => {
+            step1.areas.map(step2 => {
+                step2.places.map(step3 => {
+                    dummy.push(step3);
+                })
+            })
+        })
+        setFilterOptions(dummy);
     }
     const clearAll = () => {
+        setListingType(2)
+        resetAll();
+        initialData()
+    }
 
+    //reset all
+    React.useEffect(() => {
+        resetAll();
+    }, [stateData])
+    
+    //initial data
+    React.useEffect(() => {
+        initialData();
+        //doFilter();
+    }, [areaData])
+    
+    //checkbox
+    const onChangeValue = input => e => {
+        setListingType(e.target.value);
+        console.log('qq',e.target.value)
+        console.log(listingType);
+    }
+
+    const doFilter = async () => {
+        const holder = [];
+        await areaData?.map(step1 => {
+            if(step1.select === true) {
+                step1.areas.map(step2 => {
+                    if (step2.checkbox === true) {
+                        step2.places.map(step3 => {
+                            holder.push(step3);
+                        })
+                    }
+                })
+            }
+        })
+
+        
+        const dd = 
+        listingType != 2 && holder.filter(item => item.type == listingType)
+        setFilterOptions(dd ? dd : holder);   
     }
 
     return (
@@ -41,7 +89,7 @@ const index = () => {
         <div className="px-5 md:flex md:flex-row">
             {/* Filter */}
             <div className="smd:w-1/3 flex justify-center">
-                <div className="w-40 mt-10">
+                <div className="w-40 my-10">
                     <div className="flex flex-row justify-between items-center">
                         <p className="text-xs">FILTER</p>
                         <div 
@@ -60,38 +108,40 @@ const index = () => {
                     </div>
                     { filterState ? (
                         <div>
-                            <div className="pt-2" />
-                            <hr className=""/>
-                            {/* List */}
-                            <p className="text-xs pt-4">LISTING TYPES</p>
-                            <div className="pt-2 text-xs">
-                                <input 
-                                    type="radio" 
-                                    className="pl-4 checked:bg-red"
-                                    value="quoteafterorder"
-                                    name="deliveryFeeOption"
-                                    onChange={onChangeValue("deliveryFeeOption")}
-                                /> All Listing Types
+                            <div>
+                                <div className="pt-2" />
+                                <hr className=""/>
+                                {/* List */}
+                                <p className="text-xs pt-4">LISTING TYPES</p>
+                                <div className="pt-2 text-xs">
+                                    <input 
+                                        type="radio" 
+                                        className="pl-4 checked:bg-red"
+                                        value={2}
+                                        name="listingType"
+                                        onChange={onChangeValue("listingType")}
+                                    /> All Listing Types
+                                </div>
+                                <div className="pt-2 text-xs">
+                                    <input 
+                                        type="radio" 
+                                        className="pl-4"
+                                        value={0}
+                                        name="listingType"
+                                        onChange={onChangeValue("listingType")}
+                                    /> Available Properties
+                                </div>
+                                <div className="pt-2 text-xs">
+                                    <input 
+                                        type="radio" 
+                                        value={1}
+                                        name="listingType"
+                                        onChange={onChangeValue("listingType")}
+                                    /> Available Properties - Online Payments
+                                </div>
+                                <div className="pt-4"></div>
+                                <hr className=""/>
                             </div>
-                            <div className="pt-2 text-xs">
-                                <input 
-                                    type="radio" 
-                                    className="pl-4"
-                                    value="quoteafterorder"
-                                    name="deliveryFeeOption"
-                                    onChange={onChangeValue("deliveryFeeOption")}
-                                /> Available Properties
-                            </div>
-                            <div className="pt-2 text-xs">
-                                <input 
-                                    type="radio" 
-                                    value="quoteafterorder"
-                                    name="deliveryFeeOption"
-                                    onChange={onChangeValue("deliveryFeeOption")}
-                                /> Available Properties - Online Payments
-                            </div>
-                            <div className="pt-4"></div>
-                            <hr className=""/>
                             {/* list of areas */}
                             { areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
@@ -221,6 +271,12 @@ const index = () => {
                                     />
                                 </div>
                             </div>
+                            <div 
+                                className="bg-primary mt-6 hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
+                                onClick={doFilter}
+                            >
+                                <p className="text-xs text-gray-100 scale-75">FILTER</p>
+                            </div>
                         </div>
                     ) : null}
                 </div>
@@ -228,13 +284,15 @@ const index = () => {
             {/* Cards for single property*/}
             <div
                 className="grid flex-2 grid-cols-1 smd:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 justify-center xl:grid-cols-3 py-5 gap-7 smd:gap-4">
-                {data?.map(item => (
+                {filterOptions?.map(item => (
                     <div key={item.id.toString()}>
                         <PropertyImage
                             key={item.id.toString()}
                             title={item.title}
-                            host={item.host}
+                            location={item.location}
                             price={item.price}
+                            description={item.description}
+                            details={item.details}
                         />
                     </div>
                 ))}
