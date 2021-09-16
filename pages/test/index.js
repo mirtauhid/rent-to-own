@@ -1,4 +1,4 @@
-import MakeAnOffer from "../../Components/Modal/MakeAnOffer/MakeAnOffer";
+import MakeAnOffer from "../../Components/Modal/MakeAnOffer";
 import HomeLayout from "../../Layouts/HomeLayout";
 
 const Test = () => {
