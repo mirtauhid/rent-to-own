@@ -1,9 +1,12 @@
-const Homepage = () => {
+
+import Homepage from "../Components/SubPage/Homepage"
+
+const index = () => {
 
   return (
-      <h2 className={'text-center'}>Hello world</h2>
+      <Homepage/>
   )
 
 }
 
-export default Homepage
+export default index
