@@ -1,8 +1,10 @@
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { FaTimes } from "react-icons/fa";
 import CustomModal from './CustomModal';
 
 const SignInModal = ({ isOpen }) => {
+    const [isClose, setIsClose] = useState(!isOpen);
 
     const validate = values => {
         const errors = {};
@@ -14,9 +16,9 @@ const SignInModal = ({ isOpen }) => {
         }
 
         if (!values.password) {
-            errors.password = 'Confirm password required';
-        } else if (values.password?.length < 6) {
-            errors.password = 'Password must be at least 6 character!';
+            errors.password = 'Password required';
+        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(values.password)) {
+            errors.password = 'Password must be at least 8 character, a capital & a small letter, a number & a special character required!'
         }
 
         return errors;
@@ -34,8 +36,16 @@ const SignInModal = ({ isOpen }) => {
         },
     });
     return (
-        <CustomModal isOpen={isOpen}>
-            <h2 className="uppercase text-center font-bold text-2xl my-10">Log In</h2>
+        <CustomModal isOpen={!isClose}>
+            {/* For cross button  */}
+            <div className="text-right px-4">
+                <button
+                    className="p-2 rounded hover:bg-gray-200 text-2xl"
+                    onClick={() => setIsClose(true)}>
+                    <FaTimes />
+                </button>
+            </div>
+            <h2 className="uppercase text-center font-bold text-2xl mb-10 mt-3">Log In</h2>
 
             <form onSubmit={formik.handleSubmit} className="mb-10">
                 <div className="w-full mb-2 p-2">

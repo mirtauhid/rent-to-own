@@ -16,8 +16,8 @@ const ExploreNeighborSlider = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     variableWidth: true,
-    touchMove:true,
-    swipeToSlide:true,
+    touchMove: true,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 600,
@@ -38,26 +38,24 @@ const ExploreNeighborSlider = () => {
   };
 
   return (
-    <div className="mx-5 md:mx-20 lg:mx-28 mt-10 h-80">
-      <div>
-        <Slider {...settings}>
-          {data.map((item, index) => {
-            if (index % 2 === 0) {
-              return (
-                <div style={{ width: "250px", marginRight: "12px" }}>
-                  <SingleImageCard name={item.name} />
-                </div>
-              );
-            } else {
-              return (
-                <div style={{ width: "350px" }}>
-                  <MultipleImageCard data={item}/>
-                </div>
-              );
-            }
-          })}
-        </Slider>
-      </div>
+    <div className="ml-5 md:ml-20 lg:ml-28 mt-10 h-80">
+      <Slider {...settings}>
+        {data.map((item, index) => {
+          if (index % 2 === 0) {
+            return (
+              <div style={{ width: "250px", marginRight: "12px" }} key={index}>
+                <SingleImageCard name={item.name} />
+              </div>
+            );
+          } else {
+            return (
+              <div style={{ width: "350px" }} key={index}>
+                <MultipleImageCard data={item} />
+              </div>
+            );
+          }
+        })}
+      </Slider>
     </div>
   );
 };

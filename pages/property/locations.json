@@ -1,0 +1,226 @@
+[
+    {
+        "id": 1, "state": "Calgary", "areas": 
+        [
+            {
+                "id": 185,
+                "location": "British Columbia",
+                "places": 
+                [
+                    {
+                        "id": 1448,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Eight Luxury Bedrooms combo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 699999,
+                        "sqft" : 1855,
+                        "bedroom": 8,
+                        "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 12129,
+                        "type": 1,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 799999,
+                        "sqft" : 1855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 2448,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 699999,
+                        "sqft" : 1855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 1186,
+                        "type": 1,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 799999,
+                        "sqft" : 1955,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    }
+                ]
+            },
+            {
+                "id": 187,
+                "location": "New York City",
+                "places": 
+                [
+                    {
+                        "id": 1128,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 699999,
+                        "sqft" : 2855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 11239,
+                        "type": 0,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 799999,
+                        "sqft" : 3995,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 24328,
+                        "type": 1,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 699999,
+                        "sqft" : 8855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 1246,
+                        "type": 0,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 799999,
+                        "sqft" : 4855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    }
+                ]
+            }
+
+        ]
+    },
+    {
+        "id": 2, "state": "Columbia", "areas": 
+        [
+            {
+                "id": 97,
+                "location": "British Columbia",
+                "places": 
+                [
+                    {
+                        "id": 313,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 899999,
+                        "sqft" : 9855,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 412,
+                        "type": 0,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 499999,
+                        "sqft" : 4155,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3, "state": "New South wales", "areas": 
+        [
+            {
+                "id": 51,
+                "location": "British Columbia",
+                "places": 
+                [
+                    {
+                        "id": 317,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 899999,
+                        "sqft" : 3555,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 418,
+                        "type": 1,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 499999,
+                        "sqft" : 4955,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4, "state": "Vancovour", "areas": 
+        [
+            {
+                "id": 71,
+                "location": "British Columbia",
+                "places": 
+                [
+                    {
+                        "id": 331,
+                        "type": 0,
+                        "location": "British Columbia",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 899999,
+                        "sqft" : 8655,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    },
+                    {
+                        "id": 411,
+                        "type": 1,
+                        "location": "New York City",
+                        "title": "Two Bedroom Condo",
+                        "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
+                        "price": 499999,
+                        "sqft" : 6585,
+                        "bedroom": 2,
+                            "bathroom": 2,
+                        "imageUrl": "https://picsum.photos/400/300"
+                    }
+                ]
+            }
+        ]
+    }
+] 
