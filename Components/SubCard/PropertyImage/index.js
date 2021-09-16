@@ -3,12 +3,12 @@ import { GoLocation } from "react-icons/go";
 import SubCardList from './SubCardList';
 import { AiOutlineHeart } from "react-icons/ai";
 
-const index = ({title, location, description, price, details}) => {
+const index = ({title, location, description, price, bedroom, bathroom, sqft, imageUrl}) => {
     return (
         <div className="w-full shadow-lg rounded-xl pb-4 relative">
             
             <div className="relative">
-                <img src="https://picsum.photos/400/300" alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
+                <img src={imageUrl} alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
                 <div className="bg-primary h-8 w-8 rounded-lg absolute right-8 bottom-0 flex justify-center items-center">
                     <AiOutlineHeart color="white" fill={"white"}/>
                 </div>
@@ -33,17 +33,17 @@ const index = ({title, location, description, price, details}) => {
                     <div className="h-12 min-w-9/12 bg-gray-200 flex flex-1 mr-4 smd:mr-1 md:mr-6 justify-between">
                         <SubCardList 
                             icon="/svgs/listProperty/9705.svg" 
-                            number={details.bedroom} 
+                            number={bedroom} 
                             title="Bedrooms"
                         />
                         <SubCardList 
                             icon="/svgs/listProperty/9701.svg" 
-                            number={details.bathroom} 
+                            number={bathroom} 
                             title="Bathrooms"
                         />
                         <SubCardList 
                             icon="/svgs/listProperty/9702.svg" 
-                            number={details.sqrt} 
+                            number={sqft} 
                             title="Sq Ft"
                         />
                     </div>

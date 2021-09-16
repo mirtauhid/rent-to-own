@@ -7,9 +7,12 @@ import HomeLayout from '../../Layouts/HomeLayout';
 const index = () => {
     const stateData = require('./locations');
     const [areaData, setAreaData] = React.useState();
+    const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState(2);
+    const [price, setPrice] = React.useState([0, 100]);
+    const [areaSqft, setAreaSqft] = React.useState([0, 100]);
 
     const resetAll = () => {
         setAreaData(stateData.map(d => {
@@ -38,12 +41,16 @@ const index = () => {
                 })
             })
         })
+        setInitData(dummy)
         setFilterOptions(dummy);
     }
+    //clear filtering
     const clearAll = () => {
-        setListingType(2)
+        setListingType(2);
+        setPrice([0, 100]);
+        setAreaSqft([0, 100]);
         resetAll();
-        initialData()
+        initialData();
     }
 
     //reset all
@@ -60,28 +67,34 @@ const index = () => {
     //checkbox
     const onChangeValue = input => e => {
         setListingType(e.target.value);
-        console.log('qq',e.target.value)
         console.log(listingType);
     }
 
+    //main filtering
     const doFilter = async () => {
         const holder = [];
         await areaData?.map(step1 => {
             if(step1.select === true) {
                 step1.areas.map(step2 => {
                     if (step2.checkbox === true) {
-                        step2.places.map(step3 => {
-                            holder.push(step3);
-                        })
+                        holder.push(step2.location);
                     }
                 })
             }
         })
-
         
-        const dd = 
-        listingType != 2 && holder.filter(item => item.type == listingType)
-        setFilterOptions(dd ? dd : holder);   
+        const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
+
+        const priceFilter = dummyAreaFilter.filter(
+            item => 
+                item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
+        )
+        
+        const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
+
+        const dummyListFilter = 
+        listingType != 2 && sqftFilter.filter(item => item.type == listingType)
+        setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter);   
     }
 
     return (
@@ -96,7 +109,7 @@ const index = () => {
                             className="bg-primary hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
                             onClick={clearAll}
                         >
-                            <p className="text-xs text-gray-100 scale-75">CLEAR</p>
+                            <p className="text-xs font-bold text-white scale-75">CLEAR</p>
                         </div>
                         <div className="justify-self-end cursor-pointer p-2" 
                             onClick={() => setFilterState(
@@ -198,12 +211,15 @@ const index = () => {
                                     className="bg-gray-400 text-white cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
                                     trackClassName="bg-gray-400 h-1"
-                                    defaultValue={[0, 100]}
+                                    value={price}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
                                     pearling
                                     minDistance={10}
+                                    //onBeforeChange={(value, index) => console.log(`onBeforeChange: ${JSON.stringify({ value, index })}`)}
+                                    onChange={(value, index) => setPrice(value) }
+                                    //onAfterChange={(value, index) => console.log(`onAfterChange: ${JSON.stringify({ value, index })}`)}
                                 />
                             </div>
 
@@ -212,19 +228,21 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-12 pt-1 pl-2"
+                                        className="w-14 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        //value={inputData.phone}
-                                        //onChange={handleChange('phone')}
+                                        value={price[0]*10000}
+                                        // onChange={() => {
+                                        //     const arr= [ ,value[1]]
+                                        // })}
                                     />
                                 </div>
-                                <div className="border ml-14">
+                                <div className="border ml-8">
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-12 pt-1 pl-2"
+                                        className="w-16 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
-                                        //value={inputData.phone}
+                                        value={price[1]*10000}
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
@@ -240,12 +258,13 @@ const index = () => {
                                     className="bg-gray-400 text-white cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
                                     trackClassName="bg-gray-400 h-1"
-                                    defaultValue={[0, 100]}
+                                    value={areaSqft}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
                                     pearling
                                     minDistance={10}
+                                    onChange={(value, index) => setAreaSqft(value)}
                                 />
                             </div>
 
@@ -254,9 +273,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-12 pt-1 pl-2"
+                                        className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        //value={inputData.phone}
+                                        value={areaSqft[0]*100}
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
@@ -264,9 +283,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-12 pt-1 pl-2"
+                                        className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
-                                        //value={inputData.phone}
+                                        value={areaSqft[1]*100}
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
@@ -275,7 +294,7 @@ const index = () => {
                                 className="bg-primary mt-6 hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
                                 onClick={doFilter}
                             >
-                                <p className="text-xs text-gray-100 scale-75">FILTER</p>
+                                <p className="text-xs font-bold text-white scale-75">FILTER</p>
                             </div>
                         </div>
                     ) : null}
@@ -292,7 +311,10 @@ const index = () => {
                             location={item.location}
                             price={item.price}
                             description={item.description}
-                            details={item.details}
+                            bedroom={item.bedroom}
+                            bathroom={item.bathroom}
+                            sqft={item.sqft}
+                            imageUrl={item.imageUrl}
                         />
                     </div>
                 ))}
