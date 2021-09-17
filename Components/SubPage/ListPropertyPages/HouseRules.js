@@ -29,7 +29,7 @@ const HouseRules = ({ steps, setSteps }) => {
                         House rules
                     </label>
                     <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                        className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                         id="houseRules"
                         type="text"
                         placeholder="Please describe your house rules"
