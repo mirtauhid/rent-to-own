@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import ImageCard from '../../Components/SubCard/ImageCard';
 import {BsSearch} from "react-icons/bs";
 import Pagination from '../../Components/Pagination';
+import HomeLayout from '../../Layouts/HomeLayout';
+import Link from 'next/link';
+
 import {
     GoogleMap,
     useLoadScript,
@@ -9,62 +12,9 @@ import {
     InfoWindow
 } from "@react-google-maps/api";
 
-export const data = [
-    {
-        id: 1, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 2, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 3, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 4, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 5, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 6, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 7, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 8, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 9, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-    {
-        id: 10, title: "Pizza", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 11, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 12, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 13, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 14, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 15, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 16, title: "Burger", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 17, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 18, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 19, title: "Hotdog", host: 'Hosted by Charles E.', price: 3999
-    }, {
-        id: 20, title: "Title is much more...", host: 'Hosted by Charles E.', price: 3999
-    },
-]
-
 const libraries = ["places"];
 const index = () => {
-    
+    const data = require('./data');
     const containerStyle = {
         height: '100vh', width: 'auto'
     };
@@ -119,6 +69,7 @@ const index = () => {
     if (loadError) return "Error";
     if (!isLoaded) return "Loading";
     return (
+        <HomeLayout>
         <>
             <div className="container px-3 mx-auto p-5 relative w-full">
                 <input
@@ -136,15 +87,20 @@ const index = () => {
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-2/3">
                         <div
-                            className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3 py-5 gap-7 smd:gap-4">
+                            className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3 py-5 gap-7 smd:gap-4"
+                        >
                             {currentPosts?.map(item => (
-                                <div>
-                                    <ImageCard
-                                        key={item.id.toString()}
-                                        title={item.title}
-                                        host={item.host}
-                                        price={item.price}
-                                    />
+                                <div className="cursor-pointer">
+                                    <Link href={'/housesearch/' + item.id} key={item.id}>
+                                        <a>
+                                        <ImageCard
+                                            key={item.id.toString()}
+                                            title={item.title}
+                                            host={item.host}
+                                            price={item.price}
+                                        />
+                                        </a>
+                                    </Link>
                                 </div>
                             ))}
 
@@ -159,7 +115,7 @@ const index = () => {
                             />
                         </div>
                     </div>
-                    <div className="w-full w-1/3">
+                    <div className="w-1/3">
                         <div className="py-5 w-full pl-5 hidden md:block">
                             <GoogleMap
                                 mapContainerStyle={containerStyle}
@@ -211,7 +167,7 @@ const index = () => {
             </div>
 
         </>
-
+        </HomeLayout>
     )
 }
 

@@ -1,0 +1,41 @@
+import React from 'react'
+
+const index = () => {
+    return (
+        <div className="mt-5 font-semibold">
+            <h1 className="text-xl text-gray-400 font-bold">Amenitie</h1>
+            <div className="mt-4 flex flex-row">
+                <div className="flex flex-row">
+                    <img src="/svgs/propertySearch/wifi.svg" />
+                    <p className="text-xs  ml-4 w-full">Entire home</p>
+                </div>
+                <div className=" ml-20 flex flex-row">
+                    <img src="/svgs/propertySearch/yard.svg" />
+                    <p className="text-xs ml-4 w-full">Entire home</p>
+                </div>
+            </div>
+            <div className="mt-4 flex flex-row">
+                <div className="flex flex-row">
+                    <img src="/svgs/propertySearch/swimming-pool.svg" />
+                    <p className="text-xs ml-4 w-full">Entire home</p>
+                </div>
+                <div className=" ml-20 flex flex-row">
+                    <img src="/svgs/propertySearch/kitchen.svg" />
+                    <p className="text-xs ml-4 w-full">Entire home</p>
+                </div>
+            </div>
+            <div className="mt-4 flex flex-row">
+                <div className="flex flex-row">
+                    <img src="/svgs/propertySearch/washer.svg" />
+                    <p className="text-xs ml-4 w-full">Entire home</p>
+                </div>
+                <div className=" ml-20 flex flex-row">
+                    <img src="/svgs/propertySearch/outline.svg" />
+                    <p className="text-xs ml-4 w-full">Entire home</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default index
