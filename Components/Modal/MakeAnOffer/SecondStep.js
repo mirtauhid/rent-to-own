@@ -17,7 +17,7 @@ const SecondStep = ({ steps, setSteps, formik }) => {
                     List any items, appliances, or fittings that you would like to remain at the property.
                 </label>
                 <textarea
-                    className="mt-5 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                    className="resize-none mt-5 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                     id="listItems"
                     type="text"
                     placeholder="List items here..."
