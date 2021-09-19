@@ -6,7 +6,7 @@ function CustomSliderPrev({ onClick }) {
   return (
     <div onClick={onClick}>
       <div onClick={onClick} className={style["bestPlace-slider-prev"]}>
-        <AiOutlineLeft fill={"#07c7a2"} />
+        <AiOutlineLeft fill={"#07c7a2"}/>
       </div>
     </div>
   );

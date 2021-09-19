@@ -1,10 +1,10 @@
 import React from "react";
 
-const ImageCard = ({name}) => {
+const ImageCard = ({name,img}) => {
   return (
     <div className="relative h-full w-full rounded-md overflow-hidden">
       <img
-        src="/images/Homepage/Background.webp"
+        src={img}
         alt=""
         className="w-full h-full object-cover"
       />
