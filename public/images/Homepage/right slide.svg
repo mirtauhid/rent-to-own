@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="68.6" height="68.6" viewBox="0 0 68.6 68.6">
+  <defs>
+    <filter id="Ellipse_25" x="0" y="0" width="68.6" height="68.6" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="right_slide" data-name="right slide" transform="translate(9.3 6.3)">
+    <g transform="matrix(1, 0, 0, 1, -9.3, -6.3)" filter="url(#Ellipse_25)">
+      <g id="Ellipse_25-2" data-name="Ellipse 25" transform="translate(9.3 6.3)" fill="#fff" stroke="rgba(24,106,165,0.1)" stroke-width="0.3">
+        <circle cx="25" cy="25" r="25" stroke="none"/>
+        <circle cx="25" cy="25" r="25.15" fill="none"/>
+      </g>
+    </g>
+    <g id="Group_1178" data-name="Group 1178" transform="translate(11953 -15921) rotate(180)">
+      <rect id="Rectangle_423" data-name="Rectangle 423" width="48" height="48" transform="translate(11904 -15970)" fill="none"/>
+      <path id="Path_210" data-name="Path 210" d="M14.861,14.5l7.927-6.285a1.02,1.02,0,0,0,0-1.678,1.793,1.793,0,0,0-2.12,0l-8.981,7.122a1.018,1.018,0,0,0-.044,1.638l9.018,7.171a1.8,1.8,0,0,0,2.12,0,1.02,1.02,0,0,0,0-1.678Z" transform="translate(11908.762 -15960.505)" fill="#00dbb1"/>
+    </g>
+  </g>
+</svg>
