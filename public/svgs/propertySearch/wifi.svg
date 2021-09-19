@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18.894" height="14.45">
+    <defs>
+        <style>
+            .cls-1{fill:#292929}
+        </style>
+    </defs>
+    <g id="wifi" transform="translate(-.001 -59.055)">
+        <g id="Group_1480" data-name="Group 1480" transform="translate(.001 59.055)">
+            <g id="Group_1479" data-name="Group 1479">
+                <path id="Path_381" data-name="Path 381" class="cls-1" d="M18.807 62.939a13.221 13.221 0 0 0-18.7-.025l-.025.025a.3.3 0 0 0 .426.426 12.619 12.619 0 0 1 17.846-.023l.023.023a.3.3 0 0 0 .427-.426z" transform="translate(-.001 -59.055)"/>
+            </g>
+        </g>
+        <g id="Group_1482" data-name="Group 1482" transform="translate(1.702 61.464)">
+            <g id="Group_1481" data-name="Group 1481">
+                <path id="Path_382" data-name="Path 382" class="cls-1" d="M60.628 126.28a10.823 10.823 0 0 0-15.319 0 .3.3 0 0 0 .426.426 10.221 10.221 0 0 1 14.455-.013l.013.013a.3.3 0 0 0 .426-.426z" transform="translate(-45.225 -123.103)"/>
+            </g>
+        </g>
+        <g id="Group_1484" data-name="Group 1484" transform="translate(3.402 63.872)">
+            <g id="Group_1483" data-name="Group 1483">
+                <path id="Path_383" data-name="Path 383" class="cls-1" d="M102.4 189.575a8.411 8.411 0 0 0-11.912 0 .3.3 0 1 0 .426.425 7.809 7.809 0 0 1 11.043-.017l.017.017a.3.3 0 1 0 .426-.425z" transform="translate(-90.404 -187.103)"/>
+            </g>
+        </g>
+        <g id="Group_1486" data-name="Group 1486" transform="translate(5.106 66.28)">
+            <g id="Group_1485" data-name="Group 1485">
+                <path id="Path_384" data-name="Path 384" class="cls-1" d="M144.3 252.868a6.012 6.012 0 0 0-8.51 0 .3.3 0 0 0 .426.426 5.411 5.411 0 0 1 7.652-.007l.007.007a.3.3 0 0 0 .426-.426z" transform="translate(-135.704 -251.104)"/>
+            </g>
+        </g>
+        <g id="Group_1488" data-name="Group 1488" transform="translate(6.8 68.688)">
+            <g id="Group_1487" data-name="Group 1487">
+                <path id="Path_385" data-name="Path 385" class="cls-1" d="m185.915 316.167-.007-.007a3.614 3.614 0 0 0-5.108 0 .3.3 0 1 0 .417.434l.007-.007a3.013 3.013 0 0 1 4.259 0 .3.3 0 1 0 .432-.419z" transform="translate(-180.708 -315.103)"/>
+            </g>
+        </g>
+        <g id="Group_1490" data-name="Group 1490" transform="translate(8.242 71.108)">
+            <g id="Group_1489" data-name="Group 1489">
+                <path id="Path_386" data-name="Path 386" class="cls-1" d="M221.1 379.753a1.231 1.231 0 0 0-1.7 0 1.2 1.2 0 1 0 1.7 0zm-.852 1.452a.6.6 0 1 1 .6-.6.6.6 0 0 1-.598.6z" transform="translate(-219.046 -379.411)"/>
+            </g>
+        </g>
+    </g>
+</svg>
