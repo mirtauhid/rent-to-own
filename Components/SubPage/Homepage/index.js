@@ -5,6 +5,12 @@ import HomeLayout from "../../../Layouts/HomeLayout"
 import Hero from "./Hero";
 import ExploreNeighborSlider from "./ExploreNeighborSlider";
 import LogoSection from './LogoSection';
+import RentToOwnWin from './RentToOwnWin';
+import HowSellersWin from './HowSellersWin';
+import HowBuyersWin from './HowBuyersWin';
+import LetsTalk from './LetsTalk';
+import FAQ from './FAQ';
+import UserReview from "./UserReview"
 
 const index = () => {
     return (
@@ -12,7 +18,13 @@ const index = () => {
         <div className="py-10">
           <Hero />
           <LogoSection/>
+          <RentToOwnWin/>
           <ExploreNeighborSlider/>
+          <HowSellersWin/>
+          <HowBuyersWin/>
+          <UserReview/>
+          <FAQ/>
+          <LetsTalk/>
         </div>
       </HomeLayout>
     );

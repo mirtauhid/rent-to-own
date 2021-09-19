@@ -4,14 +4,16 @@ import { data } from "../../../../Assets/logoData";
 const LogoSection = () => {
   return (
     <div className="mx-5 md:mx-20 lg:mx-28 mt-14">
-      <div className="mx-auto mb-10" style={{ width: "fit-content" }}>
+      <div className="mx-auto mb-6 md:mb-12" style={{ width: "fit-content" }}>
         <div className="w-24 h-1 bg-primary mx-auto mb-3"></div>
-        <p className="text-3xl font-bold">In Association With</p>
+        <p className="text-xl md:text-2xl lg:text-3xl font-bold">
+          In Association With
+        </p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
-        {data.map(({img}) => {
-          return <Logo img={img}/>;
+        {data.map(({ img },index) => {
+          return <Logo img={img} key={index}/>;
         })}
       </div>
     </div>

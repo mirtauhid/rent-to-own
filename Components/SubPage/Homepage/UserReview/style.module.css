@@ -1,0 +1,14 @@
+.bestPlace-slider-next{
+  top:35%;
+  right:0;
+  box-shadow: 2px 2px 5px gray;
+  @apply absolute h-8 w-8 rounded-full grid place-items-center cursor-pointer bg-white transform hover:scale-105 duration-300;
+}
+
+.bestPlace-slider-prev{
+  top:35%;
+  left:0;
+  z-index: 100;
+  box-shadow: -2px 2px 5px gray;
+  @apply absolute h-8 w-8 rounded-full grid place-items-center cursor-pointer bg-white transform hover:scale-105 duration-300;  
+}
