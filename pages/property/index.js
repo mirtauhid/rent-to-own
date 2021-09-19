@@ -231,6 +231,7 @@ const index = () => {
                                         className="w-14 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
                                         value={price[0]*10000}
+                                        readOnly
                                         // onChange={() => {
                                         //     const arr= [ ,value[1]]
                                         // })}
@@ -243,6 +244,7 @@ const index = () => {
                                         className="w-16 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
                                         value={price[1]*10000}
+                                        readOnly
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
@@ -276,6 +278,7 @@ const index = () => {
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
                                         value={areaSqft[0]*100}
+                                        readOnly
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
@@ -286,6 +289,7 @@ const index = () => {
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
                                         value={areaSqft[1]*100}
+                                        readOnly
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>

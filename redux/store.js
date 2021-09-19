@@ -1,11 +1,11 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import counterReducer from "./slices/counter";
-import settingsFormReducer from "./slices/settingsForm";
+import authReducer from "./slices/auth"
 
 
 const RootReducer = combineReducers({
   counter: counterReducer,
-  settingsForm:settingsFormReducer
+  auth:authReducer
 })
 
 

@@ -37,7 +37,7 @@ const FourthStep = ({ steps, setSteps, formik }) => {
             <div className="w-full mb-2 p-2">
                 <label className="block text-md font-bold ml-1">Any notes or custom terms to add?</label>
                 <textarea
-                    className="mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                    className="resize-none mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                     type="text"
                     placeholder="Enter notes here..."
                     rows="5"

@@ -6,7 +6,7 @@ const CustomSliderNext=(props)=> {
   const { onClick } = props;
   return (
     <div onClick={onClick} className={style["bestPlace-slider-next"]}>
-      <AiOutlineRight fill={"gray"} />
+      <AiOutlineRight fill={"#07c7a2"} />
     </div>
   );
 }
