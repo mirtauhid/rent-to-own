@@ -1,36 +1,20 @@
 import React, { useState } from 'react';
 import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa';
+import { onSelectFile } from '../../../Helpers/imageHandlers';
 
 const Photos = ({ steps, setSteps }) => {
     const [photos, setPhotos] = useState([])
     const [files, setFiles] = useState([])
 
-    const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            if (file) {
-                const fileReader = new FileReader();
-                fileReader?.readAsDataURL(file);
-                fileReader.onload = () => {
-                    resolve(fileReader.result);
-                };
-                fileReader.onerror = () => {
-                    reject(error);
-                };
-            }
-        });
-    };
-    const onSelectFile = async (e) => {
-        // setFileName(e.target.files[0]?.name);
-        const base64 = await convertBase64(e.target.files[0]);
-
-        if (base64 instanceof Error) {
-            return;
-        }
-
-        setPhotos([...photos, base64])
-        setFiles([...files, e.target.files[0]])
-    };
-
+    const handleFileUpload = (e) => {
+        onSelectFile(e)
+            .then(data => {
+                const { base64, file } = data;
+                console.log(data);
+                setPhotos([...photos, base64])
+                setFiles([...files, file])
+            })
+    }
     const handleDeleteImg = (index) => {
 
         setPhotos(photos.filter((photo, i) => i != index))
@@ -71,7 +55,7 @@ const Photos = ({ steps, setSteps }) => {
                             placeholder="Please enter your upload here..."
                             name="upload"
                             accept="image/*"
-                            onChange={onSelectFile}
+                            onChange={handleFileUpload}
                         />
                     </label>
                 </div>
