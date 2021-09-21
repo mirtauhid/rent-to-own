@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import {FaUserCircle} from "react-icons/fa";
+import SignUpModal from "../../../Components/Modal/SignUpModal"
+import SignInModal from "../../../Components/Modal/SignInModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
   const [showNav,setShowNav] = useState(false);
+  const [showSignUpModal,setShowSignUpModal] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false);
 
   return (
     <header className={"shadow-md"}>
@@ -30,14 +34,17 @@ const Header = () => {
             }
           >
             <ul className="flex items-center">
-              <li
-                className={
-                  "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
-                }
-              >
-                List your property
-              </li>
-              <HeaderNavBar showNav={showNav}/>
+              <Link href={"/listProperty"}>
+                <li
+                  className={
+                    "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
+                  }
+                >
+                  List your property
+                </li>
+              </Link>
+
+              <HeaderNavBar showNav={showNav} />
 
               {auth.isLoggedIn ? (
                 <li
@@ -45,7 +52,11 @@ const Header = () => {
                     "mr-10 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 "
                   }
                 >
-                  <FaUserCircle fill={"#07c7a2"} className="text-3xl" onClick={()=>setShowNav(!showNav)}/>
+                  <FaUserCircle
+                    fill={"#07c7a2"}
+                    className="text-3xl"
+                    onClick={() => setShowNav(!showNav)}
+                  />
                 </li>
               ) : (
                 <>
@@ -53,6 +64,7 @@ const Header = () => {
                     className={
                       "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
                     }
+                    onClick={() => setShowSignUpModal(true)}
                   >
                     Sign up
                   </li>
@@ -60,6 +72,7 @@ const Header = () => {
                     className={
                       "mx-3 hover:shadow border-primary text-xs xs:text-sm px-4 cursor-pointer py-1 border rounded bg-primary text-white transition-all duration-300 font-semibold"
                     }
+                    onClick={() => setShowSignInModal(true)}
                   >
                     Login
                   </li>
@@ -69,6 +82,14 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <SignUpModal
+        showSignUpModal={showSignUpModal}
+        setShowSignUpModal={setShowSignUpModal}
+      />
+      <SignInModal
+        showSignInModal={showSignInModal}
+        setShowSignInModal={setShowSignInModal}
+      />
     </header>
   );
 };
