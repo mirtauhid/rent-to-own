@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { FaTimes } from "react-icons/fa";
 import CustomModal from './CustomModal';
 
-const SignUpModal = ({ isOpen }) => {
-    const [isClose, setIsClose] = useState(!isOpen);
+const SignUpModal = ({ showSignUpModal,setShowSignUpModal }) => {
+    
 
     const validate = values => {
         const errors = {};
@@ -56,12 +56,12 @@ const SignUpModal = ({ isOpen }) => {
         },
     });
     return (
-        <CustomModal isOpen={!isClose}>
+        <CustomModal isOpen={showSignUpModal}>
             {/* For cross button  */}
             <div className="text-right px-4">
                 <button
                     className="p-2 rounded hover:bg-gray-200 text-2xl"
-                    onClick={() => setIsClose(true)}>
+                    onClick={() => setShowSignUpModal(false)}>
                     <FaTimes />
                 </button>
             </div>
