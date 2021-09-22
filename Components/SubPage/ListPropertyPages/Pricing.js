@@ -11,7 +11,7 @@ const Pricing = ({ steps, setSteps, formik }) => {
         <div className="p-6">
             <h2 className="uppercase text-center text-2xl font-bold my-5">Let us know the fair market value today</h2>
 
-            <div className="w-full mb-2 p-2">
+            <div className="w-full mb-8 p-2">
                 <label className="block text-secondary text-sm font-bold mb-2" htmlFor="marketValue">
                     Write in the fair market value
                 </label>
@@ -31,15 +31,15 @@ const Pricing = ({ steps, setSteps, formik }) => {
                 }
             </div>
 
-            <div className="w-full mb-2 p-2">
+            <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
                     onClick={() => setSteps({ ...steps, fourth: false })}
-                    className="text-primary border-2 border-primary rounded py-2 px-12 m-2">Back</button>
+                    className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"
                     onClick={handleNext}
-                    className=" bg-green-400 text-white rounded py-2 px-12 m-2">Next Step</button>
+                    className=" bg-green-400 text-white rounded py-2 px-12">Next Step</button>
             </div>
         </div>
     );
