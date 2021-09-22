@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 
 const index = () => {
+    const [search, setSearch] = React.useState("");
+    //search
+    const onChangeValue = e => {
+        setSearch(e.target.value);
+    }
     return (
       <div className="px-5 md:px-20 lg:px-28">
         <div className="relative rounded-md h-60 md:h-80 lg:h-96 overflow-hidden">
@@ -21,13 +27,20 @@ const index = () => {
                 type="text"
                 className="w-full lg:w-1/2 p-2 rounded-md mr-2"
                 placeholder="Neighborhood, Address, City, Zip Code,School,"
+                value={search}
+                name="search"
+                onChange={onChangeValue}
               />
-              <button
-                className="mt-3 py-2 rounded-md px-10 text-white font-bold"
-                style={{ background: "#00b4a2" }}
+              <Link 
+                href={{
+                  pathname: "/housesearch",
+                  query: { search: search },
+                }}
               >
-                Search
-              </button>
+                  <div className="bg-green-500 w-32 mt-3 py-2 rounded-md px-10 text-white font-bold">
+                    Search
+                  </div>
+              </Link>
             </div>
           </div>
         </div>

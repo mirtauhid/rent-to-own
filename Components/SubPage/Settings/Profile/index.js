@@ -8,7 +8,7 @@ import Requirement from "./Requirement";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
+import PreQualified from "./PreQualified";
 
 //formik properties starts
 
@@ -23,12 +23,17 @@ const initialValues = {
   email: "",
   phoneNumber: "",
   secondaryPhoneNumber: "",
-  address:"",
-  suite:"",
-  city:"",
-  province:"",
-  country:"",
-  postalCode:""
+  address: "",
+  suite: "",
+  city: "",
+  province: "",
+  country: "",
+  postalCode: "",
+  combinedIncome: "",
+  availableMoney: "",
+  monthlyPayment: "",
+  priceRange:"",
+  searchingCity:""
 };
 
 const phoneRegExp =
@@ -56,6 +61,11 @@ const validationSchema = Yup.object().shape({
   province: Yup.string().required("Required"),
   country: Yup.string().required("Required"),
   postalCode: Yup.string().required("Required"),
+  combinedIncome: Yup.string().required("Required"),
+  availableMoney: Yup.string().required("Required"),
+  monthlyPayment: Yup.string().required("Required"),
+  priceRange: Yup.string().required("Required"),
+  searchingCity: Yup.string().required("Required"),
 });
 
 const onSubmit = (values, { resetForm }) => {
@@ -105,9 +115,14 @@ const Profile = ({ tab }) => {
             <Requirement setYesButtonClicked={setYesButtonClicked} />
           </div>
 
-          {yesButtonClicked && <DocumentUploadSection />}
-          {yesButtonClicked && <ContactInfo />}
-          {yesButtonClicked && <Address />}
+          {yesButtonClicked && (
+            <>
+              <PreQualified/>
+              <DocumentUploadSection />
+              <ContactInfo />
+              <Address />
+            </>
+          )}
         </Form>
       </Formik>
     </div>
