@@ -1,16 +1,16 @@
-.settings-wrapper {
+.subHomepage-FAQ-wrapper {
   @apply font-kum mx-5 md:mx-20 lg:mx-48 mt-10 md:mt-20 relative;
 }
 
-.settings-tab {
+.subHomepage-FAQ-tab {
   @apply flex gap-5 mt-10 mb-1 justify-center;
 }
 
-.settings-tab-underline {
+.subHomepage-FAQ-tab-underline {
   @apply w-full relative;
 }
 
-.settings-tab-active-underline {
+.subHomepage-FAQ-tab-active-underline {
   position: absolute;
   top: -1px;
   left: 0;

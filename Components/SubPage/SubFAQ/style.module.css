@@ -1,22 +1,9 @@
-.settings-wrapper {
-  @apply font-kum mx-5 md:mx-20 lg:mx-48 mt-10 md:mt-20 relative;
+.FAQ-wrapper {
+  @apply font-kum mx-5 md:mx-20 lg:mx-48 mt-10 md:mt-10 relative;
 }
 
-.settings-tab {
+.FAQ-tab {
   @apply flex gap-5 mt-10 mb-1 justify-center;
-}
-
-.settings-tab-underline {
-  @apply w-full relative;
-}
-
-.settings-tab-active-underline {
-  position: absolute;
-  top: -1px;
-  left: 0;
-  background-color: green;
-  height: 5px;
-  @apply w-24 bg-primary rounded-sm;
 }
 
 .FAQ-answer-Open {

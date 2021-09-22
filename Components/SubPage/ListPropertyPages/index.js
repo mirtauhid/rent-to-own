@@ -65,7 +65,7 @@ const ListPropertyPages = ({ children }) => {
             amOwner: true,
             isAgree: true,
             isInsurance: true,
-            amenities: ["Wifi","Wall-To-Wall Carpet", "Window Coverings"],
+            amenities: [],
             houseRules: '',
             address: '',
             aptNo: '',
