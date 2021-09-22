@@ -1,12 +1,12 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { FaTimes } from "react-icons/fa";
-import CustomModal from './CustomModal';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signIn } from '../../redux/slices/auth';
+import CustomModal from './CustomModal';
 
-const SignInModal = ({ showSignInModal, setShowSignInModal }) => {
-    const dispatch = useDispatch();
+const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal }) => {
+  const dispatch = useDispatch();
 
   const validate = (values) => {
     const errors = {};
@@ -128,9 +128,14 @@ const SignInModal = ({ showSignInModal, setShowSignInModal }) => {
         <div className="w-full mb-2 p-2 text-center">
           <p className="font-bold">
             Don't have an account?{" "}
-            <a href="#" className="text-primary">
+            <button
+              onClick={() => {
+                setShowSignInModal(false)
+                setShowSignUpModal(true)
+              }}
+              className="text-primary">
               Sign up
-            </a>
+            </button>
           </p>
         </div>
       </form>
