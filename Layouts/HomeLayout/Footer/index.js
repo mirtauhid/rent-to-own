@@ -85,13 +85,16 @@ const Footer = () => (
             Information
           </h2>
           <div className="w-16 pt-1 bg-primary my-2"></div>
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
-            List Home
-          </p>
-
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
-            Search Homes
-          </p>
+          <Link href="/property">
+            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
+              List Home
+            </a>
+          </Link>
+          <Link href="/housesearch">
+            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
+              Search Homes
+            </a>
+          </Link>
         </div>
 
         <div className="col-span-6 mt-6 sm:col-span-4 sm:mt-8 lg:col-span-2 lg:mt-0">

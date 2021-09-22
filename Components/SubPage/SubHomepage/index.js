@@ -10,7 +10,7 @@ import HowSellersWin from './HowSellersWin';
 import HowBuyersWin from './HowBuyersWin';
 import LetsTalk from './LetsTalk';
 import FAQ from './FAQ';
-import UserReview from "./UserReview"
+import UserReview from "../../UserReview"
 
 const index = () => {
     return (
