@@ -1,0 +1,30 @@
+.FAQ-wrapper {
+  @apply font-kum mx-5 md:mx-20 lg:mx-48 mt-10 md:mt-10 relative;
+}
+
+.FAQ-tab {
+  @apply flex gap-5 mt-10 mb-1 justify-center;
+}
+
+.FAQ-answer-Open {
+  height:fit-content;
+  overflow: auto;
+  transition:height 0.5s ease-in-out;
+}
+
+.FAQ-answer-Close {
+  height:0;
+  overflow: hidden;
+  transition:height 0.5s ease-in-out;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.FAQ-answer-Open::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.FAQ-answer-Open {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

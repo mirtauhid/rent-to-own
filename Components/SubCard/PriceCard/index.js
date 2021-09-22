@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
 const index = () => {
     return (
@@ -18,7 +19,7 @@ const index = () => {
             </div>
             <div className="mt-5 grid justify-items-center">
                 <p className="text-md text-gray-700">QUESTIONS? CALL US TODAY</p>
-                <p className="text-md mt-3 text-gray-700">(+1261 5645 4565)</p>
+                <p className="text-xl font-semibold mt-3 text-gray-700">(+1261 5645 4565)</p>
             </div>
             <div className="ml-4 mt-2">
                 <input 
@@ -30,23 +31,35 @@ const index = () => {
             </div>
             <p className="text-md mt-5 font-medium text-center text-gray-700">Booking breakdown</p>
             <div className="mt-5 flex justify-between">
-                <p className="text-xs text-gray-800">QUESTIONS? CALL US TODAY</p>
-                <p className="text-xs text-gray-800">$500,000</p>
+                <p className="text-xs text-gray-800 font-medium">Property fair market value today</p>
+                <p className="text-xs text-gray-800 font-medium">$500,000</p>
             </div>
-            <p className="text-xs text-gray-300">QUESTIONS? CALL US TODAY</p>
+            <p className="text-xs text-gray-300">Mimimun of $200,000;  maximum$50,000</p>
             <div className="mt-5 flex justify-between">
-                <p className="text-xs text-gray-800">QUESTIONS? CALL US TODAY</p>
-                <p className="text-xs text-gray-800">3%</p>
+                <div className="flex flex-row relative">
+                    <p className="text-xs text-gray-800 font-medium">Rent-to-own application down payment</p>
+                    <div className="w-8 absolute -right-10 -top-0">
+                        <BiUpArrow className="" fontSize="0.7em" />
+                        <BiDownArrow fill={"black"} fontSize="0.7em"/>
+                    </div>
+                </div>
+                <p className="text-xs text-gray-800 font-medium">3%</p>
             </div>
-            <p className="text-xs text-gray-300">QUESTIONS? CALL US TODAY</p>
+            <p className="text-xs text-gray-300 ">Mimimun of $200,000;  maximum$50,000</p>
             <div className="mt-5 flex justify-between">
-                <p className="text-xs text-gray-800">QUESTIONS? CALL US TODAY</p>
-                <p className="text-xs text-gray-800">36 year</p>
+                <div className="flex flex-row relative">
+                    <p className="text-xs text-gray-800 font-medium">Rent-to-own-term</p>
+                    <div className=" w-8 absolute -right-10 -top-0">
+                        <BiUpArrow className="" fontSize="0.7em"/>
+                        <BiDownArrow fill={"black"} fontSize="0.7em"/>
+                    </div>
+                </div>
+                <p className="text-xs text-gray-800 font-medium">36 year</p>
             </div>
             <hr className="mt-5"></hr>
             <div className="mt-5 flex justify-between">
-                <p className="text-xs text-gray-800">QUESTIONS? CALL US TODAY</p>
-                <p className="text-xs text-gray-800">3%</p>
+                <p className="text-xs text-gray-800 font-medium">Rent-to-own monthly payments</p>
+                <p className="text-sm font-medium text-gray-800">$4,358</p>
             </div>
         </div>
     )

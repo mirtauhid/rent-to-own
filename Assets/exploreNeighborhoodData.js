@@ -5,7 +5,7 @@ export const data = [
   },
   [
     {
-      name: "british columbia",
+      name: "British Columbia",
       img: "/images/Homepage/ExploreNeighborhoodSlidePhotos/NoPath - Copy.png",
     },
     {
