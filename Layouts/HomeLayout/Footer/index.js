@@ -46,7 +46,7 @@ const Footer = () => (
             Rent-to-Own
           </h2>
           <div className="w-16 pt-1 bg-primary my-2"></div>
-          <Link href="/aboutus">
+          <Link href="/aboutUs">
             <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
               About
             </a>
