@@ -105,9 +105,8 @@ const HeaderNavBar = ({showNav}) =>{
       >
         <ul>
           <li className="mt-2 cursor-pointer">Messages</li>
-          <li className="mt-2 cursor-pointer">profile</li>
           <Link href={"/settings"}>
-            <li className="mt-2 cursor-pointer">Account setting</li>
+            <li className="mt-2 cursor-pointer">Profile Settings</li>
           </Link>
 
           <li className="mt-2 cursor-pointer">Help</li>
