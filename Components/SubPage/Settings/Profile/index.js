@@ -33,6 +33,7 @@ const initialValues = {
   availableMoney: "",
   monthlyPayment: "",
   priceRange:"",
+  searchingCity:""
 };
 
 const phoneRegExp =
@@ -64,6 +65,7 @@ const validationSchema = Yup.object().shape({
   availableMoney: Yup.string().required("Required"),
   monthlyPayment: Yup.string().required("Required"),
   priceRange: Yup.string().required("Required"),
+  searchingCity: Yup.string().required("Required"),
 });
 
 const onSubmit = (values, { resetForm }) => {
