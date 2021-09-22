@@ -1,10 +1,10 @@
 
-import Homepage from "../Components/SubPage/Homepage"
+import SubHomepage from "../Components/SubPage/SubHomepage"
 
 const index = () => {
 
   return (
-      <Homepage/>
+      <SubHomepage/>
   )
 
 }
