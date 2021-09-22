@@ -1,10 +1,9 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { FaTimes } from "react-icons/fa";
 import CustomModal from './CustomModal';
 
-const SignUpModal = ({ showSignUpModal,setShowSignUpModal }) => {
-    
+const SignUpModal = ({ showSignUpModal, setShowSignUpModal,setShowSignInModal }) => {
 
     const validate = values => {
         const errors = {};
@@ -141,9 +140,8 @@ const SignUpModal = ({ showSignUpModal,setShowSignUpModal }) => {
                         onChange={(e) => formik.setFieldValue("accountType", e.target.value)}
                     >
                         <option value="">Select a type</option>
-                        <option value="type-1">Type 1</option>
-                        <option value="type-2">Type 2</option>
-                        <option value="type-3">Type 3</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
                     </select>
                     {
                         formik.errors.accountType &&
@@ -194,7 +192,12 @@ const SignUpModal = ({ showSignUpModal,setShowSignUpModal }) => {
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <p>Already have an account? <span className="text-green-400 font-bold">Login</span>
+                    <p>Already have an account? <button 
+                    onClick={() => {
+                        setShowSignInModal(true)
+                        setShowSignUpModal(false)
+                    }} 
+                    className="text-green-400 font-bold">Login</button>
                     </p>
                 </div>
             </form>
