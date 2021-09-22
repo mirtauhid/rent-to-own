@@ -2,110 +2,16 @@ import React from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Link from 'next/link';
 import PriceCard from '../../Components/SubCard/PriceCard';
+import Map from '../../Components/Map';
 import PopularProperties from '../../Components/SubCard/PopularProperties';
 import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
 import SubAmenitie from '../../Components/SubPage/HouseSearch/SubAmenitie';
 import Introduction from '../../Components/SubPage/HouseSearch/Introduction';
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
-
-import {
-    GoogleMap,
-    useLoadScript,
-    Marker,
-    InfoWindow
-} from "@react-google-maps/api";
-
-const libraries = ["places"];
+import Interior from '../../Components/SubPage/HouseSearch/Interior';
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
 
 const Details = () => {
     const data = require('./data');
-    const containerStyle = {
-        height: '100vh', width: 'auto'
-    };
-
-    const center = {
-        lat: 59.95, lng: 30.33
-    };
-
-    const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBR5-gY1SoOvSodRms0PISuSmfRz7zM5fQ',
-        libraries,
-    })
-
-    //maps @api
-    const [markers, setMarkers] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
-
-    const onMapClick = React.useCallback((e) => {
-        setMarkers((current) => [
-            ...current,
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-                time: new Date(),
-            },
-        ]);
-    }, []);
-
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
-        mapRef.current = map;
-    }, []);
-
-    const panTo = React.useCallback(({lat, lng}) => {
-        mapRef.current.panTo({lat, lng});
-        mapRef.current.setZoom(14);
-    }, []);
-
-    //map error
-    if (loadError) return "Error";
-    if (!isLoaded) return "Loading";
-
-    //scrolling
-    const Arrow = ({
-        children,
-        disabled,
-        onClick
-      }) => {
-        return (
-          <button
-            disabled={disabled}
-            onClick={onClick}
-            style={{
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              right: "1%",
-              opacity: disabled ? "0" : "1",
-              userSelect: "none"
-            }}
-          >
-            {children}
-          </button>
-        );
-      }
-      
-    const LeftArrow = () => {
-        const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext)
-      
-        return (
-          <Arrow disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
-            <FaCaretLeft />
-          </Arrow>
-        );
-    }
-      
-    const RightArrow = () => {
-        const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext)
-        
-        return (
-            <Arrow disabled={isLastItemVisible} onClick={() => scrollNext()}>
-            <FaCaretRight />
-            </Arrow>
-        );
-    }
     return (
         <HomeLayout>
         <>
@@ -136,35 +42,7 @@ const Details = () => {
                         <SubAmenitie />
                         <hr className="mt-5"></hr>
                         {/* Interior features */}
-                        <div className="mt-5">
-                            <h1 className="text-xl text-gray-400 font-bold">Interior features</h1>
-                            <div className="mt-4 flex justify-between">
-                                <p className="text-md">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                            </div>
-                            <div className="mt-4 flex justify-between">
-                                <p className="text-md">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                            </div>
-                        </div>
-                        <hr className="mt-5"></hr>
-                        {/* Exterior features */}
-                        <div className="mt-5">
-                            <h1 className="text-xl text-gray-400 font-bold">Exterior features</h1>
-                            <div className="mt-4 flex justify-between">
-                                <p className="text-md">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                            </div>
-                            <div className="mt-4 flex justify-between">
-                                <p className="text-md">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                                <p className="text-md ml-4">Entire home</p>
-                            </div>
-                        </div>
-                        <hr className="mt-5"></hr>
+                        <Interior />
                     </div>
 
                     {/* price Card */}
@@ -178,52 +56,7 @@ const Details = () => {
             {/* Location */}
             <div className="container mx-auto px-3">
             <h1 className="text-xl text-gray-700 font-bold mt-5">Location</h1>
-                <div className="py-5 w-full hidden md:block">
-                    <GoogleMap
-                        mapContainerStyle={containerStyle}
-                        center={center}
-                        zoom={10}
-                        onClick={onMapClick}
-                        onLoad={onMapLoad}
-                    >
-                        {markers.map((marker) => (
-                            <Marker
-                                key={`${marker.lat}-${marker.lng}`}
-                                position={{ lat: marker.lat, lng: marker.lng }}
-                                onClick={() => {
-                                    setSelected(marker);
-                                }}
-                                icon={{
-                                    url: ``,
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(15, 15),
-                                    scaledSize: new window.google.maps.Size(30, 30),
-                                }}
-                            />
-                        ))}
-
-                        {selected ? (
-                            <InfoWindow
-                                position={{ lat: selected.lat, lng: selected.lng }}
-                                onCloseClick={() => {
-                                    setSelected(null);
-                                }}
-                            >
-                                <div>
-                                    <div className="h-28">
-                                        <img src="https://picsum.photos/200" alt="" className="w-full h-2/3" />
-                                    </div>
-                                    <div>
-                                    <p className="text-sm pt-1">Cambium Place 1bed/1bath</p>
-                                    <p className="text-xs text-gray-400 pt-1">4 guests 2 bedrooms 2 beds 2 baths</p>
-                                    <p className="text-xs text-gray-400 pt-1">4 guests 2 bedrooms 2 beds 2 baths</p>
-                                    <p className="text-sm pt-1">$3500</p>
-                                    </div>
-                                </div>
-                            </InfoWindow>
-                        ) : null}
-                    </GoogleMap>
-                </div>
+                <Map />
             </div>
              {/* popular properties */}
             <div className="container mx-auto py-5">

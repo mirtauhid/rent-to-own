@@ -4,6 +4,9 @@ import {BsSearch} from "react-icons/bs";
 import Pagination from '../../Components/Pagination';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Link from 'next/link';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { useRouter } from "next/router"
 
 import {
     GoogleMap,
@@ -13,7 +16,13 @@ import {
 } from "@react-google-maps/api";
 
 const libraries = ["places"];
+
 const index = () => {
+    const router = useRouter()
+    const {
+        query: { search },
+    } = router
+    const [searchData, setSearchData] = useState(search ? search : "")
     const data = require('./data');
     const containerStyle = {
         height: '100vh', width: 'auto'
@@ -68,6 +77,12 @@ const index = () => {
     //map error
     if (loadError) return "Error";
     if (!isLoaded) return "Loading";
+
+    const options = [
+        'Price', 'Title', 'Time'
+    ];
+    const defaultOption = options[0];
+    
     return (
         <HomeLayout>
         <>
@@ -76,6 +91,9 @@ const index = () => {
                     type="text"
                     className="text-xs md:pl-10 pl-10 border rounded shadow h-10  w-full focus:outline-none"
                     placeholder="Search..."
+                    value={searchData}
+                    name="search"
+                    onChange={setSearchData}
                 />
                 <div className="absolute text-primary md:left-8 md:top-8 left-6 top-8">
                     <BsSearch color={'#00dbb1'} />
@@ -84,21 +102,31 @@ const index = () => {
 
             </div>
             <div className="container mx-auto px-3">
+                {/* divide */}
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-2/3">
+                        <div className="py-5 flex justify-between">
+                            <p className="text-sm text-gray-500">1-6 of 300+</p>
+                            <div className="flex justify-between">
+                                <div className="flex items-center justify-center mr-3">
+                                    <p className="text-sm text-gray-500">Sort</p>
+                                </div>
+                                <Dropdown className="text-xs text-gray-500" options={options}  value={defaultOption} placeholder="Select an option" />
+                            </div>
+                        </div>
                         <div
-                            className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3 py-5 gap-7 smd:gap-4"
+                            className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3  gap-7 smd:gap-4"
                         >
                             {currentPosts?.map(item => (
-                                <div className="cursor-pointer">
+                                <div className="cursor-pointer" key={item.id}>
                                     <Link href={'/housesearch/' + item.id} key={item.id}>
                                         <a>
-                                        <ImageCard
-                                            key={item.id.toString()}
-                                            title={item.title}
-                                            host={item.host}
-                                            price={item.price}
-                                        />
+                                            <ImageCard
+                                                key={item.id.toString()}
+                                                title={item.title}
+                                                host={item.host}
+                                                price={item.price}
+                                            />
                                         </a>
                                     </Link>
                                 </div>

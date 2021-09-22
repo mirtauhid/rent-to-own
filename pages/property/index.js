@@ -3,8 +3,13 @@ import PropertyImage from '../../Components/SubCard/PropertyImage';
 import ReactSlider from 'react-slider';
 import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import HomeLayout from '../../Layouts/HomeLayout';
+import { useRouter } from "next/router"
 
 const index = () => {
+    const router = useRouter()
+    const {
+        query: { state },
+    } = router
     const stateData = require('./locations');
     const [areaData, setAreaData] = React.useState();
     const [initData, setInitData] = React.useState();
