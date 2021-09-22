@@ -5,6 +5,7 @@ import Description from './Description';
 import HouseRules from './HouseRules';
 import Location from './Location';
 import Photos from './Photos';
+import Preview from './Preview';
 import Pricing from './Pricing';
 import TimeLine from './TimeLine';
 
@@ -45,6 +46,9 @@ const ListPropertyPages = ({ children }) => {
         // For Price Validation
         if (!values.marketValue) { errors.marketValue = 'Please input a valid value!' }
 
+        // For Photos Validation
+        if (!values.files.length) { errors.files = 'Please upload photos!' }
+
         return errors;
     };
 
@@ -61,36 +65,18 @@ const ListPropertyPages = ({ children }) => {
             amOwner: true,
             isAgree: true,
             isInsurance: true,
-            amenities: {
-                wifi: false,
-                kitchen: false,
-                woodFloors: false,
-                carpet: false,
-                windowCoverings: false,
-                innerMattress: false,
-                sleeperCouch: false,
-                ac: false,
-                heater: false,
-                washer: false,
-                parking: false,
-                garage: false,
-                outdoorSpace: false,
-                tv: false,
-                laptop: false,
-                smokeDetector: false,
-                travelCrib: false,
-                jacuzzi: false,
-            },
+            amenities: ["Wifi","Wall-To-Wall Carpet", "Window Coverings"],
             houseRules: '',
             address: '',
-            details: '',
+            aptNo: '',
             marketValue: '',
             files:[],
             photos:[],
         },
         validate,
         onSubmit: values => {
-            console.log(values);
+            alert("Your data submitted")
+            
         },
     });
     return (
@@ -166,6 +152,21 @@ const ListPropertyPages = ({ children }) => {
                             steps.fifth &&
                             !steps.sixth &&
                             <Photos
+                                steps={steps}
+                                setSteps={setSteps}
+                                formik={formik} />
+                        }
+
+                        {/* This is for the 7th step (Preview Page) */}
+                        {
+                            steps.first &&
+                            steps.second &&
+                            steps.third &&
+                            steps.fourth &&
+                            steps.fifth &&
+                            steps.sixth &&
+                            !steps.seventh &&
+                            <Preview
                                 steps={steps}
                                 setSteps={setSteps}
                                 formik={formik} />

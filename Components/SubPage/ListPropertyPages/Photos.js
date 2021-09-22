@@ -15,7 +15,13 @@ const Photos = ({ steps, setSteps, formik }) => {
         formik.setFieldValue('files', formik.values?.files?.filter((photo, i) => i != index))
         formik.setFieldValue('photos', formik.values?.photos?.filter((photo, i) => i != index))
     }
-    console.log(formik.values);
+
+    const handleNext = () => {
+        if (formik.values?.files?.length) {
+            setSteps({ ...steps, sixth: true })
+        }
+    }
+    console.log(formik.errors);
     return (
         <div className="p-6">
             <h2 className="uppercase text-center text-2xl font-bold my-5">ADD A FEW PHOTOS</h2>
@@ -56,16 +62,21 @@ const Photos = ({ steps, setSteps, formik }) => {
                     </label>
                 </div>
             </div>
+            {
+                formik.errors.files &&
+                <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.files}</div>
+            }
 
-            <p className="my-5 text-sm ml-2">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>
+            <p className="my-5 text-sm ml-2 mb-8">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>
 
-            <div className="w-full mb-2 p-2">
+            <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
                     onClick={() => setSteps({ ...steps, fifth: false })}
-                    className="text-primary border-2 border-primary rounded py-2 px-12 m-2">Back</button>
+                    className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"
+                    onClick={handleNext}
                     className=" bg-green-400 text-white rounded py-2 px-12">Preview</button>
             </div>
         </div>
