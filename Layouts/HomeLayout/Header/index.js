@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import Link from "next/link";
-import { useSelector, useDispatch } from "react-redux";
-import {FaUserCircle} from "react-icons/fa";
-import SignUpModal from "../../../Components/Modal/SignUpModal"
+import React, { useState } from 'react';
+import { FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import SignInModal from "../../../Components/Modal/SignInModal";
+import SignUpModal from "../../../Components/Modal/SignUpModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
@@ -85,10 +85,12 @@ const Header = () => {
       <SignUpModal
         showSignUpModal={showSignUpModal}
         setShowSignUpModal={setShowSignUpModal}
+        setShowSignInModal={setShowSignInModal}
       />
       <SignInModal
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}
+        setShowSignUpModal={setShowSignUpModal}
       />
     </header>
   );
