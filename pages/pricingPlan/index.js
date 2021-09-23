@@ -2,7 +2,7 @@ import React from 'react'
 import SubPricingPlan from "../../Components/SubPage/SubPricingPlan"
 import HomeLayout from '../../Layouts/HomeLayout'
 
-const index = () => {
+const PricingPlan = () => {
     return (
         <HomeLayout>
             <SubPricingPlan/>
@@ -10,4 +10,4 @@ const index = () => {
     )
 }
 
-export default index
+export default PricingPlan

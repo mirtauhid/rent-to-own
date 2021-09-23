@@ -1,7 +1,7 @@
 import React from 'react'
 import SubFAQ from "../../Components/SubPage/SubFAQ"
 
-const index = () => {
+const FAQ = () => {
     return (
         <div>
             <SubFAQ/>
@@ -9,4 +9,4 @@ const index = () => {
     )
 }
 
-export default index
+export default FAQ
