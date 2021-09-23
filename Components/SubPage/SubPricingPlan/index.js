@@ -2,7 +2,7 @@ import React from 'react'
 import UserReview from '../../UserReview'
 import SubGetStarted from "./SubGetStarted"
 
-const index = () => {
+const SubPricingPlan = () => {
     return (
         <div>
             <SubGetStarted/>
@@ -11,4 +11,4 @@ const index = () => {
     )
 }
 
-export default index
+export default SubPricingPlan;

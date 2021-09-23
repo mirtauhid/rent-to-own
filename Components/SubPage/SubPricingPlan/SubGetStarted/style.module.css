@@ -23,7 +23,7 @@
 }
 
 .SubGetStarted-btn {
-    @apply bg-secondary px-5 py-2 rounded-md mt-5 md:mt-10 mb-10 text-primary bg-white;
+    @apply  px-5 py-2 rounded-md mt-5 md:mt-10 mb-10 text-primary bg-white;
 }
 
 .SubGetStarted-lowerCurve {
