@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaCloudUploadAlt, FaTimes } from 'react-icons/fa';
 import { onSelectFile } from '../../../Helpers/imageHandlers';
 
-const Photos = ({ steps, setSteps }) => {
-    const [photos, setPhotos] = useState([])
-    const [files, setFiles] = useState([])
-
+const Photos = ({ steps, setSteps, formik }) => {
     const handleFileUpload = (e) => {
         onSelectFile(e)
             .then(data => {
                 const { base64, file } = data;
-                console.log(data);
-                setPhotos([...photos, base64])
-                setFiles([...files, file])
+                formik.setFieldValue('photos', [...formik.values?.photos, base64])
+                formik.setFieldValue('files', [...formik.values?.files, file])
             })
     }
     const handleDeleteImg = (index) => {
-
-        setPhotos(photos.filter((photo, i) => i != index))
-        setFiles(photos.filter((photo, i) => i != index))
+        formik.setFieldValue('files', formik.values?.files?.filter((photo, i) => i != index))
+        formik.setFieldValue('photos', formik.values?.photos?.filter((photo, i) => i != index))
     }
+
+    const handleNext = () => {
+        if (formik.values?.files?.length) {
+            setSteps({ ...steps, sixth: true })
+        }
+    }
+    console.log(formik.errors);
     return (
         <div className="p-6">
             <h2 className="uppercase text-center text-2xl font-bold my-5">ADD A FEW PHOTOS</h2>
             <div className="md:flex md:flex-wrap w-full mb-2 p-2">
                 {
-                    photos.map((photo, index) => {
+                    formik.values?.photos?.map((photo, index) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
@@ -60,11 +62,22 @@ const Photos = ({ steps, setSteps }) => {
                     </label>
                 </div>
             </div>
+            {
+                formik.errors.files &&
+                <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.files}</div>
+            }
 
-            <p className="my-5 text-sm ml-2">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>
+            <p className="my-5 text-sm ml-2 mb-8">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>
 
-            <div className="w-full mb-2 p-2">
-                <button type="submit" className=" bg-green-400 text-white rounded py-2 px-12">Publish</button>
+            <div className="w-full flex justify-between mb-2 p-2">
+                <button
+                    type="button"
+                    onClick={() => setSteps({ ...steps, fifth: false })}
+                    className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
+                <button
+                    type="submit"
+                    onClick={handleNext}
+                    className=" bg-green-400 text-white rounded py-2 px-12">Preview</button>
             </div>
         </div>
     );

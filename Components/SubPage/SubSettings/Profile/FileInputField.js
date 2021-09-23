@@ -13,7 +13,6 @@ const FileInputField = ({label,fieldName}) => {
         <div className="md:flex ">
           <Field name={fieldName}>
             {(props) => {
-              console.log(props);
               const { field } = props;
               return (
                 <>

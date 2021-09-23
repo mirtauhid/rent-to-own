@@ -1,12 +1,12 @@
 import React from 'react'
-import Settings from '../../Components/SubPage/Settings'
+import SubSettings from '../../Components/SubPage/SubSettings'
 
-const index = () => {
+const Settings = () => {
     return (
         <div>
-           <Settings/>
+           <SubSettings/>
         </div>
     )
 }
 
-export default index
+export default Settings

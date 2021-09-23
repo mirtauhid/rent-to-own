@@ -33,10 +33,16 @@ const TimeLine = ({ steps }) => {
                     <span className={"block absolute  rounded-full text-white text-sm text-center w-5 h-5 z-10 " + (steps.fourth ? "bg-primary" : "bg-gray-500")}>5</span>
                 </div> Pricing
             </li>
-            <li className="flex items-center h-12 cursor-pointer ">
+            <li className="flex items-center h-12 cursor-pointer">
                 <div className="relative w-7 h-5">
+                    <span className={"block absolute top-0 left-2 z-0 w-1 h-12 " + (steps.fifth ? "bg-primary" : "bg-gray-500")}></span>
                     <span className={"block absolute  rounded-full text-white text-sm text-center w-5 h-5 z-10 " + (steps.fifth ? "bg-primary" : "bg-gray-500")}>6</span>
                 </div> Photos
+            </li>
+            <li className="flex items-center h-12 cursor-pointer ">
+                <div className="relative w-7 h-5">
+                    <span className={"block absolute  rounded-full text-white text-sm text-center w-5 h-5 z-10 " + (steps.sixth ? "bg-primary" : "bg-gray-500")}>7</span>
+                </div> Preview
             </li>
         </ul>
     );

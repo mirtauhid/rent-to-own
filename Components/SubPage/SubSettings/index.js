@@ -5,7 +5,7 @@ import Profile from "./Profile";
 import Account from "./Account";
 
 
-const index = () => {
+const SubSettings = () => {
   const [tab, setTab] = useState("profile");
   return (
     <HomeLayout>
@@ -44,4 +44,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default SubSettings;
