@@ -7,7 +7,7 @@ const SubPricing = () => {
         <div className="container m-auto">
             <div className="lg:w-3/4 mx-auto my-8">
                 <div className="mx-6 mb-10">
-                    <h2 className="text-primary text-center text-3xl font-medium my-6">Select the plan that works for you</h2>
+                    <h2 className="text-primary text-center text-3xl xl:text-4xl font-medium my-6">Select the plan that works for you</h2>
                     <p>Whether you’re looking for more money in the bank, more transparency over the process or simply more options than traditional real estate has to offer - we’re committed to helping you sell the way that suits you best.</p>
                 </div>
                 <div className="w-full flex flex-wrap">
