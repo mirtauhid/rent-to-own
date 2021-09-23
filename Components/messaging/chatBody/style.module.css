@@ -25,8 +25,9 @@
     color: #000;
   }
   .content__body {
-    max-height: calc(100vh - calc(100vh / 2));
+    max-height: calc(100vh - calc(100vh / 2.8));
     overflow: auto;
+    padding-top: 10px;
   }
   .chat__item {
     display: flex;
@@ -63,22 +64,12 @@
     background: #fff;
     padding: 1px;
   }
-  .chat__item__content {
-    background-color: #f3f3f3;
-    color: #fff;
-    padding: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 10px 10px 0 10px;
-    max-width: 50%;
-    min-width: 215px;
-  }
-  .chat__item__content .chat__meta {
+  .chat__meta {
     justify-content: space-between;
     display: flex;
     margin-top: 10px;
   }
-  .chat__item__content .chat__meta span {
+ .chat__meta span {
     font-size: 14px;
     color: #8693d3;
     user-select: none;
@@ -91,7 +82,7 @@
     flex-direction: row-reverse;
     transform-origin: left;
   }
-  .chat__item.other .chat__item__content {
+  .chat__item.other  {
     background-color: #fff;
     color: #000;
     border-radius: 10px 10px 10px 0;
@@ -101,7 +92,7 @@
     margin-right: 20px;
     margin-left: 0px;
   }
-  .chat__item.other .chat__item__content .chat__meta span {
+  .chat__item.other .chat__meta span {
     color: #d1d1d1;
   }
   .content__footer {

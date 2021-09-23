@@ -63,7 +63,7 @@ const index = () => {
         },
         {
           image:
-            "https://auraqatar.com/projects/Anakalabel/media//vesbrand/designer4.jpg",
+            "https://pbs.twimg.com/profile_images/770394499/female.png",
           id: 8,
           name: "Autumn Mckee",
           active: false,
@@ -86,7 +86,7 @@ const index = () => {
         },
     ] 
     return (
-        <div className="">
+        <div className="md:max-w-[320px]">
             <h1 className="font-semibold">Messages</h1>
             <div className="border mt-6"></div>
             <div className={style["chatlist__items"]}>

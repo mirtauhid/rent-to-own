@@ -39,9 +39,9 @@
     font-size: 20px;
   }
   .chatlist__items {
-    margin-top: 10px;
+    padding-top: 10px;
     overflow: auto;
-    max-height: calc(100vh - calc(100vh / 2));
+    max-height: calc(100vh - calc(100vh/ 2.8));
   }
   
   .chatlist__item {

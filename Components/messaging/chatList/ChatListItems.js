@@ -22,7 +22,7 @@ export default class ChatListItems extends Component {
       <div
         style={{ animationDelay: `0.${this.props.animationDelay}s` }}
         onClick={this.selectChat}
-        className={`flex cursor-pointer p-2 hover:border ${
+        className={`flex cursor-pointer px-2 py-3 hover:border ${
           this.props.active ? this.props.active : ""
         } `}
       >
@@ -39,7 +39,7 @@ export default class ChatListItems extends Component {
             <p className="font-semibold text-sm">{this.props.name}</p>
             <span className="text-xs text-gray-500 absolute right-2 top-1">32 mins ago</span>
           </div>
-          <span className="text-xs text-gray-500">32 mins ago</span>
+          <span className="text-xs text-gray-500">You have 1 new message</span>
         </div>
       </div>
     );
