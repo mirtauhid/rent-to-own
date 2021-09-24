@@ -108,10 +108,9 @@ const index = () => {
 
     return (
         <HomeLayout>
-            <>
-        <div className="md:flex md:flex-row">
+        <div className=" md:flex md:flex-row md:px-20 lg:px-28">
             {/* Filter */}
-            <div className="smd:w-1/3 flex justify-center">
+            <div className="smd:w-1/3 flex">
                 <div className="w-40 my-10">
                     <div className="flex flex-row justify-between items-center">
                         <p className="text-xs">FILTER</p>
@@ -338,7 +337,6 @@ const index = () => {
                 ))}
             </div>
         </div>
-        </>
         </HomeLayout>
     )
 }
