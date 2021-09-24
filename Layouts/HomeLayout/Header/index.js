@@ -7,11 +7,15 @@ import SignUpModal from "../../../Components/Modal/SignUpModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
-  const [showNav,setShowNav] = useState(false);
-  const [showSignUpModal,setShowSignUpModal] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [redirectLink, setRedirectLink] = useState('/')
 
-  
+  const handleSingInWithRedirect = (customLink) => {
+    setRedirectLink(customLink)
+    setShowSignInModal(true)
+  }
 
   return (
     <header className={"shadow-md"}>
@@ -36,12 +40,12 @@ const Header = () => {
             }
           >
             <ul className="flex items-center">
-              <Link href={auth.isLoggedIn ? "/listProperty" : "#"}>
+              <Link href={auth.isLoggedIn ? "/pricingplan" : "#"}>
                 <li
                   className={
                     "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
                   }
-                  onClick={() =>!auth.isLoggedIn?setShowSignUpModal(true):null}
+                  onClick={() => !auth.isLoggedIn ? handleSingInWithRedirect('/pricingplan') : null}
                 >
                   List your property
                 </li>
@@ -89,34 +93,35 @@ const Header = () => {
         showSignUpModal={showSignUpModal}
         setShowSignUpModal={setShowSignUpModal}
         setShowSignInModal={setShowSignInModal}
+        redirectLink={redirectLink}
       />
       <SignInModal
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}
         setShowSignUpModal={setShowSignUpModal}
+        redirectLink={redirectLink}
       />
     </header>
   );
 };
 
-const HeaderNavBar = ({showNav}) =>{
-    return (
-      <div
-        className={`absolute border shadow-md left-1/4 md:left-1/2 lg:left-2/3 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
-          showNav ? "opacity-100" : "opacity-0"
+const HeaderNavBar = ({ showNav }) => {
+  return (
+    <div
+      className={`absolute border shadow-md left-1/4 md:left-1/2 lg:left-2/3 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${showNav ? "opacity-100" : "opacity-0"
         } transition duration-300`}
-      >
-        <ul>
-          <li className="mt-2 cursor-pointer">Messages</li>
-          <Link href={"/settings"}>
-            <li className="mt-2 cursor-pointer">Profile Settings</li>
-          </Link>
+    >
+      <ul>
+        <li className="mt-2 cursor-pointer">Messages</li>
+        <Link href={"/settings"}>
+          <li className="mt-2 cursor-pointer">Profile Settings</li>
+        </Link>
 
-          <li className="mt-2 cursor-pointer">Help</li>
-          <li className="mt-2 cursor-pointer">Log out</li>
-        </ul>
-      </div>
-    );
+        <li className="mt-2 cursor-pointer">Help</li>
+        <li className="mt-2 cursor-pointer">Log out</li>
+      </ul>
+    </div>
+  );
 }
 
 export default Header;
