@@ -11,6 +11,8 @@ const Header = () => {
   const [showSignUpModal,setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
 
+  
+
   return (
     <header className={"shadow-md"}>
       <div className="container mx-auto py-7">
@@ -34,11 +36,12 @@ const Header = () => {
             }
           >
             <ul className="flex items-center">
-              <Link href={"/listProperty"}>
+              <Link href={auth.isLoggedIn ? "/listProperty" : "#"}>
                 <li
                   className={
                     "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
                   }
+                  onClick={() =>!auth.isLoggedIn?setShowSignUpModal(true):null}
                 >
                   List your property
                 </li>
