@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { FaFacebookF, FaTwitter, FaTelegramPlane, FaInstagram } from 'react-icons/fa'
 
 const Footer = () => (
-  <footer className={"py-7 border-t"}>
+  <footer className={"py-7 border-t "}>
     <div className="container mx-auto px-4">
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-12 pl-5 md:pl-20">
         <div className="col-span-12 lg:col-span-4 sm:col-span-6 pr-16 sm:pr-4 md:col-span-6 md:pr-24 lg:pr-32 xl:pr-44">
           <div className="smd:px-2 h-8">
             <Link href={"/"}>
@@ -47,12 +47,18 @@ const Footer = () => (
           </h2>
           <div className="w-16 pt-1 bg-primary my-2"></div>
           <Link href="/aboutUs">
-            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
               About
             </a>
           </Link>
 
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
+          <p
+            className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}
+          >
             Contact us
           </p>
           <Link href="/FAQ">
@@ -67,17 +73,35 @@ const Footer = () => (
             Policies
           </h2>
           <div className="w-16 pt-1 bg-primary my-2"></div>
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
-            Terms of use
-          </p>
+          <Link href="/terms">
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
+              Terms of use
+            </a>
+          </Link>
 
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
-            Privacy Policy
-          </p>
+          <Link href="/privacy">
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
+              Privacy Policy
+            </a>
+          </Link>
 
-          <p className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
-            Cookie Policy
-          </p>
+          <Link href="/cookie">
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
+              Cookie Policy
+            </a>
+          </Link>
         </div>
 
         <div className="col-span-6 mt-6 sm:col-span-4 sm:mt-8 lg:col-span-2 lg:mt-0">
@@ -86,12 +110,20 @@ const Footer = () => (
           </h2>
           <div className="w-16 pt-1 bg-primary my-2"></div>
           <Link href="/property">
-            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
               List Home
             </a>
           </Link>
           <Link href="/housesearch">
-            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
+            <a
+              className={
+                "text-xs lg:text-sm py-2 text-gray-400 font-mons block"
+              }
+            >
               Search Homes
             </a>
           </Link>

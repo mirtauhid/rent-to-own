@@ -30,7 +30,7 @@ const index = ({title, location, description, price, bedroom, bathroom, sqft, im
                 <h1 className="text-sm pl-1 flex-1 pt-1 font-bold">{title}</h1>
                 <p className="text-xs pl-1 flex-1 pt-1 ">{description}</p>
                 <div className="flex justify-between mt-3 items-center">
-                    <div className="h-12 min-w-9/12 bg-gray-200 flex flex-1 mr-4 smd:mr-1 md:mr-6 justify-between">
+                    <div className="h-12 min-w-9/12 bg-gray-200 flex">
                         <SubCardList 
                             icon="/svgs/listProperty/9705.svg" 
                             number={bedroom} 

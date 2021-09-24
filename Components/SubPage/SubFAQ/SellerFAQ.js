@@ -94,8 +94,8 @@ const data = [
 const SellerFAQ = ({tab}) => {
     return (
       <div className={`mt-10 w-full mb-10`}>
-        {data.map(({...item}) => {
-          return <Question {...item}/>;
+        {data.map(({...item},index) => {
+          return <Question {...item} key={index}/>;
         })}
       </div>
     );
