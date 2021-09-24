@@ -60,7 +60,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal })
         Log In
       </h2>
 
-      <form onSubmit={formik.handleSubmit} className="mb-10">
+      <form onSubmit={formik.handleSubmit} >
         <div className="w-full mb-2 p-2">
           <label
             className="block text-secondary text-sm font-bold mb-2"
