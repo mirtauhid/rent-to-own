@@ -15,21 +15,24 @@ const customStyles = {
         width: '100%',
         height: '100%',
         top: 0,
+        left:0,
+        overflow:'hidden',
         padding: 0,
         backgroundColor: 'rgba(0, 0, 0, 0)'
     },
 };
 
 
-const CustomModal = ({children,isOpen,customClasses}) => {
+const CustomModal = ({ children, isOpen, customClasses }) => {
     return (
         <Modal
-        ariaHideApp={false}
+            ariaHideApp={false}
             style={customStyles}
             isOpen={isOpen}>
-            <div className={customClasses ? customClasses : "rounded-2xl px-6 py-3 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 my-6"} >
-                {/* Children goes here */}
-                {children}
+            <div
+                className={customClasses ? customClasses : "rounded-2xl px-6 pt-3 pb-6 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 my-6"} >
+                    {/* Children goes here */}
+                    {children}
             </div>
         </Modal>
     );

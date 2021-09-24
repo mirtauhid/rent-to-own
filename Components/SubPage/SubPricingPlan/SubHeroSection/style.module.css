@@ -1,0 +1,35 @@
+.pricing-hero-container {
+    height: 200px;
+    margin: 40px 20px;
+    background-image: url("/images/pricing-page-image.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+@media screen and (min-width: 640px) {
+    .pricing-hero-container {
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .pricing-hero-container {
+        height: 400px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .pricing-hero-container {
+        height: 500px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .pricing-hero-container {
+        height: 550px;
+    }
+}

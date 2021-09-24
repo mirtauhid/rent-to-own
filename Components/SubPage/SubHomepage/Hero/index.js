@@ -31,15 +31,15 @@ const index = () => {
                 name="search"
                 onChange={onChangeValue}
               />
-              <Link 
+              <Link
                 href={{
                   pathname: "/housesearch",
                   query: { search: search },
                 }}
               >
-                  <div className="bg-green-500 w-32 mt-3 py-2 rounded-md px-10 text-white font-bold">
-                    Search
-                  </div>
+                <div className="bg-green-500 w-32 mt-3 py-2 rounded-md px-10 text-white font-bold">
+                  Search
+                </div>
               </Link>
             </div>
           </div>
