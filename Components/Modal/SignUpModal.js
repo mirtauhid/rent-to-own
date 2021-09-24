@@ -1,9 +1,15 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaTimes } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/slices/auth';
 import CustomModal from './CustomModal';
 
-const SignUpModal = ({ showSignUpModal, setShowSignUpModal,setShowSignInModal }) => {
+const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, redirectLink }) => {
+    const dispatch = useDispatch();
+    
+    const router = useRouter()
 
     const validate = values => {
         const errors = {};
@@ -50,8 +56,9 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal,setShowSignInModal })
         },
         validate,
         onSubmit: values => {
-            console.log(values);
-            alert(JSON.stringify(values, null, 2));
+            dispatch(signIn());
+            router.push(redirectLink)
+            setShowSignUpModal(false);
         },
     });
     return (
@@ -66,7 +73,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal,setShowSignInModal })
             </div>
             <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} style={{ height: "400px", overflow: "auto" }}>
                 <div className="w-full mb-2 p-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Email
@@ -192,12 +199,12 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal,setShowSignInModal })
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <p>Already have an account? <button 
-                    onClick={() => {
-                        setShowSignInModal(true)
-                        setShowSignUpModal(false)
-                    }} 
-                    className="text-green-400 font-bold">Login</button>
+                    <p>Already have an account? <button
+                        onClick={() => {
+                            setShowSignInModal(true)
+                            setShowSignUpModal(false)
+                        }}
+                        className="text-green-400 font-bold">Login</button>
                     </p>
                 </div>
             </form>

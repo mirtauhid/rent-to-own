@@ -1,13 +1,16 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { signIn } from '../../redux/slices/auth';
 import CustomModal from './CustomModal';
 
-const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal }) => {
+const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal, redirectLink }) => {
   const dispatch = useDispatch();
 
+  const router = useRouter()
+  
   const validate = (values) => {
     const errors = {};
 
@@ -40,9 +43,9 @@ const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal })
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
-      setShowSignInModal(false);
       dispatch(signIn());
+      router.push(redirectLink)
+      setShowSignInModal(false);
     },
   });
   return (
@@ -60,7 +63,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal })
         Log In
       </h2>
 
-      <form onSubmit={formik.handleSubmit} className="mb-10">
+      <form onSubmit={formik.handleSubmit} >
         <div className="w-full mb-2 p-2">
           <label
             className="block text-secondary text-sm font-bold mb-2"

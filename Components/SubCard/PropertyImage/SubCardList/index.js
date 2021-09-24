@@ -3,7 +3,7 @@ import { GoLocation } from "react-icons/go";
 
 const index = ({icon, title, number}) => {
     return (
-        <div className="p-2">
+        <div className="py-2 px-1">
             <div className="flex flex-row ">
                 <p className="text-primary text-xs">{number}</p>
                 <img src={icon} alt="" className="pl-2 scale-90" fill="white"/>
