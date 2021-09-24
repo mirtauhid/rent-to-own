@@ -14,8 +14,8 @@ const Header = () => {
   
 
   return (
-    <header className={"shadow-md"}>
-      <div className="container mx-auto py-7">
+    <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
+      <div className="py-7">
         <div className="grid grid-cols-1 smd:grid-cols-2">
           <div>
             <div
@@ -41,7 +41,9 @@ const Header = () => {
                   className={
                     "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
                   }
-                  onClick={() =>!auth.isLoggedIn?setShowSignUpModal(true):null}
+                  onClick={() =>
+                    !auth.isLoggedIn ? setShowSignUpModal(true) : null
+                  }
                 >
                   List your property
                 </li>
@@ -52,7 +54,7 @@ const Header = () => {
               {auth.isLoggedIn ? (
                 <li
                   className={
-                    "mr-10 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 "
+                    "font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 "
                   }
                 >
                   <FaUserCircle
@@ -102,7 +104,7 @@ const Header = () => {
 const HeaderNavBar = ({showNav}) =>{
     return (
       <div
-        className={`absolute border shadow-md left-1/4 md:left-1/2 lg:left-2/3 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
+        className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
           showNav ? "opacity-100" : "opacity-0"
         } transition duration-300`}
       >
