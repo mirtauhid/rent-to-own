@@ -1,9 +1,15 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaTimes } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux/slices/auth';
 import CustomModal from './CustomModal';
 
-const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal }) => {
+const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, redirectLink }) => {
+    const dispatch = useDispatch();
+    
+    const router = useRouter()
 
     const validate = values => {
         const errors = {};
@@ -50,8 +56,9 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal }
         },
         validate,
         onSubmit: values => {
-            console.log(values);
-            alert(JSON.stringify(values, null, 2));
+            dispatch(signIn());
+            router.push(redirectLink)
+            setShowSignUpModal(false);
         },
     });
     return (
