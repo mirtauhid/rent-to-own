@@ -3,7 +3,8 @@ import PropertyImage from '../../Components/SubCard/PropertyImage';
 import ReactSlider from 'react-slider';
 import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import HomeLayout from '../../Layouts/HomeLayout';
-import { useRouter } from "next/router"
+import { useRouter } from "next/router";
+import Link from 'next/link';
 
 const index = () => {
     const router = useRouter()
@@ -89,22 +90,26 @@ const index = () => {
         })
         
         const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
+        console.log('===============holder=====================');
+        console.log(dummyAreaFilter);
+        console.log('====================================');
 
-        const priceFilter = dummyAreaFilter.filter(
-            item => 
-                item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
-        )
+        // const priceFilter = dummyAreaFilter.filter(
+        //     item => 
+        //         item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
+        // )
         
-        const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
+        // const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
 
-        const dummyListFilter = 
-        listingType != 2 && sqftFilter.filter(item => item.type == listingType)
-        setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter);   
+        // const dummyListFilter = 
+        // listingType != 2 && sqftFilter.filter(item => item.type == listingType)
+        //setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter ? sqftFilter : priceFilter ? priceFilter : dummyAreaFilter);   
     }
 
     return (
         <HomeLayout>
-        <div className="px-5 md:flex md:flex-row">
+            <>
+        <div className="md:flex md:flex-row">
             {/* Filter */}
             <div className="smd:w-1/3 flex justify-center">
                 <div className="w-40 my-10">
@@ -116,7 +121,7 @@ const index = () => {
                         >
                             <p className="text-xs font-bold text-white scale-75">CLEAR</p>
                         </div>
-                        <div className="justify-self-end cursor-pointer p-2" 
+                        <div className="justify-self-end cursor-pointer p-2 block md:hidden" 
                             onClick={() => setFilterState(
                                 state => !state
                             )}
@@ -313,22 +318,27 @@ const index = () => {
             <div
                 className="grid flex-2 grid-cols-1 smd:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 justify-center xl:grid-cols-3 py-5 gap-7 smd:gap-4">
                 {filterOptions?.map(item => (
-                    <div key={item.id.toString()}>
-                        <PropertyImage
-                            key={item.id.toString()}
-                            title={item.title}
-                            location={item.location}
-                            price={item.price}
-                            description={item.description}
-                            bedroom={item.bedroom}
-                            bathroom={item.bathroom}
-                            sqft={item.sqft}
-                            imageUrl={item.imageUrl}
-                        />
+                    <div className="cursor-pointer" key={item.id.toString()}>
+                        <Link href={'/housesearch/' + item.id} key={item.id}>
+                            <a>
+                                <PropertyImage
+                                    key={item.id.toString()}
+                                    title={item.title}
+                                    location={item.location}
+                                    price={item.price}
+                                    description={item.description}
+                                    bedroom={item.bedroom}
+                                    bathroom={item.bathroom}
+                                    sqft={item.sqft}
+                                    imageUrl={item.imageUrl}
+                                />
+                            </a>
+                        </Link>
                     </div>
                 ))}
             </div>
         </div>
+        </>
         </HomeLayout>
     )
 }
