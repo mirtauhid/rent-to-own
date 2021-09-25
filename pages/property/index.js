@@ -19,6 +19,7 @@ const index = () => {
     const [listingType, setListingType] = React.useState(2);
     const [price, setPrice] = React.useState([0, 100]);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
+    const [areaFilter, setAreaFilter] = React.useState();
 
     const resetAll = () => {
         setAreaData(stateData.map(d => {
@@ -90,14 +91,8 @@ const index = () => {
         })
         
         const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
-        console.log('===============holder=====================');
-        console.log(dummyAreaFilter);
-        console.log('====================================');
 
-        // const priceFilter = dummyAreaFilter.filter(
-        //     item => 
-        //         item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
-        // )
+        setFilterOptions(dummyAreaFilter);
         
         // const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
 
@@ -105,6 +100,22 @@ const index = () => {
         // listingType != 2 && sqftFilter.filter(item => item.type == listingType)
         //setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter ? sqftFilter : priceFilter ? priceFilter : dummyAreaFilter);   
     }
+
+    React.useEffect(() => {
+        doFilter();
+    }, [initData])
+
+    React.useEffect(() => {
+        const priceFilter = filterOptions?.filter(
+            item => 
+                item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
+        )
+        console.log('===============price=====================');
+        console.log(priceFilter);
+        console.log('====================================');
+        setAreaFilter(priceFilter)
+        //setFilterOptions(priceFilter);
+    }, [price])
 
     return (
         <HomeLayout>
@@ -302,12 +313,6 @@ const index = () => {
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
-                            </div>
-                            <div 
-                                className="bg-primary mt-6 hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
-                                onClick={doFilter}
-                            >
-                                <p className="text-xs font-bold text-white scale-75">FILTER</p>
                             </div>
                         </div>
                     ) : null}
