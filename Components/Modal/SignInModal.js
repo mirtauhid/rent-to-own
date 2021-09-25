@@ -42,10 +42,11 @@ const SignInModal = ({ showSignInModal, setShowSignInModal,setShowSignUpModal, r
       password: "",
     },
     validate,
-    onSubmit: (values) => {
+    onSubmit: (values,{resetForm}) => {
       dispatch(signIn());
       router.push(redirectLink)
       setShowSignInModal(false);
+      resetForm({});
     },
   });
   return (

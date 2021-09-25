@@ -1,12 +1,14 @@
 import Link from "next/link";
 import React, { useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import {signOut} from "../../../redux/slices/auth"
 import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
+  
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
@@ -51,7 +53,7 @@ const Header = () => {
                 </li>
               </Link>
 
-              <HeaderNavBar showNav={showNav} />
+              <HeaderNavBar showNav={showNav} setShowNav={setShowNav}/>
 
               {auth.isLoggedIn ? (
                 <li
@@ -105,7 +107,12 @@ const Header = () => {
   );
 };
 
-const HeaderNavBar = ({showNav}) =>{
+const HeaderNavBar = ({showNav,setShowNav}) =>{
+  const dispatch = useDispatch();
+  const handleLogOut = () =>{
+    dispatch(signOut());
+    setShowNav(false);
+  }
     return (
       <div
         className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
@@ -119,7 +126,7 @@ const HeaderNavBar = ({showNav}) =>{
         </Link>
 
         <li className="mt-2 cursor-pointer">Help</li>
-        <li className="mt-2 cursor-pointer">Log out</li>
+        <li className="mt-2 cursor-pointer" onClick={handleLogOut}>Log out</li>
       </ul>
     </div>
   );
