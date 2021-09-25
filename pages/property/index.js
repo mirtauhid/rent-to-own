@@ -303,12 +303,12 @@ const index = () => {
                                     />
                                 </div>
                             </div>
-                            <div 
+                            {/* <div 
                                 className="bg-primary mt-6 hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
                                 onClick={doFilter}
                             >
                                 <p className="text-xs font-bold text-white scale-75">FILTER</p>
-                            </div>
+                            </div> */}
                         </div>
                     ) : null}
                 </div>
