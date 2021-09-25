@@ -56,13 +56,13 @@ const Footer = () => (
             </a>
           </Link>
 
-          <p
-            className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}
-          >
-            Contact us
-          </p>
+          <Link href="/contact">
+            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
+              Contact us
+            </a>
+          </Link>
           <Link href="/FAQ">
-            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons"}>
+            <a className={"text-xs lg:text-sm py-2 text-gray-400 font-mons block"}>
               FAQ
             </a>
           </Link>

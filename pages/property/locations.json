@@ -1,16 +1,16 @@
 [
     {
-        "id": 1, "state": "Alberta", "areas": 
+        "id": 789681, "state": "Alberta", "areas": 
         [
             {
-                "id": 185,
+                "id": 18242435,
                 "location": "Calgary",
                 "places": 
                 [
                     {
-                        "id": 1448,
+                        "id": 124244248,
                         "type": 0,
-                        "location": "British Columbia",
+                        "location": "Calgary",
                         "title": "Eight Luxury Bedrooms combo",
                         "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
                         "price": 699999,
@@ -20,9 +20,9 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 12129,
+                        "id": 1124242129,
                         "type": 1,
-                        "location": "manitoba",
+                        "location": "Calgary",
                         "title": "Two Bedroom Condo",
                         "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
                         "price": 799999,
@@ -32,7 +32,7 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 2448,
+                        "id": 2235235448,
                         "type": 0,
                         "location": "labrador",
                         "title": "Two Bedroom Condo",
@@ -44,9 +44,9 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 1186,
+                        "id": 118634245,
                         "type": 1,
-                        "location": "alberta",
+                        "location": "Edmonton",
                         "title": "Two Bedroom Condo",
                         "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
                         "price": 799999,
@@ -58,12 +58,12 @@
                 ]
             },
             {
-                "id": 187,
+                "id": 61824247,
                 "location": "Edmonton",
                 "places": 
                 [
                     {
-                        "id": 1122348,
+                        "id": 13122348,
                         "type": 0,
                         "location": "northwest territories",
                         "title": "Two Bedroom Condo",
@@ -77,7 +77,7 @@
                     {
                         "id": 11224239,
                         "type": 0,
-                        "location": "nova scotia",
+                        "location": "Edmonton",
                         "title": "Two Bedroom Condo",
                         "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
                         "price": 799999,
@@ -99,7 +99,7 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 1242246,
+                        "id": 751242246,
                         "type": 0,
                         "location": "ontario",
                         "title": "Two Bedroom Condo",
@@ -113,12 +113,12 @@
                 ]
             },
             {
-                "id": 1897,
+                "id": 1825234297,
                 "location": "Lethbridge",
                 "places": 
                 [
                     {
-                        "id": 11242428,
+                        "id": 11242423428,
                         "type": 0,
                         "location": "northwest territories",
                         "title": "Two Bedroom Condo",
@@ -154,10 +154,10 @@
         ]
     },
     {
-        "id": 2, "state": "British Columbia", "areas": 
+        "id": 324242232, "state": "British Columbia", "areas": 
         [
             {
-                "id": 97,
+                "id": 523242497,
                 "location": "Comox Vally",
                 "places": 
                 [
@@ -188,7 +188,7 @@
                 ]
             },
             {
-                "id": 12187,
+                "id": 635312187,
                 "location": "Fraser Vally",
                 "places": 
                 [
@@ -207,12 +207,12 @@
                 ]
             },
             {
-                "id": 12837,
+                "id": 2535312837,
                 "location": "Kamloops",
                 "places": 
                 [
                     {
-                        "id": 112353538,
+                        "id": 112312353538,
                         "type": 0,
                         "location": "northwest territories",
                         "title": "Two Bedroom Condo",
@@ -226,7 +226,7 @@
                 ]
             },
             {
-                "id": 128347,
+                "id": 4242128347,
                 "location": "Kelowna",
                 "places": 
                 [
@@ -245,7 +245,7 @@
                 ]
             },
             {
-                "id": 123421,
+                "id": 5242123421,
                 "location": "Kootenays",
                 "places": 
                 [
@@ -264,12 +264,12 @@
                 ]
             },
             {
-                "id": 134287,
+                "id": 25352134287,
                 "location": "Nanaimo",
                 "places": 
                 [
                     {
-                        "id": 112353538,
+                        "id": 112353557838,
                         "type": 0,
                         "location": "northwest territories",
                         "title": "Two Bedroom Condo",
@@ -283,7 +283,7 @@
                 ]
             },
             {
-                "id": 341287,
+                "id": 2341287,
                 "location": "Prince George",
                 "places": 
                 [
@@ -302,12 +302,12 @@
                 ]
             },
             {
-                "id": 12092,
+                "id": 234212092,
                 "location": "Vancouver",
                 "places": 
                 [
                     {
-                        "id": 1356363128,
+                        "id": 51356363128,
                         "type": 0,
                         "location": "northwest territories",
                         "title": "Two Bedroom Condo",
@@ -321,7 +321,7 @@
                 ]
             },
             {
-                "id": 109287,
+                "id": 7854109287,
                 "location": "Victoria",
                 "places": 
                 [
@@ -361,10 +361,10 @@
         ]
     },
     {
-        "id": 3, "state": "Manitoba", "areas": 
+        "id": 374643533, "state": "Manitoba", "areas": 
         [
             {
-                "id": 51,
+                "id": 268685251,
                 "location": "Winnipeg",
                 "places": 
                 [
@@ -397,15 +397,15 @@
         ]
     },
     {
-        "id": 564, "state": "New Brunswick", "areas": 
+        "id": 523424564, "state": "New Brunswick", "areas": 
         [
             {
-                "id": 71,
+                "id": 3245254271,
                 "location": "Fredericton",
                 "places": 
                 [
                     {
-                        "id": 35356331,
+                        "id": 745535356331,
                         "type": 0,
                         "location": "British Columbia",
                         "title": "Two Bedroom Condo",
@@ -417,7 +417,7 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 4135351,
+                        "id": 423424135351,
                         "type": 1,
                         "location": "New York City",
                         "title": "Two Bedroom Condo",
@@ -436,7 +436,7 @@
         "id": 43533530, "state": "Labrador", "areas": 
         [
             {
-                "id": 725351,
+                "id": 9725351,
                 "location": "St. John's",
                 "places": 
                 [
@@ -458,10 +458,10 @@
         ]
     },
     {
-        "id": 894, "state": "Northwest Territories", "areas": 
+        "id": 8242494, "state": "Northwest Territories", "areas": 
         [
             {
-                "id": 71,
+                "id": 73242341,
                 "location": "Yellowknife",
                 "places": 
                 [
@@ -483,15 +483,15 @@
     },
     
     {
-        "id": 8971674, "state": "Nova Scotia", "areas": 
+        "id": 328971674, "state": "Nova Scotia", "areas": 
         [
             {
-                "id": 71865,
+                "id": 42471865,
                 "location": "Halifax",
                 "places": 
                 [
                     {
-                        "id": 3535331,
+                        "id": 3535332431,
                         "type": 0,
                         "location": "British Columbia",
                         "title": "Two Bedroom Condo",
@@ -503,7 +503,7 @@
                         "imageUrl": "https://picsum.photos/400/300"
                     },
                     {
-                        "id": 3535411,
+                        "id": 323535411,
                         "type": 1,
                         "location": "New York City",
                         "title": "Two Bedroom Condo",
@@ -520,7 +520,7 @@
         ]
     },
     {
-        "id": 7169774, "state": "Nunavut", "areas": 
+        "id": 17169774, "state": "Nunavut", "areas": 
         [
             {
                 "id": 792571,
@@ -579,7 +579,7 @@
                 ]
             },
             {
-                "id": 7234801,
+                "id": 72324801,
                 "location": "Hamilton",
                 "places": 
                 [
@@ -636,7 +636,7 @@
                 ]
             },
             {
-                "id": 7823471,
+                "id": 5237823471,
                 "location": "Niagara",
                 "places": 
                 [
@@ -655,7 +655,7 @@
                 ]
             },
             {
-                "id": 7835121371,
+                "id": 17835121371,
                 "location": "Ottawa",
                 "places": 
                 [
@@ -737,7 +737,7 @@
                 [
                     {
                         "id": 45758679,
-                        "type": 0,
+                        "type": 1,
                         "location": "Papuna new Gini",
                         "title": "Two Bedroom Condo",
                         "description": "Beautiful Huge 1 family House in heart of westbury newly Renovated With New Furniture",
@@ -752,10 +752,10 @@
         ]
     },
     {
-        "id": 8942424, "state": "Place Edward Island", "areas": 
+        "id": 89424241212, "state": "Place Edward Island", "areas": 
         [
             {
-                "id": 71,
+                "id": 4742421,
                 "location": "Charlottetown",
                 "places": 
                 [
@@ -798,12 +798,12 @@
                 ]
             },
             {
-                "id": 71132442131,
+                "id": 1271132442131,
                 "location": "Quebec City",
                 "places": 
                 [
                     {
-                        "id": 331,
+                        "id": 3321231,
                         "type": 0,
                         "location": "New Island Lane",
                         "title": "Two Bedroom Condo",
@@ -903,7 +903,7 @@
         "id": 8234232424, "state": "Yukon", "areas": 
         [
             {
-                "id": 2414144144,
+                "id": 92414144144,
                 "location": "Whitehorse",
                 "places": 
                 [

@@ -6,13 +6,16 @@ export const authSlice = createSlice({
     isLoggedIn: false,
   },
   reducers: {
-    signIn: (state,action) =>{
+    signIn: (state, action) => {
       state.isLoggedIn = true;
-    }
+    },
+    signOut: (state, action) => {
+      state.isLoggedIn = false;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { signIn } = authSlice.actions;
+export const { signIn,signOut } = authSlice.actions;
 
 export default authSlice.reducer;
