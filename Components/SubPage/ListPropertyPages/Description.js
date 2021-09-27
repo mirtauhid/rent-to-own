@@ -72,9 +72,10 @@ const Description = ({ steps, setSteps, formik }) => {
                     onChange={(e) => formik.setFieldValue("homeType", e.target.value)}
                 >
                     <option value="">Choose the  type of your home</option>
-                    <option value="type-1">Type 1</option>
-                    <option value="type-2">Type 2</option>
-                    <option value="type-3">Type 3</option>
+                    <option value="detachedHouse">Detached House</option>
+                    <option value="semiDetachedHouse">Semi-detached House</option>
+                    <option value="townHouse">Row/Town House</option>
+                    <option value="apartment">Condo/Apartment</option>
                 </select>
                 {
                     formik.errors.homeType &&
@@ -200,7 +201,7 @@ const Description = ({ steps, setSteps, formik }) => {
                         name="amOwner"
                         checked={formik.values.amOwner}
                         onChange={formik.handleChange} />
-                    <span class="text-sm">
+                    <span className="text-sm">
                         I certify that I own this property or am an authorized representative of the owner
                     </span>
                 </label>
@@ -218,7 +219,7 @@ const Description = ({ steps, setSteps, formik }) => {
                         name="isAgree"
                         checked={formik.values.isAgree}
                         onChange={formik.handleChange} />
-                    <span class="text-sm">
+                    <span className="text-sm">
                         I agree that I will have any renter who contacts me through Rent-to-Own Realty book the rental through Rent-to-Own Realty.
                     </span>
                 </label>
@@ -236,7 +237,7 @@ const Description = ({ steps, setSteps, formik }) => {
                         name="isInsurance"
                         checked={formik.values.isInsurance}
                         onChange={formik.handleChange} />
-                    <span class="text-sm">
+                    <span className="text-sm">
                         I certify that I have landlord's insurance on this property.
                     </span>
                 </label>

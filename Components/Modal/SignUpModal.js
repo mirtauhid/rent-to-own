@@ -185,7 +185,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                             name="isAgree"
                             checked={formik.values.isAgree}
                             onChange={formik.handleChange} />
-                        <span class="text-sm">
+                        <span className="text-sm">
                             I agree to RealEstate privacy policy and terms of use
                         </span>
                     </label>
