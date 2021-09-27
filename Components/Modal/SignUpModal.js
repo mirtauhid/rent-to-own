@@ -55,10 +55,11 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
             isAgree: false
         },
         validate,
-        onSubmit: values => {
+        onSubmit: (values,{resetForm}) => {
             dispatch(signIn());
             router.push(redirectLink)
             setShowSignUpModal(false);
+            resetForm({});
         },
     });
     return (
