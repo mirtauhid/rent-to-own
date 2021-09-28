@@ -18,7 +18,7 @@ const SubGetStarted = props => {
               Get started
             </button>
           </div>
-        </div>
+        </div> 
         <div className={style["SubGetStarted-lowerCurve"]}></div>
       </div>
     );
