@@ -24,11 +24,10 @@ const ListPropertyPages = ({ children }) => {
         if (!values.name) { errors.name = 'Required'; }
         if (!values.description) { errors.description = 'Required'; }
         if (!values.homeType) { errors.homeType = 'Required'; }
-        if (!values.bedRooms) { errors.bedRooms = 'Required'; }
-        if (!values.bathRooms) { errors.bathRooms = 'Required'; }
-        if (!values.accomodates) { errors.accomodates = 'Required'; }
         if (!values.footage) { errors.footage = 'Required'; }
-        if (!values.petPolicy) { errors.petPolicy = 'Required'; }
+        if (!values.beds) { errors.beds = 'Required'; }
+        if (!values.baths) { errors.baths = 'Required'; }
+        if (!values.partialBaths) { errors.partialBaths = 'Required'; }
         if (!values.amOwner) { errors.amOwner = 'Required'; }
         if (!values.isAgree) { errors.isAgree = 'Required'; }
         if (!values.isInsurance) { errors.isInsurance = 'Required'; }
@@ -53,11 +52,10 @@ const ListPropertyPages = ({ children }) => {
             name: '',
             description: '',
             homeType: '',
-            bedRooms: '',
-            bathRooms: '',
-            accomodates: '',
             footage: '',
-            petPolicy: '',
+            beds: 0,
+            baths: 0,
+            partialBaths: 0,
             amOwner: true,
             isAgree: true,
             isInsurance: true,
