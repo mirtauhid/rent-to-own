@@ -22,7 +22,7 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                             name="anOtherPropertySell"
                             checked={formik.values.anOtherPropertySell}
                             onClick={formik.handleChange} />
-                        <span class="text-sm">
+                        <span className="text-sm">
                             Buyer needs to sell another property first.
                         </span>
                     </label>
@@ -36,7 +36,7 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                             name="inspection" 
                             checked={formik.values.inspection}
                             onClick={formik.handleChange}/>
-                        <span class="text-sm">
+                        <span className="text-sm">
                             Buyer to obtain satisfactory property inspection.
                         </span>
                     </label>
@@ -50,7 +50,7 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                             name="appraisal" 
                             checked={formik.values.appraisal}
                             onClick={formik.handleChange}/>
-                        <span class="text-sm">
+                        <span className="text-sm">
                             Buyer to obtain a satisfactory appraisal.
                         </span>
                     </label>
@@ -64,7 +64,7 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                             name="appropriateFinancing" 
                             checked={formik.values.appropriateFinancing}
                             onClick={formik.handleChange}/>
-                        <span class="text-sm">
+                        <span className="text-sm">
                             Buyer needs to obtain appropriate financing.
                         </span>
                     </label>

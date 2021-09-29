@@ -18,7 +18,7 @@ const Photos = ({ steps, setSteps, formik }) => {
 
     const handleNext = () => {
         if (formik.values?.files?.length) {
-            setSteps({ ...steps, sixth: true })
+            setSteps({ ...steps, fourth: true })
         }
     }
     console.log(formik.errors);
@@ -72,7 +72,7 @@ const Photos = ({ steps, setSteps, formik }) => {
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
-                    onClick={() => setSteps({ ...steps, fifth: false })}
+                    onClick={() => setSteps({ ...steps, third: false })}
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"
