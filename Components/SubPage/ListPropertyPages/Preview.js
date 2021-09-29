@@ -19,13 +19,6 @@ const Preview = ({ steps, setSteps, formik }) => {
                 }
             </div>
 
-            <div className="my-5 shadow border border-gray-100 rounded py-4">
-                <h2 className="text-xl font-bold ml-2">Amenities:</h2>
-                {
-                    formik.values?.amenities?.map((item, index) => <span key={index} className="inline-block bg-gray-50 rounded border-2 border-gray-100 py-2 px-4 m-2">{item}</span>)
-                }
-            </div>
-
             <div className="my-5 shadow border border-gray-100 rounded p-4">
                 <h2 className="text-xl font-bold mb-5">Description</h2>
                 <div className="mb-3">
@@ -41,31 +34,20 @@ const Preview = ({ steps, setSteps, formik }) => {
                     <p>{formik.values?.homeType}</p>
                 </div>
                 <div className="mb-3">
-                    <h3 className="text-md font-bold">Number of bedrooms:</h3>
-                    <p>{formik.values?.bedRooms}</p>
+                    <h3 className="text-md font-bold">Number of Beds:</h3>
+                    <p>{formik.values?.beds}</p>
                 </div>
                 <div className="mb-3">
-                    <h3 className="text-md font-bold">Number of bathrooms:</h3>
-                    <p>{formik.values?.bathRooms}</p>
+                    <h3 className="text-md font-bold">Number of Baths:</h3>
+                    <p>{formik.values?.baths}</p>
                 </div>
                 <div className="mb-3">
-                    <h3 className="text-md font-bold">Accomodates (Number of people):</h3>
-                    <p>{formik.values?.accomodates}</p>
+                    <h3 className="text-md font-bold">Number of Partial Baths:</h3>
+                    <p>{formik.values?.partialBaths}</p>
                 </div>
                 <div className="mb-3">
-                    <h3 className="text-md font-bold">Approximate square footage:</h3>
+                    <h3 className="text-md font-bold">Approximate Square Footage:</h3>
                     <p>{formik.values?.footage}</p>
-                </div>
-                <div className="mb-3">
-                    <h3 className="text-md font-bold">Pet policy:</h3>
-                    <p>{formik.values?.petPolicy}</p>
-                </div>
-            </div>
-
-            <div className="my-5 shadow border border-gray-100 rounded p-4">
-                <h2 className="text-xl font-bold mb-5">House Rules</h2>
-                <div className="mb-3">
-                    <p>{formik.values?.houseRules}</p>
                 </div>
             </div>
 
@@ -92,7 +74,7 @@ const Preview = ({ steps, setSteps, formik }) => {
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
-                    onClick={() => setSteps({ ...steps, sixth: false })}
+                    onClick={() => setSteps({ ...steps, fourth: false })}
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"

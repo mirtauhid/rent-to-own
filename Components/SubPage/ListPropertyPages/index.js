@@ -1,8 +1,6 @@
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import Amenities from './Amenities';
 import Description from './Description';
-import HouseRules from './HouseRules';
 import Location from './Location';
 import Photos from './Photos';
 import Preview from './Preview';
@@ -16,8 +14,6 @@ const ListPropertyPages = ({ children }) => {
         third: false,
         fourth: false,
         fifth: false,
-        sixth: false,
-        seventh: false
     })
 
 
@@ -28,11 +24,10 @@ const ListPropertyPages = ({ children }) => {
         if (!values.name) { errors.name = 'Required'; }
         if (!values.description) { errors.description = 'Required'; }
         if (!values.homeType) { errors.homeType = 'Required'; }
-        if (!values.bedRooms) { errors.bedRooms = 'Required'; }
-        if (!values.bathRooms) { errors.bathRooms = 'Required'; }
-        if (!values.accomodates) { errors.accomodates = 'Required'; }
         if (!values.footage) { errors.footage = 'Required'; }
-        if (!values.petPolicy) { errors.petPolicy = 'Required'; }
+        if (!values.beds) { errors.beds = 'Required'; }
+        if (!values.baths) { errors.baths = 'Required'; }
+        if (!values.partialBaths) { errors.partialBaths = 'Required'; }
         if (!values.amOwner) { errors.amOwner = 'Required'; }
         if (!values.isAgree) { errors.isAgree = 'Required'; }
         if (!values.isInsurance) { errors.isInsurance = 'Required'; }
@@ -57,11 +52,10 @@ const ListPropertyPages = ({ children }) => {
             name: '',
             description: '',
             homeType: '',
-            bedRooms: '',
-            bathRooms: '',
-            accomodates: '',
             footage: '',
-            petPolicy: '',
+            beds: 0,
+            baths: 0,
+            partialBaths: 0,
             amOwner: true,
             isAgree: true,
             isInsurance: true,
@@ -97,75 +91,46 @@ const ListPropertyPages = ({ children }) => {
                                 formik={formik} />
                         }
 
-                        {/* This is for the 2nd step (Amenities Page) */}
+                        {/* This is for the 2nd step (Location Page) */}
                         {
                             steps.first &&
                             !steps.second &&
-                            <Amenities
-                                steps={steps}
-                                setSteps={setSteps}
-                                formik={formik} />
-                        }
-
-                        {/* This is for the 3rd step (House Rules Page) */}
-                        {
-                            steps.first &&
-                            steps.second &&
-                            !steps.third &&
-                            <HouseRules
-                                steps={steps}
-                                setSteps={setSteps}
-                                formik={formik} />
-                        }
-
-                        {/* This is for the 4th step (House Rules Page) */}
-                        {
-                            steps.first &&
-                            steps.second &&
-                            steps.third &&
-                            !steps.fourth &&
                             <Location
                                 steps={steps}
                                 setSteps={setSteps}
                                 formik={formik} />
                         }
 
-                        {/* This is for the 5th step (Pricing Page) */}
+                        {/* This is for the 3rd step (Pricing Page) */}
                         {
                             steps.first &&
                             steps.second &&
-                            steps.third &&
-                            steps.fourth &&
-                            !steps.fifth &&
+                            !steps.third &&
                             <Pricing
                                 steps={steps}
                                 setSteps={setSteps}
                                 formik={formik} />
                         }
 
-                        {/* This is for the 6th step (Photos Page) */}
+                        {/* This is for the 4th step (Photos Page) */}
                         {
                             steps.first &&
                             steps.second &&
                             steps.third &&
-                            steps.fourth &&
-                            steps.fifth &&
-                            !steps.sixth &&
+                            !steps.fourth &&
                             <Photos
                                 steps={steps}
                                 setSteps={setSteps}
                                 formik={formik} />
                         }
 
-                        {/* This is for the 7th step (Preview Page) */}
+                        {/* This is for the 5th step (Preview Page) */}
                         {
                             steps.first &&
                             steps.second &&
                             steps.third &&
                             steps.fourth &&
-                            steps.fifth &&
-                            steps.sixth &&
-                            !steps.seventh &&
+                            !steps.fifth &&
                             <Preview
                                 steps={steps}
                                 setSteps={setSteps}

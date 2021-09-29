@@ -25,7 +25,7 @@ const FirstStep = ({ steps, setSteps, formik }) => {
                             onClick={formik.handleChange}
                             checked={formik.values.preQualified === 'yes'}
                             name="preQualified" />
-                        <span class="text-md">
+                        <span className="text-md">
                             Yes
                         </span>
                     </label>
@@ -37,7 +37,7 @@ const FirstStep = ({ steps, setSteps, formik }) => {
                             onClick={formik.handleChange}
                             checked={formik.values.preQualified === 'no'}
                             name="preQualified" />
-                        <span class="text-md">
+                        <span className="text-md">
                             No
                         </span>
                     </label>
