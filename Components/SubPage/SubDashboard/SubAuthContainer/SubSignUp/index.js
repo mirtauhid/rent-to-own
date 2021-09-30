@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import React from 'react';
-import SubAuthContainer from '..';
+import SubAuthContainer from '../..';
 
 const SubSignUp = () => {
     const validate = values => {
