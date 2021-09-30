@@ -7,14 +7,17 @@ export default class ChatListItems extends Component {
     super(props);
   }
   selectChat = (e) => {
-    for (
-      let index = 0;
-      index < e.currentTarget.parentNode.children.length;
-      index++
-    ) {
-      e.currentTarget.parentNode.children[index].classList.remove("active");
-    }
-    e.currentTarget.classList.add("active");
+    console.log(e);
+    console.log(this.props.userId)
+    this.props.setSelectedId(this.props.userId)
+    // for (
+    //   let index = 0;
+    //   index < e.currentTarget.parentNode.children.length;
+    //   index++
+    // ) {
+    //   e.currentTarget.parentNode.children[index].classList.remove("active");
+    // }
+    // e.currentTarget.classList.add("active");
   };
 
   render() {
