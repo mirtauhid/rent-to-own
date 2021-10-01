@@ -17,7 +17,7 @@ const index = () => {
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState(2);
-    const [price, setPrice] = React.useState([0, 100]);
+    const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
     const [areaFilter, setAreaFilter] = React.useState();
 
@@ -110,9 +110,6 @@ const index = () => {
             item => 
                 item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
         )
-        console.log('===============price=====================');
-        console.log(priceFilter);
-        console.log('====================================');
         setAreaFilter(priceFilter)
         //setFilterOptions(priceFilter);
     }, [price])
@@ -248,9 +245,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-14 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        value={price[0]*10000}
+                                        value={`$${(price[0]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         // onChange={() => {
                                         //     const arr= [ ,value[1]]
@@ -261,9 +258,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-16 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-1 text-xs"
                                         placeholder="MAX"
-                                        value={price[1]*10000}
+                                        value={`$${(price[1]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
@@ -297,7 +294,7 @@ const index = () => {
                                         name="phone"
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        value={areaSqft[0]*100}
+                                        value={(areaSqft[0]*100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
@@ -308,7 +305,7 @@ const index = () => {
                                         name="phone"
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
-                                        value={areaSqft[1]*100}
+                                        value={(areaSqft[1]*100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />

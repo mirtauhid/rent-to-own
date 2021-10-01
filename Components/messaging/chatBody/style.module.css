@@ -25,9 +25,10 @@
     color: #000;
   }
   .content__body {
-    max-height: calc(100vh - calc(100vh / 2.8));
+    height: calc(100vh - calc(100vh / 2.4));
     overflow: auto;
     padding-top: 10px;
+    display: flex;
   }
   .chat__item {
     display: flex;
