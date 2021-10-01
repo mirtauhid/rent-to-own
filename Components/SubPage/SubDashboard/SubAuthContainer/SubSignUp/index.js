@@ -1,16 +1,9 @@
 import { useFormik } from 'formik';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import React from 'react';
-import { FaTimes } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import { signIn } from '../../redux/slices/auth';
-import CustomModal from './CustomModal';
+import SubAuthContainer from '../..';
 
-const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, redirectLink }) => {
-    const dispatch = useDispatch();
-    
-    const router = useRouter()
-
+const SubSignUp = () => {
     const validate = values => {
         const errors = {};
 
@@ -55,27 +48,16 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
             isAgree: false
         },
         validate,
-        onSubmit: (values,{resetForm}) => {
-            dispatch(signIn());
-            router.push(redirectLink)
-            setShowSignUpModal(false);
+        onSubmit: (values, { resetForm }) => {
             resetForm({});
         },
     });
     return (
-        <CustomModal isOpen={showSignUpModal}>
-            {/* For cross button  */}
-            <div className="text-right px-4">
-                <button
-                    className="p-2 rounded hover:bg-gray-200 text-2xl"
-                    onClick={() => setShowSignUpModal(false)}>
-                    <FaTimes />
-                </button>
-            </div>
+        <SubAuthContainer>
             <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
 
-            <form onSubmit={formik.handleSubmit} style={{ height: "400px", overflow: "auto" }}>
-                <div className="w-full mb-2 p-2">
+            <form onSubmit={formik.handleSubmit}>
+                <div className="w-full p-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                         Email
                     </label>
@@ -95,7 +77,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                     }
                 </div>
 
-                <div className="flex mb-2">
+                <div className="flex">
                     <div className="w-1/2 p-2">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
@@ -136,7 +118,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                     </div>
                 </div>
 
-                <div className="w-full mb-2 p-2">
+                <div className="w-full p-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="accountType">
                         Account Type
                     </label>
@@ -157,7 +139,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                     }
                 </div>
 
-                <div className="w-full mb-2 p-2">
+                <div className="w-full p-2">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                         Password
                     </label>
@@ -177,7 +159,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                     }
                 </div>
 
-                <div className="mb-6 p-2">
+                <div className="p-2">
                     <label className=" block text-gray-500 font-bold">
                         <input
                             className="mr-2 leading-tight"
@@ -195,22 +177,22 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                     }
                 </div>
 
-                <div className="w-full mb-2 p-2">
+                <div className="w-full p-2">
                     <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign up</button>
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <p>Already have an account? <button
-                        onClick={() => {
-                            setShowSignInModal(true)
-                            setShowSignUpModal(false)
-                        }}
-                        className="text-green-400 font-bold">Login</button>
+                    <p className="font-bold">Already have an account?
+                        <Link href="/dashboard/login">
+                            <a className="text-primary inline-block ml-2">
+                                Login
+                            </a>
+                        </Link>
                     </p>
                 </div>
             </form>
-        </CustomModal>
+        </SubAuthContainer>
     );
 };
 
-export default SignUpModal;
+export default SubSignUp;

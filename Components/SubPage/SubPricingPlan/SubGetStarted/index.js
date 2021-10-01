@@ -1,5 +1,5 @@
-import React from 'react'
-import style from "./style.module.css"
+import React from 'react';
+import style from "./style.module.css";
 
 const SubGetStarted = props => {
  
@@ -18,7 +18,7 @@ const SubGetStarted = props => {
               Get started
             </button>
           </div>
-        </div>
+        </div> 
         <div className={style["SubGetStarted-lowerCurve"]}></div>
       </div>
     );
