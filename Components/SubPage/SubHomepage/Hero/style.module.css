@@ -1,0 +1,16 @@
+.subhomepage-hero-wrapper {
+  height: 75vh;
+  @apply relative rounded-md overflow-hidden;
+}
+
+@media screen and (max-width: 640px){
+  .subhomepage-hero-wrapper {
+    height: 350px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 641px) {
+  .subhomepage-hero-wrapper {
+    height: 400px;
+  }
+} 

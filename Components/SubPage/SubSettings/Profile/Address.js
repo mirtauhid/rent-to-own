@@ -2,8 +2,7 @@ import InputField from './InputField';
 
 const Address = () => {
     return (
-      <div className="border-2 mt-10 grid md:grid-cols-2 gap-4 px-5 py-5 rounded-lg">
-        <p className="text-lg font-bold mb-2">Address</p>
+      <div className="mt-5 grid md:grid-cols-2 gap-4 rounded-lg">
 
         <div className="md:col-span-2">
           <InputField fieldName="address" placeholder="Address" />

@@ -23,11 +23,7 @@ const onSubmit = (values, { resetForm }) => {
 const Account = ({ tab }) => {
   return (
     <div
-      className={`border-2 rounded-lg mt-10 w-full absolute transition duration-300 ${
-        tab === "account"
-          ? "transform translate-x-0"
-          : "transform translate-x-full"
-      } px-5 py-5`}
+      className={`border-2 rounded-lg mt-10 w-full px-5 py-5`}
     >
       <Formik
         initialValues={initialValues}

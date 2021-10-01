@@ -11,7 +11,7 @@ const Question = ({ question, answer }) => {
           className="flex justify-between cursor-pointer"
           onClick={() => setShowAnswer(!showAnswer)}
         >
-          <p className="text-lg text-gray-600">{question}</p>
+          <p className="text-lg md:text-xl text-gray-600 font-medium">{question}</p>
           <div className="mt-1">
             <div
               className={`w-4 h-1 transform translate-y-full ${
@@ -31,7 +31,7 @@ const Question = ({ question, answer }) => {
             showAnswer
               ? `${style["FAQ-answer-Open"]}`
               : `${style["FAQ-answer-Close"]}`
-          } mt-3 mb-2`}
+          } mt-3 mb-2 text-xs md:text-sm`}
         >
           {answer}
         </p>

@@ -5,7 +5,7 @@ import { Field, ErrorMessage } from "formik";
 const FileInputField = ({label,fieldName}) => {
     return (
       <>
-        <p className="mt-7 mb-3 text-base font-bold">
+        <p className="mt-5 mb-3 text-base font-bold">
          {label}  <span className="text-red-500">*</span>
         </p>
 
@@ -22,11 +22,11 @@ const FileInputField = ({label,fieldName}) => {
                   >
                     <p
                       className={`${
-                        field.value.name ? "text-gray-600" : "text-gray-400"
+                        field.value ? "text-gray-600" : "text-gray-400"
                       }`}
                     >
-                      {field.value.name
-                        ? field.value.name
+                      {field.value
+                        ? field.value
                         : "Upload letter of employment"}
                     </p>
                   </div>

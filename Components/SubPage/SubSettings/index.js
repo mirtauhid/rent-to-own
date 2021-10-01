@@ -3,42 +3,57 @@ import HomeLayout from "../../../Layouts/HomeLayout";
 import style from "./style.module.css";
 import Profile from "./Profile";
 import Account from "./Account";
-
+import PreQualification from "./PreQualification";
 
 const SubSettings = () => {
-  const [tab, setTab] = useState("profile");
+  const [tab, setTab] = useState("preQualified");
   return (
     <HomeLayout>
-      <div className={`${style["settings-wrapper"]} ${tab === "account" ? style["seetings-wrapper-for-account"]:null}`}>
+      <div
+        className={`${style["settings-wrapper"]} ${
+          tab === "account" ? style["seetings-wrapper-for-account"] : null
+        }`}
+      >
         <p className="text-3xl text-gray-700 font-extrabold ml-5">
-          Profile Settings
+          Settings
         </p>
 
         <div className={style["settings-tab"]}>
           <p
-            className="text-lg ml-5 cursor-pointer font-bold"
+            className={`text-lg ml-5 cursor-pointer font-bold ${
+              tab === "profile" ? "border-b-4 border-primary pb-1" : null
+            }`}
             onClick={() => setTab("profile")}
           >
             Profile
           </p>
           <p
-            className="text-lg ml-3 cursor-pointer font-bold"
+            className={`text-lg ml-5 cursor-pointer font-bold ${
+              tab === "account" ? "border-b-4 border-primary pb-1" : null
+            }`}
             onClick={() => setTab("account")}
           >
             Account
           </p>
+          <p
+            className={`text-lg ml-5 cursor-pointer font-bold ${
+              tab === "preQualification"
+                ? "border-b-4 border-primary pb-1"
+                : null
+            }`}
+            onClick={() => setTab("preQualification")}
+          >
+            Pre-Qualification
+          </p>
         </div>
 
-        <div className={`${style["settings-tab-underline"]}`}>
-          <div
-            className={`${style["settings-tab-active-underline"]} transform ${
-              tab === "profile" ? "translate-x-0" : "translate-x-full"
-            } transition duration-300`}
-          ></div>
-        </div>
-
-        <Account tab={tab} />
-        <Profile tab={tab} />
+        {tab === "profile" ? (
+          <Profile tab={tab} />
+        ) : tab === "account" ? (
+          <Account tab={tab} />
+        ) : (
+          <PreQualification tab={tab} />
+        )}
       </div>
     </HomeLayout>
   );

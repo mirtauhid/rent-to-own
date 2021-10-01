@@ -41,7 +41,7 @@ const ExploreNeighborSlider = () => {
     <div className="mx-5 md:mx-20 lg:mx-28 mt-12 md:mt-24">
       <div className="mx-auto mb-5 md:mb-10" style={{ width: "fit-content" }}>
         <div className="w-24 h-1 bg-primary mx-auto mb-3"></div>
-        <p className="text-xl md:text-2xl lg:text-3xl font-bold">
+        <p className="text-xl md:text-2xl lg:text-3xl font-bold capitalize">
           Explore our neighborhoods
         </p>
       </div>
