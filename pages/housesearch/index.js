@@ -174,7 +174,7 @@ function Search ({ setSearch, panTo, isLoaded }) {
           value={value}
           onChange={handleInput}
           placeholder="Search city"
-          style={{  borderWidth: 2 }}
+          style={{ borderWidth: 2 }}
         />
         <ComboboxPopover>
           <ComboboxList>
