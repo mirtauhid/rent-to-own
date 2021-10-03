@@ -6,6 +6,7 @@ import {
     InfoWindow
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
+import { BiCurrentLocation } from "react-icons/bi";
 
 const containerStyle = {
     height: '100vh', width: 'auto'
@@ -37,23 +38,13 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
         ]);
     }, []);
 
-    // const mapRef = React.useRef();
-    // const onMapLoad = React.useCallback((map) => {
-    //     mapRef.current = map;
-    // }, []);
-
-    // const panTo = React.useCallback(({lat, lng}) => {
-    //     mapRef.current.panTo({lat, lng});
-    //     mapRef.current.setZoom(14);
-    // }, []);
-
     //map error
     if (loadError) return "Error";
     if (!isLoaded) return "Loading";
 
     return (
-        <div className="py-5 w-full hidden md:block">
-            {/* <Locate panTo={panTo} /> */}
+        <div className="py-5 w-full hidden md:block relative">
+            
             <GoogleMap
                 id="map"
                 mapContainerStyle={containerStyle}
@@ -63,6 +54,7 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
                 onClick={onMapClick}
                 onLoad={onMapLoad}
             >
+                {/* <Locate panTo={panTo} /> */}
                 {markers.map((marker) => (
                     <Marker
                         key={`${marker.lat}-${marker.lng}`}
@@ -100,6 +92,9 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
                     </InfoWindow>
                 ) : null}
             </GoogleMap>
+            <div className="absolute left-5 bottom-8">
+                <Locate panTo={panTo} />
+            </div>
         </div>
     )
 }
@@ -120,7 +115,7 @@ function Locate({ panTo }) {
           );
         }}
       >
-        <img src="/compass.svg" alt="compass" />
+        <BiCurrentLocation size={32}/>
       </button>
     );
   }

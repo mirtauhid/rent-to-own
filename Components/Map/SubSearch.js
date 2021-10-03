@@ -85,7 +85,7 @@ const Search = ({ setSearch }) => {
                   //     query: { search: description },
                   //   }}
                   // >
-                    <ComboboxOption value={description} />
+                    <ComboboxOption key={id} value={description} />
                   //</Link>
                 ))}
             </ComboboxList>
