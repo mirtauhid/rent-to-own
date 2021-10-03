@@ -18,15 +18,11 @@ import {
   import style from './style.module.css';
   const libraries = ["places"];
 
-const Search = ({ setSearch }) => {
-    const {isLoaded, loadError} = useLoadScript({
+const Search = ({ setSearch, setLatLng }) => {
+      const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
         libraries,
       })
-  
-      const onChangeValue = e => {
-          setSearch(e.target.value);
-      }
       const mapRef = React.useRef();
       const panTo = React.useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
@@ -57,9 +53,11 @@ const Search = ({ setSearch }) => {
       clearSuggestions();
   
       try {
+        setSearch(address);
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
-        panTo({ lat, lng });
+        // panTo({ lat, lng });
+        setLatLng({lat, lng})
       } catch (error) {
         console.log("😱 Error: ", error);
       }

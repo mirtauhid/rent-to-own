@@ -1,11 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getProperty = createAsyncThunk (
-    //https://rent-to-own.zetech.us/api/v2/public/property/filter
     'property/getProperty',
     async () => {
-        return fetch("https://rent-to-own.zetech.us/api/v2/public/property/filter")
-            .then(response => response.json())
+        try {
+            const response = await fetch('https://rent-to-own.zetech.us/api/v2/public/property/filter') ;
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+            const resData = await response.json();
+            return resData.data;
+        }catch(err) {
+            throw err;
+        }
     }
 )
 
@@ -15,7 +22,7 @@ export const propertySlice = createSlice({
     allproperties: [],
     status: null
   },
-  reducers: {
+  extraReducers: {
     [getProperty.pending]: (state, action) => {
         state.status = 'loading'
     },
@@ -29,6 +36,6 @@ export const propertySlice = createSlice({
   },
 });
 
-export const { getAllProperties } = propertySlice.actions;
+//export const { getAllProperties } = propertySlice.actions;
 
 export default propertySlice.reducer;

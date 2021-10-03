@@ -3,6 +3,7 @@ import authReducer from "./slices/auth";
 import counterReducer from "./slices/counter";
 import chatReducer from './slices/messaging';
 import propertyReducer from './slices/property';
+import areasReducer from './slices/areas';
 
 
 const RootReducer = combineReducers({
@@ -10,6 +11,7 @@ const RootReducer = combineReducers({
   auth:authReducer,
   message: chatReducer,
   property: propertyReducer,
+  areas: areasReducer,
 })
 
 

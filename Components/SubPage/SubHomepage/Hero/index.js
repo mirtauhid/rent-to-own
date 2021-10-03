@@ -1,10 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 import SubSearch from '../../../Map/SubSearch';
+import {
+  useLoadScript,
+} from "@react-google-maps/api";
+const libraries = ["places"];
 
 const index = () => {
     const [search, setSearch] = React.useState("");
-
+    const [latlng, setLatLng] = React.useState();
+    const {isLoaded, loadError} = useLoadScript({
+      googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
+      libraries,
+    })
     return (
       <div className="px-5 md:px-20 lg:px-28">
         <div className="relative rounded-md h-60 md:h-80 lg:h-96 overflow-hidden">
@@ -21,7 +29,7 @@ const index = () => {
               Canada's Only Rent-to-Own Marketplace
             </p>
             <div className="mt-5 lg:mt-5">
-              {<SubSearch setSearch={setSearch} /> }
+              {isLoaded && <SubSearch setSearch={setSearch} setLatLng={setLatLng} /> }
               <Link
                 href={{
                   pathname: "/housesearch",
