@@ -7,7 +7,6 @@ import {
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 
-const libraries = ["places"];
 const containerStyle = {
     height: '100vh', width: 'auto'
 };
@@ -22,12 +21,7 @@ const center = {
     lat: 59.95, lng: 30.33
 };
 
-const Map = () => {
-    const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
-        libraries,
-    })
-
+const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
     //maps @api
     const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(null);
@@ -43,10 +37,10 @@ const Map = () => {
         ]);
     }, []);
 
-    const mapRef = React.useRef();
-    const onMapLoad = React.useCallback((map) => {
-        mapRef.current = map;
-    }, []);
+    // const mapRef = React.useRef();
+    // const onMapLoad = React.useCallback((map) => {
+    //     mapRef.current = map;
+    // }, []);
 
     // const panTo = React.useCallback(({lat, lng}) => {
     //     mapRef.current.panTo({lat, lng});
@@ -59,6 +53,7 @@ const Map = () => {
 
     return (
         <div className="py-5 w-full hidden md:block">
+            {/* <Locate panTo={panTo} /> */}
             <GoogleMap
                 id="map"
                 mapContainerStyle={containerStyle}
