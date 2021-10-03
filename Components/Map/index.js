@@ -5,20 +5,26 @@ import {
     Marker,
     InfoWindow
 } from "@react-google-maps/api";
+import mapStyles from "./mapStyles";
 
 const libraries = ["places"];
+const containerStyle = {
+    height: '100vh', width: 'auto'
+};
+
+const options = {
+    styles: mapStyles,
+    //disableDefaultUI: true,
+    //zoomControl: true,
+};
+
+const center = {
+    lat: 59.95, lng: 30.33
+};
 
 const Map = () => {
-    const containerStyle = {
-        height: '100vh', width: 'auto'
-    };
-
-    const center = {
-        lat: 59.95, lng: 30.33
-    };
-
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBR5-gY1SoOvSodRms0PISuSmfRz7zM5fQ',
+        googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
         libraries,
     })
 
@@ -42,19 +48,22 @@ const Map = () => {
         mapRef.current = map;
     }, []);
 
-    const panTo = React.useCallback(({lat, lng}) => {
-        mapRef.current.panTo({lat, lng});
-        mapRef.current.setZoom(14);
-    }, []);
+    // const panTo = React.useCallback(({lat, lng}) => {
+    //     mapRef.current.panTo({lat, lng});
+    //     mapRef.current.setZoom(14);
+    // }, []);
 
     //map error
     if (loadError) return "Error";
     if (!isLoaded) return "Loading";
+
     return (
         <div className="py-5 w-full hidden md:block">
             <GoogleMap
+                id="map"
                 mapContainerStyle={containerStyle}
                 center={center}
+                options={options}
                 zoom={10}
                 onClick={onMapClick}
                 onLoad={onMapLoad}
@@ -66,12 +75,12 @@ const Map = () => {
                         onClick={() => {
                             setSelected(marker);
                         }}
-                        icon={{
-                            url: ``,
-                            origin: new window.google.maps.Point(0, 0),
-                            anchor: new window.google.maps.Point(15, 15),
-                            scaledSize: new window.google.maps.Size(30, 30),
-                        }}
+                        //     icon={{
+                        //         url: ``,
+                        //         origin: new window.google.maps.Point(0, 0),
+                        //         anchor: new window.google.maps.Point(15, 15),
+                        //         scaledSize: new window.google.maps.Size(30, 30),
+                        //     }}
                     />
                 ))}
 
@@ -99,5 +108,26 @@ const Map = () => {
         </div>
     )
 }
+
+function Locate({ panTo }) {
+    return (
+      <button
+        className="locate"
+        onClick={() => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              panTo({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              });
+            },
+            () => null
+          );
+        }}
+      >
+        <img src="/compass.svg" alt="compass" />
+      </button>
+    );
+  }
 
 export default Map;
