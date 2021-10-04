@@ -1,14 +1,10 @@
-import { useState } from "react";
 import AboutMeForm from "./AboutMeForm";
-import DocumentUploadSection from "./DocumentUploadSection";
 import ContactInfo from "./ContactInfo";
-import Address from "./Address";
-import style from "../style.module.css";
-import Requirement from "./Requirement";
+
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import PreQualified from "./PreQualified";
+
 
 //formik properties starts
 
@@ -17,9 +13,6 @@ const initialValues = {
   lastName: "",
   gender: "",
   dob: "",
-  LOE: "",
-  downPayment: "",
-  CRA: "",
   email: "",
   phoneNumber: "",
   secondaryPhoneNumber: "",
@@ -29,11 +22,6 @@ const initialValues = {
   province: "",
   country: "",
   postalCode: "",
-  combinedIncome: "",
-  availableMoney: "",
-  monthlyPayment: "",
-  priceRange:"",
-  searchingCity:""
 };
 
 const phoneRegExp =
@@ -44,9 +32,6 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().required("Required"),
   gender: Yup.string().required("Required"),
   dob: Yup.string().required("Required"),
-  LOE: Yup.mixed().required("Required"),
-  downPayment: Yup.mixed().required("Required"),
-  CRA: Yup.mixed().required("Required"),
   email: Yup.string().email("Invalid email format").required("Required"),
   phoneNumber: Yup.string()
     .matches(phoneRegExp, "Enter valid phone number")
@@ -61,11 +46,6 @@ const validationSchema = Yup.object().shape({
   province: Yup.string().required("Required"),
   country: Yup.string().required("Required"),
   postalCode: Yup.string().required("Required"),
-  combinedIncome: Yup.string().required("Required"),
-  availableMoney: Yup.string().required("Required"),
-  monthlyPayment: Yup.string().required("Required"),
-  priceRange: Yup.string().required("Required"),
-  searchingCity: Yup.string().required("Required"),
 });
 
 const onSubmit = (values, { resetForm }) => {
@@ -73,15 +53,11 @@ const onSubmit = (values, { resetForm }) => {
 };
 
 const Profile = ({ tab }) => {
-  const [yesButtonClicked, setYesButtonClicked] = useState(false);
+
 
   return (
     <div
-      className={`mt-10 w-full transition duration-300 ${
-        tab === "profile"
-          ? "transform translate-x-0"
-          : "transform -translate-x-full"
-      } mb-10 `}
+      className={`mt-10 w-full transition duration-300 mb-10 `}
     >
       <Formik
         initialValues={initialValues}
@@ -89,8 +65,8 @@ const Profile = ({ tab }) => {
         onSubmit={onSubmit}
       >
         <Form>
-          <div className="border-2 px-5 rounded-lg">
-            <div className="flex gap-5 mt-7">
+          <div className="border-2 px-5 py-10 rounded-lg">
+            <div className="flex gap-5">
               <div className="w-16 h-16 rounded-full overflow-hidden">
                 <img
                   src="/images/img_avatar.png"
@@ -112,17 +88,8 @@ const Profile = ({ tab }) => {
             </div>
 
             <AboutMeForm />
-            <Requirement setYesButtonClicked={setYesButtonClicked} />
           </div>
-
-          {yesButtonClicked && (
-            <>
-              <PreQualified/>
-              <DocumentUploadSection />
-              <ContactInfo />
-              <Address />
-            </>
-          )}
+          <ContactInfo />
         </Form>
       </Formik>
     </div>

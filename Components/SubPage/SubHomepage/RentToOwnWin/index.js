@@ -12,7 +12,7 @@ const data = [
 
   {
     title: "I'm a Home Buyer",
-    imgSrc: "/images/Homepage/sell.svg",
+    imgSrc: "/images/Homepage/sold-Icons.svg",
     content:
       "With Rent-to-Own Realty, individuals can get access to properties allowing you to become a homeowner today! Our powerful tools can help you find, apply, and even enter into a purchase agreement in a few simple steps. Why wait? Become a homeowner today!",
     btnText: "Search Homes",
@@ -24,7 +24,7 @@ const RentToOwnWin = () => {
     <div className="mx-5 md:mx-20 lg:mx-28 mt-12 md:mt-24">
       <div className="mx-auto md:mb-10" style={{ width: "fit-content" }}>
         <div className="w-24 h-1 bg-primary mx-auto mb-3"></div>
-        <p className="text-xl md:text-2xl lg:text-3xl font-bold">Rent-to-Own for the Win Win</p>
+        <p className="text-xl md:text-2xl lg:text-3xl font-bold capitalize">Rent-to-Own for the Win Win</p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-2 md:gap-5">

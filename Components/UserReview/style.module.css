@@ -12,3 +12,8 @@
   box-shadow: -2px 2px 5px gray;
   @apply absolute h-8 w-8 rounded-full grid place-items-center cursor-pointer bg-white transform hover:scale-105 duration-300;  
 }
+
+.userReview-review-wrapper{
+  @apply w-96 h-72 my-10 mx-3 px-5 pt-5 rounded-md;
+  box-shadow: 6px 6px 20px 15px rgb(233, 233, 233);
+}
