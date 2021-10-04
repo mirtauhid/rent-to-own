@@ -5,6 +5,7 @@ import {
   useLoadScript,
 } from "@react-google-maps/api";
 const libraries = ["places"];
+import style from "./style.module.css"
 
 const index = () => {
     const [search, setSearch] = React.useState("");
