@@ -130,11 +130,7 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
           if (res.data.success) {
             // Updating redux
             dispatch(signIn(res.data?.data?.data));
-          } else {
-            // loading end
-            setLoading(false);
-            setError({ status: true, msg: "Error occurred. Please try again!" })
-          }
+          } 
         })
         .catch((err)=>{
           localStorage.removeItem('authToken')
