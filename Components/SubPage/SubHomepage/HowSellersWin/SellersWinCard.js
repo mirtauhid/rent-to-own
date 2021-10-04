@@ -1,10 +1,11 @@
 import React from 'react'
 
-const SellersWinCard = ({img,content}) => {
+
+const SellersWinCard = ({logo,content}) => {
     return (
       <div>
         <div className="h-10 w-10">
-          <img src={img} alt="" className="w-full h-full"/>
+          <img src={logo} className="h-full w-full"/>
         </div>
 
         <p className="font-bold mt-4 text-sm">{content}</p>

@@ -11,7 +11,7 @@ const ImageCard = ({name,img}) => {
       />
 
       <div
-        className="absolute top-0 left-0 w-full h-full pt-5 px-5"
+        className="absolute top-0 left-0 w-full h-full pt-5 px-3"
         style={{ background: "rgba(0,0,0,0.4)" }}
       >
         <Link 
