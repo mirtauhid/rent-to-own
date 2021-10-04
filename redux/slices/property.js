@@ -21,7 +21,6 @@ export const getListingType = createAsyncThunk (
     async () => {
         try {
             const response = await fetch('https://rent-to-own.zetech.us/api/v2/listing-types');
-            console.log(response);
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }

@@ -19,7 +19,7 @@ const Property = () => {
     const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
-    const [listingType, setListingType] = React.useState(2);
+    const [listingType, setListingType] = React.useState();
     const [filterCity, setFilterCity] = React.useState('');
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
@@ -153,7 +153,7 @@ const Property = () => {
         <HomeLayout>
         <div className=" md:flex md:flex-row md:px-20 lg:px-28">
             {/* Filter */}
-            <div className="smd:w-1/3 flex">
+            <div className="smd:w-1/3 flex justify-center">
                 <div className="w-40 my-10">
                     <div className="flex flex-row justify-between items-center">
                         <p className="text-xs">FILTER</p>
@@ -172,7 +172,7 @@ const Property = () => {
                         </div>
                     </div>
                     { filterState ? (
-                        <div>
+                        <div className="">
                             <div>
                                 <div className="pt-2" />
                                 <hr className=""/>
@@ -215,19 +215,6 @@ const Property = () => {
                                 <div className="pt-4"></div>
                                 <hr className=""/>
                             </div>
-                            {/* list of areas */}
-                            {/* {areaData?.map(item => {
-                                <div className=" mt-2 text-sm" key={item?.id}>
-                               <div className="grid grid-cols-2">
-                                    <p>Hello</p>
-                                    <div className="justify-self-end mt-1 cursor-pointer" 
-                                        
-                                    >
-                                        {item?.id ? <BiDownArrow /> : <BiRightArrow/> }
-                                    </div>
-                                </div>
-                                </div>
-                            })} */}
                             {areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
@@ -280,9 +267,9 @@ const Property = () => {
                             </div>
                             <div className="relative">
                                 <ReactSlider
-                                    className="bg-gray-400 text-white cursor-pointer"
-                                    thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
-                                    trackClassName="bg-gray-400 h-1"
+                                    className="cursor-pointer"
+                                    thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400"
+                                    trackClassName="bg-green-400 h-1"
                                     value={price}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
@@ -329,9 +316,9 @@ const Property = () => {
                             </div>
                             <div className="relative">
                                 <ReactSlider
-                                    className="bg-gray-400 text-white cursor-pointer"
-                                    thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
-                                    trackClassName="bg-gray-400 h-1"
+                                    className="cursor-pointer"
+                                    thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400 text-xs"
+                                    trackClassName="bg-green-400 h-1"
                                     value={areaSqft}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
@@ -388,7 +375,7 @@ const Property = () => {
                                     bedroom={item.bedroom}
                                     bathroom={item.bathroom}
                                     sqft={item.plotSize}
-                                    imageUrl={item.imageUrl}
+                                    imageUrl={item.PropertyImages[0]}
                                 />
                             </a>
                         </Link>

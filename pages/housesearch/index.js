@@ -25,7 +25,7 @@ import "@reach/combobox/styles.css";
 import style from './style.module.css';
 const libraries = ["places"];
 
-const index = () => {
+const HouseSearch = () => {
     const router = useRouter()
     const {
         query: { search },
@@ -189,4 +189,4 @@ function Search ({ setSearch, panTo, isLoaded }) {
   );
 }
 
-export default index
+export default HouseSearch;

@@ -3,14 +3,14 @@ import { GoLocation } from "react-icons/go";
 import SubCardList from './SubCardList';
 import { AiOutlineHeart } from "react-icons/ai";
 
-const index = ({title, location, description, price, bedroom, bathroom, sqft, imageUrl}) => {
+const PropertyImage = ({title, location, description, price, bedroom, bathroom, sqft, imageUrl}) => {
     const titleSlice = title.slice(0, 35) + (title.length > 35 ? "..." : "")
     const descriptionSlice = description.slice(0, 130) + (description.length > 130 ? "..." : "")
     return (
         <div className="w-full shadow-lg rounded-xl pb-4 relative">
             
             <div className="relative">
-                <img src={'https://picsum.photos/200/300'} alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
+                <img src={imageUrl.src.secure_url} alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
                 <div className="bg-primary h-8 w-8 rounded-lg absolute right-8 bottom-0 flex justify-center items-center">
                     <AiOutlineHeart color="white" fill={"white"}/>
                 </div>
@@ -58,4 +58,4 @@ const index = ({title, location, description, price, bedroom, bathroom, sqft, im
     )
 }
 
-export default index
+export default PropertyImage

@@ -50,13 +50,13 @@ const Details = () => {
             <div className="md:flex md:flex-row flex-column pt-6">
               {/* Introduction */}
               <div className="w-full md:w-2/3">
-                <Introduction />
+                <Introduction propertyDetails={propertyDetails}/>
                 <hr className="mt-2"></hr>
                 {/* Capacity */}
-                <SubCapacity />
+                <SubCapacity propertyDetails={propertyDetails}/>
                 <hr className="mt-5"></hr>
                 {/* Interior features */}
-                <Interior />
+                <Interior propertyDetails={propertyDetails}/>
               </div>
 
               {/* price Card */}
