@@ -6,29 +6,31 @@ import HomeLayout from '../../Layouts/HomeLayout';
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
-import { getProperty } from '../../redux/slices/property';
+import { getProperty, getListingType, getFilteredData } from '../../redux/slices/property';
 import { getProvience, getCities } from '../../redux/slices/areas';
 
-const index = () => {
+const Property = () => {
     const dispatch = useDispatch();
     const router = useRouter()
     const {
         query: { state },
     } = router
-    const stateData = require('./locations');
     const [areaData, setAreaData] = React.useState();
     const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState(2);
+    const [filterCity, setFilterCity] = React.useState('');
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
     const [areaFilter, setAreaFilter] = React.useState();
     const properties = useSelector((state) => state.property.allproperties);
+    const listingType1 = useSelector((state) => state.property.listingType);
+    const filteredData = useSelector((state) => state.property.filteredData);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
     console.log('================areas====================');
-    console.log(areas);
+    console.log(filteredData);
     console.log('====================================');
 
     useEffect(() => {
@@ -39,20 +41,40 @@ const index = () => {
         dispatch(getProperty());
         dispatch(getProvience());
         dispatch(getCities());
+        dispatch(getListingType());
+        dispatch(getFilteredData({
+            listingTypeIds: listingType, 
+            cityIds: filterCity,
+            minPrice: parseInt(price[0]*10000),
+            maxPrice: parseInt(price[1]*100000),
+            minSize: parseInt(areaSqft[0]*100),
+            maxSize: parseInt(areaSqft[1]*100),
+            
+        }));
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getFilteredData({
+            listingTypeIds: listingType, 
+            cityIds: filterCity,
+            minPrice: parseInt(price[0]*10000),
+            maxPrice: parseInt(price[1]*100000),
+            minSize: parseInt(areaSqft[0]*100),
+            maxSize: parseInt(areaSqft[1]*100),
+        }));
+    }, [listingType, filterCity, price, areaSqft])
+
     const resetAll = () => {
-        setAreaData(stateData.map(d => {
+        setAreaData(allareas?.map(d => {
             return {
                 select: false,
                 id: d.id,
-                state: d.state,
-                areas: d.areas.map(d => {
+                state: d.name,
+                areas: d.Cities.map(d => {
                     return {
                         id: d.id,
-                        location: d.location,
+                        location: d.name,
                         checkbox: false,
-                        places: d.places
                     }
                 }),
             }
@@ -63,9 +85,7 @@ const index = () => {
         const dummy = [];
         areaData?.map(step1 => {
             step1.areas.map(step2 => {
-                step2.places.map(step3 => {
-                    dummy.push(step3);
-                })
+                dummy.push(step2);
             })
         })
         setInitData(dummy)
@@ -73,7 +93,7 @@ const index = () => {
     }
     //clear filtering
     const clearAll = () => {
-        setListingType(2);
+        setListingType();
         setPrice([0, 100]);
         setAreaSqft([0, 100]);
         resetAll();
@@ -83,7 +103,7 @@ const index = () => {
     //reset all
     React.useEffect(() => {
         resetAll();
-    }, [stateData])
+    }, [allareas])
     
     //initial data
     React.useEffect(() => {
@@ -94,33 +114,22 @@ const index = () => {
     //checkbox
     const onChangeValue = input => e => {
         setListingType(e.target.value);
-        console.log(listingType);
+        //console.log(listingType);
     }
 
-    //main filtering
+    //main filtering for city listing
     const doFilter = async () => {
         const holder = [];
         await areaData?.map(step1 => {
             if(step1.select === true) {
                 step1.areas.map(step2 => {
                     if (step2.checkbox === true) {
-                        holder.push(step2.location);
+                        holder.push(parseInt(step2.id));
                     }
                 })
             }
         })
-
-        console.log(holder);
-        
-        const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
-
-        setFilterOptions(dummyAreaFilter);
-        
-        // const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
-
-        // const dummyListFilter = 
-        // listingType != 2 && sqftFilter.filter(item => item.type == listingType)
-        //setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter ? sqftFilter : priceFilter ? priceFilter : dummyAreaFilter);   
+        setFilterCity(holder.toString());   
     }
 
     React.useEffect(() => {
@@ -173,27 +182,35 @@ const index = () => {
                                     <input 
                                         type="radio" 
                                         className="pl-4 checked:bg-red"
-                                        value={2}
+                                        value={listingType1[0]?.id}
                                         name="listingType"
                                         onChange={onChangeValue("listingType")}
-                                    /> All Listing Types
+                                    /> {listingType1[0]?.name}
                                 </div>
                                 <div className="pt-2 text-xs">
                                     <input 
                                         type="radio" 
                                         className="pl-4"
-                                        value={0}
+                                        value={listingType1[1]?.id}
                                         name="listingType"
                                         onChange={onChangeValue("listingType")}
-                                    /> Available Properties
+                                    /> {listingType1[1]?.name}
                                 </div>
                                 <div className="pt-2 text-xs">
                                     <input 
                                         type="radio" 
-                                        value={1}
+                                        value={listingType1[2]?.id}
                                         name="listingType"
                                         onChange={onChangeValue("listingType")}
-                                    /> Available Properties - Online Payments
+                                    /> {listingType1[2]?.name}
+                                </div>
+                                <div className="pt-2 text-xs">
+                                    <input 
+                                        type="radio" 
+                                        value={listingType1[3]?.id}
+                                        name="listingType"
+                                        onChange={onChangeValue("listingType")}
+                                    /> {listingType1[3]?.name}
                                 </div>
                                 <div className="pt-4"></div>
                                 <hr className=""/>
@@ -211,10 +228,10 @@ const index = () => {
                                 </div>
                                 </div>
                             })} */}
-                            {allareas?.map(item => (
+                            {areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
-                                        <p>{item?.name}</p>
+                                        <p>{item?.state}</p>
                                         <div className="justify-self-end mt-1 cursor-pointer" 
                                             onClick={() => setAreaData(
                                                 areaData?.map(state => {
@@ -285,20 +302,20 @@ const index = () => {
                                         name="phone"
                                         className="w-16 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        value={`$${(price[0]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                                        value={`$${(price[0]*100000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         // onChange={() => {
                                         //     const arr= [ ,value[1]]
                                         // })}
                                     />
                                 </div>
-                                <div className="border ml-8">
+                                <div className="border ml-4">
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-16 pt-1 pl-1 text-xs"
+                                        className="w-20 pt-1 pl-1 text-xs"
                                         placeholder="MAX"
-                                        value={`$${(price[1]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
+                                        value={`$${(price[1]*100000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
@@ -356,9 +373,11 @@ const index = () => {
             {/* Cards for single property*/}
             <div
                 className="grid flex-2 grid-cols-1 smd:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 justify-center xl:grid-cols-3 py-5 pl-8 gap-7 smd:gap-4">
-                {properties?.map(item => (
+                {filteredData?.map(item => (
                     <div className="cursor-pointer" key={item.id.toString()}>
-                        <Link href={'/housesearch/' + item.id} key={item.id}>
+                        <Link 
+                            href={'/housesearch/' + item.id}
+                        >
                             <a>
                                 <PropertyImage
                                     key={item.id.toString()}
@@ -381,4 +400,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Property;

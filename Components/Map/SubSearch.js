@@ -57,6 +57,7 @@ const Search = ({ setSearch, setLatLng }) => {
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
         // panTo({ lat, lng });
+        console.log(results);
         setLatLng({lat, lng})
       } catch (error) {
         console.log("😱 Error: ", error);
