@@ -1,8 +1,6 @@
 import React from "react";
-import Slider from "react-slick";
-import CustomSliderNext from "./CustomSliderNext";
-import CustomSliderPrev from "./CustomSliderPrev";
 import Review from "./Review";
+import Marquee from "react-fast-marquee";
 
 const data = [
   {
@@ -33,27 +31,16 @@ const data = [
 ];
 
 const UserReview = () => {
-  const settings = {
-    arrows: true,
-    nextArrow: <CustomSliderNext />,
-    prevArrow: <CustomSliderPrev />,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    touchMove: true,
-    swipeToSlide: true,
-    
-  };
 
   return (
-    <div className="mx-5 md:mx-20 lg:mx-48 mt-12 md:mt-24">
-
-      <Slider {...settings}>
-        {
-          data.map(({...item},index)=><Review {...item} key={index}/>)
-        }
-      </Slider>
+    <div className="mt-20">
+      <Marquee speed={"80"} gradient={false} pauseOnHover={true}>
+        
+          {data.map(({ ...item }, index) => (
+            <Review {...item} key={index} />
+          ))}
+        
+      </Marquee>
     </div>
   );
 };

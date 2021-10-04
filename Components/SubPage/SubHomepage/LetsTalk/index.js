@@ -5,7 +5,7 @@ const LetsTalk = () => {
       <div className="mx-5 lg:mx-28 mt-14 grid md:grid-cols-2 md:px-20">
         <div className="md:h-72 lg:h-80">
           <img
-            src="/images/letsTalk.png"
+            src="/images/Homepage/questionsLetsTalk.webp"
             alt=""
             className="h-full w-full object-cover"
           />
@@ -18,7 +18,7 @@ const LetsTalk = () => {
             <p className="text-white text-2xl lg:text-3xl xl:text-5xl text-center">
               Questions?
             </p>
-            <p className="text-white text-2xl lg:text-3xl xl:text-5xl text-center">
+            <p className="text-white text-2xl lg:text-3xl xl:text-5xl text-center capitalize">
               Let's talk
             </p>
             <p className="font-semibold text-white lg:text-lg text-center mt-4">

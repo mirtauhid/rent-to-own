@@ -1,6 +1,7 @@
 import React from "react";
 import { data } from "../../../../Assets/logoData";
 
+
 const LogoSection = () => {
   return (
     <div className="mx-5 md:mx-20 lg:mx-28 mt-14">
@@ -11,7 +12,7 @@ const LogoSection = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-6">
         {data.map(({ img },index) => {
           return <Logo img={img} key={index}/>;
         })}
@@ -22,8 +23,8 @@ const LogoSection = () => {
 
 const Logo = ({img}) => {
   return (
-    <div className="h-14 flex md:justify-center">
-      <img src={img} alt="" className="h-full"/>
+    <div className="h-9 flex md:justify-center">
+      <img src={img} alt=""/>
     </div>
   );
 };

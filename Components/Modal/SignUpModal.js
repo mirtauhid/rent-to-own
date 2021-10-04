@@ -1,16 +1,24 @@
+import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
+import baseURL from '../../Helpers/httpRequest';
 import { signIn } from '../../redux/slices/auth';
 import CustomModal from './CustomModal';
 
 const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, redirectLink }) => {
+    const [error, setError] = useState({ status: false, msg: "" })
+    const [loading, setLoading] = useState(false)
+
+    // Redux dispatch
     const dispatch = useDispatch();
-    
+
+    // next router
     const router = useRouter()
 
+    // Formik Validation
     const validate = values => {
         const errors = {};
 
@@ -28,8 +36,8 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
             errors.lastName = 'Last name required';
         }
 
-        if (!values.accountType) {
-            errors.accountType = 'Account type required';
+        if (!values.type) {
+            errors.type = 'Account type required';
         }
 
         if (!values.password) {
@@ -47,19 +55,71 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            firstName: '',
-            lastName: '',
-            accountType: '',
-            password: '',
+            email: 'piash@gmail.com',
+            firstName: 'Habibullah',
+            lastName: 'Bahar',
+            type: 'SELLER',
+            password: 'Aa$123456',
             isAgree: false
         },
         validate,
-        onSubmit: (values,{resetForm}) => {
-            dispatch(signIn());
-            router.push(redirectLink)
-            setShowSignUpModal(false);
-            resetForm({});
+        onSubmit: (values, { resetForm }) => {
+            // loading started
+            setLoading(true);
+            setError({ status: false, msg: "" })
+
+            // axios request for checking sign in
+            axios({
+                method: "POST",
+                url: `${baseURL}/v2/auth/signup`,
+                data: values
+            })
+                .then((res) => {
+                    if (res.data.success) {
+                        // Saving token to local-storage
+                        localStorage.setItem('authToken', res.data.data.token)
+
+                        // verifying token
+                        axios({
+                            method: "POST",
+                            url: `${baseURL}/v2/auth/verify`,
+                            headers: { Authorization: res.data.data.token }
+                        })
+                            .then((res) => {
+                                if (res.data.success) {
+                                    // loading end
+                                    setLoading(false);
+                                    // Making error empty
+                                    setError({ status: false, msg: "" })
+                                    // Updating redux
+                                    dispatch(signIn());
+                                    // Dynamic routing
+                                    router.push(redirectLink)
+                                    // Closing the modal
+                                    setShowSignUpModal(false);
+                                    resetForm({});
+                                } else {
+                                    // loading end
+                                    setLoading(false);
+                                    setError({ status: true, msg: "Error occurred. Please try again!" })
+                                }
+                            })
+                            .catch((err) => {
+                                // loading end
+                                setLoading(false);
+                                setError({ status: true, msg: err.response.data.message })
+                            })
+                    } else {
+                        // loading end
+                        setLoading(false);
+                        setError({ status: true, msg: res.data.message })
+                    }
+                })
+                .catch((err) => {
+                    // loading end
+                    setLoading(false);
+                    setError({ status: true, msg: err.response.data.message })
+                })
         },
     });
     return (
@@ -73,6 +133,10 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                 </button>
             </div>
             <h2 className="uppercase text-center font-bold text-xl my-5">Create an account</h2>
+
+            {
+                error.status && <p className="bg-red-50 border border-red-200 text-red-500 text-center p-2 my-2 rounded">{error.msg}</p>
+            }
 
             <form onSubmit={formik.handleSubmit} style={{ height: "400px", overflow: "auto" }}>
                 <div className="w-full mb-2 p-2">
@@ -137,23 +201,24 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="accountType">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="type">
                         Account Type
                     </label>
                     <select
                         className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="accountType"
+                        id="type"
                         placeholder="Acount Type"
-                        name="accountType"
-                        onChange={(e) => formik.setFieldValue("accountType", e.target.value)}
+                        name="type"
+                        value={formik.values?.type}
+                        onChange={(e) => formik.setFieldValue("type", e.target.value)}
                     >
                         <option value="">Select a type</option>
-                        <option value="buyer">Buyer</option>
-                        <option value="seller">Seller</option>
+                        <option value="BUYER">Buyer</option>
+                        <option value="SELLER">Seller</option>
                     </select>
                     {
-                        formik.errors.accountType &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.accountType}</div>
+                        formik.errors.type &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.type}</div>
                     }
                 </div>
 
@@ -186,7 +251,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                             checked={formik.values.isAgree}
                             onChange={formik.handleChange} />
                         <span className="text-sm">
-                            I agree to RealEstate privacy policy and terms of use
+                            I agree to Rent-To-Own privacy policy and terms of use
                         </span>
                     </label>
                     {
@@ -196,7 +261,19 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <button type="submit" className="w-full bg-green-400 text-white rounded py-2">Sign up</button>
+                    <button
+                        type={loading ? "button" : "submit"}
+                        className="w-full flex justify-center items-center bg-primary text-white rounded py-2"
+                        disabled={loading}
+                    >
+                        {
+                            loading &&
+                            <span className="animate-spin flex justify-center items-center w-7">
+                                <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                            </span>
+                        }
+                        {loading ? "Loading..." : "Sign up"}
+                    </button>
                 </div>
 
                 <div className="w-full mb-2 p-2">

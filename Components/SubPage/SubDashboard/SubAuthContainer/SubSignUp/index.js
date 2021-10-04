@@ -168,7 +168,7 @@ const SubSignUp = () => {
                             checked={formik.values.isAgree}
                             onChange={formik.handleChange} />
                         <span className="text-sm">
-                            I agree to RealEstate privacy policy and terms of use
+                            I agree to Rent-To-Own privacy policy and terms of use
                         </span>
                     </label>
                     {

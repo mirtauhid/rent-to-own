@@ -10,7 +10,7 @@ const FAQ = () => {
       className={`${style["subHomepage-FAQ-wrapper"]}`}
     >
       <div className="w-24 h-1 bg-primary mb-3 mx-auto"></div>
-      <p className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-center">
+      <p className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 text-center capitalize">
         Frequently asked questions
       </p>
       <div className={style["subHomepage-FAQ-tab"]}>

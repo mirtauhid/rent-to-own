@@ -1,47 +1,82 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import HomeLayout from "../../../Layouts/HomeLayout";
 import style from "./style.module.css";
 import Profile from "./Profile";
 import Account from "./Account";
-
+import PreQualification from "./PreQualification";
+import Link from "next/link"
+import { useRouter } from "next/router";
 
 const SubSettings = () => {
-  const [tab, setTab] = useState("profile");
+  const router = useRouter();
+  const [tab, setTab] = useState(router.query.name);
+  
+  console.log(router.query.name);
   return (
     <HomeLayout>
-      <div className={`${style["settings-wrapper"]} ${tab === "account" ? style["seetings-wrapper-for-account"]:null}`}>
-        <p className="text-3xl text-gray-700 font-extrabold ml-5">
-          Profile Settings
-        </p>
+      <div
+        className={`${style["settings-wrapper"]} ${
+          tab === "account" ? style["seetings-wrapper-for-account"] : null
+        }`}
+      >
+        <p className="text-3xl text-gray-700 font-extrabold ml-5">Settings</p>
 
         <div className={style["settings-tab"]}>
-          <p
-            className="text-lg ml-5 cursor-pointer font-bold"
-            onClick={() => setTab("profile")}
-          >
-            Profile
-          </p>
-          <p
-            className="text-lg ml-3 cursor-pointer font-bold"
-            onClick={() => setTab("account")}
-          >
-            Account
-          </p>
+          <Link href="/settings?name=profile">
+            <a
+              className={`text-lg ml-5 cursor-pointer font-bold ${
+                tab === "profile" ? "border-b-4 border-primary pb-1" : null
+              }`}
+            >
+              Profile
+            </a>
+          </Link>
+
+          <Link href="/settings?name=account">
+            <a
+              className={`text-lg ml-5 cursor-pointer font-bold ${
+                tab === "account" ? "border-b-4 border-primary pb-1" : null
+              }`}
+            >
+              Account
+            </a>
+          </Link>
+
+          <Link href="/settings?name=prequalification">
+            <a
+              className={`text-lg ml-5 cursor-pointer font-bold ${
+                tab === "account" ? "border-b-4 border-primary pb-1" : null
+              }`}
+            >
+              Pre-Qualification
+            </a>
+          </Link>
         </div>
 
-        <div className={`${style["settings-tab-underline"]}`}>
-          <div
-            className={`${style["settings-tab-active-underline"]} transform ${
-              tab === "profile" ? "translate-x-0" : "translate-x-full"
-            } transition duration-300`}
-          ></div>
-        </div>
-
-        <Account tab={tab} />
-        <Profile tab={tab} />
+        {router.query.name === "profile" ? (
+          <Profile tab={tab} />
+        ) : router.query.name === "account" ? (
+          <Account tab={tab} />
+        ) : (
+          <PreQualification tab={tab} />
+        )}
       </div>
     </HomeLayout>
   );
 };
+
+const Tab = ({ href, isSelected, title }) => (
+  <Link href={href}>
+    <a
+      style={{
+        padding: 5,
+        margin: 5,
+        backgroundColor: isSelected ? "blue" : "transparent",
+      }}
+    >
+      {title}
+    </a>
+  </Link>
+);
 
 export default SubSettings;
