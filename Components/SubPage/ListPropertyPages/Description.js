@@ -22,9 +22,6 @@ const Description = ({ steps, setSteps, formik }) => {
         if (formik.values.name &&
             formik.values.description &&
             formik.values.listingTypeId &&
-            formik.values.bedroom &&
-            formik.values.bathroom &&
-            formik.values.partialBathroom &&
             formik.values.squareFootage &&
             formik.values.amOwner &&
             formik.values.isAgree &&

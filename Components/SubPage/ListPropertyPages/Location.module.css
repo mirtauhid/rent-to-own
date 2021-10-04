@@ -1,0 +1,22 @@
+.listing-search-box {
+    padding: 0.5rem;
+    width: 100%;
+    display: block;
+}
+.listing-search-box input {
+    --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    --tw-text-opacity: 1;
+    color: rgba(69, 75, 78, var(--tw-text-opacity));
+    line-height: 1.25;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    border-width: 1px;
+    border-radius: 0.25rem;
+    appearance: none;
+    width: 100% !important;
+    font-size: 1em;
+    outline: none;
+}

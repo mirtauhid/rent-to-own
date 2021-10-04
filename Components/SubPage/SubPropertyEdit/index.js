@@ -105,7 +105,7 @@ const handleDeleteImg = (index) => {
                         </div>
                         <div className="mb-3">
                             <h3 className="text-md font-bold">Apartment, suit, building, flat no. etc:</h3>
-                            <p>{propertyData?.aptNo}</p>
+                            <p>{propertyData?.apt}</p>
                         </div>
                     </div>
 

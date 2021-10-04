@@ -9,7 +9,7 @@ import TimeLine from './TimeLine';
 
 const ListPropertyPages = ({ children }) => {
     const [steps, setSteps] = useState({
-        first: false,
+        first: true,
         second: false,
         third: false,
         fourth: false,
@@ -25,18 +25,9 @@ const ListPropertyPages = ({ children }) => {
         if (!values.description) { errors.description = 'Required'; }
         if (!values.listingTypeId) { errors.listingTypeId = 'Required'; }
         if (!values.squareFootage) { errors.squareFootage = 'Required'; }
-        if (!values.bedroom) { errors.bedroom = 'Required'; }
-        if (!values.bathroom) { errors.bathroom = 'Required'; }
-        if (!values.partialBathroom) { errors.partialBathroom = 'Required'; }
         if (!values.amOwner) { errors.amOwner = 'Required'; }
         if (!values.isAgree) { errors.isAgree = 'Required'; }
         if (!values.isInsurance) { errors.isInsurance = 'Required'; }
-
-        // For House Rules Validation
-        if (!values.houseRules) { errors.houseRules = 'You have to write your house rules!' }
-
-        // For Location Validation
-        if (!values.address) { errors.address = 'Address required!' }
 
         // For Price Validation
         if (!values.price) { errors.price = 'Please input a valid value!' }
@@ -59,16 +50,23 @@ const ListPropertyPages = ({ children }) => {
             amOwner: true,
             isAgree: true,
             isInsurance: true,
-            address: '',
-            aptNo: '',
+            address:"",
+            street: "",
+            latitude: "",
+            longitude: "",
+            apt: "",
+            zipCode: "",
+            country: "",
+            cityId: 3,
+            apt: '',
             price: '',
-            files:[],
-            photos:[],
+            files: [],
+            photos: [],
         },
         validate,
         onSubmit: values => {
             alert("Your data submitted")
-            
+
         },
     });
     return (

@@ -59,7 +59,7 @@ const Preview = ({ steps, setSteps, formik }) => {
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Apartment, suit, building, flat no. etc:</h3>
-                    <p>{formik.values?.aptNo}</p>
+                    <p>{formik.values?.apt}</p>
                 </div>
             </div>
 
