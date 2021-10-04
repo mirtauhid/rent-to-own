@@ -3,7 +3,7 @@ import React from 'react';
 const Pricing = ({ steps, setSteps, formik }) => {
     const handleNext = () => {
         if (!formik.errors.marketValue){
-                setSteps({ ...steps, fifth: true })
+                setSteps({ ...steps, third: true })
             }
     }
 
@@ -34,7 +34,7 @@ const Pricing = ({ steps, setSteps, formik }) => {
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
-                    onClick={() => setSteps({ ...steps, fourth: false })}
+                    onClick={() => setSteps({ ...steps, second: false })}
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"

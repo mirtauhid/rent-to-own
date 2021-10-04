@@ -3,22 +3,22 @@ import BuyersWinCard from './BuyersWinCard'
 
 const data = [
   {
-    img: "/images/Homepage/search.svg",
+    logo: "/images/Homepage/search.svg",
     content:
       " Effortlessly search thousands of real-time availability of rent-to-own properties filtering by location, property type, number of bedrooms, and more",
   },
   {
-    img: "/images/Homepage/house-rental.svg",
+    logo: "/images/Homepage/house-rental.svg",
     content:
       " A streamlined application process to easily apply to live rent-to-own programs in your desired area",
   },
   {
-    img: "/images/Homepage/contract.svg",
+    logo: "/images/Homepage/contract.svg",
     content:
       "Standardized rent-to-own agreements and comprehensive a network of professionals",
   },
   {
-    img: "/images/Homepage/price.svg",
+    logo: "/images/Homepage/price.svg",
     content:
       "A proven model helping Canadian’s achieve home-ownership as early as possible and ‘lock-in’ at today’s prices before they escalate out of reach",
   },

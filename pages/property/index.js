@@ -17,8 +17,9 @@ const index = () => {
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState(2);
-    const [price, setPrice] = React.useState([0, 100]);
+    const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
+    const [areaFilter, setAreaFilter] = React.useState();
 
     const resetAll = () => {
         setAreaData(stateData.map(d => {
@@ -90,14 +91,8 @@ const index = () => {
         })
         
         const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
-        console.log('===============holder=====================');
-        console.log(dummyAreaFilter);
-        console.log('====================================');
 
-        // const priceFilter = dummyAreaFilter.filter(
-        //     item => 
-        //         item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
-        // )
+        setFilterOptions(dummyAreaFilter);
         
         // const sqftFilter = priceFilter.filter(item => item.sqft >= (areaSqft[0]*100) && item.sqft <= (areaSqft[1]*100))
 
@@ -105,6 +100,19 @@ const index = () => {
         // listingType != 2 && sqftFilter.filter(item => item.type == listingType)
         //setFilterOptions(dummyListFilter ? dummyListFilter : sqftFilter ? sqftFilter : priceFilter ? priceFilter : dummyAreaFilter);   
     }
+
+    React.useEffect(() => {
+        doFilter();
+    }, [initData])
+
+    React.useEffect(() => {
+        const priceFilter = filterOptions?.filter(
+            item => 
+                item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
+        )
+        setAreaFilter(priceFilter)
+        //setFilterOptions(priceFilter);
+    }, [price])
 
     return (
         <HomeLayout>
@@ -237,9 +245,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-14 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        value={price[0]*10000}
+                                        value={`$${(price[0]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         // onChange={() => {
                                         //     const arr= [ ,value[1]]
@@ -250,9 +258,9 @@ const index = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-16 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-1 text-xs"
                                         placeholder="MAX"
-                                        value={price[1]*10000}
+                                        value={`$${(price[1]*10000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
@@ -286,7 +294,7 @@ const index = () => {
                                         name="phone"
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MIN"
-                                        value={areaSqft[0]*100}
+                                        value={(areaSqft[0]*100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
@@ -297,18 +305,12 @@ const index = () => {
                                         name="phone"
                                         className="w-12 pt-1 pl-2 text-xs"
                                         placeholder="MAX"
-                                        value={areaSqft[1]*100}
+                                        value={(areaSqft[1]*100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                                         readOnly
                                         //onChange={handleChange('phone')}
                                     />
                                 </div>
                             </div>
-                            {/* <div 
-                                className="bg-primary mt-6 hover:bg-green-500 w-12 h-6 rounded flex items-center justify-center cursor-pointer"
-                                onClick={doFilter}
-                            >
-                                <p className="text-xs font-bold text-white scale-75">FILTER</p>
-                            </div> */}
                         </div>
                     ) : null}
                 </div>

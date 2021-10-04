@@ -12,7 +12,7 @@ const data = [
 
   {
     title: "I'm a Home Buyer",
-    imgSrc: "/images/Homepage/sell.svg",
+    imgSrc: "/images/Homepage/sold-Icons.svg",
     content:
       "With Rent-to-Own Realty, individuals can get access to properties allowing you to become a homeowner today! Our powerful tools can help you find, apply, and even enter into a purchase agreement in a few simple steps. Why wait? Become a homeowner today!",
     btnText: "Search Homes",
