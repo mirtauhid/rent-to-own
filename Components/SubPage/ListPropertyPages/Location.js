@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Search from '../../Map/SubSearch';
 import styles from './Location.module.css';
+import { useLoadScript } from "@react-google-maps/api";
+  const libraries = ["places"];
 
 const Location = ({ steps, setSteps, formik }) => {
+    const { isLoaded, loadError } = useLoadScript({
+      googleMapsApiKey: "AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM",
+      libraries,
+    });
     const [search, setSearch] = useState("")
     const [latLng, setLatLng] = useState({ lat: 0, lng: 0 })
     const [locationData, setLocationData] = useState([])
@@ -38,11 +44,11 @@ const Location = ({ steps, setSteps, formik }) => {
                 <h3 className="block text-secondary text-sm font-bold mb-2">
                     Search Your Address
                 </h3>
-                <Search
+                {isLoaded && <Search
                     setSearch={setSearch}
                     setLatLng={setLatLng}
                     setLocationData={setLocationData}
-                    inputPlaceholder="Search your address" />
+                    inputPlaceholder="Search your address" />}
                 {
                     error.status &&
                     <div className="text-md text-red-500 mt-2 ml-1">{error.msg}</div>

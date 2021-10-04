@@ -110,6 +110,8 @@ const Header = () => {
 };
 
 const HeaderNavBar = ({ showNav, setShowNav }) => {
+  const auth = useSelector((state)=>state.auth);
+  
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(signOut());
@@ -130,11 +132,7 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
           if (res.data.success) {
             // Updating redux
             dispatch(signIn(res.data?.data?.data));
-          } else {
-            // loading end
-            setLoading(false);
-            setError({ status: true, msg: "Error occurred. Please try again!" })
-          }
+          } 
         })
         .catch((err)=>{
           localStorage.removeItem('authToken')
@@ -143,17 +141,26 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
   }, [])
   return (
     <div
-      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${showNav ? "opacity-100" : "opacity-0"
-        } transition duration-300`}
+      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
+        showNav ? "opacity-100" : "opacity-0"
+      } transition duration-300`}
     >
       <ul>
         <li className="mt-2 cursor-pointer">Messages</li>
-        <Link href={"/settings"}>
+        <Link
+          href={
+            auth.userData?.type === "SELLER"
+              ? "/sellerProfile/accountSettings"
+              : "/settings?name=profile"
+          }
+        >
           <li className="mt-2 cursor-pointer">Profile Settings</li>
         </Link>
 
         <li className="mt-2 cursor-pointer">Help</li>
-        <li className="mt-2 cursor-pointer" onClick={handleLogOut}>Log out</li>
+        <li className="mt-2 cursor-pointer" onClick={handleLogOut}>
+          Log out
+        </li>
       </ul>
     </div>
   );

@@ -1,6 +1,5 @@
 import React from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
-import Nav from '../../Components/messaging/nav';
 import ChatList from '../../Components/messaging/chatList';
 import ChatBody from '../../Components/messaging/chatBody';
 import DetailsContent from '../../Components/messaging/detailsContent';
