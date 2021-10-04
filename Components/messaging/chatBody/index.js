@@ -19,13 +19,13 @@ const index = ({selectedId}) => {
         dispatch(getConversation());
     })
     const scrollToBottom = () => {
-        messagesEndRef1.current?.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef1.current?.scrollIntoView({ block: 'end', behavior: "smooth" })
     }
     useEffect(() => {
         scrollToBottom()
     }, [chat]);
     return (
-        <div className="lg:min-w-[530px]">
+        <div className="">
             <div className="flex items-center">
                 <img
                     className="h-8 w-8 rounded-full"
@@ -38,7 +38,7 @@ const index = ({selectedId}) => {
             <div className={style["content__body"]}>
                 <div className={style["chat__items"]}>
                     <div>
-                    {chat?.messages.map((itm, index) => {
+                    {chat ? chat?.messages.map((itm, index) => {
                     return (
                         <ChatItem
                             animationDelay={index + 2}
@@ -46,10 +46,15 @@ const index = ({selectedId}) => {
                             user={itm.type ? itm.type : "me"}
                             msg={itm.msg}
                             image={itm.image}
+                            sUserImage={user.image}
                             messageImages={itm.messageImages}
                         />
                     );
-                    })}
+                    }) : (
+                        <div className="flex items-center justify-center h-full min-h-[400px] w-[250px]">
+                            <p className="text-gray-300 p-4 text-center">Sorry no conversation found</p>
+                        </div>
+                    )}
                     <div ref={messagesEndRef1} />
                     </div>
                 </div>

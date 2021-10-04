@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropertyImage from '../../Components/SubCard/PropertyImage';
 import ReactSlider from 'react-slider';
 import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import HomeLayout from '../../Layouts/HomeLayout';
 import { useRouter } from "next/router";
 import Link from 'next/link';
+import { useDispatch, useSelector } from "react-redux";
+import { getProperty } from '../../redux/slices/property';
+import { getProvience, getCities } from '../../redux/slices/areas';
 
 const index = () => {
+    const dispatch = useDispatch();
     const router = useRouter()
     const {
         query: { state },
@@ -20,6 +24,22 @@ const index = () => {
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
     const [areaFilter, setAreaFilter] = React.useState();
+    const properties = useSelector((state) => state.property.allproperties);
+    const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
+    const allareas = areas?.status === 'success' ? areas.allareas : null;
+    console.log('================areas====================');
+    console.log(areas);
+    console.log('====================================');
+
+    useEffect(() => {
+
+    }, [areas, allareas])
+
+    useEffect(() => {
+        dispatch(getProperty());
+        dispatch(getProvience());
+        dispatch(getCities());
+    }, [dispatch])
 
     const resetAll = () => {
         setAreaData(stateData.map(d => {
@@ -89,6 +109,8 @@ const index = () => {
                 })
             }
         })
+
+        console.log(holder);
         
         const dummyAreaFilter = holder.length === 0 ? initData : initData.filter(item => holder.includes(item.location))
 
@@ -113,6 +135,10 @@ const index = () => {
         setAreaFilter(priceFilter)
         //setFilterOptions(priceFilter);
     }, [price])
+
+    if(areas.status === 'loading'){
+        return( <p>Loading</p>)
+    }
 
     return (
         <HomeLayout>
@@ -173,10 +199,22 @@ const index = () => {
                                 <hr className=""/>
                             </div>
                             {/* list of areas */}
-                            { areaData?.map(item => (
+                            {/* {areaData?.map(item => {
+                                <div className=" mt-2 text-sm" key={item?.id}>
+                               <div className="grid grid-cols-2">
+                                    <p>Hello</p>
+                                    <div className="justify-self-end mt-1 cursor-pointer" 
+                                        
+                                    >
+                                        {item?.id ? <BiDownArrow /> : <BiRightArrow/> }
+                                    </div>
+                                </div>
+                                </div>
+                            })} */}
+                            {allareas?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
-                                        <p>{item?.state}</p>
+                                        <p>{item?.name}</p>
                                         <div className="justify-self-end mt-1 cursor-pointer" 
                                             onClick={() => setAreaData(
                                                 areaData?.map(state => {
@@ -317,20 +355,20 @@ const index = () => {
             </div>
             {/* Cards for single property*/}
             <div
-                className="grid flex-2 grid-cols-1 smd:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 justify-center xl:grid-cols-3 py-5 gap-7 smd:gap-4">
-                {filterOptions?.map(item => (
+                className="grid flex-2 grid-cols-1 smd:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 justify-center xl:grid-cols-3 py-5 pl-8 gap-7 smd:gap-4">
+                {properties?.map(item => (
                     <div className="cursor-pointer" key={item.id.toString()}>
                         <Link href={'/housesearch/' + item.id} key={item.id}>
                             <a>
                                 <PropertyImage
                                     key={item.id.toString()}
-                                    title={item.title}
-                                    location={item.location}
+                                    title={item.name}
+                                    location={item.PropertyAddresses[0].street}
                                     price={item.price}
                                     description={item.description}
                                     bedroom={item.bedroom}
                                     bathroom={item.bathroom}
-                                    sqft={item.sqft}
+                                    sqft={item.plotSize}
                                     imageUrl={item.imageUrl}
                                 />
                             </a>

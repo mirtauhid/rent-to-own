@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
-import { useSelector,useDispatch } from "react-redux";
-import {signOut} from "../../../redux/slices/auth"
+import { useDispatch, useSelector } from "react-redux";
 import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
+import { signOut } from "../../../redux/slices/auth";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
@@ -112,6 +112,8 @@ const HeaderNavBar = ({showNav,setShowNav}) =>{
   const handleLogOut = () =>{
     dispatch(signOut());
     setShowNav(false);
+    // Removing auth token from local storage
+    localStorage.removeItem("authToken")
   }
     return (
       <div
