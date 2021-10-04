@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Link from 'next/link';
 import PriceCard from '../../Components/SubCard/PriceCard';
 import Map from '../../Components/Map';
 import PopularProperties from '../../Components/SubCard/PopularProperties';
 import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
-import SubAmenitie from '../../Components/SubPage/HouseSearch/SubAmenitie';
 import Introduction from '../../Components/SubPage/HouseSearch/Introduction';
 import Interior from '../../Components/SubPage/HouseSearch/Interior';
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import { useRouter } from "next/router";
+import { getPropertyDetails } from '../../redux/slices/property';
+import { useDispatch, useSelector } from "react-redux";
 
 const Details = () => {
+    const dispatch = useDispatch();
     const data = require('./data');
+    const router = useRouter()
+    
+    const propertyDetails = useSelector((state) => state.property.propertyDetails);
+    console.log('====================================');
+    console.log(propertyDetails);
+    console.log('====================================');
+
+    useEffect(() => {
+      dispatch(getPropertyDetails({id: router.query.id}));
+    }, [router.query.id]);
+
     return (
       <HomeLayout>
         <>
@@ -41,9 +55,6 @@ const Details = () => {
                 {/* Capacity */}
                 <SubCapacity />
                 <hr className="mt-5"></hr>
-                {/* Amenitie */}
-                <SubAmenitie />
-                <hr className="mt-5"></hr>
                 {/* Interior features */}
                 <Interior />
               </div>
@@ -67,7 +78,7 @@ const Details = () => {
             </h1>
             <ScrollMenu>
               {data?.map((item) => (
-                <div className="cursor-pointer gap-8 grid-flow-row py-5">
+                <div className="cursor-pointer gap-8 grid-flow-row py-5" key={item.id}>
                   <Link href={"/housesearch/" + item.id} key={item.id}>
                     <a>
                       <PopularProperties

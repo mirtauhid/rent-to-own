@@ -14,7 +14,7 @@ const AccountSettingsPage = () => {
         }
         if (!values.phone) { errors.phone = 'Required' }
         if (!values.street) { errors.street = 'Required' }
-        if (!values.aptNo) { errors.aptNo = 'Required' }
+        if (!values.apt) { errors.apt = 'Required' }
         if (!values.city) { errors.city = 'Required' }
         if (!values.province) { errors.province = 'Required' }
         if (!values.country) { errors.country = 'Required' }
@@ -39,7 +39,7 @@ const AccountSettingsPage = () => {
             email: '',
             phone: '',
             street: '',
-            aptNo: '',
+            apt: '',
             city: '',
             province: '',
             country: '',
@@ -125,14 +125,14 @@ const AccountSettingsPage = () => {
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 type="text"
                                 placeholder="Apt or suit number"
-                                name="aptNo"
-                                value={formik.values.aptNo}
+                                name="apt"
+                                value={formik.values.apt}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                             />
                             {
-                                formik.touched.aptNo && formik.errors.aptNo &&
-                                <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.aptNo}</div>
+                                formik.touched.apt && formik.errors.apt &&
+                                <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.apt}</div>
                             }
                         </div>
 

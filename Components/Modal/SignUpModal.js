@@ -92,7 +92,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                                     // Making error empty
                                     setError({ status: false, msg: "" })
                                     // Updating redux
-                                    dispatch(signIn());
+                                    dispatch(signIn(res.data?.data?.data));
                                     // Dynamic routing
                                     router.push(redirectLink)
                                     // Closing the modal
