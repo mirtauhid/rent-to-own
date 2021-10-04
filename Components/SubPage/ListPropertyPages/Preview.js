@@ -31,23 +31,23 @@ const Preview = ({ steps, setSteps, formik }) => {
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Home Type:</h3>
-                    <p>{formik.values?.homeType}</p>
+                    <p>{formik.values?.listingTypeId}</p>
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Number of Beds:</h3>
-                    <p>{formik.values?.beds}</p>
+                    <p>{formik.values?.bedroom}</p>
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Number of Baths:</h3>
-                    <p>{formik.values?.baths}</p>
+                    <p>{formik.values?.bathroom}</p>
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Number of Partial Baths:</h3>
-                    <p>{formik.values?.partialBaths}</p>
+                    <p>{formik.values?.partialBathroom}</p>
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Approximate Square Footage:</h3>
-                    <p>{formik.values?.footage}</p>
+                    <p>{formik.values?.squareFootage}</p>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@ const Preview = ({ steps, setSteps, formik }) => {
                 </div>
                 <div className="mb-3">
                     <h3 className="text-md font-bold">Apartment, suit, building, flat no. etc:</h3>
-                    <p>{formik.values?.aptNo}</p>
+                    <p>{formik.values?.apt}</p>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@ const Preview = ({ steps, setSteps, formik }) => {
             <div className="my-5 shadow border border-gray-100 rounded p-4">
                 <h2 className="text-xl font-bold mb-5">Fair market value</h2>
                 <div className="mb-3">
-                    <p>${formik.values?.marketValue}</p>
+                    <p>${formik.values?.price}</p>
                 </div>
             </div>
 
@@ -78,7 +78,8 @@ const Preview = ({ steps, setSteps, formik }) => {
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"
-                    className=" bg-green-400 text-white rounded py-2 px-12">Submit</button>
+                    className=" bg-green-400 text-white rounded py-2 px-12"
+                    onClick={formik.handleSubmit}>Submit</button>
             </div>
         </div>
     );

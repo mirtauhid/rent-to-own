@@ -149,14 +149,7 @@ const Footer = () => (
       <div className="py-7 my-7 border-t text-center font-mons text-xs text-gray-400 px-3">
         <span>
           <span className="text-lg">&copy;</span> Copywrite reserved,
-          Rent-to-Own, 2021 Developed by{" "}
-          <a
-            className={"text-primary"}
-            target={"_blank"}
-            href="https://algosolver.com"
-          >
-            AlgoSolver LLC.
-          </a>
+          Rent-to-Own, 2021
         </span>
 
         <p className="px-5 md:px-20 text-justify mt-5">

@@ -1,14 +1,16 @@
+import axios from "axios";
 import Link from "next/link";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
-import { useSelector,useDispatch } from "react-redux";
-import {signOut} from "../../../redux/slices/auth"
+import { useDispatch, useSelector } from "react-redux";
 import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
+import baseURL from "../../../Helpers/httpRequest";
+import { signIn, signOut } from "../../../redux/slices/auth";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
-  
+
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
@@ -53,7 +55,7 @@ const Header = () => {
                 </li>
               </Link>
 
-              <HeaderNavBar showNav={showNav} setShowNav={setShowNav}/>
+              <HeaderNavBar showNav={showNav} setShowNav={setShowNav} />
 
               {auth.isLoggedIn ? (
                 <li
@@ -107,16 +109,41 @@ const Header = () => {
   );
 };
 
-const HeaderNavBar = ({showNav,setShowNav}) =>{
+const HeaderNavBar = ({ showNav, setShowNav }) => {
   const dispatch = useDispatch();
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     dispatch(signOut());
     setShowNav(false);
+    // Removing auth token from local storage
+    localStorage.removeItem("authToken")
   }
-    return (
-      <div
-        className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
-          showNav ? "opacity-100" : "opacity-0"
+
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      // verifying token
+      axios({
+        method: "POST",
+        url: `${baseURL}/v2/auth/verify`,
+        headers: { Authorization: localStorage.getItem('authToken')}
+      })
+        .then((res) => {
+          if (res.data.success) {
+            // Updating redux
+            dispatch(signIn(res.data?.data?.data));
+          } else {
+            // loading end
+            setLoading(false);
+            setError({ status: true, msg: "Error occurred. Please try again!" })
+          }
+        })
+        .catch((err)=>{
+          localStorage.removeItem('authToken')
+        })
+    }
+  }, [])
+  return (
+    <div
+      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${showNav ? "opacity-100" : "opacity-0"
         } transition duration-300`}
     >
       <ul>

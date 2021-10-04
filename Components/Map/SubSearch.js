@@ -1,24 +1,21 @@
-import React from 'react';
-import Link from 'next/link';
 import {
-    useLoadScript,
-  } from "@react-google-maps/api";
-  import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-  } from "use-places-autocomplete";
-  import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-  } from "@reach/combobox";
-  import "@reach/combobox/styles.css";
-  import style from './style.module.css';
+  Combobox,
+  ComboboxInput, ComboboxList,
+  ComboboxOption, ComboboxPopover
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
+import {
+  useLoadScript
+} from "@react-google-maps/api";
+import React from 'react';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng
+} from "use-places-autocomplete";
+import style from './style.module.css';
   const libraries = ["places"];
 
-const Search = ({ setSearch, setLatLng }) => {
+const Search = ({ setSearch, setLatLng, setLocationData, inputPlaceholder }) => {
       const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
         libraries,
@@ -56,6 +53,7 @@ const Search = ({ setSearch, setLatLng }) => {
         setSearch(address);
         const results = await getGeocode({ address });
         const { lat, lng } = await getLatLng(results[0]);
+        setLocationData(results);
         // panTo({ lat, lng });
         console.log(results);
         setLatLng({lat, lng})
@@ -70,13 +68,14 @@ const Search = ({ setSearch, setLatLng }) => {
           <ComboboxInput
             value={value}
             onChange={handleInput}
-            placeholder="Search city"
+            placeholder={inputPlaceholder ? inputPlaceholder : "Search city"}
             style={{ width: '70%' }}
+            id="search_input"
           />
           <ComboboxPopover>
             <ComboboxList>
               {status === "OK" &&
-                data.map(({ id, description }) => (
+                data.map(({ id, description },index) => (
                   // <Link
                   //   key={id}
                   //   href={{
@@ -84,7 +83,7 @@ const Search = ({ setSearch, setLatLng }) => {
                   //     query: { search: description },
                   //   }}
                   // >
-                    <ComboboxOption key={id} value={description} />
+                    <ComboboxOption key={index.toString()} value={description} /> 
                   //</Link>
                 ))}
             </ComboboxList>

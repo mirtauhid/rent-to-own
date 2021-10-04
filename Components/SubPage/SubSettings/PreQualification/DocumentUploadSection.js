@@ -32,14 +32,14 @@ const DocumentUploadSection = () => {
 
   // };
   return (
-    <section className="border-2 mt-10 mb-10 px-5 py-8 rounded-lg">
-      <p className="text-lg font-bold">For Rent-to-Own Applicants:</p>
-      <p className="text-gray-400 mt-2">Upload the following documents</p>
+    <section className="mb-10 rounded-lg">
+
+      <p className="text-gray-600 mt-5 text-lg font-bold">Upload the following documents :</p>
 
       <FileInputField label="Recent letter of employment" fieldName="LOE" />
       <FileInputField
         label="Proof of down payment (minimum of 3% of home price you wish to purchase)"
-        fieldName="downPayment"
+        fieldName="downpaymentDoc"
       />
       <FileInputField
         label="Two most recent Notice of Assessments per CRA"

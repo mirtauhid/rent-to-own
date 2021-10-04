@@ -2,7 +2,7 @@ import React from 'react';
 
 const Pricing = ({ steps, setSteps, formik }) => {
     const handleNext = () => {
-        if (!formik.errors.marketValue){
+        if (!formik.errors.price){
                 setSteps({ ...steps, third: true })
             }
     }
@@ -12,22 +12,22 @@ const Pricing = ({ steps, setSteps, formik }) => {
             <h2 className="uppercase text-center text-2xl font-bold my-5">Let us know the fair market value today</h2>
 
             <div className="w-full mb-8 p-2">
-                <label className="block text-secondary text-sm font-bold mb-2" htmlFor="marketValue">
+                <label className="block text-secondary text-sm font-bold mb-2" htmlFor="price">
                     Write in the fair market value
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                    id="marketValue"
+                    id="price"
                     type="number"
                     placeholder="Please write in the fair market value here... "
-                    name="marketValue"
-                    value={formik.values.marketValue}
+                    name="price"
+                    value={formik.values.price}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
                 {
-                    formik.touched.marketValue && formik.errors.marketValue &&
-                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.marketValue}</div>
+                    formik.touched.price && formik.errors.price &&
+                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.price}</div>
                 }
             </div>
 
