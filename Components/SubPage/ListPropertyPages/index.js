@@ -23,11 +23,11 @@ const ListPropertyPages = ({ children }) => {
         // For Description Validation
         if (!values.name) { errors.name = 'Required'; }
         if (!values.description) { errors.description = 'Required'; }
-        if (!values.homeType) { errors.homeType = 'Required'; }
-        if (!values.footage) { errors.footage = 'Required'; }
-        if (!values.beds) { errors.beds = 'Required'; }
-        if (!values.baths) { errors.baths = 'Required'; }
-        if (!values.partialBaths) { errors.partialBaths = 'Required'; }
+        if (!values.listingTypeId) { errors.listingTypeId = 'Required'; }
+        if (!values.squareFootage) { errors.squareFootage = 'Required'; }
+        if (!values.bedroom) { errors.bedroom = 'Required'; }
+        if (!values.bathroom) { errors.bathroom = 'Required'; }
+        if (!values.partialBathroom) { errors.partialBathroom = 'Required'; }
         if (!values.amOwner) { errors.amOwner = 'Required'; }
         if (!values.isAgree) { errors.isAgree = 'Required'; }
         if (!values.isInsurance) { errors.isInsurance = 'Required'; }
@@ -39,7 +39,7 @@ const ListPropertyPages = ({ children }) => {
         if (!values.address) { errors.address = 'Address required!' }
 
         // For Price Validation
-        if (!values.marketValue) { errors.marketValue = 'Please input a valid value!' }
+        if (!values.price) { errors.price = 'Please input a valid value!' }
 
         // For Photos Validation
         if (!values.files.length) { errors.files = 'Please upload photos!' }
@@ -51,19 +51,17 @@ const ListPropertyPages = ({ children }) => {
         initialValues: {
             name: '',
             description: '',
-            homeType: '',
-            footage: '',
-            beds: 0,
-            baths: 0,
-            partialBaths: 0,
+            listingTypeId: "",
+            squareFootage: '',
+            bedroom: 0,
+            bathroom: 0,
+            partialBathroom: 0,
             amOwner: true,
             isAgree: true,
             isInsurance: true,
-            amenities: [],
-            houseRules: '',
             address: '',
             aptNo: '',
-            marketValue: '',
+            price: '',
             files:[],
             photos:[],
         },

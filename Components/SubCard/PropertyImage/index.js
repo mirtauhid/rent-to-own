@@ -4,11 +4,13 @@ import SubCardList from './SubCardList';
 import { AiOutlineHeart } from "react-icons/ai";
 
 const index = ({title, location, description, price, bedroom, bathroom, sqft, imageUrl}) => {
+    const titleSlice = title.slice(0, 35) + (title.length > 35 ? "..." : "")
+    const descriptionSlice = description.slice(0, 130) + (description.length > 130 ? "..." : "")
     return (
         <div className="w-full shadow-lg rounded-xl pb-4 relative">
             
             <div className="relative">
-                <img src={imageUrl} alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
+                <img src={'https://picsum.photos/200/300'} alt="" className="h-56 p-4 w-full object-center object-cover rounded-3xl" />
                 <div className="bg-primary h-8 w-8 rounded-lg absolute right-8 bottom-0 flex justify-center items-center">
                     <AiOutlineHeart color="white" fill={"white"}/>
                 </div>
@@ -27,8 +29,8 @@ const index = ({title, location, description, price, bedroom, bathroom, sqft, im
                     <h1 className="text-lg pl-1 text-primary font-semibold">${price} /</h1>
                     <h1 className="text-sm pl-1 pt-1 text-primary">per property</h1>
                 </div>
-                <h1 className="text-sm pl-1 flex-1 pt-1 font-bold">{title}</h1>
-                <p className="text-xs pl-1 flex-1 pt-1 ">{description}</p>
+                <h1 className="text-sm pl-1 flex-1 pt-1 font-bold">{titleSlice}</h1>
+                <p className="text-xs pl-1 flex-1 pt-1 ">{descriptionSlice}</p>
                 <div className="flex justify-between mt-3 items-center">
                     <div className="h-12 min-w-9/12 bg-gray-200 flex">
                         <SubCardList 
