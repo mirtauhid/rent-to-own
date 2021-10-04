@@ -1,15 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import baseURL from '../../../Helpers/httpRequest';
 import CustomCounter from './CustomCounter';
 
 const Description = ({ steps, setSteps, formik }) => {
+    const [listingTypes, setListingTypes] = useState([])
+
+    useEffect(() => {
+        // axios request for getting listing types
+        axios({
+            method: "GET",
+            url: `${baseURL}/v2/listing-types`
+        })
+            .then((res) => {
+                setListingTypes(res.data.data);
+            })
+            .catch((err) => console.log(err.response))
+    }, [])
+
     const handleNext = () => {
         if (formik.values.name &&
             formik.values.description &&
-            formik.values.homeType &&
-            formik.values.beds &&
-            formik.values.baths &&
-            formik.values.partialBaths &&
-            formik.values.footage &&
+            formik.values.listingTypeId &&
+            formik.values.bedroom &&
+            formik.values.bathroom &&
+            formik.values.partialBathroom &&
+            formik.values.squareFootage &&
             formik.values.amOwner &&
             formik.values.isAgree &&
             formik.values.isInsurance) {
@@ -61,45 +77,44 @@ const Description = ({ steps, setSteps, formik }) => {
             </div>
 
             <div className="w-full mb-2 p-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="homeType">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="listingTypeId">
                     Home Type
                 </label>
                 <select
                     className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="homeType"
-                    name="homeType"
-                    value={formik.values.homeType}
-                    onChange={(e) => formik.setFieldValue("homeType", e.target.value)}
+                    id="listingTypeId"
+                    name="listingTypeId"
+                    value={formik.values.listingTypeId}
+                    onChange={(e) => formik.setFieldValue("listingTypeId", e.target.value)}
                 >
                     <option value="">Choose the  type of your home</option>
-                    <option value="detachedHouse">Detached House</option>
-                    <option value="semiDetachedHouse">Semi-detached House</option>
-                    <option value="townHouse">Row/Town House</option>
-                    <option value="apartment">Condo/Apartment</option>
+                    {
+                        listingTypes?.map((type)=><option key={type.id?.toString()} value={type.id}>{type.name}</option>)
+                    }
                 </select>
                 {
-                    formik.errors.homeType &&
-                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.homeType}</div>
+                    formik.errors.listingTypeId &&
+                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.listingTypeId}</div>
                 }
             </div>
 
             <div className="w-full mb-4 p-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="footage">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="squareFootage">
                     Approximate square footage
                 </label>
                 <input
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                    id="footage"
-                    name="footage"
+                    id="squareFootage"
+                    name="squareFootage"
                     type="number"
                     placeholder="Approximate square footage"
-                    value={formik.values.footage}
+                    value={formik.values.squareFootage}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                 />
                 {
-                    formik.touched.footage && formik.errors.footage &&
-                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.footage}</div>
+                    formik.touched.squareFootage && formik.errors.squareFootage &&
+                    <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.squareFootage}</div>
                 }
             </div>
 
@@ -108,17 +123,17 @@ const Description = ({ steps, setSteps, formik }) => {
                     labelText="Beds"
                     icon="IoIosBed"
                     formik={formik}
-                    fieldName="beds" />
+                    fieldName="bedroom" />
                 <CustomCounter
                     labelText="Baths"
                     icon="GiBathtub"
                     formik={formik}
-                    fieldName="baths" />
+                    fieldName="bathroom" />
                 <CustomCounter
                     labelText="Partial Baths"
                     value="0" icon="GiBathtub"
                     formik={formik}
-                    fieldName="partialBaths" />
+                    fieldName="partialBathroom" />
             </div>
 
             <div className="mb-3 p-2">
