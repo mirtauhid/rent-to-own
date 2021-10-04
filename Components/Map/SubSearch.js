@@ -55,6 +55,7 @@ const Search = ({ setSearch, setLatLng, setLocationData, inputPlaceholder }) => 
         const { lat, lng } = await getLatLng(results[0]);
         setLocationData(results);
         // panTo({ lat, lng });
+        console.log(results);
         setLatLng({lat, lng})
       } catch (error) {
         console.log("😱 Error: ", error);

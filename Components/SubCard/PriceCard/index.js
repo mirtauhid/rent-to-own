@@ -1,7 +1,9 @@
 import React from 'react';
-import { BiDownArrow, BiUpArrow } from "react-icons/bi";
+import Slider from '../../Slider/index';
 
 const index = () => {
+    const [downPay, setDownPay] = React.useState();
+    const [minMaxMonth, setMinMaxMonth] = React.useState();
     return (
         <div className="border border-primary shadow-md border-t-8 rounded-lg p-5">
             <div className="flex justify-between">
@@ -15,7 +17,7 @@ const index = () => {
                 <p className="text-md font-bold text-white">Message Seller</p>
             </div>
             <div className="h-10 mt-5 rounded hover:bg-gray-100 border border-primary flex items-center justify-center cursor-pointer">
-                <p className="text-md font-bold">Make an offer</p>
+                <p className="text-md font-bold">Apply-Rent-To-Own</p>
             </div>
             <div className="mt-5 grid justify-items-center">
                 <p className="text-md text-gray-700">QUESTIONS? CALL US TODAY</p>
@@ -38,24 +40,24 @@ const index = () => {
             <div className="mt-5 flex justify-between">
                 <div className="flex flex-row relative">
                     <p className="text-xs text-gray-800 font-medium">Rent-to-own application down payment</p>
-                    <div className="w-8 absolute -right-10 -top-0">
-                        <BiUpArrow className="" fontSize="0.7em" />
-                        <BiDownArrow fill={"black"} fontSize="0.7em"/>
-                    </div>
                 </div>
-                <p className="text-xs text-gray-800 font-medium">3%</p>
             </div>
             <p className="text-xs text-gray-300 ">Mimimun of $200,000;  maximum$50,000</p>
+
+            <div className="pt-4"></div>
+            <Slider sliderValue={downPay} setSliderValue={setDownPay} min={3} max={10}/>
+
+            {/* 2nd */}
             <div className="mt-5 flex justify-between">
                 <div className="flex flex-row relative">
                     <p className="text-xs text-gray-800 font-medium">Rent-to-own-term</p>
-                    <div className=" w-8 absolute -right-10 -top-0">
-                        <BiUpArrow className="" fontSize="0.7em"/>
-                        <BiDownArrow fill={"black"} fontSize="0.7em"/>
-                    </div>
                 </div>
-                <p className="text-xs text-gray-800 font-medium">36 year</p>
             </div>
+            <p className="text-xs text-gray-300 ">Minimum of 12 months;  maximum of 36 months</p>
+
+            <div className="pt-4"></div>
+            <Slider sliderValue={minMaxMonth} setSliderValue={setMinMaxMonth} min={12} max={36}/>
+
             <hr className="mt-5"></hr>
             <div className="mt-5 flex justify-between">
                 <p className="text-xs text-gray-800 font-medium">Rent-to-own monthly payments</p>
