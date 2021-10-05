@@ -19,7 +19,7 @@ const Property = () => {
     const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
-    const [listingType, setListingType] = React.useState();
+    const [listingType, setListingType] = React.useState(2);
     const [filterCity, setFilterCity] = React.useState('');
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);

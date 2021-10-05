@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ImageCard from '../../Components/SubCard/ImageCard';
 import Pagination from '../../Components/Pagination';
 import HomeLayout from '../../Layouts/HomeLayout';
@@ -23,15 +23,27 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import style from './style.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { getProperty } from '../../redux/slices/property';
 const libraries = ["places"];
 
 const HouseSearch = () => {
+    const dispatch = useDispatch();
     const router = useRouter()
     const {
         query: { search },
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
+    const properties = useSelector((state) => state.property.allproperties);
     const data = require('./data');
+
+    console.log('===========properties=========================');
+    console.log(properties);
+    console.log('====================================');
+
+    useEffect(() => {
+      dispatch(getProperty());
+  }, [dispatch])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -80,48 +92,28 @@ const HouseSearch = () => {
           <div className="px-5 md:px-20 lg:px-28">
             {/* divide */}
             <div className="flex flex-wrap">
-              <div className="w-full md:w-2/3">
-                <div className="py-5 flex justify-between">
-                  <p className="text-sm text-gray-500">1-6 of 300+</p>
-                  <div className="flex justify-between">
-                    <div className="flex items-center justify-center mr-3">
-                      <p className="text-sm text-gray-500">Sort</p>
-                    </div>
-                    <Dropdown
-                      className="text-xs text-gray-500"
-                      options={options}
-                      value={defaultOption}
-                      placeholder="Select an option"
-                    />
-                  </div>
+              <div className="w-full md:w-1/2">
+                <div className="py-5">
                 </div>
-                <div className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3  gap-7 smd:gap-4">
-                  {currentPosts?.map((item) => (
-                    <div className="cursor-pointer" key={item.id}>
-                      <Link href={"/housesearch/" + item.id} key={item.id}>
-                        <a>
+                <div className="">
+                  {properties?.map((item) => (
+                    <div className="cursor-pointer pb-10" key={item.id}>
+                      {/* <Link href={"/housesearch/" + item.id} key={item.id}>
+                        <a> */}
                           <ImageCard
                             key={item.id.toString()}
-                            title={item.title}
-                            host={item.host}
+                            item={item}
+                            title={item.name}
+                            host="host"
                             price={item.price}
                           />
-                        </a>
-                      </Link>
+                        {/* </a>
+                      </Link> */}
                     </div>
                   ))}
                 </div>
-                <div className="grid py-5 lg:mr-5">
-                  <Pagination
-                    postsPerPage={postsPerPage}
-                    totalPosts={data.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                  />
-                </div>
               </div>
-              <div className="w-1/3">
+              <div className="w-1/2">
                 <div className="py-5 w-full pl-5 hidden md:block">
                   <MapG panTo={panTo} isLoaded={isLoaded} loadError={loadError} onMapLoad={onMapLoad}/>
                 </div>

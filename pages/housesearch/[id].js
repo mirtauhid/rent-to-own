@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Link from 'next/link';
 import PriceCard from '../../Components/SubCard/PriceCard';
@@ -11,16 +11,28 @@ import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { useRouter } from "next/router";
 import { getPropertyDetails } from '../../redux/slices/property';
 import { useDispatch, useSelector } from "react-redux";
+import {
+  useLoadScript,
+} from "@react-google-maps/api";
+
+const libraries = ["places"];
 
 const Details = () => {
     const dispatch = useDispatch();
     const data = require('./data');
     const router = useRouter()
+    const [pricePerMonth, setPricePerMonth] = useState();
     
     const propertyDetails = useSelector((state) => state.property.propertyDetails);
     console.log('====================================');
     console.log(propertyDetails);
     console.log('====================================');
+
+    //maps
+    const {isLoaded, loadError} = useLoadScript({
+      googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
+      libraries,
+    })
 
     useEffect(() => {
       dispatch(getPropertyDetails({id: router.query.id}));
@@ -50,7 +62,7 @@ const Details = () => {
             <div className="md:flex md:flex-row flex-column pt-6">
               {/* Introduction */}
               <div className="w-full md:w-2/3">
-                <Introduction propertyDetails={propertyDetails}/>
+                {pricePerMonth && <Introduction propertyDetails={propertyDetails} pricePerMonth={pricePerMonth} />}
                 <hr className="mt-2"></hr>
                 {/* Capacity */}
                 <SubCapacity propertyDetails={propertyDetails}/>
@@ -61,7 +73,7 @@ const Details = () => {
 
               {/* price Card */}
               <div className="md:w-1/3 md:ml-10 mt-10 md:mt-0">
-                <PriceCard />
+                <PriceCard propertyDetails={propertyDetails} setPricePerMonth={setPricePerMonth}/>
               </div>
             </div>
           </div>
@@ -69,12 +81,12 @@ const Details = () => {
           {/* Location */}
           <div className="px-5 md:px-20 lg:px-28">
             <h1 className="text-xl text-gray-700 font-bold mt-5">Location</h1>
-            <Map />
+            {isLoaded && <Map isLoaded={isLoaded} />}
           </div>
           {/* popular properties */}
           <div className="px-5 md:px-20 lg:px-28 py-5">
             <h1 className="text-xl text-gray-700 font-bold mt-5">
-              Some Popular properties
+              Other Popular properties in the area
             </h1>
             <ScrollMenu>
               {data?.map((item) => (
