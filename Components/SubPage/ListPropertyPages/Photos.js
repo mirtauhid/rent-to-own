@@ -7,17 +7,15 @@ const Photos = ({ steps, setSteps, formik }) => {
         onSelectFile(e)
             .then(data => {
                 const { base64, file } = data;
-                formik.setFieldValue('photos', [...formik.values?.photos, base64])
-                formik.setFieldValue('files', [...formik.values?.files, file])
+                formik.setFieldValue('images', [...formik.values?.images, base64])
             })
     }
     const handleDeleteImg = (index) => {
-        formik.setFieldValue('files', formik.values?.files?.filter((photo, i) => i != index))
-        formik.setFieldValue('photos', formik.values?.photos?.filter((photo, i) => i != index))
+        formik.setFieldValue('images', formik.values?.images?.filter((photo, i) => i != index))
     }
 
     const handleNext = () => {
-        if (formik.values?.files?.length) {
+        if (formik.values?.images?.length) {
             setSteps({ ...steps, fourth: true })
         }
     }
@@ -27,7 +25,7 @@ const Photos = ({ steps, setSteps, formik }) => {
             <h2 className="uppercase text-center text-2xl font-bold my-5">ADD A FEW PHOTOS</h2>
             <div className="md:flex md:flex-wrap w-full mb-2 p-2">
                 {
-                    formik.values?.photos?.map((photo, index) => {
+                    formik.values?.images?.map((photo, index) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
@@ -63,8 +61,8 @@ const Photos = ({ steps, setSteps, formik }) => {
                 </div>
             </div>
             {
-                formik.errors.files &&
-                <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.files}</div>
+                formik.errors.images &&
+                <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.images}</div>
             }
 
             <p className="my-5 text-sm ml-2 mb-8">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>

@@ -1,5 +1,9 @@
+import axios from "axios";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import baseURL from "../../../Helpers/httpRequest";
 import Description from "./Description";
 import Location from "./Location";
 import Photos from "./Photos";
@@ -15,6 +19,11 @@ const ListPropertyPages = ({ children }) => {
     fourth: false,
     fifth: false,
   });
+
+  // next router
+  const router = useRouter()
+
+  const { userData } = useSelector((state) => state.auth);
 
   const validate = (values) => {
     const errors = {};
@@ -48,8 +57,8 @@ const ListPropertyPages = ({ children }) => {
     }
 
     // For Photos Validation
-    if (!values.files.length) {
-      errors.files = "Please upload photos!";
+    if (!values.images.length) {
+      errors.images = "Please upload photos!";
     }
 
     return errors;
@@ -57,6 +66,7 @@ const ListPropertyPages = ({ children }) => {
 
   const formik = useFormik({
     initialValues: {
+      userId: userData?.id,
       name: "",
       description: "",
       listingTypeId: "",
@@ -77,12 +87,24 @@ const ListPropertyPages = ({ children }) => {
       cityId: 3,
       apt: "",
       price: "",
-      files: [],
-      photos: [],
+      plotSize: 1000000000000000000,
+      images: [],
     },
+    enableReinitialize: true,
     validate,
     onSubmit: (values) => {
-      alert("Your data submitted");
+      axios({
+        method: "POST",
+        url: `${baseURL}/v2/public/property`,
+        data: values
+      })
+        .then((res) => {
+          if (res.data?.status_code) {
+            // Dynamic routing
+            router.push("/sellerProfile/yourListings")
+          }
+        })
+        .catch((err) => console.log(err))
     },
   });
   return (
