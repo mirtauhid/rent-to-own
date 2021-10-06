@@ -7,7 +7,7 @@ const Preview = ({ steps, setSteps, formik }) => {
             <div className="w-full flex flex-wrap">
                 <h2 className="w-full text-xl font-bold mb-5">Images</h2>
                 {
-                    formik.values?.photos?.map((photo, index) => {
+                    formik.values?.images?.map((photo, index) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
