@@ -66,18 +66,4 @@ const SubSettings = () => {
   );
 };
 
-const Tab = ({ href, isSelected, title }) => (
-  <Link href={href}>
-    <a
-      style={{
-        padding: 5,
-        margin: 5,
-        backgroundColor: isSelected ? "blue" : "transparent",
-      }}
-    >
-      {title}
-    </a>
-  </Link>
-);
-
 export default SubSettings;
