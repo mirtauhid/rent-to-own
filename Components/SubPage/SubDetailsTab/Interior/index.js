@@ -2,21 +2,25 @@ import React from 'react'
 
 const index = () => {
     return (
-        <div className="mt-3 grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3">
-            <div className="">
-                <p className="text-md">Range</p>
-                <p className="text-md py-4">Wood cook stove</p>
-                
-            </div>
-            <div className="">
-                <p className="text-md">Deep soaker tub</p>
-                <p className="text-md py-4">Open upper floor loft</p>
-                
-            </div>
-            <div className="">
-                <p className="text-md">Propane range</p>
-                <p className="text-md py-4">custom log finishes</p>
-            </div>
+        <div className="gap-8 flex flex-wrap py-5">
+                <div>
+                    <p className="text-md">Range</p>
+                </div>
+                <div>
+                    <p className="text-md w-full">Wood cook stove</p>
+                </div>
+                <div>
+                    <p className="text-md w-full">Deep soaker tub</p>
+                </div>
+                <div>
+                    <p className="text-md ">Open upper floor left</p>
+                </div>
+                <div>
+                    <p className="text-md">Propane range</p>
+                </div>
+                <div>
+                    <p className="text-md">Custom log finishes</p>
+                </div>
         </div>
     )
 }

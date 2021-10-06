@@ -19,9 +19,10 @@ export default class ChatItem extends Component {
         ) : null}
         <div>
           {this.props.messageImages ? (
-            this.props.messageImages.map(item => (
+            this.props.messageImages.map((item, index) => (
               <img className={`bg-gray-200 flex mx-2 mt-2 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md" : "rounded-br-md"}`}
                 src={item}
+                key={index}
               />
             ))
           ) : (

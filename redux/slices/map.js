@@ -2,16 +2,31 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import baseURL from '../../Helpers/httpRequest';
 
 const initialState = {
-    allareas: null,
-    allcities: [],
+    areas: null,
+    filterLocation: null,
     status: null
 };
 
-export const getProvience = createAsyncThunk (
-    'areas/getProvience',
-    async () => {
+export const getAreas = createAsyncThunk (
+    'map/getAreas',
+    async ({lat, lng}) => {
         try {
-            const response = await fetch(`${baseURL}/v2/provinces`) ;
+            const response = await fetch(`${baseURL}/v2/public/property/filter/test?lat=${lat}&lng=${lng}`) ;
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+            const resData = await response.json();
+            return resData;
+        }catch(err) {
+            throw err;
+        }
+    }
+)
+export const getFilterLocation = createAsyncThunk (
+    'map/getFilterLocation',
+    async ({lat, lng}) => {
+        try {
+            const response = await fetch(`${baseURL}/v2/public/property/map?lat=${lat}&lng=${lng}`) ;
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
@@ -23,44 +38,29 @@ export const getProvience = createAsyncThunk (
     }
 )
 
-export const getCities = createAsyncThunk (
-    'areas/getCities',
-    async () => {
-        try {
-            const response = await fetch(`${baseURL}/v2/cities`) ;
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
-            const resData = await response.json();
-            return resData.data;
-        }catch(err) {
-            throw err;
-        }
-    }
-)
-
-export const areasSlice = createSlice({
-  name: "areas",
+export const mapSlice = createSlice({
+  name: "map",
   initialState,
   extraReducers: {
-    [getProvience.pending]: (state, action) => {
+    [getAreas.pending]: (state, action) => {
         state.status = 'loading'
     },
-    [getProvience.fulfilled]: (state, { payload }) => {
-        state.allareas = payload
+    [getAreas.fulfilled]: (state, { payload }) => {
+        state.areas = payload
         state.status = 'success'
     },
-    [getProvience.rejected]: (state, action) => {
+    [getAreas.rejected]: (state, action) => {
         state.status = 'failed'
     },
-    [getCities.pending]: (state, action) => {
+    //
+    [getFilterLocation.pending]: (state, action) => {
         state.status = 'loading'
     },
-    [getCities.fulfilled]: (state, { payload }) => {
-        state.allcities = payload
+    [getFilterLocation.fulfilled]: (state, { payload }) => {
+        state.filterLocation = payload
         state.status = 'success'
     },
-    [getCities.rejected]: (state, action) => {
+    [getFilterLocation.rejected]: (state, action) => {
         state.status = 'failed'
     },
   },
@@ -68,4 +68,4 @@ export const areasSlice = createSlice({
 
 //export const { getAllProperties } = areasSlice.actions;
 
-export default areasSlice.reducer;
+export default mapSlice.reducer;

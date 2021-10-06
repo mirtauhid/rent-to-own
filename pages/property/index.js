@@ -19,19 +19,20 @@ const Property = () => {
     const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
-    const [listingType, setListingType] = React.useState(2);
+    const [listingType, setListingType] = React.useState('');
     const [filterCity, setFilterCity] = React.useState('');
+    const [proviceIds] = React.useState('');
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
-    const [areaFilter, setAreaFilter] = React.useState();
     const properties = useSelector((state) => state.property.allproperties);
     const listingType1 = useSelector((state) => state.property.listingType);
     const filteredData = useSelector((state) => state.property.filteredData);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
-    console.log('================areas====================');
-    console.log(filteredData);
-    console.log('====================================');
+    // console.log('================areas====================');
+    // console.log(state);
+    // console.log(filteredData);
+    // console.log('====================================');
 
     useEffect(() => {
 
@@ -49,7 +50,7 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
-            
+            proviceIds: proviceIds
         }));
     }, [dispatch])
 
@@ -65,18 +66,33 @@ const Property = () => {
     }, [listingType, filterCity, price, areaSqft])
 
     const resetAll = () => {
-        setAreaData(allareas?.map(d => {
-            return {
-                select: false,
-                id: d.id,
-                state: d.name,
-                areas: d.Cities.map(d => {
-                    return {
-                        id: d.id,
-                        location: d.name,
-                        checkbox: false,
-                    }
-                }),
+        setAreaData(allareas?.provience?.map(d => {
+            if(d.name === state) {
+                return {
+                    select: true,
+                    id: d.id,
+                    state: d.name,
+                    areas: d.Cities.map(d => {
+                        return {
+                            id: d.id,
+                            location: d.name,
+                            checkbox: false,
+                        }
+                    }),
+                }
+            } else {
+                return {
+                    select: false,
+                    id: d.id,
+                    state: d.name,
+                    areas: d.Cities.map(d => {
+                        return {
+                            id: d.id,
+                            location: d.name,
+                            checkbox: false,
+                        }
+                    }),
+                }
             }
         }))
     }
@@ -141,8 +157,6 @@ const Property = () => {
             item => 
                 item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
         )
-        setAreaFilter(priceFilter)
-        //setFilterOptions(priceFilter);
     }, [price])
 
     if(areas.status === 'loading'){
