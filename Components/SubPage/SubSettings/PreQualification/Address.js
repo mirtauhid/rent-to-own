@@ -22,10 +22,6 @@ const Address = () => {
         <div className="col-span-1">
           <InputField fieldName="postalCode" placeholder="Postal code" />
         </div>
-
-        <button className="bg-primary text-white font-bold p-2 rounded-md md:w-1/2" type="submit">
-          Submit
-        </button>
       </div>
     );
 }
