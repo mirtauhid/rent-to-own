@@ -57,10 +57,10 @@ const Description = ({ steps, setSteps, formik }) => {
                 <label className="block text-secondary text-sm font-bold mb-2" htmlFor="description">
                     Describe your home
                 </label>
-                <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                <textarea
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline resize-none"
                     id="description"
-                    type="text"
+                    rows="4"
                     placeholder="Describe your home"
                     name="description"
                     value={formik.values.description}

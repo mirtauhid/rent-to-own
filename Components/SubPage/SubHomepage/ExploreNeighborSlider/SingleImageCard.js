@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const SingleImageCard = ({name,img}) => {
+const SingleImageCard = ({name,img,id}) => {
     return (
       <div className="h-80 w-full rounded-md overflow-hidden relative">
         <img
@@ -16,7 +16,7 @@ const SingleImageCard = ({name,img}) => {
           <Link 
             href={{
               pathname: "/property",
-              query: { state: name },
+              query: { state: id },
             }}
           >
             <p className="text-white text-2xl font-bold uppercase hover:underline cursor-pointer">{name}</p>
