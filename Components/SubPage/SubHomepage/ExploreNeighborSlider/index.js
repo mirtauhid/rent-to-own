@@ -4,7 +4,6 @@ import SingleImageCard from "./SingleImageCard";
 import MultipleImageCard from "./MultipleImageCard";
 import CustomSliderNext from "./CustomSliderNext";
 import CustomSliderPrev from "./CustomSliderPrev";
-import { data } from "../../../../Assets/exploreNeighborhoodData";
 import axios from "axios";
 import baseUrl from "../../../../Helpers/httpRequest";
 
