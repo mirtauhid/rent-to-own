@@ -35,10 +35,8 @@ const HouseSearch = () => {
     const properties = useSelector((state) => state.property.allproperties);
     const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
-    const [coordinates, setCoordinates] = useState();
     console.log('=============mapareas=======================');
     console.log(filterLocation);
-    console.log(coordinates);
     console.log('====================================');
 
     useEffect(() => {
@@ -46,19 +44,6 @@ const HouseSearch = () => {
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
       dispatch(getFilterLocation({lat: 49.093363, lng: -122.968549}));
   }, [dispatch])
-
-  // useEffect(() => {
-  //   const holder = [];
-  //   filterLocation?.map(item =>{
-  //     holder.push({
-  //       lat: parseFloat(item.PropertyAddresses[0].latitude),
-  //       lng: parseFloat(item.PropertyAddresses[0].longitude)
-  //     })
-  //   })
-  //   setCoordinates(holder);
-  // },[filterLocation])
-
-  // useEffect(() => {}, [coordinates])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -92,17 +77,14 @@ const HouseSearch = () => {
                 <div className="">
                   {filterLocation?.map((item) => (
                     <div className="cursor-pointer pb-10" key={item.id}>
-                      {/* <Link href={"/housesearch/" + item.id} key={item.id}>
-                        <a> */}
-                          <ImageCard
-                            key={item.id.toString()}
-                            item={item}
-                            title={item.name}
-                            host="host"
-                            price={item.price}
-                          />
-                        {/* </a>
-                      </Link> */}
+                      <ImageCard
+                        key={item.id.toString()}
+                        item={item}
+                        title={item.name}
+                        host="host"
+                        price={item.price}
+                        images={item.PropertyImages}
+                      />
                     </div>
                   ))}
                 </div>
@@ -127,7 +109,7 @@ const HouseSearch = () => {
     );
 }
 
-function Search ({ setSearch, panTo, isLoaded }) {
+function Search ({ panTo, isLoaded }) {
   const router = useRouter()
     const {
         query: { search },
