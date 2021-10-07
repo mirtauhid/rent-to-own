@@ -383,7 +383,8 @@ const Property = () => {
                                 <PropertyImage
                                     key={item.id.toString()}
                                     title={item.name}
-                                    location={item.PropertyAddresses[0].street}
+                                    location={item.PropertyAddresses[0]?.street}
+                                    city={item.PropertyAddresses[0]?.street}
                                     price={item.price}
                                     description={item.description}
                                     bedroom={item.bedroom}

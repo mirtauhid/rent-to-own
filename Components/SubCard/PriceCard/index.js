@@ -31,7 +31,7 @@ const index = ({propertyDetails, setPricePerMonth}) => {
             <p className="text-md mt-5 font-medium text-center text-gray-700">Booking breakdown</p>
             <div className="mt-5 flex justify-between">
                 <p className="text-xs text-gray-800 font-medium">Property fair market value today</p>
-                <p className="text-xs text-gray-800 font-medium">${pricePerMonth}</p>
+                <p className="text-xs text-gray-800 font-medium">${price}</p>
             </div>
             <p className="text-xs text-gray-300">Mimimun of $200,000;  maximum$50,000</p>
             <div className="mt-5 flex justify-between">
