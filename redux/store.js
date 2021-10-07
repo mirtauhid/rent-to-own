@@ -4,6 +4,7 @@ import counterReducer from "./slices/counter";
 import chatReducer from './slices/messaging';
 import propertyReducer from './slices/property';
 import areasReducer from './slices/areas';
+import mapReducer from './slices/map';
 
 
 const RootReducer = combineReducers({
@@ -12,6 +13,7 @@ const RootReducer = combineReducers({
   message: chatReducer,
   property: propertyReducer,
   areas: areasReducer,
+  map: mapReducer
 })
 
 

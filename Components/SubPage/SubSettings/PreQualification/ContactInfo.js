@@ -8,7 +8,7 @@ const ContactInfo = () => {
   const [showNumberField, setShowNumberField] = useState(false);
 
   return (
-    <div className="border-2 px-5 py-5 rounded-lg mt-10">
+    <div className="mt-10">
       <p className="text-lg font-bold mb-2">Contact info</p>
 
       <div className="flex border-2 rounded-md px-2">

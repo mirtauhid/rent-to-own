@@ -1,12 +1,24 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import SingleImageCard from "./SingleImageCard";
 import MultipleImageCard from "./MultipleImageCard";
 import CustomSliderNext from "./CustomSliderNext";
 import CustomSliderPrev from "./CustomSliderPrev";
-import { data } from "../../../../Assets/exploreNeighborhoodData";
+import axios from "axios";
+import baseUrl from "../../../../Helpers/httpRequest";
 
 const ExploreNeighborSlider = () => {
+  const [sliderData, setSliderData] = useState();
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/v2/provinces`).then((res) => {
+      
+      setSliderData(formatData(res.data.data.provinces)); 
+    });
+  }, []);
+
+  
+
   const settings = {
     arrows: true,
     nextArrow: <CustomSliderNext />,
@@ -47,20 +59,26 @@ const ExploreNeighborSlider = () => {
       </div>
       <div className="h-80">
         <Slider {...settings} className="explore-slider">
-          {data.map((item, index) => {
+          {sliderData?.map((item, index) => {
+            
             if (index % 2 === 0) {
+              console.log(item)
               return (
                 <div
                   style={{ width: "250px", marginRight: "12px" }}
                   key={index}
                 >
-                  <SingleImageCard name={item.name} img={item.img}/>
+                  <SingleImageCard
+                    name={item.name}
+                    img={JSON.parse(item.description).url}
+                    id={item.id}
+                  />
                 </div>
               );
             } else {
               return (
                 <div style={{ width: "350px" }} key={index}>
-                  <MultipleImageCard data={item}/>
+                  <MultipleImageCard data={item} />
                 </div>
               );
             }
@@ -69,6 +87,30 @@ const ExploreNeighborSlider = () => {
       </div>
     </div>
   );
+};
+
+const formatData = (apiData) => {
+  const dataAfterFormat = [];
+  let miniArray = [];
+  let count = 0;
+
+  apiData.map((item, index) => {
+    if (index!==0 && index%5!==0 && count<4) {
+      miniArray.push(item);
+      count++;
+    }
+    if (index === 0 || index % 5 === 0) {
+      dataAfterFormat.push(item);
+    }
+
+    if(count === 4){
+      dataAfterFormat.push([...miniArray]);
+      miniArray=[];
+      count =0;
+    }
+  });
+
+  return dataAfterFormat;
 };
 
 export default ExploreNeighborSlider;

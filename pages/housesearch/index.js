@@ -1,9 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ImageCard from '../../Components/SubCard/ImageCard';
-import Pagination from '../../Components/Pagination';
 import HomeLayout from '../../Layouts/HomeLayout';
-import Link from 'next/link';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { useRouter } from "next/router";
 import MapG from '../../Components/Map';
@@ -23,15 +20,33 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import style from './style.module.css';
-const libraries = ["places"];
+import { useDispatch, useSelector } from "react-redux";
+import { getProperty } from '../../redux/slices/property';
+import { getAreas, getFilterLocation } from '../../redux/slices/map';
 
-const index = () => {
+const HouseSearch = () => {
+    const [ libraries ] = useState(['places']);
+    const dispatch = useDispatch();
     const router = useRouter()
     const {
         query: { search },
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
-    const data = require('./data');
+    const properties = useSelector((state) => state.property.allproperties);
+    const mapareas = useSelector((state) => state.map.areas);
+    const filterLocation = useSelector((state) => state.map.filterLocation);
+    console.log('=============mapareas=======================');
+    console.log(filterLocation);
+    console.log('====================================');
+
+    useEffect(() => {
+      dispatch(getProperty());
+      dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
+      dispatch(getFilterLocation({lat: 43.6685934, lng: -79.543553}));
+  }, [dispatch])
+
+  useEffect(() => {
+  },[mapareas])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -48,27 +63,6 @@ const index = () => {
       mapRef.current.setZoom(14);
     }, []);
 
-    //Pagination
-    const [currentPage, setCurrentPage] = useState(1);
-    const postsPerPage = 6;
-
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost);
-
-    const paginate = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
-
-    const options = [
-        'Price', 'Title', 'Time'
-    ];
-    const defaultOption = options[0];
-
-    const handleChange = event => {
-      setSearchData(event.target.value)
-    }
-
     return (
       <HomeLayout>
         <>
@@ -80,50 +74,46 @@ const index = () => {
           <div className="px-5 md:px-20 lg:px-28">
             {/* divide */}
             <div className="flex flex-wrap">
-              <div className="w-full md:w-2/3">
-                <div className="py-5 flex justify-between">
-                  <p className="text-sm text-gray-500">1-6 of 300+</p>
-                  <div className="flex justify-between">
-                    <div className="flex items-center justify-center mr-3">
-                      <p className="text-sm text-gray-500">Sort</p>
-                    </div>
-                    <Dropdown
-                      className="text-xs text-gray-500"
-                      options={options}
-                      value={defaultOption}
-                      placeholder="Select an option"
-                    />
-                  </div>
+              <div className="w-full md:w-1/2">
+                <div className="py-5">
                 </div>
-                <div className="grid  smd:grid-cols-2 justify-center md:grid-cols-2 lg:grid-cols-3  gap-7 smd:gap-4">
-                  {currentPosts?.map((item) => (
-                    <div className="cursor-pointer" key={item.id}>
-                      <Link href={"/housesearch/" + item.id} key={item.id}>
-                        <a>
+                <div className="">
+                  {filterLocation?.map((item) => (
+                    <div className="cursor-pointer pb-10" key={item.id}>
+                      {/* <Link href={"/housesearch/" + item.id} key={item.id}>
+                        <a> */}
                           <ImageCard
                             key={item.id.toString()}
-                            title={item.title}
-                            host={item.host}
+                            item={item}
+                            title={item.name}
+                            host="host"
                             price={item.price}
                           />
-                        </a>
-                      </Link>
+                        {/* </a>
+                      </Link> */}
                     </div>
                   ))}
                 </div>
-                <div className="grid py-5 lg:mr-5">
-                  <Pagination
-                    postsPerPage={postsPerPage}
-                    totalPosts={data.length}
-                    paginate={paginate}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                  />
-                </div>
               </div>
-              <div className="w-1/3">
+              <div className="w-1/2">
                 <div className="py-5 w-full pl-5 hidden md:block">
-                  <MapG panTo={panTo} isLoaded={isLoaded} loadError={loadError} onMapLoad={onMapLoad}/>
+                  {mapareas && 
+                  <MapG 
+                    panTo={panTo} 
+                    isLoaded={isLoaded} 
+                    loadError={loadError} 
+                    onMapLoad={onMapLoad} 
+                    mapRef={mapRef}
+                    mark={
+                      [
+                        {
+                        lat: parseFloat(mapareas[0]?.latitude),
+                        lng: parseFloat(mapareas[0]?.longitude),
+                        //time: mapareas[0]?.updatedAt
+                        }
+                      ]
+                    }
+                  />}
                 </div>
               </div>
             </div>
@@ -134,9 +124,10 @@ const index = () => {
 }
 
 function Search ({ setSearch, panTo, isLoaded }) {
-    const onChangeValue = e => {
-        setSearch(e.target.value);
-    }
+  const router = useRouter()
+    const {
+        query: { search },
+    } = router
 
   const {
     ready,
@@ -150,6 +141,9 @@ function Search ({ setSearch, panTo, isLoaded }) {
       radius: 100 * 1000,
     },
   });
+  useEffect(() => {
+    setValue(search)
+  }, [search])
 
   const handleInput = (e) => {
     setValue(e.target.value);
@@ -179,8 +173,8 @@ function Search ({ setSearch, panTo, isLoaded }) {
         <ComboboxPopover>
           <ComboboxList>
             {status === "OK" &&
-              data.map(({ id, description }) => (
-                  <ComboboxOption key={id} value={description} />
+              data.map(({ id, description }, index) => (
+                  <ComboboxOption key={index} value={description} />
               ))}
           </ComboboxList>
         </ComboboxPopover>
@@ -189,4 +183,4 @@ function Search ({ setSearch, panTo, isLoaded }) {
   );
 }
 
-export default index
+export default HouseSearch;

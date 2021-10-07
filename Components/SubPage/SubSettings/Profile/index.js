@@ -1,5 +1,5 @@
 import AboutMeForm from "./AboutMeForm";
-import ContactInfo from "./ContactInfo";
+
 
 
 import { Formik, Form } from "formik";
@@ -13,39 +13,16 @@ const initialValues = {
   lastName: "",
   gender: "",
   dob: "",
-  email: "",
-  phoneNumber: "",
-  secondaryPhoneNumber: "",
-  address: "",
-  suite: "",
-  city: "",
-  province: "",
-  country: "",
-  postalCode: "",
 };
 
-const phoneRegExp =
-  /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
+
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("Required"),
   lastName: Yup.string().required("Required"),
   gender: Yup.string().required("Required"),
   dob: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email format").required("Required"),
-  phoneNumber: Yup.string()
-    .matches(phoneRegExp, "Enter valid phone number")
-    .required("Required"),
-  secondaryPhoneNumber: Yup.string().matches(
-    phoneRegExp,
-    "Enter valid phone number"
-  ),
-  address: Yup.string().required("Required"),
-  suite: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
-  province: Yup.string().required("Required"),
-  country: Yup.string().required("Required"),
-  postalCode: Yup.string().required("Required"),
+  
 });
 
 const onSubmit = (values, { resetForm }) => {
@@ -89,7 +66,7 @@ const Profile = ({ tab }) => {
 
             <AboutMeForm />
           </div>
-          <ContactInfo />
+          
         </Form>
       </Formik>
     </div>

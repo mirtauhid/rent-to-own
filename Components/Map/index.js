@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     GoogleMap,
     useLoadScript,
@@ -18,14 +18,26 @@ const options = {
     //zoomControl: true,
 };
 
-const center = {
-    lat: 59.95, lng: 30.33
-};
-
-const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
+const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
+    const center1 = {
+        lat: 59.95, lng: 30.33
+    };
     //maps @api
-    const [markers, setMarkers] = React.useState([]);
+    const [markers, setMarkers] = React.useState(mark?mark : []);
     const [selected, setSelected] = React.useState(null);
+    const [center , setCenter] = React.useState(center1);
+    const [zoom, setZoom] = React.useState(8);
+    console.log('=============markers=======================');
+    console.log(markers);
+    console.log('====================================');
+
+    useEffect(() => {
+        if(markers && markers[0] && panTo){
+            //panTo(markers[0]);
+            setCenter(markers[0])
+            setZoom(4);
+        }
+    },[markers])
 
     const onMapClick = React.useCallback((e) => {
         setMarkers((current) => [
@@ -44,14 +56,13 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
 
     return (
         <div className="py-5 w-full hidden md:block relative">
-            
             <GoogleMap
                 id="map"
                 mapContainerStyle={containerStyle}
                 center={center}
                 options={options}
-                zoom={10}
-                onClick={onMapClick}
+                zoom={zoom}
+                //onClick={onMapClick}
                 onLoad={onMapLoad}
             >
                 {/* <Locate panTo={panTo} /> */}
@@ -62,12 +73,6 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
                         onClick={() => {
                             setSelected(marker);
                         }}
-                        //     icon={{
-                        //         url: ``,
-                        //         origin: new window.google.maps.Point(0, 0),
-                        //         anchor: new window.google.maps.Point(15, 15),
-                        //         scaledSize: new window.google.maps.Size(30, 30),
-                        //     }}
                     />
                 ))}
 
@@ -93,7 +98,7 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad}) => {
                 ) : null}
             </GoogleMap>
             <div className="absolute left-5 bottom-8">
-                <Locate panTo={panTo} />
+                {markers && <Locate panTo={panTo} />}
             </div>
         </div>
     )
@@ -106,7 +111,7 @@ function Locate({ panTo }) {
         onClick={() => {
           navigator.geolocation.getCurrentPosition(
             (position) => {
-              panTo({
+            panTo({
                 lat: position.coords.latitude,
                 lng: position.coords.longitude,
               });
