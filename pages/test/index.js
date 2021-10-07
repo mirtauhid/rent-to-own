@@ -1,11 +1,12 @@
 import MakeAnOffer from "../../Components/Modal/MakeAnOffer/";
 import HomeLayout from "../../Layouts/HomeLayout";
+import ImageSlider from "../../Components/ImageSlider"
 
 const Test = () => {
     return (
         <HomeLayout>
-            <MakeAnOffer isOpen={true}/>
-            This is test
+            {/* <MakeAnOffer isOpen={true}/> */}
+            <ImageSlider/>
         </HomeLayout>
     )
 }

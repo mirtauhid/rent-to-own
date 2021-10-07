@@ -73,13 +73,14 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
               headers: { Authorization: res.data.data.token}
             })
               .then((res) => {
+                console.log(res.data.data);
                 if (res.data.success) {
                   // loading end
                   setLoading(false);
                   // Making error empty
                   setError({ status: false, msg: "" })
                   // Updating redux
-                  dispatch(signIn(res.data?.data?.data));
+                  dispatch(signIn(res.data?.data));
                   // Dynamic routing
                   router.push(redirectLink)
                   // Closing the modal
