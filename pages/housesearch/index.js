@@ -32,21 +32,24 @@ const HouseSearch = () => {
         query: { search },
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
+    const [searchCoordinates, setSearchCoordinates] = useState()
     const properties = useSelector((state) => state.property.allproperties);
     const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
     console.log('=============mapareas=======================');
+    console.log(searchCoordinates);
     console.log(filterLocation);
     console.log('====================================');
 
     useEffect(() => {
       dispatch(getProperty());
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
-      dispatch(getFilterLocation({lat: 43.6685934, lng: -79.543553}));
+      dispatch(getFilterLocation({lat: 49.093363, lng: -122.968549}));
   }, [dispatch])
 
   useEffect(() => {
-  },[mapareas])
+    dispatch(getFilterLocation(searchCoordinates));
+  }, [searchCoordinates])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -60,7 +63,7 @@ const HouseSearch = () => {
     }, []);
     const panTo = React.useCallback(({ lat, lng }) => {
       mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(14);
+      mapRef.current.setZoom(8);
     }, []);
 
     return (
@@ -68,7 +71,13 @@ const HouseSearch = () => {
         <>
           <div className="px-5 md:px-20 lg:px-28 w-full mt-5">
             <div className="relative">
-              {isLoaded && <Search panTo={panTo} isLoaded={isLoaded} setSearch={setSearchData} searchData={searchData}/>}
+              {isLoaded && 
+                <Search panTo={panTo} 
+                  isLoaded={isLoaded} 
+                  setSearch={setSearchData} 
+                  searchData={searchData}
+                  setSearchCoordinates={setSearchCoordinates}
+                />}
             </div>
           </div>
           <div className="px-5 md:px-20 lg:px-28">
@@ -80,39 +89,28 @@ const HouseSearch = () => {
                 <div className="">
                   {filterLocation?.map((item) => (
                     <div className="cursor-pointer pb-10" key={item.id}>
-                      {/* <Link href={"/housesearch/" + item.id} key={item.id}>
-                        <a> */}
-                          <ImageCard
-                            key={item.id.toString()}
-                            item={item}
-                            title={item.name}
-                            host="host"
-                            price={item.price}
-                          />
-                        {/* </a>
-                      </Link> */}
+                      <ImageCard
+                        key={item.id.toString()}
+                        item={item}
+                        title={item.name}
+                        host="host"
+                        price={item.price}
+                        images={item.PropertyImages}
+                      />
                     </div>
                   ))}
                 </div>
               </div>
               <div className="w-1/2">
                 <div className="py-5 w-full pl-5 hidden md:block">
-                  {mapareas && 
+                  {filterLocation &&
                   <MapG 
                     panTo={panTo} 
                     isLoaded={isLoaded} 
                     loadError={loadError} 
                     onMapLoad={onMapLoad} 
                     mapRef={mapRef}
-                    mark={
-                      [
-                        {
-                        lat: parseFloat(mapareas[0]?.latitude),
-                        lng: parseFloat(mapareas[0]?.longitude),
-                        //time: mapareas[0]?.updatedAt
-                        }
-                      ]
-                    }
+                    mark={filterLocation}
                   />}
                 </div>
               </div>
@@ -123,7 +121,7 @@ const HouseSearch = () => {
     );
 }
 
-function Search ({ setSearch, panTo, isLoaded }) {
+function Search ({ panTo, isLoaded, setSearchCoordinates }) {
   const router = useRouter()
     const {
         query: { search },
@@ -155,6 +153,7 @@ function Search ({ setSearch, panTo, isLoaded }) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
+      setSearchCoordinates({lat, lng})
       panTo({ lat, lng });
     } catch (error) {
       console.log("😱 Error: ", error);

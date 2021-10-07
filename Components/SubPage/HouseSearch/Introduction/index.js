@@ -18,7 +18,10 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
                     </div>
                     <h1 className="text-3xl mt-2">{propertyDetails?.name}</h1>
                     <div className="mt-3 flex flex-row">
-                        <p className="text-xs text-gray-500">Apartment</p>
+                        <p className="text-xs text-gray-500">
+                            {`${propertyDetails?.PropertyAddresses[0]?.City?.name}, `}
+                            {propertyDetails?.PropertyAddresses[0]?.City?.Province?.name}
+                        </p>
                         <p className="text-xs text-gray-500 ml-4">Hosted by {propertyDetails?.User.firstName}</p>
                     </div>
                 </div>
@@ -28,7 +31,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
                 <p className="text-sm font-open-sans text-gray-900 pt-5">
                     {propertyDetails?.description}
                 </p>
-                <a className="cursor-pointer text-xs text-primary pt-3">See more</a>
+                {/* <a className="cursor-pointer text-xs text-primary pt-3">See more</a> */}
             </div>
         </div>
     )

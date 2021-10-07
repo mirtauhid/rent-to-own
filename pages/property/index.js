@@ -21,7 +21,7 @@ const Property = () => {
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState('');
     const [filterCity, setFilterCity] = React.useState('');
-    const [proviceIds] = React.useState('');
+    const [proviceIds, setProviceIds] = React.useState(['']);
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
     const properties = useSelector((state) => state.property.allproperties);
@@ -29,13 +29,13 @@ const Property = () => {
     const filteredData = useSelector((state) => state.property.filteredData);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
-    // console.log('================areas====================');
-    // console.log(state);
-    // console.log(filteredData);
-    // console.log('====================================');
+    console.log('================areas====================');
+    console.log(proviceIds);
+    console.log(filteredData);
+    console.log('====================================');
 
     useEffect(() => {
-
+        setProviceIds(state)
     }, [areas, allareas])
 
     useEffect(() => {
@@ -62,12 +62,13 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
+            proviceIds: proviceIds
         }));
     }, [listingType, filterCity, price, areaSqft])
 
     const resetAll = () => {
         setAreaData(allareas?.provinces?.map(d => {
-            if(d.name === state) {
+            if(d.id === state) {
                 return {
                     select: true,
                     id: d.id,
@@ -109,7 +110,6 @@ const Property = () => {
     }
     //clear filtering
     const clearAll = () => {
-        setListingType();
         setPrice([0, 100]);
         setAreaSqft([0, 100]);
         resetAll();
@@ -284,7 +284,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400"
                                     trackClassName="bg-green-400 h-1"
-                                    value={parseInt(price)}
+                                    value={price}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -301,7 +301,7 @@ const Property = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-16 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-1 text-xs"
                                         placeholder="MIN"
                                         value={`$${(price[0]*100000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
@@ -333,7 +333,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400 text-xs"
                                     trackClassName="bg-green-400 h-1"
-                                    value={parseInt(areaSqft)}
+                                    value={areaSqft}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}

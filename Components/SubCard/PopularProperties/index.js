@@ -1,11 +1,11 @@
 import React from 'react'
 
-const index = ({title, host, price}) => {
+const index = ({title, host, price, imageUrl}) => {
     return (
         <div>
             <div className="w-72 px-4">
-                <img src="https://picsum.photos/200/300" alt="" className="h-40 w-full object-center object-cover rounded" />
-                <div className="flex flex-row pt-3">
+                <img src={imageUrl} alt="" className="h-40 w-full object-center object-cover rounded" />
+                <div className="flex flex-row pt-3 gap-4">
                     <div className="flex-1"> 
                         <h1 className="text-sm flex-1 text-primary">${price}</h1>
                         <h1 className="text-xs flex-auto text-gray-400 pt-1">per month</h1>
