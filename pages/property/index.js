@@ -21,7 +21,7 @@ const Property = () => {
     const [filterOptions, setFilterOptions] = React.useState();
     const [listingType, setListingType] = React.useState('');
     const [filterCity, setFilterCity] = React.useState('');
-    const [proviceIds] = React.useState('');
+    const [proviceIds, setProviceIds] = React.useState(['']);
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
     const properties = useSelector((state) => state.property.allproperties);
@@ -29,13 +29,13 @@ const Property = () => {
     const filteredData = useSelector((state) => state.property.filteredData);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
-    // console.log('================areas====================');
-    // console.log(state);
-    // console.log(filteredData);
-    // console.log('====================================');
+    console.log('================areas====================');
+    console.log(proviceIds);
+    console.log(filteredData);
+    console.log('====================================');
 
     useEffect(() => {
-
+        setProviceIds(state)
     }, [areas, allareas])
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
-            proviceIds: proviceIds
+            proviceIds: proviceIds.toString()
         }));
     }, [dispatch])
 
@@ -67,7 +67,7 @@ const Property = () => {
 
     const resetAll = () => {
         setAreaData(allareas?.provinces?.map(d => {
-            if(d.name === state) {
+            if(d.id === state) {
                 return {
                     select: true,
                     id: d.id,
