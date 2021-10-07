@@ -8,7 +8,7 @@ const libraries = ["places"];
 import style from "./style.module.css"
 
 const index = () => {
-    const [search, setSearch] = React.useState("");
+    const [search, setSearch] = React.useState();
     const [latlng, setLatLng] = React.useState();
     const {isLoaded, loadError} = useLoadScript({
       googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',

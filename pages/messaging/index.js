@@ -6,7 +6,7 @@ import DetailsContent from '../../Components/messaging/detailsContent';
 import SubModal from '../../Components/messaging/SubModal';
 import { FaWindowClose } from 'react-icons/fa';
 
-const index = () => {
+const Message = () => {
     const [selectedId, setSelectedId] = React.useState(1);
     const [messageVisible, setMessageVisible] = React.useState(false);
     return (
@@ -46,4 +46,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Message;

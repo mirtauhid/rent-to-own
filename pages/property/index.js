@@ -19,19 +19,20 @@ const Property = () => {
     const [initData, setInitData] = React.useState();
     const [filterState, setFilterState] = React.useState(true);
     const [filterOptions, setFilterOptions] = React.useState();
-    const [listingType, setListingType] = React.useState(2);
+    const [listingType, setListingType] = React.useState('');
     const [filterCity, setFilterCity] = React.useState('');
+    const [proviceIds] = React.useState('');
     const [price, setPrice] = React.useState(['0', '100']);
     const [areaSqft, setAreaSqft] = React.useState([0, 100]);
-    const [areaFilter, setAreaFilter] = React.useState();
     const properties = useSelector((state) => state.property.allproperties);
     const listingType1 = useSelector((state) => state.property.listingType);
     const filteredData = useSelector((state) => state.property.filteredData);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
-    console.log('================areas====================');
-    console.log(filteredData);
-    console.log('====================================');
+    // console.log('================areas====================');
+    // console.log(state);
+    // console.log(filteredData);
+    // console.log('====================================');
 
     useEffect(() => {
 
@@ -49,7 +50,7 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
-            
+            proviceIds: proviceIds
         }));
     }, [dispatch])
 
@@ -65,18 +66,33 @@ const Property = () => {
     }, [listingType, filterCity, price, areaSqft])
 
     const resetAll = () => {
-        setAreaData(allareas?.map(d => {
-            return {
-                select: false,
-                id: d.id,
-                state: d.name,
-                areas: d.Cities.map(d => {
-                    return {
-                        id: d.id,
-                        location: d.name,
-                        checkbox: false,
-                    }
-                }),
+        setAreaData(allareas?.provinces?.map(d => {
+            if(d.name === state) {
+                return {
+                    select: true,
+                    id: d.id,
+                    state: d.name,
+                    areas: d.Cities.map(d => {
+                        return {
+                            id: d.id,
+                            location: d.name,
+                            checkbox: false,
+                        }
+                    }),
+                }
+            } else {
+                return {
+                    select: false,
+                    id: d.id,
+                    state: d.name,
+                    areas: d.Cities.map(d => {
+                        return {
+                            id: d.id,
+                            location: d.name,
+                            checkbox: false,
+                        }
+                    }),
+                }
             }
         }))
     }
@@ -141,8 +157,6 @@ const Property = () => {
             item => 
                 item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
         )
-        setAreaFilter(priceFilter)
-        //setFilterOptions(priceFilter);
     }, [price])
 
     if(areas.status === 'loading'){
@@ -153,7 +167,7 @@ const Property = () => {
         <HomeLayout>
         <div className=" md:flex md:flex-row md:px-20 lg:px-28">
             {/* Filter */}
-            <div className="smd:w-1/3 flex">
+            <div className="smd:w-1/3 flex justify-center">
                 <div className="w-40 my-10">
                     <div className="flex flex-row justify-between items-center">
                         <p className="text-xs">FILTER</p>
@@ -172,7 +186,7 @@ const Property = () => {
                         </div>
                     </div>
                     { filterState ? (
-                        <div>
+                        <div className="">
                             <div>
                                 <div className="pt-2" />
                                 <hr className=""/>
@@ -215,19 +229,6 @@ const Property = () => {
                                 <div className="pt-4"></div>
                                 <hr className=""/>
                             </div>
-                            {/* list of areas */}
-                            {/* {areaData?.map(item => {
-                                <div className=" mt-2 text-sm" key={item?.id}>
-                               <div className="grid grid-cols-2">
-                                    <p>Hello</p>
-                                    <div className="justify-self-end mt-1 cursor-pointer" 
-                                        
-                                    >
-                                        {item?.id ? <BiDownArrow /> : <BiRightArrow/> }
-                                    </div>
-                                </div>
-                                </div>
-                            })} */}
                             {areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
@@ -280,10 +281,10 @@ const Property = () => {
                             </div>
                             <div className="relative">
                                 <ReactSlider
-                                    className="bg-gray-400 text-white cursor-pointer"
-                                    thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
-                                    trackClassName="bg-gray-400 h-1"
-                                    value={price}
+                                    className="cursor-pointer"
+                                    thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400"
+                                    trackClassName="bg-green-400 h-1"
+                                    value={parseInt(price)}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -329,10 +330,10 @@ const Property = () => {
                             </div>
                             <div className="relative">
                                 <ReactSlider
-                                    className="bg-gray-400 text-white cursor-pointer"
-                                    thumbClassName="h-6 w-6 bg-gray-700 grid justify-center rounded-full mb-2 absolute -top-2 text-gray-700"
-                                    trackClassName="bg-gray-400 h-1"
-                                    value={areaSqft}
+                                    className="cursor-pointer"
+                                    thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400 text-xs"
+                                    trackClassName="bg-green-400 h-1"
+                                    value={parseInt(areaSqft)}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -388,7 +389,7 @@ const Property = () => {
                                     bedroom={item.bedroom}
                                     bathroom={item.bathroom}
                                     sqft={item.plotSize}
-                                    imageUrl={item.imageUrl}
+                                    imageUrl={item.PropertyImages[0]}
                                 />
                             </a>
                         </Link>
