@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   useLoadScript,
 } from "@react-google-maps/api";
+import ImageSlider from "../../Components/ImageSlider";
 
 const libraries = ["places"];
+
 
 const Details = () => {
     const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const Details = () => {
     
     const propertyDetails = useSelector((state) => state.property.propertyDetails);
     console.log('============ppd========================');
-    console.log(propertyDetails);
+    console.log(propertyDetails?.PropertyImages);
     console.log('====================================');
 
     //maps
@@ -43,37 +45,30 @@ const Details = () => {
         <>
           <div className="mt-5 px-5 md:px-20 lg:px-28 relative w-full">
             {/* Images */}
-            <div className="flex flex-row">
-              <img
-                src="https://picsum.photos/600/400"
-                className="w-1/2 object-center object-cover"
-              />
-              <div className="flex flex-end">
-                <div className="w-full">
-                  <img src="https://picsum.photos/400" className="" />
-                  <img src="https://picsum.photos/400/200" />
-                </div>
-                <div className="w-full">
-                  <img src="https://picsum.photos/400/200" />
-                  <img src="https://picsum.photos/400" />
-                </div>
-              </div>
-            </div>
+            <ImageSlider data={propertyDetails?.PropertyImages} />
             <div className="md:flex md:flex-row flex-column pt-6">
               {/* Introduction */}
               <div className="w-full md:w-2/3">
-                {pricePerMonth && <Introduction propertyDetails={propertyDetails} pricePerMonth={pricePerMonth} />}
+                {pricePerMonth && (
+                  <Introduction
+                    propertyDetails={propertyDetails}
+                    pricePerMonth={pricePerMonth}
+                  />
+                )}
                 <hr className="mt-2"></hr>
                 {/* Capacity */}
-                <SubCapacity propertyDetails={propertyDetails}/>
+                <SubCapacity propertyDetails={propertyDetails} />
                 <hr className="mt-5"></hr>
                 {/* Interior features */}
-                <Interior propertyDetails={propertyDetails}/>
+                <Interior propertyDetails={propertyDetails} />
               </div>
 
               {/* price Card */}
               <div className="md:w-1/3 md:ml-10 mt-10 md:mt-0">
-                <PriceCard propertyDetails={propertyDetails} setPricePerMonth={setPricePerMonth}/>
+                <PriceCard
+                  propertyDetails={propertyDetails}
+                  setPricePerMonth={setPricePerMonth}
+                />
               </div>
             </div>
           </div>
@@ -81,7 +76,9 @@ const Details = () => {
           {/* Location */}
           <div className="px-5 md:px-20 lg:px-28">
             <h1 className="text-xl text-gray-700 font-bold mt-5">Location</h1>
-            {isLoaded && propertyDetails && <Map isLoaded={isLoaded} mark={[propertyDetails]} />}
+            {isLoaded && propertyDetails && (
+              <Map isLoaded={isLoaded} mark={[propertyDetails]} />
+            )}
           </div>
           {/* popular properties */}
           <div className="px-5 md:px-20 lg:px-28 py-5">
@@ -90,7 +87,10 @@ const Details = () => {
             </h1>
             <ScrollMenu>
               {data?.map((item) => (
-                <div className="cursor-pointer gap-8 grid-flow-row py-5" key={item.id}>
+                <div
+                  className="cursor-pointer gap-8 grid-flow-row py-5"
+                  key={item.id}
+                >
                   <Link href={"/housesearch/" + item.id} key={item.id}>
                     <a>
                       <PopularProperties

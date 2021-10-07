@@ -20,8 +20,8 @@ const ImageSlider = ({data,height="h-96",width="w-full"}) => {
   return (
     <div className={`${width} mx-auto`}>
       <Slider {...settings}>
-        {data.map((item) => {
-          return <Images src={item.img} height={height}/>;
+        {data?.map((item) => {
+          return <Images src={item?.src?.secure_url} height={height}/>;
         })}
       </Slider>
     </div>
