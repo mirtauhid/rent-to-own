@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     GoogleMap,
     useLoadScript,
@@ -23,19 +23,35 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
         lat: 59.95, lng: 30.33
     };
     //maps @api
-    const [markers, setMarkers] = React.useState(mark?mark : []);
+    const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(null);
     const [center , setCenter] = React.useState(center1);
-    const [zoom, setZoom] = React.useState(8);
+    const [zoom, setZoom] = React.useState(10);
+    const [coordinates, setCoordinates] = useState();
     console.log('=============markers=======================');
     console.log(markers);
+    console.log(center);
     console.log('====================================');
+
+    useEffect(() => {
+        const holder = [];
+        mark?.map(item =>{
+          holder.push({
+            lat: parseFloat(item.PropertyAddresses[0].latitude),
+            lng: parseFloat(item.PropertyAddresses[0].longitude)
+          })
+        })
+        setMarkers(holder);
+        if(holder){
+            setCenter(holder[0])
+        }
+      },[mark])
 
     useEffect(() => {
         if(markers && markers[0] && panTo){
             //panTo(markers[0]);
             setCenter(markers[0])
-            setZoom(4);
+            setZoom(8);
         }
     },[markers])
 
