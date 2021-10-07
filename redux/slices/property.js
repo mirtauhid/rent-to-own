@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import baseURL from '../../Helpers/httpRequest';
 
 export const getProperty = createAsyncThunk (
     'property/getProperty',
     async () => {
         try {
-            const response = await fetch('https://rent-to-own.zetech.us/api/v2/public/property/filter') ;
+            const response = await fetch(`${baseURL}/v2/public/property/filter`);
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
@@ -20,8 +21,7 @@ export const getListingType = createAsyncThunk (
     'property/getListingType',
     async () => {
         try {
-            const response = await fetch('https://rent-to-own.zetech.us/api/v2/listing-types');
-            console.log(response);
+            const response = await fetch(`${baseURL}/v2/listing-types`);
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
@@ -35,15 +35,16 @@ export const getListingType = createAsyncThunk (
 
 export const getFilteredData = createAsyncThunk (
     'property/getFilteredData',
-    async ({listingTypeIds, cityIds, minPrice, maxPrice, minSize, maxSize}) => {
+    async ({listingTypeIds, cityIds, minPrice, maxPrice, minSize, maxSize, proviceIds}) => {
         try {
             const response = await fetch(`
-                https://rent-to-own.zetech.us/api/v2/public/property/filter?listingTypeIds=${listingTypeIds}&cityIds=${cityIds}&minPrice=${minPrice}&maxPrice=${maxPrice}&minSize=${minSize}&maxSize=${maxSize}
-                `) ;
+                ${baseURL}/v2/public/property/filter?minPrice=${minPrice}&maxPrice=${maxPrice}&minSize=${minSize}&maxSize=${maxSize}&proviceIds=${proviceIds ? proviceIds : ""}&listingTypeIds=${listingTypeIds}&cityIds=${cityIds}
+            `) ;
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
+            console.log(resData);
             return resData;
         }catch(err) {
             throw err;
@@ -55,11 +56,12 @@ export const getPropertyDetails = createAsyncThunk (
     'property/getPropertyDetails',
     async ({id}) => {
         try {
-            const response = await fetch(`https://rent-to-own.zetech.us/api/v2/properties/${id}`) ;
+            const response = await fetch(`${baseURL}/v2/properties/${id}`) ;
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
+            console.log(resData.data);
             return resData.data;
         }catch(err) {
             throw err;

@@ -8,8 +8,9 @@ const libraries = ["places"];
 import style from "./style.module.css"
 
 const index = () => {
-    const [search, setSearch] = React.useState("");
+    const [search, setSearch] = React.useState();
     const [latlng, setLatLng] = React.useState();
+    const [locationData, setLocationData] = React.useState();
     const {isLoaded, loadError} = useLoadScript({
       googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
       libraries,
@@ -30,7 +31,7 @@ const index = () => {
               Canada's Only Rent-to-Own Marketplace
             </p>
             <div className="mt-5 lg:mt-5">
-              {isLoaded && <SubSearch setSearch={setSearch} setLatLng={setLatLng} /> }
+              {isLoaded && <SubSearch setSearch={setSearch} setLatLng={setLatLng} setLocationData={setLocationData} /> }
               <Link
                 href={{
                   pathname: "/housesearch",

@@ -39,17 +39,19 @@ const index = ({selectedId}) => {
                 <div className={style["chat__items"]}>
                     <div>
                     {chat ? chat?.messages.map((itm, index) => {
-                    return (
-                        <ChatItem
-                            animationDelay={index + 2}
-                            key={itm.key}
-                            user={itm.type ? itm.type : "me"}
-                            msg={itm.msg}
-                            image={itm.image}
-                            sUserImage={user.image}
-                            messageImages={itm.messageImages}
-                        />
-                    );
+                        return (
+                            <div key={index}>
+                                <ChatItem
+                                animationDelay={index + 2}
+                                key={index}
+                                user={itm.type ? itm.type : "me"}
+                                msg={itm.msg}
+                                image={itm.image}
+                                sUserImage={user.image}
+                                messageImages={itm.messageImages}
+                                />
+                            </div>
+                        );
                     }) : (
                         <div className="flex items-center justify-center h-full min-h-[400px] w-[250px]">
                             <p className="text-gray-300 p-4 text-center">Sorry no conversation found</p>

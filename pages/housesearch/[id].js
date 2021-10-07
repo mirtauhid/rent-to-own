@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
 import Link from 'next/link';
 import PriceCard from '../../Components/SubCard/PriceCard';
@@ -6,21 +6,33 @@ import Map from '../../Components/Map';
 import PopularProperties from '../../Components/SubCard/PopularProperties';
 import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
 import Introduction from '../../Components/SubPage/HouseSearch/Introduction';
-import Interior from '../../Components/SubPage/HouseSearch/Interior';
+import Interior from '../../Components/SubPage/SubDetailsTab/Interior';
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { useRouter } from "next/router";
 import { getPropertyDetails } from '../../redux/slices/property';
 import { useDispatch, useSelector } from "react-redux";
+import {
+  useLoadScript,
+} from "@react-google-maps/api";
+import ImageSlider from "../../Components/ImageSlider";
 
 const Details = () => {
     const dispatch = useDispatch();
-    const data = require('./data');
+    const [ libraries ] = useState(['places']);
     const router = useRouter()
-    
-    const propertyDetails = useSelector((state) => state.property.propertyDetails);
+    const [pricePerMonth, setPricePerMonth] = useState();
+    const filterLocation = useSelector((state) => state.map?.filterLocation);
+    const propertyDetails = useSelector((state) => state.property?.propertyDetails);
+    console.log('============ppd========================');
+    console.log(router.query.id);
+    console.log(propertyDetails?.PropertyImages);
     console.log('====================================');
-    console.log(propertyDetails);
-    console.log('====================================');
+
+    //maps
+    const {isLoaded, loadError} = useLoadScript({
+      googleMapsApiKey: 'AIzaSyA7DPgVBt9bQ8rtDV4PCFEmacgLBFpjmVM',
+      libraries,
+    })
 
     useEffect(() => {
       dispatch(getPropertyDetails({id: router.query.id}));
@@ -31,37 +43,35 @@ const Details = () => {
         <>
           <div className="mt-5 px-5 md:px-20 lg:px-28 relative w-full">
             {/* Images */}
-            <div className="flex flex-row">
-              <img
-                src="https://picsum.photos/600/400"
-                className="w-1/2 object-center object-cover"
-              />
-              <div className="flex flex-end">
-                <div className="w-full">
-                  <img src="https://picsum.photos/400" className="" />
-                  <img src="https://picsum.photos/400/200" />
-                </div>
-                <div className="w-full">
-                  <img src="https://picsum.photos/400/200" />
-                  <img src="https://picsum.photos/400" />
-                </div>
-              </div>
-            </div>
+            <ImageSlider data={propertyDetails?.PropertyImages} />
             <div className="md:flex md:flex-row flex-column pt-6">
               {/* Introduction */}
               <div className="w-full md:w-2/3">
-                <Introduction />
+                {pricePerMonth && (
+                  <Introduction
+                    propertyDetails={propertyDetails}
+                    pricePerMonth={pricePerMonth}
+                  />
+                )}
                 <hr className="mt-2"></hr>
                 {/* Capacity */}
-                <SubCapacity />
+                <SubCapacity propertyDetails={propertyDetails} />
                 <hr className="mt-5"></hr>
-                {/* Interior features */}
-                <Interior />
+                {/* Interior Exterior features */}
+                <h1 className="text-xl pt-3 text-gray-400 font-bold">Interior features</h1>
+                <Interior propertyDetails={propertyDetails}/>
+                <hr className="mt-5"></hr>
+                {/* Exterior features */}
+                <h1 className="text-xl pt-3 text-gray-400 font-bold">Exterior features</h1>
+                <Interior propertyDetails={propertyDetails}/>
               </div>
 
               {/* price Card */}
               <div className="md:w-1/3 md:ml-10 mt-10 md:mt-0">
-                <PriceCard />
+                <PriceCard
+                  propertyDetails={propertyDetails}
+                  setPricePerMonth={setPricePerMonth}
+                />
               </div>
             </div>
           </div>
@@ -69,27 +79,32 @@ const Details = () => {
           {/* Location */}
           <div className="px-5 md:px-20 lg:px-28">
             <h1 className="text-xl text-gray-700 font-bold mt-5">Location</h1>
-            <Map />
+            {isLoaded && propertyDetails && (
+              <Map isLoaded={isLoaded} mark={[propertyDetails]} />
+            )}
           </div>
           {/* popular properties */}
           <div className="px-5 md:px-20 lg:px-28 py-5">
             <h1 className="text-xl text-gray-700 font-bold mt-5">
-              Some Popular properties
+              Other Popular properties in the area
             </h1>
             <ScrollMenu>
-              {data?.map((item) => (
-                <div className="cursor-pointer gap-8 grid-flow-row py-5" key={item.id}>
-                  <Link href={"/housesearch/" + item.id} key={item.id}>
-                    <a>
-                      <PopularProperties
-                        key={item.id.toString()}
-                        title={item.title}
-                        host={item.host}
-                        price={item.price}
-                      />
-                    </a>
-                  </Link>
-                </div>
+              {filterLocation?.map((item) => (
+                item.id != propertyDetails?.id ? (
+                  <div className="cursor-pointer gap-8 grid-flow-row py-5" key={item.id}>
+                    <Link href={"/housesearch/" + item.id} key={item.id}>
+                      <a>
+                        <PopularProperties
+                          key={item.id.toString()}
+                          title={item.name}
+                          host={item.PropertyAddresses[0]?.street}
+                          price={item.price}
+                          imageUrl={item.PropertyImages[0]?.src?.secure_url}
+                        />
+                      </a>
+                    </Link>
+                  </div>
+                ) : null
               ))}
             </ScrollMenu>
           </div>
