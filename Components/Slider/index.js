@@ -9,7 +9,7 @@ const index = ({sliderValue, setSliderValue, min, max, month}) => {
                     className="bg-gray-400 text-white cursor-pointer horizontal-slider"
                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full absolute -top-2 text-white"
                     trackClassName="bg-green-500 h-1"
-                    value={sliderValue}
+                    value={parseInt(sliderValue)}
                     min={min}
                     max={max}
                     step={month ? 6 : 1}

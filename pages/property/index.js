@@ -66,7 +66,7 @@ const Property = () => {
     }, [listingType, filterCity, price, areaSqft])
 
     const resetAll = () => {
-        setAreaData(allareas?.provience?.map(d => {
+        setAreaData(allareas?.provinces?.map(d => {
             if(d.name === state) {
                 return {
                     select: true,
@@ -284,7 +284,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400"
                                     trackClassName="bg-green-400 h-1"
-                                    value={price}
+                                    value={parseInt(price)}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -333,7 +333,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400 text-xs"
                                     trackClassName="bg-green-400 h-1"
-                                    value={areaSqft}
+                                    value={parseInt(areaSqft)}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}

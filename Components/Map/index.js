@@ -18,15 +18,14 @@ const options = {
     //zoomControl: true,
 };
 
-const center = {
-    lat: 59.95, lng: 30.33
-};
-
 const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
+    const center1 = {
+        lat: 59.95, lng: 30.33
+    };
     //maps @api
     const [markers, setMarkers] = React.useState(mark?mark : []);
     const [selected, setSelected] = React.useState(null);
-    const [center , setCenter] = React.useState(center);
+    const [center , setCenter] = React.useState(center1);
     const [zoom, setZoom] = React.useState(8);
     console.log('=============markers=======================');
     console.log(markers);
