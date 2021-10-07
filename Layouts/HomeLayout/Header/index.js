@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import { signIn, signOut } from "../../../redux/slices/auth";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
+  
 
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
@@ -110,6 +112,9 @@ const Header = () => {
 };
 
 const HeaderNavBar = ({ showNav, setShowNav }) => {
+
+  const router = useRouter(); 
+
   const auth = useSelector((state)=>state.auth);
   
   const dispatch = useDispatch();
@@ -117,7 +122,8 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
     dispatch(signOut());
     setShowNav(false);
     // Removing auth token from local storage
-    localStorage.removeItem("authToken")
+    localStorage.removeItem("authToken");
+    router.push("/");
   }
 
   useEffect(() => {
@@ -139,23 +145,32 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
         })
     }
   }, [])
+
+  const handleProfileClick = () =>{
+       axios({
+         method: "POST",
+         url: `${baseURL}/v2/auth/verify`,
+         headers: { Authorization: localStorage.getItem("authToken") },
+       })
+         .then((res) => {
+           res.data.data.type === "SELLER"
+             ? router.push("/sellerProfile/accountSettings")
+             : router.push("/settings?name=profile"); 
+         })
+         .catch((err) => {
+            router.push("/");
+         });
+  }
+
   return (
     <div
       className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
-        showNav ? "opacity-100" : "opacity-0"
+        showNav ? "block" : "hidden"
       } transition duration-300`}
     >
       <ul>
         <li className="mt-2 cursor-pointer">Messages</li>
-        <Link
-          href={
-            auth.userData?.type === "SELLER"
-              ? "/sellerProfile/accountSettings"
-              : "/settings?name=profile"
-          }
-        >
-          <li className="mt-2 cursor-pointer">Profile Settings</li>
-        </Link>
+        <li className="mt-2 cursor-pointer" onClick={handleProfileClick}>Profile Settings</li>
 
         <li className="mt-2 cursor-pointer">Help</li>
         <li className="mt-2 cursor-pointer" onClick={handleLogOut}>
