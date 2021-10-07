@@ -24,7 +24,7 @@ const Details = () => {
     const [pricePerMonth, setPricePerMonth] = useState();
     
     const propertyDetails = useSelector((state) => state.property.propertyDetails);
-    console.log('====================================');
+    console.log('============ppd========================');
     console.log(propertyDetails);
     console.log('====================================');
 
@@ -81,7 +81,7 @@ const Details = () => {
           {/* Location */}
           <div className="px-5 md:px-20 lg:px-28">
             <h1 className="text-xl text-gray-700 font-bold mt-5">Location</h1>
-            {isLoaded && <Map isLoaded={isLoaded} />}
+            {isLoaded && propertyDetails && <Map isLoaded={isLoaded} mark={[propertyDetails]} />}
           </div>
           {/* popular properties */}
           <div className="px-5 md:px-20 lg:px-28 py-5">

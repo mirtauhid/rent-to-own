@@ -35,18 +35,30 @@ const HouseSearch = () => {
     const properties = useSelector((state) => state.property.allproperties);
     const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
+    const [coordinates, setCoordinates] = useState();
     console.log('=============mapareas=======================');
     console.log(filterLocation);
+    console.log(coordinates);
     console.log('====================================');
 
     useEffect(() => {
       dispatch(getProperty());
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
-      dispatch(getFilterLocation({lat: 43.6685934, lng: -79.543553}));
+      dispatch(getFilterLocation({lat: 49.093363, lng: -122.968549}));
   }, [dispatch])
 
-  useEffect(() => {
-  },[mapareas])
+  // useEffect(() => {
+  //   const holder = [];
+  //   filterLocation?.map(item =>{
+  //     holder.push({
+  //       lat: parseFloat(item.PropertyAddresses[0].latitude),
+  //       lng: parseFloat(item.PropertyAddresses[0].longitude)
+  //     })
+  //   })
+  //   setCoordinates(holder);
+  // },[filterLocation])
+
+  // useEffect(() => {}, [coordinates])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -60,7 +72,7 @@ const HouseSearch = () => {
     }, []);
     const panTo = React.useCallback(({ lat, lng }) => {
       mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(14);
+      mapRef.current.setZoom(8);
     }, []);
 
     return (
@@ -97,22 +109,14 @@ const HouseSearch = () => {
               </div>
               <div className="w-1/2">
                 <div className="py-5 w-full pl-5 hidden md:block">
-                  {mapareas && 
+                  {filterLocation &&
                   <MapG 
                     panTo={panTo} 
                     isLoaded={isLoaded} 
                     loadError={loadError} 
                     onMapLoad={onMapLoad} 
                     mapRef={mapRef}
-                    mark={
-                      [
-                        {
-                        lat: parseFloat(mapareas[0]?.latitude),
-                        lng: parseFloat(mapareas[0]?.longitude),
-                        //time: mapareas[0]?.updatedAt
-                        }
-                      ]
-                    }
+                    mark={filterLocation}
                   />}
                 </div>
               </div>

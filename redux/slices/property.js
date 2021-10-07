@@ -38,12 +38,13 @@ export const getFilteredData = createAsyncThunk (
     async ({listingTypeIds, cityIds, minPrice, maxPrice, minSize, maxSize, proviceIds}) => {
         try {
             const response = await fetch(`
-                ${baseURL}/v2/public/property/filter?listingTypeIds=${listingTypeIds}&cityIds=${cityIds}&minPrice=${minPrice}&maxPrice=${maxPrice}&minSize=${minSize}&maxSize=${maxSize}&proviceIds=${proviceIds}
-                `) ;
+                ${baseURL}/v2/public/property/filter?minPrice=${minPrice}&maxPrice=${maxPrice}&minSize=${minSize}&maxSize=${maxSize}&proviceIds=${proviceIds ? proviceIds : ""}&listingTypeIds=${listingTypeIds}&cityIds=${cityIds}
+            `) ;
             if (!response.ok) {
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
+            console.log(resData);
             return resData;
         }catch(err) {
             throw err;
