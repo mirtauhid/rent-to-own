@@ -8,12 +8,12 @@ import Exterior from '../../SubPage/SubDetailsTab/Interior';
 import { IoMdTimer } from "react-icons/io";
 import Carousel from './Carousel';
 
-const index = ({item, title, host, price}) => {
+const index = ({item, title, host, price, images}) => {
     const [component, setComponent] = useState('About');
     return (
         <div className="w-full border">
             {/* <img src="https://picsum.photos/200/300" alt="" className="h-96 w-full object-center object-cover" /> */}
-            <Carousel className="w-full"/>
+            {images && <Carousel className="w-full" images={images}/>}
             <div className="p-3 pt-8">
                 <div className="">
                     <Link href={"/housesearch/" + item.id} key={item.id}>

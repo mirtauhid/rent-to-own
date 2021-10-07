@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
     GoogleMap,
-    useLoadScript,
     Marker,
     InfoWindow
 } from "@react-google-maps/api";
@@ -14,20 +13,17 @@ const containerStyle = {
 
 const options = {
     styles: mapStyles,
-    //disableDefaultUI: true,
-    //zoomControl: true,
 };
 
-const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
-    const center1 = {
+const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
+    const initialcenter = {
         lat: 59.95, lng: 30.33
     };
     //maps @api
     const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(null);
-    const [center , setCenter] = React.useState(center1);
+    const [center , setCenter] = React.useState(initialcenter);
     const [zoom, setZoom] = React.useState(10);
-    const [coordinates, setCoordinates] = useState();
     console.log('=============markers=======================');
     console.log(markers);
     console.log(center);
@@ -55,16 +51,16 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
         }
     },[markers])
 
-    const onMapClick = React.useCallback((e) => {
-        setMarkers((current) => [
-            ...current,
-            {
-                lat: e.latLng.lat(),
-                lng: e.latLng.lng(),
-                time: new Date(),
-            },
-        ]);
-    }, []);
+    // const onMapClick = React.useCallback((e) => {
+    //     setMarkers((current) => [
+    //         ...current,
+    //         {
+    //             lat: e.latLng.lat(),
+    //             lng: e.latLng.lng(),
+    //             time: new Date(),
+    //         },
+    //     ]);
+    // }, []);
 
     //map error
     if (loadError) return "Error";
@@ -81,7 +77,6 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
                 //onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {/* <Locate panTo={panTo} /> */}
                 {markers.map((marker) => (
                     <Marker
                         key={`${marker.lat}-${marker.lng}`}
@@ -92,7 +87,7 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
                     />
                 ))}
 
-                {selected ? (
+                {/* {selected ? (
                     <InfoWindow
                         position={{ lat: selected.lat, lng: selected.lng }}
                         onCloseClick={() => {
@@ -111,7 +106,7 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark, mapRef}) => {
                             </div>
                         </div>
                     </InfoWindow>
-                ) : null}
+                ) : null} */}
             </GoogleMap>
             <div className="absolute left-5 bottom-8">
                 {markers && <Locate panTo={panTo} />}
