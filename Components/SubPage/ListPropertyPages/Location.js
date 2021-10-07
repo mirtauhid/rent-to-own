@@ -23,7 +23,7 @@ const Location = ({ steps, setSteps, formik }) => {
             url: `${baseURL}/v2/cities`
         })
             .then((res) => {
-                setCities(res.data?.data);
+                setCities(res.data?.data?.cities);
             })
             .catch((err) => {
                 console.log(err);
@@ -34,13 +34,16 @@ const Location = ({ steps, setSteps, formik }) => {
         const handleUpdateAddress = () => {
             if (locationData?.length) {
                 const { address_components } = locationData[0];
-                const matchedCity = cities.find((data) => data.name === compArrToName(address_components, "locality")?.toLowerCase());
+                const matchedCity = cities.find((data) => data.code === compArrToName(address_components, "locality")?.toLowerCase());
 
                 if (matchedCity) {
+                    // Street finding
+                    const street = [compArrToName(address_components, "street_number") || "", compArrToName(address_components, "route") || ""].join(` `);
+
                     // updating formik address value
                     formik.setFieldValue("address", search)
                     // updating formik street
-                    formik.setFieldValue("street", [compArrToName(address_components, "street_number") || "", compArrToName(address_components, "route") || ""].join(` `) || "N/A");
+                    formik.setFieldValue("street", (street !== " " && street) || "N/A");
                     // updating formik country
                     formik.setFieldValue("country", compArrToName(address_components, "country"))
                     // updating formik zip code
