@@ -50,7 +50,7 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
-            proviceIds: proviceIds.toString()
+            proviceIds: proviceIds
         }));
     }, [dispatch])
 
@@ -62,6 +62,7 @@ const Property = () => {
             maxPrice: parseInt(price[1]*100000),
             minSize: parseInt(areaSqft[0]*100),
             maxSize: parseInt(areaSqft[1]*100),
+            proviceIds: proviceIds
         }));
     }, [listingType, filterCity, price, areaSqft])
 
@@ -109,7 +110,6 @@ const Property = () => {
     }
     //clear filtering
     const clearAll = () => {
-        setListingType();
         setPrice([0, 100]);
         setAreaSqft([0, 100]);
         resetAll();
@@ -284,7 +284,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400"
                                     trackClassName="bg-green-400 h-1"
-                                    value={parseInt(price)}
+                                    value={price}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -301,7 +301,7 @@ const Property = () => {
                                     <input
                                         type="text"
                                         name="phone"
-                                        className="w-16 pt-1 pl-2 text-xs"
+                                        className="w-16 pt-1 pl-1 text-xs"
                                         placeholder="MIN"
                                         value={`$${(price[0]*100000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`}
                                         readOnly
@@ -333,7 +333,7 @@ const Property = () => {
                                     className="cursor-pointer"
                                     thumbClassName="h-6 w-6 bg-green-400 grid justify-center rounded-full mb-2 absolute -top-2 text-green-400 text-xs"
                                     trackClassName="bg-green-400 h-1"
-                                    value={parseInt(areaSqft)}
+                                    value={areaSqft}
                                     ariaLabel={['Lower thumb', 'Upper thumb']}
                                     ariaValuetext={state => `Thumb value ${state.valueNow}`}
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}

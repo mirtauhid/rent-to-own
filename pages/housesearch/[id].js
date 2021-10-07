@@ -24,6 +24,7 @@ const Details = () => {
     const filterLocation = useSelector((state) => state.map?.filterLocation);
     const propertyDetails = useSelector((state) => state.property?.propertyDetails);
     console.log('============ppd========================');
+    console.log(router.query.id);
     console.log(propertyDetails?.PropertyImages);
     console.log('====================================');
 
