@@ -77,9 +77,10 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
                 //onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {markers.map((marker) => (
+                {markers.map((marker, index) => (
                     <Marker
-                        key={`${marker.lat}-${marker.lng}`}
+                        //key={`${marker.lat}-${marker.lng}`}
+                        key={index}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         onClick={() => {
                             setSelected(marker);

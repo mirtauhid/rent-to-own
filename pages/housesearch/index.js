@@ -32,10 +32,12 @@ const HouseSearch = () => {
         query: { search },
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
+    const [searchCoordinates, setSearchCoordinates] = useState()
     const properties = useSelector((state) => state.property.allproperties);
     const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
     console.log('=============mapareas=======================');
+    console.log(searchCoordinates);
     console.log(filterLocation);
     console.log('====================================');
 
@@ -44,6 +46,10 @@ const HouseSearch = () => {
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
       dispatch(getFilterLocation({lat: 49.093363, lng: -122.968549}));
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getFilterLocation(searchCoordinates));
+  }, [searchCoordinates])
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -65,7 +71,13 @@ const HouseSearch = () => {
         <>
           <div className="px-5 md:px-20 lg:px-28 w-full mt-5">
             <div className="relative">
-              {isLoaded && <Search panTo={panTo} isLoaded={isLoaded} setSearch={setSearchData} searchData={searchData}/>}
+              {isLoaded && 
+                <Search panTo={panTo} 
+                  isLoaded={isLoaded} 
+                  setSearch={setSearchData} 
+                  searchData={searchData}
+                  setSearchCoordinates={setSearchCoordinates}
+                />}
             </div>
           </div>
           <div className="px-5 md:px-20 lg:px-28">
@@ -109,7 +121,7 @@ const HouseSearch = () => {
     );
 }
 
-function Search ({ panTo, isLoaded }) {
+function Search ({ panTo, isLoaded, setSearchCoordinates }) {
   const router = useRouter()
     const {
         query: { search },
@@ -141,6 +153,7 @@ function Search ({ panTo, isLoaded }) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
+      setSearchCoordinates({lat, lng})
       panTo({ lat, lng });
     } catch (error) {
       console.log("😱 Error: ", error);
