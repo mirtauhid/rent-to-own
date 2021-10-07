@@ -5,6 +5,7 @@ import { BsCardImage } from "react-icons/bs";
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import SellerProfilePages from '.';
 import { onSelectFile } from '../../../Helpers/imageHandlers';
+import EditAddress from './EditAddress';
 
 const ProfileSettingsPage = () => {
     const [photo, setPhoto] = useState(null)
@@ -161,6 +162,22 @@ const ProfileSettingsPage = () => {
                             }
                         </div>
                     </div>
+                    <div className="w-full mb-2 py-2">
+                        <label className="w-full font-medium">Your phone number</label>
+                        <input
+                            className="resize-none shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            rows="8"
+                            placeholder="Enter your phone number"
+                            name="phone"
+                            value={formik.values.phone}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                        {
+                            formik.touched.phone && formik.errors.phone &&
+                            <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.phone}</div>
+                        }
+                    </div>
                     <div className="w-full mb-2 p-2">
                         <label className="w-full mx-2 font-medium">Your portfolio bio</label>
                         <textarea
@@ -183,6 +200,7 @@ const ProfileSettingsPage = () => {
                         <button onClick={formik.handleSubmit} type="submit" className="py-2 px-6 bg-primary text-white rounded">Save Changes</button>
                     </div>
                 </form>
+                <EditAddress/>
             </div>
         </SellerProfilePages>
     );

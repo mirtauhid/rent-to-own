@@ -131,7 +131,7 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
         .then((res) => {
           if (res.data.success) {
             // Updating redux
-            dispatch(signIn(res.data?.data?.data));
+            dispatch(signIn(res.data?.data));
           } 
         })
         .catch((err)=>{

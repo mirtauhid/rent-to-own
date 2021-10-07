@@ -55,11 +55,11 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
 
     const formik = useFormik({
         initialValues: {
-            email: 'piash@gmail.com',
-            firstName: 'Habibullah',
-            lastName: 'Bahar',
-            type: 'SELLER',
-            password: 'Aa$123456',
+            email: '',
+            firstName: '',
+            lastName: '',
+            type: '',
+            password: '',
             isAgree: false
         },
         validate,

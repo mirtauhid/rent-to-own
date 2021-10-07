@@ -38,12 +38,12 @@ const SubPropertyEdit = () => {
 
     const { userData } = useSelector((state) => state.auth);
 
-    const { query } = useRouter();
+    const router = useRouter();
 
     useEffect(() => {
-        query?.propertyid && axios({
+        axios({
             method: "GET",
-            url: `${baseURL}/v2/properties/${query?.propertyid}`
+            url: `${baseURL}/v2/properties/${router?.query?.propertyid}`
         })
             .then((res) => {
                 const {
@@ -88,7 +88,7 @@ const SubPropertyEdit = () => {
                 setIsLoading(false)
                 console.log(err)
             })
-    }, [query?.propertyid])
+    }, [router?.query?.propertyid])
     const validate = (values) => {
         const errors = {};
 
@@ -109,19 +109,24 @@ const SubPropertyEdit = () => {
         enableReinitialize: true,
         validate,
         onSubmit: (values) => {
+            setIsLoading(true);
             axios({
                 method: "PUT",
-                url: `${baseURL}/v2/public/property/${query.propertyid}`,
+                url: `${baseURL}/v2/public/property/${router?.query.propertyid}`,
                 data: values
             })
                 .then((res) => {
                     if (res.data?.success) {
+                        setIsLoading(false);
                         console.log(res.data);
                         // Dynamic routing
-                        // router.push("/sellerProfile/yourListings")
+                        router.push("/sellerProfile/yourListings")
                     }
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => {
+                    setIsLoading(false);
+                    console.log(err)
+                })
         },
     });
 
@@ -133,8 +138,11 @@ const SubPropertyEdit = () => {
                     : (
                         userData?.id === propertyData?.userId
                             ? <form onSubmit={formik.handleSubmit}>
+                                <div className="lg:w-3/4 xl:w-3/5 mx-auto  my-5 shadow border border-gray-100 rounded p-4">
+                                    <h2 className="text-2xl font-bold">Edit property</h2>
+                                </div>
                                 <PhotosEdit
-                                    propertyid={query?.propertyid}
+                                    propertyid={router?.query?.propertyid}
                                     setPropertyImages={setPropertyImages}
                                     propertyImages={propertyImages} />
                                 <DescriptionEdit formik={formik} />
@@ -147,7 +155,7 @@ const SubPropertyEdit = () => {
                                         className="block ml-auto bg-green-400 text-white rounded py-2 px-12 ">Update Data</button>
                                 </div>
                             </form>
-                            : <h1 className="text-center text-xl text-red-500 font-medium my-8 mx-4 ">You are not allowed to edit the property</h1>
+                            : <h1 className="text-center text-xl text-red-500 font-medium my-8 mx-4 ">Sorry, we did not find any property!</h1>
                     )
             }
         </div>

@@ -86,7 +86,7 @@ const LocationEdit = ({ formik }) => {
             </label>
 
             <div className="block text-secondary text-sm ml-1 my-2"><b>Your address is: </b>
-                {formik.values?.address ? formik.values?.address : `${formik?.values?.street} ${cities.find(city => city.id === formik?.values?.cityId)?.name}, ${formik?.values?.country}`}
+                {formik.values?.address ? formik.values?.address : `${formik?.values?.street !== "N/A" ? formik?.values?.street : ""} ${cities.find(city => city.id === formik?.values?.cityId)?.name}, ${formik?.values?.country}`}
             </div>
 
             <div className="w-full mb-6 p-2">

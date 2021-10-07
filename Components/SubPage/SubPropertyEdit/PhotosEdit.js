@@ -18,7 +18,7 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
     }
 
     const handleFileUpload = (e) => {
-        setPopUpData({ type: "success", message: "Uploading image...", delay: 10000 })
+        setPopUpData({ type: "success", message: "Uploading image...", delay: 10000, visible: true })
         onSelectFile(e)
             .then(data => {
                 const { base64, file } = data;
@@ -30,18 +30,18 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
                     .then(res => {
                         // Updating image array
                         handleUpdateImages()
-                        setPopUpData({ type: "success", message: "Image uploaded!", delay: 2000 })
+                        setPopUpData({ type: "success", message: "Image uploaded!", delay: 2000, visible: true })
                     })
                     .catch((err) => {
                         // Updating image array
                         handleUpdateImages()
-                        setPopUpData({ type: "failed", message: "Image upload failed!", delay: 2000 })
+                        setPopUpData({ type: "failed", message: "Image upload failed!", delay: 2000, visible: true })
                         console.log(err)
                     })
             })
     }
     const handleDeleteImg = (photoId) => {
-        setPopUpData({ type: "failed", message: "Deleting image...", delay: 10000 })
+        setPopUpData({ type: "failed", message: "Deleting image...", delay: 10000, visible: true })
         axios({
             method: "DELETE",
             url: `${baseURL}/v2/properties/${propertyid}/images/${photoId}`
@@ -49,19 +49,19 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
             .then(res => {
                 // Updating image array
                 handleUpdateImages()
-                setPopUpData({ type: "success", message: "Image deleted!", delay: 2000 })
+                setPopUpData({ type: "success", message: "Image deleted!", delay: 2000, visible: true })
             })
             .catch((err) => {
                 // Updating image array
                 handleUpdateImages()
-                setPopUpData({ type: "failed", message: "Image delete failed!", delay: 2000 })
+                setPopUpData({ type: "failed", message: "Image delete failed!", delay: 2000, visible: true })
                 console.log(err)
             })
     }
     return (
 
         <div className="lg:w-3/4 xl:w-3/5 mx-auto  my-5 shadow border border-gray-100 rounded p-4">
-            {<PopUpAlert key={new Date().toLocaleTimeString()} popUpData={popUpData} />}
+            {<PopUpAlert key={new Date().toLocaleTimeString()} popUpData={popUpData} setPopUpData={setPopUpData} />}
             <div className="md:flex md:flex-wrap w-full mb-2 p-2">
                 {
                     propertyImages?.map((photo) => {
