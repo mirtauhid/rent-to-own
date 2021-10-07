@@ -1,54 +1,31 @@
 import React from "react";
 import Slider from "react-slick";
-import { FindSpace } from "../../Components";
+import Images from "./Images";
 import CustomSliderNext from "./CustomSliderNext";
 import CustomSliderPrev from "./CustomSliderPrev";
 import style from "./style.module.css";
 
 
-const BestPlaceSlider = ({className,title,cardContent}) => {
+
+const ImageSlider = ({data,height="h-96",width="w-full"}) => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
     nextArrow: <CustomSliderNext />,
     prevArrow: <CustomSliderPrev />,
-    responsive: [
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
   return (
-    <div className={`mt-4 ${className}`}>
-      {cardContent && <h1 className="text-base md:text-2xl mb-4 font-primary">{title}</h1>}
+    <div className={`${width} mx-auto`}>
       <Slider {...settings}>
-        {cardContent?.map(({ ...item }, index) => {
-          return (
-            <FindSpace
-              key={index}
-              {...item}
-              className={`h-60 md:mr-4`}
-            />
-          );
+        {data.map((item) => {
+          return <Images src={item.img} height={height}/>;
         })}
       </Slider>
     </div>
   );
 };
 
-export default BestPlaceSlider;
+export default ImageSlider;
