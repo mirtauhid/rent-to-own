@@ -77,6 +77,7 @@ const ListPropertyPages = ({ children }) => {
       amOwner: false,
       isAgree: false,
       isInsurance: false,
+      featureIds:[1,2],
       address: "",
       street: "",
       latitude: "",

@@ -57,7 +57,7 @@ const EditAddress = () => {
                 })
         },
     });
-    console.log(userData);
+    
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -159,7 +159,7 @@ const EditAddress = () => {
                 </div>
             </div>
             <div className="my-4 mx-2">
-                <button onClick={formik.handleSubmit} type="submit" className="py-2 px-6 bg-primary text-white rounded">Save Changes</button>
+                <button onClick={formik.handleSubmit} type="submit" className="py-2 px-6 bg-primary text-white rounded">Update Address</button>
             </div>
         </form>
     );

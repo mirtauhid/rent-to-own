@@ -60,6 +60,7 @@ const SubPropertyEdit = () => {
                     PropertyImages,
                     PropertyAddresses,
                 } = res.data?.data;
+                console.log(res.data?.data);
                 const { apt, cityId, country, latitude, longitude, street, zipCode } = PropertyAddresses[0];
                 setPropertyImages(PropertyImages)
                 setPropertyData({
