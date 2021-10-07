@@ -5,7 +5,7 @@ import CustomCounter from '../ListPropertyPages/CustomCounter';
 
 const DescriptionEdit = ({ formik }) => {
     const [listingTypes, setListingTypes] = useState([])
-
+    
     useEffect(() => {
         // axios request for getting listing types
         axios({

@@ -11,6 +11,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.22.0",
     "formik": "^2.2.9",
+    "moment": "^2.29.1",
     "next": "latest",
     "rc-tabs": "^11.10.1",
     "react": "^17.0.2",
