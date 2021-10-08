@@ -10,7 +10,7 @@ import CustomModal from './CustomModal';
 
 const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, redirectLink }) => {
   const [error, setError] = useState({ status: false, msg: "" })
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   // Redux dispatch
   const dispatch = useDispatch();
@@ -82,7 +82,9 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
                   // Updating redux
                   dispatch(signIn(res.data?.data));
                   // Dynamic routing
-                  router.push(redirectLink)
+                  res.data.data.type === "SELLER"
+                    ? router.push(redirectLink)
+                    : null;
                   // Closing the modal
                   setShowSignInModal(false);
                   resetForm({});
@@ -95,7 +97,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
               .catch((err) => {
                 // loading end
                 setLoading(false);
-                setError({ status: true, msg: err.response.data.message })
+                setError({ status: true, msg: err.response?.data.message })
               })
           } else {
             // loading end
@@ -106,7 +108,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
         .catch((err) => {
           // loading end
           setLoading(false);
-          setError({ status: true, msg: err.response.data.message })
+          setError({ status: true, msg: err.response?.data.message })
         })
     },
   });
