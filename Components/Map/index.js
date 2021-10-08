@@ -17,13 +17,13 @@ const options = {
 
 const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
     const initialcenter = {
-        lat: 20.03, lng:21.32
+        lat: 61.068250, lng: -111.293542
     };
     //maps @api
     const [markers, setMarkers] = React.useState([]);
     const [selected, setSelected] = React.useState(null);
     const [center , setCenter] = React.useState(initialcenter);
-    const [zoom, setZoom] = React.useState(10);
+    const [zoom, setZoom] = React.useState(8);
 
     useEffect(() => {
         const holder = [];
@@ -43,7 +43,7 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
         if(markers && markers[0] && panTo){
             //panTo(markers[0]);
             setCenter(markers[0])
-            setZoom(8);
+            setZoom(6);
         }
     },[markers])
 

@@ -10,9 +10,6 @@ import Carousel from './Carousel';
 
 const index = ({item, title, host, price, images}) => {
     const [component, setComponent] = useState('About');
-    console.log('====================================');
-    console.log(item);
-    console.log('====================================');
     return (
         <div className="w-full border">
             {/* <img src="https://picsum.photos/200/300" alt="" className="h-96 w-full object-center object-cover" /> */}
