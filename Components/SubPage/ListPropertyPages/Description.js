@@ -134,7 +134,7 @@ const Description = ({ steps, setSteps, formik }) => {
             </div>
 
             <div className="mb-3 p-2">
-                <label className=" block text-gray-500 font-bold">
+                <label className=" block text-gray-500 font-bold cursor-pointer">
                     <input
                         className="mr-2 leading-tight"
                         type="checkbox"
@@ -152,7 +152,7 @@ const Description = ({ steps, setSteps, formik }) => {
             </div>
 
             <div className="mb-3 p-2">
-                <label className=" block text-gray-500 font-bold">
+                <label className=" block text-gray-500 font-bold cursor-pointer">
                     <input
                         className="mr-2 leading-tight"
                         type="checkbox"
@@ -170,7 +170,7 @@ const Description = ({ steps, setSteps, formik }) => {
             </div>
 
             <div className="mb-3 p-2">
-                <label className=" block text-gray-500 font-bold">
+                <label className=" block text-gray-500 font-bold cursor-pointer">
                     <input
                         className="mr-2 leading-tight"
                         type="checkbox"
