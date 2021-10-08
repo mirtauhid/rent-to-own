@@ -114,7 +114,8 @@ const SubPropertyEdit = () => {
             axios({
                 method: "PUT",
                 url: `${baseURL}/v2/public/property/${router?.query.propertyid}`,
-                data: values
+                data: values,
+                headers: {Authorization: localStorage.getItem("authToken")}
             })
                 .then((res) => {
                     if (res.data?.success) {
