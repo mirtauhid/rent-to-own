@@ -1,20 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import baseURL from '../../../Helpers/httpRequest';
+import PageLoading from '../../PageLoading';
+import FeatureAlert from './FeatureAlert';
 import FeatureItem from './FeatureItem';
 
 const Features = ({ formik, steps, setSteps }) => {
-    const [allFeatures, setAllFeatures] = useState([
-        { id: 1, interior: true, name: "Interior 1" },
-        { id: 2, interior: true, name: "Interior 2" },
-        { id: 3, interior: true, name: "Interior 3" },
-        { id: 4, interior: true, name: "Interior 4" },
-        { id: 5, interior: false, name: "Exterior 1" },
-        { id: 6, interior: false, name: "Exterior 2" },
-        { id: 7, interior: false, name: "Exterior 3" },
-        { id: 8, interior: false, name: "Exterior 4" },
-    ])
-    const [error, setError] = useState({ status: false, msg: "" })
+    const [loading, setLoading] = useState(true)
+    const [showModal, setShowModal] = useState(false)
+    const [allFeatures, setAllFeatures] = useState([])
 
     useEffect(() => {
         axios({
@@ -22,47 +16,55 @@ const Features = ({ formik, steps, setSteps }) => {
             url: `${baseURL}/v2/features`
         })
             .then((res) => {
+                setLoading(false)
                 setAllFeatures(res.data?.data);
             })
             .catch((err) => {
+                setLoading(false)
                 console.log(err.response);
             })
     }, [])
 
     const handleNext = () => {
         if (formik.values?.featureIds?.length) {
-            setError({ status: false, msg: "" })
             setSteps({ ...steps, second: true })
         } else {
-            setError({ status: true, msg: "Your entered address is wrong or our service is not available to your city!" })
+            setShowModal(true)
         }
     }
     return (
         <div className="p-6">
+            <FeatureAlert setShowModal={setShowModal} showModal={showModal} />
+
             <h2 className="uppercase text-center text-2xl font-bold my-5">Add Features</h2>
 
-            <h3 className="uppercase text-lg font-bold">Interior Features</h3>
             {
-                allFeatures?.filter((item) => item.interior)?.map((featureData) => {
-                    return <FeatureItem
-                        formik={formik}
-                        key={featureData?.id}
-                        featureData={featureData} />
-                })
+                loading
+                    ? <div className="my-8">
+                        <PageLoading />
+                    </div>
+                    : <div className="w-full">
+                        <h3 className="uppercase text-lg font-bold">Interior Features</h3>
+                        {
+                            allFeatures?.filter((item) => item.interior)?.map((featureData) => {
+                                return <FeatureItem
+                                    formik={formik}
+                                    key={featureData?.id}
+                                    featureData={featureData} />
+                            })
+                        }
+
+                        <h3 className="uppercase text-lg font-bold">Exterior Features</h3>
+                        {
+                            allFeatures?.filter((item) => !item.interior)?.map((featureData) => {
+                                return <FeatureItem
+                                    formik={formik}
+                                    key={featureData?.id}
+                                    featureData={featureData} />
+                            })
+                        }
+                    </div>
             }
-
-
-            <h3 className="uppercase text-lg font-bold">Exterior Features</h3>
-            {
-                allFeatures?.filter((item) => !item.interior)?.map((featureData) => {
-                    return <FeatureItem
-                        formik={formik}
-                        key={featureData?.id}
-                        featureData={featureData} />
-                })
-            }
-
-
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"

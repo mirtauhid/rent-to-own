@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import baseURL from '../../../Helpers/httpRequest';
 import PageLoading from '../../PageLoading';
 import DescriptionEdit from './DescriptionEdit';
+import FeatureEdit from './FeatureEdit';
 import LocationEdit from './LocationEdit';
 import PhotosEdit from './PhotosEdit';
 import PricingEdit from './PricingEdit';
@@ -148,6 +149,7 @@ const SubPropertyEdit = () => {
                                     setPropertyImages={setPropertyImages}
                                     propertyImages={propertyImages} />
                                 <DescriptionEdit formik={formik} />
+                                <FeatureEdit propertyid={router?.query?.propertyid} />
                                 <LocationEdit formik={formik} />
                                 <PricingEdit formik={formik} />
                                 <div className="lg:w-3/4 xl:w-3/5 mx-auto  my-5 shadow border border-gray-100 rounded p-4">

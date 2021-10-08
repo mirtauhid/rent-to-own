@@ -2,7 +2,6 @@ import React from 'react';
 
 const FeatureItem = ({formik,featureData}) => {
 
-    console.log(formik?.values);
     return (
         <div className="mb-3 p-2">
             <label className=" block text-gray-500 font-bold cursor-pointer">

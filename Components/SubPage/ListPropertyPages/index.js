@@ -14,7 +14,7 @@ import TimeLine from "./TimeLine";
 
 const ListPropertyPages = ({ children }) => {
   const [steps, setSteps] = useState({
-    first: true,
+    first: false,
     second: false,
     third: false,
     fourth: false,
