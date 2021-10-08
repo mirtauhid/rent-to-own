@@ -16,7 +16,7 @@ const Photos = ({ steps, setSteps, formik }) => {
 
     const handleNext = () => {
         if (formik.values?.images?.length) {
-            setSteps({ ...steps, fourth: true })
+            setSteps({ ...steps, fifth: true })
         }
     }
     console.log(formik.errors);
@@ -29,7 +29,7 @@ const Photos = ({ steps, setSteps, formik }) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
-                                    <img src={photo} className="w-full" style={{ height: "fit-content" }} />
+                                    <img src={photo} className="w-full h-full object-cover" />
                                     <button
                                         onClick={() => handleDeleteImg(index)}
                                         className="absolute top-0 right-0 rounded w-10 h-10 bg-gray-200 flex justify-center items-center text-xl">
@@ -70,7 +70,7 @@ const Photos = ({ steps, setSteps, formik }) => {
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
-                    onClick={() => setSteps({ ...steps, third: false })}
+                    onClick={() => setSteps({ ...steps, fourth: false })}
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"

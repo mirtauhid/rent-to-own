@@ -17,7 +17,7 @@ const options = {
 
 const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
     const initialcenter = {
-        lat: 59.95, lng: 30.33
+        lat: 20.03, lng:21.32
     };
     //maps @api
     const [markers, setMarkers] = React.useState([]);

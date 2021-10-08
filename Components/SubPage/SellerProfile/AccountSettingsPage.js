@@ -36,7 +36,7 @@ const AccountSettingsPage = () => {
             confPassword: '',
         },
         validate,
-        onSubmit: values => {
+        onSubmit: (values,{resetForm}) => {
             // loading started
             setLoading(true);
             setSuccess({status:false,msg:""});
@@ -52,6 +52,7 @@ const AccountSettingsPage = () => {
                   // loading end
                   setLoading(false);
                   setSuccess({status:res.data?.success,msg:res.data?.message});
+                  resetForm();
                 })
                 .catch((err) => {
                     // loading end
