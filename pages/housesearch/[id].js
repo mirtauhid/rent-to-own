@@ -7,6 +7,7 @@ import PopularProperties from '../../Components/SubCard/PopularProperties';
 import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
 import Introduction from '../../Components/SubPage/HouseSearch/Introduction';
 import Interior from '../../Components/SubPage/SubDetailsTab/Interior';
+import Exterior from '../../Components/SubPage/SubDetailsTab/Exterior';
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { useRouter } from "next/router";
 import { getPropertyDetails } from '../../redux/slices/property';
@@ -23,10 +24,6 @@ const Details = () => {
     const [pricePerMonth, setPricePerMonth] = useState();
     const filterLocation = useSelector((state) => state.map?.filterLocation);
     const propertyDetails = useSelector((state) => state.property?.propertyDetails);
-    console.log('============ppd========================');
-    console.log(router.query.id);
-    console.log(propertyDetails?.PropertyImages);
-    console.log('====================================');
 
     //maps
     const {isLoaded, loadError} = useLoadScript({
@@ -59,15 +56,15 @@ const Details = () => {
                 <hr className="mt-5"></hr>
                 {/* Interior Exterior features */}
                 <h1 className="text-xl pt-3 text-gray-400 font-bold">Interior features</h1>
-                <Interior propertyDetails={propertyDetails}/>
+                {propertyDetails && <Interior property={propertyDetails?.PropertyFeatures}/>}
                 <hr className="mt-5"></hr>
                 {/* Exterior features */}
                 <h1 className="text-xl pt-3 text-gray-400 font-bold">Exterior features</h1>
-                <Interior propertyDetails={propertyDetails}/>
+                {propertyDetails && <Exterior property={propertyDetails?.PropertyFeatures}/>}
               </div>
 
               {/* price Card */}
-              <div className="md:w-1/3 md:ml-10 mt-10 md:mt-0">
+              <div className="md:w-1/3 md:ml-10 mt-5 md:mt-0">
                 <PriceCard
                   propertyDetails={propertyDetails}
                   setPricePerMonth={setPricePerMonth}

@@ -24,10 +24,6 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
     const [selected, setSelected] = React.useState(null);
     const [center , setCenter] = React.useState(initialcenter);
     const [zoom, setZoom] = React.useState(10);
-    console.log('=============markers=======================');
-    console.log(markers);
-    console.log(center);
-    console.log('====================================');
 
     useEffect(() => {
         const holder = [];
