@@ -8,6 +8,7 @@ import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
 import baseURL from "../../../Helpers/httpRequest";
 import { signIn, signOut } from "../../../redux/slices/auth";
+import ListPropertyWarningModal from "../../../Components/Modal/ListPropertyWarningModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
@@ -16,12 +17,15 @@ const Header = () => {
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
+  const [showWarningModal, setShowWarningModal] = useState(false);
   const [redirectLink, setRedirectLink] = useState('/')
 
   const handleSingInWithRedirect = (customLink) => {
     setRedirectLink(customLink)
     setShowSignInModal(true)
   }
+
+  
 
   return (
     <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
@@ -46,12 +50,20 @@ const Header = () => {
             }
           >
             <ul className="flex items-center">
-              <Link href={auth.isLoggedIn ? "/pricingplan" : "#"}>
+              <Link
+                href={auth.userData?.type === "SELLER" ? "/pricingplan" : "#"}
+              >
                 <li
                   className={
                     "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
                   }
-                  onClick={() => !auth.isLoggedIn ? handleSingInWithRedirect('/pricingplan') : null}
+                  onClick={() =>
+                    !auth.isLoggedIn
+                      ? handleSingInWithRedirect("/pricingplan")
+                      : auth.userData?.type === "BUYER"
+                      ? setShowWarningModal(true)
+                      : null
+                  }
                 >
                   List your property
                 </li>
@@ -106,6 +118,10 @@ const Header = () => {
         setShowSignInModal={setShowSignInModal}
         setShowSignUpModal={setShowSignUpModal}
         redirectLink={redirectLink}
+      />
+      <ListPropertyWarningModal
+        showWarningModal={showWarningModal}
+        setShowWarningModal={setShowWarningModal}
       />
     </header>
   );
