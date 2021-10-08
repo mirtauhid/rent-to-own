@@ -33,13 +33,7 @@ const HouseSearch = () => {
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
     const [searchCoordinates, setSearchCoordinates] = useState()
-    const properties = useSelector((state) => state.property.allproperties);
-    const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
-    console.log('=============mapareas=======================');
-    console.log(searchCoordinates);
-    console.log(filterLocation);
-    console.log('====================================');
 
     useEffect(() => {
       dispatch(getProperty());
@@ -93,7 +87,7 @@ const HouseSearch = () => {
                         key={item.id.toString()}
                         item={item}
                         title={item.name}
-                        host="host"
+                        host={item.User.firstName}
                         price={item.price}
                         images={item.PropertyImages}
                       />
