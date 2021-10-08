@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import baseURL from "../../../Helpers/httpRequest";
 import Description from "./Description";
+import Features from "./Features";
 import Location from "./Location";
 import Photos from "./Photos";
 import Preview from "./Preview";
@@ -77,7 +78,7 @@ const ListPropertyPages = ({ children }) => {
       amOwner: false,
       isAgree: false,
       isInsurance: false,
-      featureIds:[1,2],
+      featureIds:[],
       address: "",
       street: "",
       latitude: "",
@@ -88,7 +89,6 @@ const ListPropertyPages = ({ children }) => {
       cityId: 3,
       apt: "",
       price: "",
-      plotSize: 1000000000000000000,
       images: [],
     },
     enableReinitialize: true,
@@ -97,7 +97,8 @@ const ListPropertyPages = ({ children }) => {
       axios({
         method: "POST",
         url: `${baseURL}/v2/public/property`,
-        data: values
+        data: values,
+        headers: {Authorization: localStorage.getItem("authToken")}
       })
         .then((res) => {
           if (res.data?.status_code) {
@@ -108,6 +109,7 @@ const ListPropertyPages = ({ children }) => {
         .catch((err) => console.log(err))
     },
   });
+  
   return (
     <div className="container mx-auto py-7">
       <div className="md:flex">
@@ -124,16 +126,21 @@ const ListPropertyPages = ({ children }) => {
 
             {/* This is for the 2nd step (Location Page) */}
             {steps.first && !steps.second && (
+              <Features steps={steps} setSteps={setSteps} formik={formik} />
+            )}
+
+            {/* This is for the 2nd step (Location Page) */}
+            {steps.second && !steps.third && (
               <Location steps={steps} setSteps={setSteps} formik={formik} />
             )}
 
             {/* This is for the 3rd step (Pricing Page) */}
-            {steps.first && steps.second && !steps.third && (
+            {steps.first && steps.second && steps.third && !steps.fourth &&  (
               <Pricing steps={steps} setSteps={setSteps} formik={formik} />
             )}
 
             {/* This is for the 4th step (Photos Page) */}
-            {steps.first && steps.second && steps.third && !steps.fourth && (
+            {steps.first && steps.second && steps.third  && steps.fourth && !steps.fifth && (
               <Photos steps={steps} setSteps={setSteps} formik={formik} />
             )}
 
@@ -142,7 +149,7 @@ const ListPropertyPages = ({ children }) => {
               steps.second &&
               steps.third &&
               steps.fourth &&
-              !steps.fifth && (
+              steps.fifth && (
                 <Preview steps={steps} setSteps={setSteps} formik={formik} />
               )}
           </form>

@@ -3,13 +3,12 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import baseURL from "../../../Helpers/httpRequest";
 import Search from '../../Map/SubSearch';
+import PageLoading from "../../PageLoading";
 import styles from './Location.module.css';
 const libraries = ["places"];
 
 const Location = ({ steps, setSteps, formik }) => {
-    const [cities, setCities] = useState([])
-    const [search, setSearch] = useState("")
-    const [latLng, setLatLng] = useState({ lat: 0, lng: 0 })
+    const [loading, setLoading] = useState(false)
     const [locationData, setLocationData] = useState([])
     const [error, setError] = useState({ status: false, msg: "" })
     const { isLoaded, loadError } = useLoadScript({
@@ -17,53 +16,57 @@ const Location = ({ steps, setSteps, formik }) => {
         libraries,
     });
 
-    useEffect(() => {
-        axios({
-            method: "GET",
-            url: `${baseURL}/v2/cities`
-        })
-            .then((res) => {
-                setCities(res.data?.data?.cities);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
 
     useEffect(() => {
         const handleUpdateAddress = () => {
+                setLoading(true)
             if (locationData?.length) {
-                const { address_components } = locationData[0];
-                const matchedCity = cities.find((data) => data.code === compArrToName(address_components, "locality")?.toLowerCase());
+                const { address_components, geometry, formatted_address } = locationData[0];
+                const { location } = geometry;
 
-                if (matchedCity) {
-                    // Street finding
-                    const street = [compArrToName(address_components, "street_number") || "", compArrToName(address_components, "route") || ""].join(` `);
+                axios({
+                    method: "POST",
+                    url: `${baseURL}/v2/public/find-cities`,
+                    data: { name: compArrToName(address_components, "locality") }
+                })
+                    .then((res) => {
+                        setLoading(false)
+                        setError({ status: false, msg: "" })
 
-                    // updating formik address value
-                    formik.setFieldValue("address", search)
-                    // updating formik street
-                    formik.setFieldValue("street", (street !== " " && street) || "N/A");
-                    // updating formik country
-                    formik.setFieldValue("country", compArrToName(address_components, "country"))
-                    // updating formik zip code
-                    formik.setFieldValue("zipCode", compArrToName(address_components, "postal_code"))
-                    // updating formik city id
-                    formik.setFieldValue("cityId", matchedCity.id)
-                    // updating formik latitude & longitude
-                    formik.setFieldValue("latitude", latLng.lat?.toString())
-                    formik.setFieldValue("longitude", latLng.lng?.toString())
+                        if (res?.data?.success) {
+                            // Street finding
+                            const street = [compArrToName(address_components, "street_number") || "", compArrToName(address_components, "route") || ""].join(` `);
+                            // City id
+                            const cityId = res?.data?.data?.[0]?.id;
 
-                    setError({ status: false, msg: "" })
-                } else {
-                    formik.setFieldValue("address", "")
-                    formik.setFieldValue("street", "")
-                    formik.setFieldValue("country", "")
-                    formik.setFieldValue("zipCode", "")
-                    setError({ status: true, msg: "Our service is not available this city!" })
-                }
+                            // updating formik address value
+                            formik.setFieldValue("address", formatted_address)
+                            formik.setFieldValue("street", (street !== " " && street) || "N/A");
+                            formik.setFieldValue("cityId", cityId)
+                            formik.setFieldValue("country", compArrToName(address_components, "country"))
+                            formik.setFieldValue("zipCode", compArrToName(address_components, "postal_code"))
+                            // updating formik latitude & longitude
+                            formik.setFieldValue("latitude", location?.lat()?.toString())
+                            formik.setFieldValue("longitude", location?.lng()?.toString())
+                        }
+                    })
+                    .catch((err) => {
+                        setLoading(false)
+                        setError({ status: true, msg: "Our service is not available this city!" })
+                        formik.setFieldValue("address", "")
+                        formik.setFieldValue("street", "")
+                        formik.setFieldValue("cityId", "")
+                        formik.setFieldValue("country", "")
+                        formik.setFieldValue("zipCode", "")
+                        formik.setFieldValue("latitude", "")
+                        formik.setFieldValue("longitude", "")
+                    })
+
             } else if (formik.values?.address) {
+                setLoading(false)
                 setError({ status: false, msg: "" })
+            }else if(!formik.values?.address && !locationData?.length){
+                setLoading(false)
             }
         }
         handleUpdateAddress()
@@ -74,14 +77,16 @@ const Location = ({ steps, setSteps, formik }) => {
         return componentName
     }
 
+
     const handleNext = () => {
         if (formik.values?.address) {
             setError({ status: false, msg: "" })
-            setSteps({ ...steps, second: true })
+            setSteps({ ...steps, third: true })
         } else {
             setError({ status: true, msg: "Your entered address is wrong or our service is not available to your city!" })
         }
     }
+    
     return (
         <div className="p-6">
             <h2 className="uppercase text-center text-2xl font-bold my-5">where is your home?</h2>
@@ -91,17 +96,18 @@ const Location = ({ steps, setSteps, formik }) => {
                     Search Your Address
                 </h3>
                 {isLoaded && <Search
-                    setSearch={setSearch}
-                    setLatLng={setLatLng}
+                    setSearch={(value) => console.log(value)}
+                    setLatLng={(value) => console.log(value)}
                     setLocationData={setLocationData}
                     inputPlaceholder="Search your address" />}
                 {
-                    error.status &&
+                    error.status && !loading &&
                     <div className="text-md text-red-500 mt-2 ml-1">{error.msg}</div>
                 }
             </label>
+            { loading ? <PageLoading type="small" /> : null }
             {
-                formik.values?.address &&
+                formik.values?.address && !loading &&
                 <div className="block text-secondary text-sm ml-1 my-2"><b>Your address is: </b>{formik.values?.address}</div>
             }
 
@@ -129,7 +135,7 @@ const Location = ({ steps, setSteps, formik }) => {
             <div className="w-full flex justify-between mb-2 p-2">
                 <button
                     type="button"
-                    onClick={() => setSteps({ ...steps, first: false })}
+                    onClick={() => setSteps({ ...steps, second: false })}
                     className="text-primary border-2 border-primary rounded py-2 px-12">Back</button>
                 <button
                     type="submit"
