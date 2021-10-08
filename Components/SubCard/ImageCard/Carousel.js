@@ -18,9 +18,9 @@ const Carousel = ({images}) => {
           {
             images?.map((item)=>{
               return (
-                <div className="w-full">
+                <div className="w-full h-80">
                   <img
-                    className="w-full h-72"
+                    className="w-full h-full object-cover"
                     src={item?.src.secure_url}
                   />
                 </div>

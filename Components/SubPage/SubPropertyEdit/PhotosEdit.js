@@ -70,7 +70,7 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
                         return (
                             <div key={photoId + (Math.random() * 100).toString()} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
-                                    <img src={photoSrc} className="w-full" style={{ height: "fit-content" }} />
+                                    <img src={photoSrc} className="w-full h-full object-cover" />
                                     <button
                                         onClick={() => handleDeleteImg(photoId)}
                                         className="absolute top-0 right-0 rounded w-10 h-10 bg-gray-200 flex justify-center items-center text-xl">

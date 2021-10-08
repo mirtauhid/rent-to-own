@@ -44,7 +44,7 @@ const HouseSearch = () => {
     useEffect(() => {
       dispatch(getProperty());
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
-      dispatch(getFilterLocation({lat: 49.093363, lng: -122.968549}));
+      dispatch(getFilterLocation({lat: 20.03, lng: -20.968549}));
   }, [dispatch])
 
   useEffect(() => {
@@ -139,8 +139,11 @@ function Search ({ panTo, isLoaded, setSearchCoordinates }) {
       radius: 100 * 1000,
     },
   });
+
+  
+
   useEffect(() => {
-    setValue(search)
+    handleSelect(search);
   }, [search])
 
   const handleInput = (e) => {
@@ -159,6 +162,8 @@ function Search ({ panTo, isLoaded, setSearchCoordinates }) {
       console.log("😱 Error: ", error);
     }
   };
+
+  console.log(search);
 
   return (
     <div className={style["search"]}>

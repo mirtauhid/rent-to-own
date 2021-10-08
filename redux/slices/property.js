@@ -10,6 +10,7 @@ export const getProperty = createAsyncThunk (
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
+            console.log(resData);
             return resData.data;
         }catch(err) {
             throw err;
