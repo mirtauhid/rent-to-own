@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useDispatch, useSelector } from "react-redux";
 import { getProperty, getListingType, getFilteredData } from '../../redux/slices/property';
 import { getProvience, getCities } from '../../redux/slices/areas';
+import { stCity } from '../../redux/slices/property';
 
 const Property = () => {
     const dispatch = useDispatch();
@@ -27,12 +28,9 @@ const Property = () => {
     const properties = useSelector((state) => state.property.allproperties);
     const listingType1 = useSelector((state) => state.property.listingType);
     const filteredData = useSelector((state) => state.property.filteredData);
+    const statecity = useSelector((state) => state.property.statecity);
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
-    console.log('================areas====================');
-    console.log(proviceIds);
-    console.log(filteredData);
-    console.log('====================================');
 
     useEffect(() => {
         setProviceIds(state)
@@ -66,7 +64,8 @@ const Property = () => {
         }));
     }, [listingType, filterCity, price, areaSqft])
 
-    const resetAll = () => {
+    const initializeAll = () => {
+        const dummyId = 18
         setAreaData(allareas?.provinces?.map(d => {
             if(d.id === state) {
                 return {
@@ -74,10 +73,18 @@ const Property = () => {
                     id: d.id,
                     state: d.name,
                     areas: d.Cities.map(d => {
-                        return {
-                            id: d.id,
-                            location: d.name,
-                            checkbox: false,
+                        if(d.id === dummyId) {
+                            return {
+                                id: d.id,
+                                location: d.name,
+                                checkbox: true,
+                            }
+                        } else{
+                            return {
+                                id: d.id,
+                                location: d.name,
+                                checkbox: false,
+                            }
                         }
                     }),
                 }
@@ -94,6 +101,23 @@ const Property = () => {
                         }
                     }),
                 }
+            }
+        }))
+    }
+
+    const resetAll = () => {
+        setAreaData(allareas?.provinces?.map(d => {
+            return {
+                select: false,
+                id: d.id,
+                state: d.name,
+                areas: d.Cities.map(d => {
+                    return {
+                        id: d.id,
+                        location: d.name,
+                        checkbox: false,
+                    }
+                }),
             }
         }))
     }
@@ -118,7 +142,9 @@ const Property = () => {
 
     //reset all
     React.useEffect(() => {
-        resetAll();
+        if(areaData === undefined) {
+            initializeAll();
+        }
     }, [allareas])
     
     //initial data
@@ -126,6 +152,11 @@ const Property = () => {
         initialData();
         //doFilter();
     }, [areaData])
+
+    // useEffect(() => {
+    //     const hold = areaData
+    //     dispatch(stCity(hold));
+    // }, []);
     
     //checkbox
     const onChangeValue = input => e => {
@@ -162,6 +193,9 @@ const Property = () => {
     if(areas.status === 'loading'){
         return( <p>Loading</p>)
     }
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
 
     return (
         <HomeLayout>
@@ -232,7 +266,7 @@ const Property = () => {
                             {areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
-                                        <p>{item?.state}</p>
+                                        <p>{item?.state.toUpperCase()}</p>
                                         <div className="justify-self-end mt-1 cursor-pointer" 
                                             onClick={() => setAreaData(
                                                 areaData?.map(state => {
@@ -267,7 +301,7 @@ const Property = () => {
                                                         }))
                                                     }}
                                                 ></input>
-                                                <label className="ml-2">{item1.location}</label><br></br>
+                                                <label className="ml-2">{capitalizeFirstLetter(item1.location)}</label><br></br>
                                             </div>
                                         ))
                                     ) : null}

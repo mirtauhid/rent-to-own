@@ -7,7 +7,7 @@ import { BiSend } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
 import { getConversation } from '../../../redux/slices/messaging';
 
-const index = ({selectedId}) => {
+const index = ({selectedId, messages}) => {
     const messagesEndRef1 = useRef(null)
     const messagesEndRef = createRef(null);
     const dispatch = useDispatch();
@@ -15,6 +15,12 @@ const index = ({selectedId}) => {
     const chat = conversations?.chats.find(item => item.userId === selectedId);
     const users = useSelector((state) => state.message.users);
     const user = users?.find(item => item.id === selectedId);
+    const selectedmsg = messages.filter(itm => itm.roomId === selectedId)
+    console.log('==============body======================');
+    console.log(selectedId);
+    console.log(messages);
+    console.log(selectedmsg);
+    console.log('====================================');
     useEffect(() => {
         dispatch(getConversation());
     })
@@ -24,12 +30,13 @@ const index = ({selectedId}) => {
     useEffect(() => {
         scrollToBottom()
     }, [chat]);
+    console.log(chat);
     return (
         <div className="">
             <div className="flex items-center">
                 <img
                     className="h-8 w-8 rounded-full"
-                    src={user.image}
+                    src={user?.image}
                 />
                 <h1 className="ml-4">{user?.name}</h1>
             </div>
@@ -38,17 +45,16 @@ const index = ({selectedId}) => {
             <div className={style["content__body"]}>
                 <div className={style["chat__items"]}>
                     <div>
-                    {chat ? chat?.messages.map((itm, index) => {
+                    {selectedmsg ? selectedmsg?.map((itm, index) => {
                         return (
                             <div key={index}>
                                 <ChatItem
                                 animationDelay={index + 2}
                                 key={index}
-                                user={itm.type ? itm.type : "me"}
+                                user={itm.userId===2 ? "other" : "me"}
                                 msg={itm.msg}
-                                image={itm.image}
-                                sUserImage={user.image}
-                                messageImages={itm.messageImages}
+                                image={'https://picsum.photos/200'}
+                                sUserImage={'https://picsum.photos/200'}
                                 />
                             </div>
                         );
