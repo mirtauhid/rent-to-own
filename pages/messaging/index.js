@@ -5,11 +5,9 @@ import ChatBody from '../../Components/messaging/chatBody';
 import DetailsContent from '../../Components/messaging/detailsContent';
 import SubModal from '../../Components/messaging/SubModal';
 import { FaWindowClose } from 'react-icons/fa';
-import firebase from "firebase/app";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import 'firebase/firestore';
-import { useFirestoreQuery } from './hooks';
 
 const Message = () => {
     const [selectedId, setSelectedId] = useState('FtAPQ3tLUC4udTUB02Ao');
