@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProperty, getListingType, getFilteredData } from '../../redux/slices/property';
 import { getProvience, getCities } from '../../redux/slices/areas';
 import { stCity } from '../../redux/slices/property';
+import Router from 'next/router'
 
 const Property = () => {
     const dispatch = useDispatch();
@@ -32,9 +33,29 @@ const Property = () => {
     const areas = useSelector((state) => state.areas.status != 'loading' && state.areas);
     const allareas = areas?.status === 'success' ? areas.allareas : null;
 
+    const updateQuery = (newQuery, state) => {
+        Router.push({
+            pathname: `/property`,
+            query: { state: encodeURI(state), city: encodeURI(newQuery) },
+        });
+    };
+
     useEffect(() => {
         setProviceIds(state)
     }, [areas, allareas])
+
+    useEffect(() => {
+        const state = [];
+        const city = [];
+        areaData?.map(data => {
+            if(data.select === true) state.push(data.id)
+            data.areas.map(d => {
+                if(d.checkbox === true) city.push(d.id)
+            })
+        })
+        dispatch(stCity({state: state, city: city}))
+        city.length != 0 ? updateQuery(city, state) : null
+    }, [areaData])
 
     useEffect(() => {
         dispatch(getProperty());
@@ -62,18 +83,19 @@ const Property = () => {
             maxSize: parseInt(areaSqft[1]*100),
             proviceIds: proviceIds
         }));
-    }, [listingType, filterCity, price, areaSqft])
+    }, [listingType, filterCity, price, areaSqft, proviceIds])
 
     const initializeAll = () => {
-        const dummyId = 18
+        const city = router.query.city?.split(',');
+        const prov = router.query.state?.split(',');
         setAreaData(allareas?.provinces?.map(d => {
-            if(d.id === state) {
+            if(d.id === state || prov?.includes(d.id.toString())) {
                 return {
                     select: true,
                     id: d.id,
                     state: d.name,
                     areas: d.Cities.map(d => {
-                        if(d.id === dummyId) {
+                        if(city?.includes(d.id.toString())) {
                             return {
                                 id: d.id,
                                 location: d.name,
@@ -150,18 +172,11 @@ const Property = () => {
     //initial data
     React.useEffect(() => {
         initialData();
-        //doFilter();
     }, [areaData])
-
-    // useEffect(() => {
-    //     const hold = areaData
-    //     dispatch(stCity(hold));
-    // }, []);
     
     //checkbox
     const onChangeValue = input => e => {
         setListingType(e.target.value);
-        //console.log(listingType);
     }
 
     //main filtering for city listing
@@ -182,13 +197,6 @@ const Property = () => {
     React.useEffect(() => {
         doFilter();
     }, [initData])
-
-    React.useEffect(() => {
-        const priceFilter = filterOptions?.filter(
-            item => 
-                item.price >= (price[0]*10000) && item.price<= (price[1]*10000)
-        )
-    }, [price])
 
     if(areas.status === 'loading'){
         return( <p>Loading</p>)
@@ -290,6 +298,7 @@ const Property = () => {
                                                     value="Bike"
                                                     onChange={event => {
                                                         let checked = event.target.checked;
+                                                        //setCities(state => [...state, item1.id]);
                                                         setAreaData(areaData?.map(data => {
                                                             data.areas.map(d => {
                                                                 if(item1.id === d.id) {
