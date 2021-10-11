@@ -7,6 +7,8 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import baseURL from '../../../Helpers/httpRequest';
 import { onSelectFile } from '../../../Helpers/imageHandlers';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditProfileData = () => {
     const [photo, setPhoto] = useState(null)
@@ -54,6 +56,12 @@ const EditProfileData = () => {
         enableReinitialize: true,
         validate,
         onSubmit: values => {
+          // For toast
+          toast.warning("Profile updating!", {
+              theme: "colored",
+              autoClose: 2000,
+          });
+
             const modifiedData = {...values};
             if (values?.image?.secure_url) {
                 delete modifiedData.image
@@ -67,13 +75,36 @@ const EditProfileData = () => {
                     Authorization: localStorage.getItem('authToken'),
                 }
             })
-            .then((res)=>console.log(res.data))
-            .catch((err)=>console.log(err.response))
+            .then((res)=>{
+                    // For toast
+                    toast.success("Profile updated!", {
+                      theme: "colored",
+                      autoClose: 2000,
+                  });
+            })
+            .catch((err)=>{
+                    // For toast
+                    toast.error("Address changining failed!", {
+                      theme: "colored",
+                      autoClose: 2000,
+                  });
+            })
         },
     });
 
     return (
       <form onSubmit={formik.handleSubmit} className="lg:w-2/3">
+        
+        <ToastContainer
+                position="top-center"
+                limit={2}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
         <h3 className="text-xl my-4 font-medium">Your profile picture</h3>
         <div className="flex w-full">
           <div className=" w-40 text-secondary text-sm font-bold mb-2">

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import baseURL from '../../../Helpers/httpRequest';
 
@@ -40,6 +40,13 @@ const EditAddress = () => {
         enableReinitialize: true,
         validate,
         onSubmit: values => {
+            // For toast
+            toast.warning("Address changing request processing!", {
+                theme: "colored",
+                autoClose: 2000,
+            });
+
+            // For axios config
             const method = userData?.UserAddress ? "PUT" : "POST";
             const url = userData?.UserAddress
                 ? `${baseURL}/v2/user-addresses/profile-address/${userData?.UserAddress?.id}`
@@ -52,10 +59,18 @@ const EditAddress = () => {
                 data: values
             })
                 .then((res) => {
-                    console.log(res.data);
+                    // For toast
+                    toast.success("Address changined!", {
+                        theme: "colored",
+                        autoClose: 2000,
+                    });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    // For toast
+                    toast.error("Address changining failed!", {
+                        theme: "colored",
+                        autoClose: 2000,
+                    });
                 })
         },
     });
