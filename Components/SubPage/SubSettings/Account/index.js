@@ -1,11 +1,15 @@
+import axios from "axios";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
-import { Formik, Form, Field, ErrorMessage  } from "formik";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from "yup";
+import baseURL from "../../../../Helpers/httpRequest";
 
 const initialValues = {
-  oldPassword:"",
-  password:"",
-  confirmPassword:""
+  oldPassword: "",
+  password: "",
+  confirmPassword: ""
 };
 
 const validationSchema = Yup.object().shape({
@@ -17,11 +21,44 @@ const validationSchema = Yup.object().shape({
 });
 
 const onSubmit = (values, { resetForm }) => {
-  console.log(values);
+  toast.warning("Processing!", {
+    theme:"colored",
+    autoClose: 1500,
+    });
+  axios({
+    method: "POST",
+    url: `${baseURL}/v2/auth/update-password`,
+    data: values,
+    headers: { Authorization: localStorage.getItem('authToken') }
+  })
+    .then((res) => {
+      toast.success("Password changed!", {
+        theme:"colored",
+        autoClose: 2000,
+        });
+      resetForm();
+    })
+    .catch((err) => {
+      toast.error("Password changing failed!", {
+        theme:"colored",
+        autoClose: 2000
+        });
+    })
 };
 
 const Account = ({ tab }) => {
   return (
+    <>
+    <ToastContainer 
+      position="top-center"
+      limit={1}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover/>
     <div
       className={`border-2 rounded-lg mt-10 w-full px-5 py-5`}
     >
@@ -33,7 +70,7 @@ const Account = ({ tab }) => {
         <Form>
           <p className="text-lg font-bold mb-2">Password</p>
           <Field
-            type="text"
+            type="password"
             placeholder="Old Password"
             className="border-2 focus:outline-none p-2 w-full  rounded-md text-gray-500"
             name="oldPassword"
@@ -44,7 +81,7 @@ const Account = ({ tab }) => {
             className="text-red-500"
           />
           <Field
-            type="text"
+            type="password"
             placeholder="New Password"
             className="border-2 focus:outline-none p-2 w-full  rounded-md text-gray-500 mt-3"
             name="password"
@@ -56,7 +93,7 @@ const Account = ({ tab }) => {
           />
 
           <Field
-            type="text"
+            type="password"
             placeholder="Confirm New Password"
             className="border-2 focus:outline-none p-2 w-full  rounded-md text-gray-500 mt-3"
             name="confirmPassword"
@@ -109,6 +146,7 @@ const Account = ({ tab }) => {
         </Form>
       </Formik>
     </div>
+    </>
   );
 };
 

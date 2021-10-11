@@ -36,3 +36,10 @@
     scrollbar-color: #b3c4c0 #f1f1f1 !important;
     scrollbar-width: 12px !important;
 }
+.Toastify__toast-body div,
+.Toastify__toast-body div svg,
+.Toastify__toast-body + button svg {
+    @apply text-white !important;
+    fill: white;
+    stroke: white;
+}
