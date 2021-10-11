@@ -29,7 +29,7 @@ const Photos = ({ steps, setSteps, formik }) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
-                                    <img src={photo} className="w-full" style={{ height: "fit-content" }} />
+                                    <img src={photo} className="w-full h-full object-cover" />
                                     <button
                                         onClick={() => handleDeleteImg(index)}
                                         className="absolute top-0 right-0 rounded w-10 h-10 bg-gray-200 flex justify-center items-center text-xl">

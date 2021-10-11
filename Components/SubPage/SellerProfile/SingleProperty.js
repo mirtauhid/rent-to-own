@@ -10,7 +10,7 @@ const SingleProperty = ({ propertyData }) => {
                 <Link href={`/property/edit?propertyid=${id}`}>
                     <a className="absolute right-0 top-0 bg-primary text-white text-sm rounded py-2 px-4">Edit</a>
                 </Link>
-                <img src={PropertyImages?.[0]?.src?.secure_url} className="w-full h-60 md:h-40 lg:h-60 xl:h-80 border" alt="" />
+                <img src={PropertyImages?.[0]?.src?.secure_url} className="w-full h-full object-cover border" alt="" />
             </div>
             <div className=" my-3">
                 <h4 className="text-xl text-primary font-bold">${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h4>

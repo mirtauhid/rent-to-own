@@ -26,7 +26,7 @@ const PropertyImage = ({title, location, description, price, bedroom, bathroom, 
                     <h1 className="text-sm pl-1 flex-1  ">{location}</h1>
                 </div>
                 <div className="flex flex-row"> 
-                    <h1 className="text-lg pl-1 text-primary font-semibold">${price} /</h1>
+                    <h1 className="text-lg pl-1 text-primary font-semibold">${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} /</h1>
                     <h1 className="text-sm pl-1 pt-1 text-primary">per property</h1>
                 </div>
                 <h1 className="text-sm pl-1 flex-1 pt-1 font-bold">{titleSlice}</h1>

@@ -13,7 +13,7 @@ const index = ({item, title, host, price, images}) => {
     return (
         <div className="w-full border">
             {/* <img src="https://picsum.photos/200/300" alt="" className="h-96 w-full object-center object-cover" /> */}
-            {images && <Carousel className="w-full" images={images}/>}
+            {images && <Carousel className="w-full h-40" images={images}/>}
             <div className="p-3 pt-8">
                 <div className="">
                     <Link href={"/housesearch/" + item.id} key={item.id}>
@@ -80,9 +80,9 @@ const index = ({item, title, host, price, images}) => {
                 ) : component === "Capacity" ? (
                 <Capacity propertyDetails={item}/>
                 ) : component === "Interior" ?(
-                <Interior />
+                <Interior property={item.PropertyFeatures} />
                 ) : (
-                    <Exterior />
+                    <Exterior property={item.PropertyFeatures} />
                 )}
             </div>
             
