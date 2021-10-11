@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SellerProfileLayout from '.';
 import baseURL from '../../../Helpers/httpRequest';
@@ -10,7 +9,6 @@ const AccountSettingsPage = () => {
     const [error, setError] = useState({ status: false, msg: "" })
     const [success, setSuccess] = useState({status:false,msg:""})
     const [loading, setLoading] = useState(false)
-    const notify = () => toast("Wow so easy!");
 
     const validate = values => {
         const errors = {};
@@ -76,19 +74,18 @@ const AccountSettingsPage = () => {
                         <a className={"inline-block rounded-lg py-2 px-5 border-2 border-primary text-primary font-medium"}>Edit Settings</a>
                     </Link> */}
                 </div>
+                <form
+                    onSubmit={formik.handleSubmit}
+                    className="lg:w-2/3">
+                    <h3 className="text-xl my-4 font-medium">Change Password</h3>
+                    
                 {
                     error.status && <p className="bg-red-50 border border-red-200 text-red-500 text-center p-2 my-2 rounded">{error.msg}</p>
                 }
                 {
                     success.status  && <p className="bg-green-50 border border-green-200 text-green-500 text-center p-2 my-2 rounded">{success.msg}</p>
                 }
-                <form
-                    onSubmit={formik.handleSubmit}
-                    className="lg:w-2/3">
-                    <h3 className="text-xl my-4 font-medium">Change Password</h3>
-
-                    <button onClick={notify}>Notify!</button>
-        <ToastContainer />
+        
                     <div className="w-full flex mt-5 flex-wrap">
 
                         <div className="w-full mb-2 py-2">

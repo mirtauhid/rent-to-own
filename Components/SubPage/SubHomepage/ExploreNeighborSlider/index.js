@@ -9,7 +9,7 @@ import SingleImageCard from "./SingleImageCard";
 
 const ExploreNeighborSlider = () => {
   const [sliderData, setSliderData] = useState();
-console.log(sliderData);
+
   useEffect(() => {
     axios.get(`${baseUrl}/v2/provinces`).then((res) => {
       
