@@ -10,7 +10,6 @@ export const getProperty = createAsyncThunk (
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
-            console.log(resData);
             return resData.data;
         }catch(err) {
             throw err;
@@ -45,7 +44,6 @@ export const getFilteredData = createAsyncThunk (
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
-            //console.log(resData);
             return resData;
         }catch(err) {
             throw err;
@@ -62,7 +60,6 @@ export const getPropertyDetails = createAsyncThunk (
                 throw new Error('Something went wrong!');
             }
             const resData = await response.json();
-            //console.log(resData.data);
             return resData.data;
         }catch(err) {
             throw err;
@@ -76,7 +73,7 @@ export const propertySlice = createSlice({
     allproperties: [],
     listingType: [],
     filteredData: [],
-    statecity: null,
+    statecity: [],
     propertyDetails: null,
     status: null
   },
