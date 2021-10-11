@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SellerProfileLayout from '.';
 import baseURL from '../../../Helpers/httpRequest';
 
@@ -8,6 +10,7 @@ const AccountSettingsPage = () => {
     const [error, setError] = useState({ status: false, msg: "" })
     const [success, setSuccess] = useState({status:false,msg:""})
     const [loading, setLoading] = useState(false)
+    const notify = () => toast("Wow so easy!");
 
     const validate = values => {
         const errors = {};
@@ -84,7 +87,8 @@ const AccountSettingsPage = () => {
                     className="lg:w-2/3">
                     <h3 className="text-xl my-4 font-medium">Change Password</h3>
 
-
+                    <button onClick={notify}>Notify!</button>
+        <ToastContainer />
                     <div className="w-full flex mt-5 flex-wrap">
 
                         <div className="w-full mb-2 py-2">
