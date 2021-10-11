@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {
     GoogleMap,
     Marker,
-    InfoWindow
+    InfoWindow,
+    Circle
 } from "@react-google-maps/api";
 import mapStyles from "./mapStyles";
 import { BiCurrentLocation } from "react-icons/bi";
@@ -14,10 +15,23 @@ const containerStyle = {
 const options = {
     styles: mapStyles,
 };
+const optionsCircle = {
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#0000',
+    fillOpacity: 1,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 50000,
+    zIndex: 1
+  }
 
 const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
     const initialcenter = {
-        lat: 61.068250, lng: -111.293542
+        lat: 51.0407822, lng: -114.0694058
     };
     //maps @api
     const [markers, setMarkers] = React.useState([]);
@@ -61,6 +75,13 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
     //map error
     if (loadError) return "Error";
     if (!isLoaded) return "Loading";
+    const onLoad = circle => {
+        console.log('Circle onLoad circle: ', circle)
+    }
+    
+    const onUnmount = circle => {
+        console.log('Circle onUnmount circle: ', circle)
+    }
 
     return (
         <div className="py-5 w-full hidden md:block relative">
@@ -73,6 +94,16 @@ const Map = ({isLoaded, loadError, panTo, onMapLoad, mark}) => {
                 //onClick={onMapClick}
                 onLoad={onMapLoad}
             >
+                <Circle
+                    // optional
+                    onLoad={onLoad}
+                    // optional
+                    onUnmount={onUnmount}
+                    // required
+                    center={initialcenter}
+                    // required
+                    options={optionsCircle}
+                />
                 {markers.map((marker, index) => (
                     <Marker
                         //key={`${marker.lat}-${marker.lng}`}
