@@ -4,7 +4,7 @@ import RentToOwnCard from "./RentToOwnCard";
 const data = [
   {
     title: "I'm a Home Seller",
-    imgSrc: "/images/Homepage/sell.svg",
+    imgSrc: "/images/icons/BuyAHome.svg",
     content:
       "List your property and find a fitting candidate to purchase it from you over a 6 – 36 month rent-to-own period. With Rent-to-Own Realty’s thorough underwriting, you know that each applicant has been pre-qualified and is a viable applicant. Ultimately, you decide which individual you want to rent to but we provide you access to hundreds of potential applicants as well as all the modern documentation necessary to underwrite any rent-to-own agreement.",
     btnText: "List Home",
@@ -12,7 +12,7 @@ const data = [
 
   {
     title: "I'm a Home Buyer",
-    imgSrc: "/images/Homepage/sold-Icons.svg",
+    imgSrc: "/images/icons/BuyAHome.svg",
     content:
       "With Rent-to-Own Realty, individuals can get access to properties allowing you to become a homeowner today! Our powerful tools can help you find, apply, and even enter into a purchase agreement in a few simple steps. Why wait? Become a homeowner today!",
     btnText: "Search Homes",

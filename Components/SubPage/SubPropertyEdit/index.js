@@ -134,7 +134,7 @@ const SubPropertyEdit = () => {
     });
 
     return (
-        <div className="px-5 md:px-20 lg:px-28 py-6">
+        <div className="px-5 md:px-20 lg:px-28">
             {
                 isLoading ?
                     <PageLoading />

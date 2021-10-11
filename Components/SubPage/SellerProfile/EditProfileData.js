@@ -105,7 +105,7 @@ const EditProfileData = () => {
                     </label>
                 </div>
                 <div className="px-6">
-                    <h3 className="text-xl font-bold">John Doe</h3>
+                    <h3 className="text-xl font-bold">{`${userData?.firstName} ${userData?.lastName}`}</h3>
                     <p className="text-sm">Member since September 5, 2021</p>
                 </div>
             </div>
