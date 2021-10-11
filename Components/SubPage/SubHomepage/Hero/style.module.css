@@ -1,5 +1,5 @@
 .subhomepage-hero-wrapper {
-  height: 75vh;
+  height: 85vh;
   @apply relative rounded-md overflow-hidden;
 }
 

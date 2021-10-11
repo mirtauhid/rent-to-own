@@ -16,7 +16,7 @@ const index = () => {
       libraries,
     })
     return (
-      <div className="px-5 md:px-20 lg:px-28">
+      <div className="px-5">
         <div className={`${style["subhomepage-hero-wrapper"]}`}>
           <img
             src="/images/Homepage/Background.webp"
@@ -27,7 +27,7 @@ const index = () => {
             className="absolute top-0 left-0 w-full h-full px-5 md:px-12 pt-14 xs:pt-24 lg:pt-36"
             style={{ background: "rgba(0,0,0,0.4)" }}
           >
-            <p className="text-white text-2xl xs:text-3xl smd:text-5xl lg:w-3/4 font-bold">
+            <p className="text-white text-2xl xs:text-3xl smd:text-5xl lg:w-3/4 font-bold lg:mb-10">
               Canada's Only Rent-to-Own Marketplace
             </p>
             <div className="mt-5 lg:mt-5">
@@ -38,7 +38,7 @@ const index = () => {
                   query: { search: search },
                 }}
               >
-                <div className="bg-green-500 w-32 mt-3 py-2 rounded-md px-10 text-white font-bold">
+                <div className="bg-green-500 w-32 lg:w-48 mt-3 py-2 rounded-md text-center lg:text-xl text-white font-bold lg:mt-5">
                   Search
                 </div>
               </Link>
