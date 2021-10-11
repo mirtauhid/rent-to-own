@@ -33,18 +33,12 @@ const HouseSearch = () => {
     } = router
     const [searchData, setSearchData] = useState(search ? search : "")
     const [searchCoordinates, setSearchCoordinates] = useState()
-    const properties = useSelector((state) => state.property.allproperties);
-    const mapareas = useSelector((state) => state.map.areas);
     const filterLocation = useSelector((state) => state.map.filterLocation);
-    console.log('=============mapareas=======================');
-    console.log(searchCoordinates);
-    console.log(filterLocation);
-    console.log('====================================');
 
     useEffect(() => {
       dispatch(getProperty());
       dispatch(getAreas({lat: 43.6685934, lng: -79.543553}));
-      dispatch(getFilterLocation({lat: 20.03, lng: -20.968549}));
+      dispatch(getFilterLocation({lat: 61.068250, lng: -111.293542,}));
   }, [dispatch])
 
   useEffect(() => {
@@ -93,7 +87,7 @@ const HouseSearch = () => {
                         key={item.id.toString()}
                         item={item}
                         title={item.name}
-                        host="host"
+                        host={item.User.firstName}
                         price={item.price}
                         images={item.PropertyImages}
                       />
@@ -135,7 +129,7 @@ function Search ({ panTo, isLoaded, setSearchCoordinates }) {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      location: { lat: () => 43.6532, lng: () => -79.3832 },
+      location: { lat: () => 61.068250, lng: () => -111.293542 },
       radius: 100 * 1000,
     },
   });
@@ -162,8 +156,6 @@ function Search ({ panTo, isLoaded, setSearchCoordinates }) {
       console.log("😱 Error: ", error);
     }
   };
-
-  console.log(search);
 
   return (
     <div className={style["search"]}>

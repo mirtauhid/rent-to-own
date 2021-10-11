@@ -7,7 +7,8 @@ export default class ChatListItems extends Component {
     super(props);
   }
   selectChat = (e) => {
-    this.props.setSelectedId(this.props.userId)
+    console.log('selected');
+    this.props.setSelectedId('6ciWGkTMSnyPDUXuCAg9')
   };
 
   render() {

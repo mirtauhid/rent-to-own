@@ -80,9 +80,9 @@ const index = ({item, title, host, price, images}) => {
                 ) : component === "Capacity" ? (
                 <Capacity propertyDetails={item}/>
                 ) : component === "Interior" ?(
-                <Interior />
+                <Interior property={item.PropertyFeatures} />
                 ) : (
-                    <Exterior />
+                    <Exterior property={item.PropertyFeatures} />
                 )}
             </div>
             
