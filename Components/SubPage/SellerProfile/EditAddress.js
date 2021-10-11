@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import baseURL from '../../../Helpers/httpRequest';
 
 const EditAddress = () => {
@@ -57,12 +59,21 @@ const EditAddress = () => {
                 })
         },
     });
-    
+
     return (
         <form
             onSubmit={formik.handleSubmit}
             className="lg:w-2/3">
-
+            <ToastContainer
+                position="top-center"
+                limit={2}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
             <div className="w-full flex mt-5 flex-wrap">
                 <label className="w-full font-medium">Address</label>
 

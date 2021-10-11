@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
 const onSubmit = (values, { resetForm }) => {
   toast.warning("Processing!", {
     theme:"colored",
-    autoClose: 1000,
+    autoClose: 1500,
     });
   axios({
     method: "POST",
@@ -40,7 +40,8 @@ const onSubmit = (values, { resetForm }) => {
     })
     .catch((err) => {
       toast.error("Password changing failed!", {
-        theme:"colored"
+        theme:"colored",
+        autoClose: 2000
         });
     })
 };
@@ -50,7 +51,7 @@ const Account = ({ tab }) => {
     <>
     <ToastContainer 
       position="top-center"
-      autoClose={5000}
+      limit={1}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
