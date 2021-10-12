@@ -1,25 +1,23 @@
+import axios from 'axios';
 import { useFormik } from 'formik';
 import React from 'react';
+import { FaTimes } from 'react-icons/fa';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import baseURL from '../../Helpers/httpRequest';
+import CustomModal from './CustomModal';
 
-const ForgetPasswordModal = () => {
+const ForgetPasswordModal = ({ showForgetPasswordModal, setShowForgetPasswordModal }) => {
 
     const validate = values => {
         const errors = {};
 
-        if (!values.newPassword) {
-            errors.newPassword = 'New password required!';
-        } else if (values.newPassword?.length < 6) {
-            errors.newPassword = 'Password must be at least 6 character!';
-        } else if (values.confPassword && values.newPassword != values.confPassword) {
-            errors.newPassword = 'New password and Confirm password did not matched!';
-        }
-
-        if (!values.confPassword) {
-            errors.confPassword = 'Confirm password required';
-        } else if (values.confPassword?.length < 6) {
-            errors.confPassword = 'Password must be at least 6 character!';
-        } else if (values.newPassword && values.newPassword != values.confPassword) {
-            errors.confPassword = 'New password and Confirm password did not matched!';
+        if (!values.email) {
+            errors.email = "Required";
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        ) {
+            errors.email = "Invalid email address";
         }
 
         return errors;
@@ -27,58 +25,77 @@ const ForgetPasswordModal = () => {
 
     const formik = useFormik({
         initialValues: {
-            newPassword: '',
-            confPassword: ''
+            email: ''
         },
         validate,
-        onSubmit: values => {
-            console.log(values);
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: (values, { resetForm }) => {
+            axios({
+                method: "POST",
+                url: `${baseURL}/v2/forget-password`,
+                data: values
+            })
+                .then((res) => {
+                    // For toast
+                    toast.success(res.data.message, {
+                        theme: "colored",
+                        autoClose: 3000,
+                    });
+                    
+                    resetForm()
+                    // Closing the modal
+                    
+                })
+                .catch((err) => {
+                    console.log(err.response.data.message);
+                    // For toast
+                    toast.error(err?.response?.data?.message, {
+                        theme: "colored",
+                        autoClose: 2000,
+                    });
+                })
         },
     });
     return (
-        <div className="rounded-2xl border px-6 py-3 w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 mx-auto my-12 bg-white">
-            <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Change Password</h2>
+        <CustomModal isOpen={showForgetPasswordModal}>
+            {/* For cross button  */}
+            <div className="text-right px-4">
+                <button
+                    className="p-2 rounded hover:bg-gray-200 text-2xl"
+                    onClick={() => setShowForgetPasswordModal(false)}
+                >
+                    <FaTimes />
+                </button>
+            </div>
+            <ToastContainer
+                position="top-center"
+                limit={2}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
+            <h2 className="uppercase text-center font-bold text-xl mb-5 mt-10">Forget Password</h2>
 
             <form onSubmit={formik.handleSubmit} className="mb-10">
                 <div className="w-full mb-2 p-2">
-                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="newPassword">
-                        New password
+                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="email">
+                        Email
                     </label>
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                        id="newPassword"
-                        type="password"
-                        placeholder="Enter your new password here"
-                        name="newPassword"
-                        value={formik.values.newPassword}
+                        id="email"
+                        type="email"
+                        placeholder="Type your email here"
+                        name="email"
+                        value={formik.values.email}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />
                     {
-                        formik.touched.newPassword && formik.errors.newPassword &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.newPassword}</div>
-                    }
-                </div>
-
-                <div className="w-full mb-2 p-2">
-                    <label className="block text-secondary text-sm font-bold mb-2" htmlFor="confPassword">
-                        Confirm password
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                        id="confPassword"
-                        type="password"
-                        placeholder="Confirm your password here"
-                        autoComplete="off"
-                        name="confPassword"
-                        value={formik.values.confPassword}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                    {
-                        formik.touched.confPassword && formik.errors.confPassword &&
-                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.confPassword}</div>
+                        formik.touched.email && formik.errors.email &&
+                        <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.email}</div>
                     }
                 </div>
 
@@ -86,7 +103,7 @@ const ForgetPasswordModal = () => {
                     <button type="submit" className="w-full bg-primary text-white rounded py-2">Submit</button>
                 </div>
             </form>
-        </div>
+        </CustomModal>
     );
 };
 

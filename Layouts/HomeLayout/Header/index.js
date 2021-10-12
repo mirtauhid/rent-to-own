@@ -4,20 +4,22 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from 'react';
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import ForgetPasswordModal from "../../../Components/Modal/ForgetPassword";
+import ListPropertyWarningModal from "../../../Components/Modal/ListPropertyWarningModal";
 import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
 import baseURL from "../../../Helpers/httpRequest";
 import { signIn, signOut } from "../../../redux/slices/auth";
-import ListPropertyWarningModal from "../../../Components/Modal/ListPropertyWarningModal";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
-  
+
 
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [showWarningModal, setShowWarningModal] = useState(false);
+  const [showForgetPasswordModal, setShowForgetPasswordModal] = useState(false)
   const [redirectLink, setRedirectLink] = useState('/')
 
   const handleSingInWithRedirect = (customLink) => {
@@ -25,7 +27,7 @@ const Header = () => {
     setShowSignInModal(true)
   }
 
-  
+
 
   return (
     <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
@@ -61,8 +63,8 @@ const Header = () => {
                     !auth.isLoggedIn
                       ? handleSingInWithRedirect("/pricingplan")
                       : auth.userData?.type === "BUYER"
-                      ? setShowWarningModal(true)
-                      : null
+                        ? setShowWarningModal(true)
+                        : null
                   }
                 >
                   List your property
@@ -111,13 +113,21 @@ const Header = () => {
         showSignUpModal={showSignUpModal}
         setShowSignUpModal={setShowSignUpModal}
         setShowSignInModal={setShowSignInModal}
+        setShowForgetPasswordModal={setShowForgetPasswordModal}
         redirectLink={redirectLink}
       />
       <SignInModal
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}
         setShowSignUpModal={setShowSignUpModal}
+        setShowForgetPasswordModal={setShowForgetPasswordModal}
         redirectLink={redirectLink}
+      />
+      <ForgetPasswordModal
+        showForgetPasswordModal={showForgetPasswordModal}
+        setShowForgetPasswordModal={setShowForgetPasswordModal}
+        setShowSignInModal={setShowSignInModal}
+        setShowSignUpModal={setShowSignUpModal}
       />
       <ListPropertyWarningModal
         showWarningModal={showWarningModal}
@@ -129,10 +139,10 @@ const Header = () => {
 
 const HeaderNavBar = ({ showNav, setShowNav }) => {
 
-  const router = useRouter(); 
+  const router = useRouter();
 
-  const auth = useSelector((state)=>state.auth);
-  
+  const auth = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(signOut());
@@ -148,41 +158,40 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
       axios({
         method: "POST",
         url: `${baseURL}/v2/auth/verify`,
-        headers: { Authorization: localStorage.getItem('authToken')}
+        headers: { Authorization: localStorage.getItem('authToken') }
       })
         .then((res) => {
           if (res.data.success) {
             // Updating redux
             dispatch(signIn(res.data?.data));
-          } 
+          }
         })
-        .catch((err)=>{
+        .catch((err) => {
           localStorage.removeItem('authToken')
         })
     }
   }, [])
 
-  const handleProfileClick = () =>{
-       axios({
-         method: "POST",
-         url: `${baseURL}/v2/auth/verify`,
-         headers: { Authorization: localStorage.getItem("authToken") },
-       })
-         .then((res) => {
-           res.data.data.type === "SELLER"
-             ? router.push("/sellerProfile/accountSettings")
-             : router.push("/settings?name=profile"); 
-         })
-         .catch((err) => {
-            router.push("/");
-         });
+  const handleProfileClick = () => {
+    axios({
+      method: "POST",
+      url: `${baseURL}/v2/auth/verify`,
+      headers: { Authorization: localStorage.getItem("authToken") },
+    })
+      .then((res) => {
+        res.data.data.type === "SELLER"
+          ? router.push("/sellerProfile/accountSettings")
+          : router.push("/settings?name=profile");
+      })
+      .catch((err) => {
+        router.push("/");
+      });
   }
 
   return (
     <div
-      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
-        showNav ? "block" : "hidden"
-      } transition duration-300`}
+      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${showNav ? "block" : "hidden"
+        } transition duration-300`}
     >
       <ul>
         <li className="mt-2 cursor-pointer">Messages</li>

@@ -8,7 +8,7 @@ import baseURL from '../../Helpers/httpRequest';
 import { signIn } from '../../redux/slices/auth';
 import CustomModal from './CustomModal';
 
-const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, redirectLink }) => {
+const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, setShowForgetPasswordModal, redirectLink }) => {
   const [error, setError] = useState({ status: false, msg: "" })
   const [loading, setLoading] = useState(false);
 
@@ -184,9 +184,16 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
         </div>
 
         <div className="w-full mb-2 p-2  text-right">
-          <a href="#" className="inline-block font-bold">
+          <button 
+          onClick={() => {
+            setShowForgetPasswordModal(true)
+            setShowSignInModal(false)
+            setShowSignUpModal(false)
+          }}
+          type="button"
+          className="inline-block font-bold">
             Forget Password
-          </a>
+          </button>
         </div>
 
         <div className="w-full mb-2 p-2">
