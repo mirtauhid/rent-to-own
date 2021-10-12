@@ -15,7 +15,7 @@ import UserReview from "../../UserReview"
 const index = () => {
     return (
       <HomeLayout>
-        <div className="py-10">
+        <div className="pb-10">
           <Hero />
           <LogoSection/>
           <RentToOwnWin/>

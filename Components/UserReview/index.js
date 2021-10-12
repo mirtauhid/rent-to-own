@@ -4,26 +4,31 @@ import Marquee from "react-fast-marquee";
 
 const data = [
   {
+    title: "Great service",
     review:
       "We're glad we found Rent to Own Realty! We thought about selling our house the traditional way but after looking at all the numbers and the process, we were able to get about $40,000 more in our pocket. Highly recommend taking a look at this company.",
     name: "- Mike P. | Saskatoon, SK",
   },
   {
+    title: "Highly recommended",
     review:
       "We are new to Canada and could not do the large down payment required to get a mortgage right away so we decided to go the rent to own route. Easy program and we love our new home, thank you.",
     name: "- Stuart A. | Edmonton, AB",
   },
   {
+    title: "Couldn't have done it without them!",
     review:
       "I wish more people knew about rent to own options. We sold our home through this company and Perry was great in providing all the details. No pressure or hassles, just great information and a simple program.",
     name: "- Rob V. | Orangeville, ON",
   },
   {
+    title: "My only regret is not doing it sooner",
     review:
       "I got a call from RTOR about my house that I listed for sale. I never really knew the details about rent to own before but after understanding everything, this was a no brainer for me. They match you up with a buyer, save you a bunch of money, and guide you the whole way.",
     name: "- Tyler B. | Winnipeg, MB",
   },
   {
+    title: "A truly lifechanging experience",
     review:
       "Rent to own is not confusing with this company. Straight forward program, they make expectations clear for both sellers/buyers, and great customer support along the way.",
     name: "- Dax C. | Kelowna, BC",
