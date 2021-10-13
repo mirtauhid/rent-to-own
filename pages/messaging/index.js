@@ -105,7 +105,7 @@ const Message = () => {
 
     const changeRoom = async (roomid) => {
         if(activeRoom !== roomid) {
-            firestore.collection('messages').where('roomId', '==', `${roomid}`).orderBy('createdAt', 'desc').limit(5).onSnapshot(snapshots => {
+            firestore.collection('messages').where('roomId', '==', `${roomid}`).orderBy('createdAt', 'desc').onSnapshot(snapshots => {
                 setActiveRoom(roomid);
                 setMessages(snapshotToArray(snapshots).reverse())
             });
@@ -117,15 +117,16 @@ const Message = () => {
         // await startAtSnapshot.limit(10).onSnapshot(snapshots => {
         //     setNewMessages(snapshotToArray(snapshots).reverse())
         // });
-        firestore.collection('messages').where('roomId', '==', `${roomid}`).orderBy('createdAt', 'desc').limit(10).onSnapshot(snapshots => {
+        firestore.collection('messages').where('roomId', '==', `${roomid}`).orderBy('createdAt', 'desc').onSnapshot(snapshots => {
             setNewMessages2(snapshotToArray(snapshots).reverse())
         });
     }
 
     useEffect(() => {
         if(activeRoom) {
-            firestore.collection('messages').where('roomId', '==', `${activeRoom}`).orderBy('createdAt', 'desc').limit(5).onSnapshot(snapshots => {
-                setMessages(snapshotToArray(snapshots).reverse())
+            firestore.collection('messages').where('roomId', '==', `${activeRoom}`).orderBy('createdAt', 'desc').onSnapshot(snapshots => {
+                const data = snapshotToArray(snapshots).reverse();
+                setMessages(data)
             });
         }
     }, [activeRoom])

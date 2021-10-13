@@ -26,16 +26,24 @@ const index = ({propertyDetails, setPricePerMonth}) => {
                   pathname: "/messaging",
                   query: { buyerid: loggedInUser?.id, sellerid: propertyDetails?.User.id },
                 }}
-              >
+            >
                 <a className={"text-xs lg:text-sm py-2  block"}>
                     <div className="bg-primary mt-5 hover:bg-green-500 h-10 rounded flex items-center justify-center cursor-pointer">
                         <p className="text-md font-bold text-white">Message Seller</p>
                     </div>
                 </a>
             </Link>
-            <div className="h-10 mt-5 rounded hover:bg-gray-100 border border-primary flex items-center justify-center cursor-pointer">
-                <p className="text-md font-bold">Apply to Rent-To-Own</p>
-            </div>
+            <Link
+                href={{
+                  pathname: "/testmsg",
+                  query: { b: loggedInUser?.id},
+                }}
+            >   
+                <div className="h-10 mt-5 rounded hover:bg-gray-100 border border-primary flex items-center justify-center cursor-pointer">
+                    <p className="text-md font-bold">Apply to Rent-To-Own</p>
+                </div>
+            </Link>
+            
             <div className="mt-5 grid justify-items-center">
                 <p className="text-md text-gray-700">QUESTIONS? CALL US TODAY</p>
                 <p className="text-xl font-semibold mt-3 text-gray-700">(+1261 5645 4565)</p>
