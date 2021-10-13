@@ -59,7 +59,7 @@ const ForgetPasswordModal = ({ showForgetPasswordModal, setShowForgetPasswordMod
         },
     });
     return (
-        <CustomModal isOpen={showForgetPasswordModal}>
+        <CustomModal isOpen={showForgetPasswordModal} isMiddle={true}>
             {/* For cross button  */}
             <div className="text-right px-4">
                 <button
