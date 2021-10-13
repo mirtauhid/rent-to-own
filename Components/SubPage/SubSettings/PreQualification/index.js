@@ -53,6 +53,18 @@ const index = () => {
     console.log(JSON.stringify(formData));
 
     axios
+      .get(`${baseURL}/v2/prequalifications`, {
+        headers: {
+          authorization:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4IiwidHlwZSI6IkJVWUVSIiwiaWF0IjoxNjMzOTQwNzg1LCJleHAiOjE2MzQxOTk5ODV9.hn6gcL3aARVOzWesKh7iq9F7OMULfkRVaHYD5m_cqgk",
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data.id);
+      })
+      .catch((err) => console.log(err));
+
+    axios
       .put(`${baseURL}/v2/prequalifications/5`, formData, {
         headers: {
           authorization:
