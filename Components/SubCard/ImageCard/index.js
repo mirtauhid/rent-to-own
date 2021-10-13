@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
 import Link from "next/link";
-import style from "./style.module.css";
+import React, { useState } from 'react';
+import { IoMdTimer } from "react-icons/io";
 import About from '../../SubPage/SubDetailsTab/About';
 import Capacity from '../../SubPage/SubDetailsTab/Capacity';
+import Exterior from '../../SubPage/SubDetailsTab/Exterior';
 import Interior from '../../SubPage/SubDetailsTab/Interior';
-import Exterior from '../../SubPage/SubDetailsTab/Interior';
-import { IoMdTimer } from "react-icons/io";
 import Carousel from './Carousel';
+import style from "./style.module.css";
 
 const index = ({item, title, host, price, images}) => {
     const [component, setComponent] = useState('About');

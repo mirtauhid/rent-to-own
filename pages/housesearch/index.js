@@ -1,28 +1,26 @@
-import React, {useState, useEffect} from 'react';
-import ImageCard from '../../Components/SubCard/ImageCard';
-import HomeLayout from '../../Layouts/HomeLayout';
-import 'react-dropdown/style.css';
-import { useRouter } from "next/router";
-import MapG from '../../Components/Map';
-import {
-  useLoadScript,
-} from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
 import {
   Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
+  ComboboxInput, ComboboxList,
+  ComboboxOption, ComboboxPopover
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import style from './style.module.css';
+import {
+  useLoadScript
+} from "@react-google-maps/api";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import 'react-dropdown/style.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getProperty } from '../../redux/slices/property';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng
+} from "use-places-autocomplete";
+import MapG from '../../Components/Map';
+import ImageCard from '../../Components/SubCard/ImageCard';
+import HomeLayout from '../../Layouts/HomeLayout';
 import { getAreas, getFilterLocation } from '../../redux/slices/map';
+import { getProperty } from '../../redux/slices/property';
+import style from './style.module.css';
 
 const HouseSearch = () => {
     const [ libraries ] = useState(['places']);
@@ -59,7 +57,6 @@ const HouseSearch = () => {
       mapRef.current.panTo({ lat, lng });
       mapRef.current.setZoom(8);
     }, []);
-
     return (
       <HomeLayout>
         <>
@@ -82,7 +79,7 @@ const HouseSearch = () => {
                 </div>
                 <div className="">
                   {filterLocation?.map((item) => (
-                    <div className="cursor-pointer pb-10" key={item.id}>
+                    <div className="pb-10" key={item.id}>
                       <ImageCard
                         key={item.id.toString()}
                         item={item}

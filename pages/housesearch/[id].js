@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import HomeLayout from '../../Layouts/HomeLayout';
+import {
+  useLoadScript
+} from "@react-google-maps/api";
 import Link from 'next/link';
-import PriceCard from '../../Components/SubCard/PriceCard';
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import { useDispatch, useSelector } from "react-redux";
+import ImageSlider from "../../Components/ImageSlider";
 import Map from '../../Components/Map';
 import PopularProperties from '../../Components/SubCard/PopularProperties';
-import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
+import PriceCard from '../../Components/SubCard/PriceCard';
 import Introduction from '../../Components/SubPage/HouseSearch/Introduction';
-import Interior from '../../Components/SubPage/SubDetailsTab/Interior';
+import SubCapacity from '../../Components/SubPage/HouseSearch/SubCapacity';
 import Exterior from '../../Components/SubPage/SubDetailsTab/Exterior';
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
-import { useRouter } from "next/router";
+import Interior from '../../Components/SubPage/SubDetailsTab/Interior';
+import HomeLayout from '../../Layouts/HomeLayout';
 import { getPropertyDetails } from '../../redux/slices/property';
-import { useDispatch, useSelector } from "react-redux";
-import {
-  useLoadScript,
-} from "@react-google-maps/api";
-import ImageSlider from "../../Components/ImageSlider";
 
 const Details = () => {
     const dispatch = useDispatch();
@@ -56,11 +56,11 @@ const Details = () => {
                 <hr className="mt-5"></hr>
                 {/* Interior Exterior features */}
                 <h1 className="text-xl pt-3 text-gray-400 font-bold">Interior features</h1>
-                {propertyDetails && <Interior property={propertyDetails?.PropertyFeatures}/>}
+                {propertyDetails && <Interior property={propertyDetails?.PropertyFeatures} showVertically={true}/>}
                 <hr className="mt-5"></hr>
                 {/* Exterior features */}
                 <h1 className="text-xl pt-3 text-gray-400 font-bold">Exterior features</h1>
-                {propertyDetails && <Exterior property={propertyDetails?.PropertyFeatures}/>}
+                {propertyDetails && <Exterior property={propertyDetails?.PropertyFeatures} showVertically={true}/>}
               </div>
 
               {/* price Card */}
