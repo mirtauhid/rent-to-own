@@ -4,7 +4,7 @@ const index = ({property}) => {
     return (
         <div className="gap-8 flex flex-wrap py-5">
                 {property?.map(item => (
-                    item.Feature.interior != true ? <div>
+                    item.Feature.interior === false ? <div>
                         <p className="text-md">{item.Feature?.name}</p>
                     </div> : null
                 ))}
