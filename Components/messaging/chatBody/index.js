@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef, createRef, useEffect } from "react";
+import React, { Component, useState, useRef, CSSProperties, useEffect } from "react";
 import Avatar from '../chatList/Avatar';
 import ChatItem from "./ChatItem";
 import style from './style.module.css';
@@ -6,55 +6,79 @@ import { FaPlus } from 'react-icons/fa';
 import { BiSend } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
 import { getConversation } from '../../../redux/slices/messaging';
+import firebase from 'firebase/compat/app';
 
-const index = ({selectedId, messages}) => {
-    const messagesEndRef1 = useRef(null)
-    const messagesEndRef = createRef(null);
+const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selectedUser}) => {
+    const messagesEndRef = useRef(null)
+    const [content, setContent] = useState('')
     const dispatch = useDispatch();
-    const conversations = useSelector((state) => state.message);
-    const chat = conversations?.chats.find(item => item.userId === selectedId);
-    const users = useSelector((state) => state.message.users);
-    const user = users?.find(item => item.id === selectedId);
-    const selectedmsg = messages.filter(itm => itm.roomId === selectedId)
-    console.log('==============body======================');
-    console.log(selectedId);
-    console.log(messages);
-    console.log(selectedmsg);
-    console.log('====================================');
+    //const conversations = useSelector((state) => state.message);
+    const loggedInUser = useSelector((state) => state.auth.userData);
+    //const chat = conversations?.chats.find(item => item.userId === selectedId);
+    //const users = useSelector((state) => state.message.users);
+    //const user = users?.find(item => item.id === selectedId);
+    //const roomKey = rooms?.find(item => item.roomId === activeRoom && user1 === item.userId)
+
+    const setValue = (e) => setContent(e.target.value);
     useEffect(() => {
         dispatch(getConversation());
     })
+
     const scrollToBottom = () => {
-        messagesEndRef1.current?.scrollIntoView({ block: 'end', behavior: "smooth" })
+        messagesEndRef.current?.scrollIntoView({ block: 'end', behavior: "smooth" })
     }
+
     useEffect(() => {
         scrollToBottom()
-    }, [chat]);
-    console.log(chat);
+    }, [messages]);
+
+    const sendMsg = async() => {
+        let msg = content;
+        setContent('');
+        const messagesRef = firestore.collection('messages');
+        await messagesRef.add({
+            userId: parseInt(loggedInUser.id),
+            roomId: activeRoom,
+            msg,
+            type: 'TEXT',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        
+        // const roomRef = firestore.collection('userRooms').doc(roomKey?.key)
+        // const res = await roomRef.update({
+        //     lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+        // });
+    }
+
+    useEffect(() => {
+        
+    }, [loggedInUser])
+
     return (
-        <div className="">
+        <div className="pl-5">
             <div className="flex items-center">
                 <img
                     className="h-8 w-8 rounded-full"
-                    src={user?.image}
+                    src={selectedUser?.image?.secure_url}
                 />
-                <h1 className="ml-4">{user?.name}</h1>
+                <h1 className="ml-4">{selectedUser?.firstName}</h1>
             </div>
             <div className="border mt-4"></div>
             {/* body */}
             <div className={style["content__body"]}>
                 <div className={style["chat__items"]}>
                     <div>
-                    {selectedmsg ? selectedmsg?.map((itm, index) => {
+                    {messages && loggedInUser?.id ? messages?.map((itm, index) => {
                         return (
                             <div key={index}>
                                 <ChatItem
-                                animationDelay={index + 2}
-                                key={index}
-                                user={itm.userId===2 ? "other" : "me"}
-                                msg={itm.msg}
-                                image={'https://picsum.photos/200'}
-                                sUserImage={'https://picsum.photos/200'}
+                                    animationDelay={index + 2}
+                                    key={index}
+                                    user={itm.userId === parseInt(loggedInUser?.id) ? "me" : "other"}
+                                    msg={itm.msg}
+                                    createdAt={itm.createdAt}
+                                    image={selectedUser?.image?.secure_url}
+                                    sUserImage={loggedInUser?.image?.secure_url}
                                 />
                             </div>
                         );
@@ -63,24 +87,31 @@ const index = ({selectedId, messages}) => {
                             <p className="text-gray-300 p-4 text-center">Sorry no conversation found</p>
                         </div>
                     )}
-                    <div ref={messagesEndRef1} />
+                    <div ref={messagesEndRef} />
                     </div>
                 </div>
             </div>
             {/* footer */}
             <div className="w-full">
                 <div className={style["sendNewMessage"]} >
-                    <button className={"flex justify-center items-center"}>
+                    {/* <button className={"flex justify-center items-center"}>
                         <FaPlus fill={"#00dbb1"}/>
-                    </button>
+                    </button> */}
+                    <div className="border w-full h-auto max-h-16 flex items-center">
                     <input
                         type="text"
                         placeholder="Type a message here"
-                        //onChange={this.onStateChange}
-                        //value={this.state.msg}
-                        
+                        value={content} 
+                        onChange={setValue}
+                        className="w-full max-w-16 p-1"
+                        //className="shadow appearance-none border border-gray-700 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                     />
-                    <button className="flex justify-center items-center" id="sendMsgBtn">
+                    </div>
+                    <button 
+                        className="flex justify-center items-center" 
+                        id="sendMsgBtn"
+                        onClick={() => sendMsg() }
+                    >
                         <BiSend fill={"#00dbb1"}/>
                     </button>
                 </div>

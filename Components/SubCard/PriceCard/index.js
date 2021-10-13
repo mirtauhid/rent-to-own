@@ -1,7 +1,10 @@
 import React, {useEffect} from 'react';
 import Slider from '../../Slider/index';
+import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const index = ({propertyDetails, setPricePerMonth}) => {
+    const loggedInUser = useSelector((state) => state.auth?.userData);
     const [downPay, setDownPay] = React.useState(3);
     const [minMaxMonth, setMinMaxMonth] = React.useState(12);
     const price = propertyDetails?.price;
@@ -18,9 +21,18 @@ const index = ({propertyDetails, setPricePerMonth}) => {
                     <p className="text-xs text-gray-500">per month</p>
                 </div>
             </div>
-            <div className="bg-primary mt-5 hover:bg-green-500 h-10 rounded flex items-center justify-center cursor-pointer">
-                <p className="text-md font-bold text-white">Message Seller</p>
-            </div>
+            <Link
+                href={{
+                  pathname: "/messaging",
+                  query: { buyerid: loggedInUser?.id, sellerid: propertyDetails?.User.id },
+                }}
+              >
+                <a className={"text-xs lg:text-sm py-2  block"}>
+                    <div className="bg-primary mt-5 hover:bg-green-500 h-10 rounded flex items-center justify-center cursor-pointer">
+                        <p className="text-md font-bold text-white">Message Seller</p>
+                    </div>
+                </a>
+            </Link>
             <div className="h-10 mt-5 rounded hover:bg-gray-100 border border-primary flex items-center justify-center cursor-pointer">
                 <p className="text-md font-bold">Apply to Rent-To-Own</p>
             </div>
