@@ -14,7 +14,7 @@ export default class ChatItem extends Component {
       >
         {this.props?.user != "me" ? (
           <div className="flex justify-end items-end">
-            <Avatar isOnline="active" image={this.props.image} size />
+            <Avatar isOnline="active" image={this.props.image ? this.props.image : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"} size />
           </div>
         ) : null}
         <div>

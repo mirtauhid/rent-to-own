@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 const index = ({ propertyDetails, setPricePerMonth }) => {
+  const loggedInUser = useSelector((state) => state.auth?.userData);
   const auth = useSelector((state) => state.auth);
   const [downPay, setDownPay] = React.useState(3);
   const [minMaxMonth, setMinMaxMonth] = React.useState(12);

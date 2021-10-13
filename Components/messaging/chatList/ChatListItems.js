@@ -59,7 +59,7 @@ const ChatListItems = props => {
       <Avatar
         className="h-16 w-16"
         image={
-          userDesc?.image.secure_url
+          userDesc?.image?.secure_url ? userDesc?.image?.secure_url : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"
         }
         isOnline={true}
       />

@@ -59,7 +59,7 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
             <div className="flex items-center">
                 <img
                     className="h-8 w-8 rounded-full"
-                    src={selectedUser?.image?.secure_url}
+                    src={selectedUser?.image?.secure_url ? selectedUser?.image?.secure_url : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"}
                 />
                 <h1 className="ml-4">{selectedUser?.firstName}</h1>
             </div>
