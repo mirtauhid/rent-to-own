@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,6 +8,7 @@ import baseURL from '../../Helpers/httpRequest';
 import CustomModal from './CustomModal';
 
 const ForgetPasswordModal = ({ showForgetPasswordModal, setShowForgetPasswordModal }) => {
+    const [loading, setLoading] = useState(false)
 
     const validate = values => {
         const errors = {};
@@ -29,28 +30,30 @@ const ForgetPasswordModal = ({ showForgetPasswordModal, setShowForgetPasswordMod
         },
         validate,
         onSubmit: (values, { resetForm }) => {
+            setLoading(true);
+            
             axios({
                 method: "POST",
                 url: `${baseURL}/v2/forget-password`,
                 data: values
             })
                 .then((res) => {
+                    setLoading(false)
                     // For toast
                     toast.success(res.data.message, {
                         theme: "colored",
-                        autoClose: 3000,
+                        autoClose: 5000,
                     });
-                    
                     resetForm()
-                    // Closing the modal
                     
+                    setTimeout(() => setShowForgetPasswordModal(false), 5000)
                 })
                 .catch((err) => {
-                    console.log(err.response.data.message);
+                    setLoading(false)
                     // For toast
                     toast.error(err?.response?.data?.message, {
                         theme: "colored",
-                        autoClose: 2000,
+                        autoClose: 3000,
                     });
                 })
         },
@@ -100,7 +103,18 @@ const ForgetPasswordModal = ({ showForgetPasswordModal, setShowForgetPasswordMod
                 </div>
 
                 <div className="w-full mb-2 p-2">
-                    <button type="submit" className="w-full bg-primary text-white rounded py-2">Submit</button>
+                                                <button 
+                            type={loading ? "button" : "submit"}
+                            className="w-full flex justify-center items-center bg-primary text-white rounded py-2"
+                            disabled={loading}>
+                                                        {
+                                loading &&
+                                <span className="animate-spin flex justify-center items-center w-7">
+                                    <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                                </span>
+                            }
+                            {loading ? "Loading..." : "Submit"}
+                            </button>
                 </div>
             </form>
         </CustomModal>
