@@ -11,6 +11,8 @@ const SubSettings = () => {
   const router = useRouter();
   
   console.log(router.query.name);
+
+  
   return (
     <HomeLayout>
       <div className={`${style["settings-wrapper"]}`}>

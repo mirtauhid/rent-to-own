@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import baseURL from "../../../Helpers/httpRequest";
 import Description from "./Description";
 import Features from "./Features";
@@ -94,6 +96,12 @@ const ListPropertyPages = ({ children }) => {
     enableReinitialize: true,
     validate,
     onSubmit: (values) => {
+      // For toast
+      toast.warning("Your request processing!", {
+          theme: "colored",
+          autoClose: 5000,
+      });
+
       axios({
         method: "POST",
         url: `${baseURL}/v2/public/property`,
@@ -102,16 +110,37 @@ const ListPropertyPages = ({ children }) => {
       })
         .then((res) => {
           if (res.data?.status_code) {
+            // For toast
+            toast.success("Property listed successfully!", {
+                theme: "colored",
+                autoClose: 3000,
+            });
             // Dynamic routing
             router.push("/sellerProfile/yourListings")
           }
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          // For toast
+          toast.error("Property listing failed!", {
+              theme: "colored",
+              autoClose: 2000,
+          });
+        })
     },
   });
   
   return (
     <div className="container mx-auto py-7">
+       <ToastContainer
+                position="top-center"
+                limit={2}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover />
       <div className="md:flex">
         <div className="md:w-1/4 px-3">
           <TimeLine steps={steps} />

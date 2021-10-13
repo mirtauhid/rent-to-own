@@ -90,7 +90,7 @@ const Description = ({ steps, setSteps, formik }) => {
                     }
                 </select>
                 {
-                    formik.errors.listingTypeId &&
+                    formik.touched.listingTypeId && formik.errors.listingTypeId &&
                     <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.listingTypeId}</div>
                 }
             </div>
@@ -146,7 +146,7 @@ const Description = ({ steps, setSteps, formik }) => {
                     </span>
                 </label>
                 {
-                    formik.errors.amOwner &&
+                    formik.touched.amOwner && formik.errors.amOwner &&
                     <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.amOwner}</div>
                 }
             </div>
@@ -164,7 +164,7 @@ const Description = ({ steps, setSteps, formik }) => {
                     </span>
                 </label>
                 {
-                    formik.errors.isAgree &&
+                    formik.touched.isAgree && formik.errors.isAgree &&
                     <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.isAgree}</div>
                 }
             </div>
@@ -182,7 +182,7 @@ const Description = ({ steps, setSteps, formik }) => {
                     </span>
                 </label>
                 {
-                    formik.errors.isInsurance &&
+                    formik.touched.isInsurance && formik.errors.isInsurance &&
                     <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.isInsurance}</div>
                 }
             </div>

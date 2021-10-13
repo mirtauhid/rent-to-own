@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
-import SingleImageCard from "./SingleImageCard";
-import MultipleImageCard from "./MultipleImageCard";
+import baseUrl from "../../../../Helpers/httpRequest";
 import CustomSliderNext from "./CustomSliderNext";
 import CustomSliderPrev from "./CustomSliderPrev";
-import axios from "axios";
-import baseUrl from "../../../../Helpers/httpRequest";
+import MultipleImageCard from "./MultipleImageCard";
+import SingleImageCard from "./SingleImageCard";
 
 const ExploreNeighborSlider = () => {
   const [sliderData, setSliderData] = useState();
