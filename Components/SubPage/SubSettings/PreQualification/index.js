@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Requirement from "./Requirement";
 import PreQualified from "./PreQualified";
 import DocumentUploadSection from "./DocumentUploadSection";
@@ -10,14 +10,7 @@ import baseURL from "../../../../Helpers/httpRequest";
 
 //formik properties starts
 
-const initialValues = {
-  applicantIncome: null,
-  coApplicantIncome: null,
-  downpayment: null,
-  LOE: null,
-  downpaymentDoc: null,
-  CRA: null,
-};
+
 
 // const phoneRegExp =
 //   /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
@@ -32,9 +25,40 @@ const validationSchema = Yup.object().shape({
   LOE: Yup.mixed().required("Required"),
   downpaymentDoc: Yup.mixed().required("Required"),
   CRA: Yup.mixed().required("Required"),
-});
+},[]);
 
 const index = () => {
+
+  const [preQualificationData, setPreQualificationData] = useState();
+
+  useEffect(() => {
+    axios
+      .get(`${baseURL}/v2/prequalifications`, {
+        headers: {
+          authorization: localStorage.getItem("authToken"),
+        },
+      })
+      .then((res) => {
+        setPreQualificationData(res.data.data);
+      })
+      .catch((err) => console.log(err));
+
+      
+
+      
+  },[]);
+
+  const initialValues = {
+    applicantIncome: null,
+    coApplicantIncome: null,
+    downpayment: null,
+    LOE: null,
+    downpaymentDoc: null,
+    CRA: null,
+  };
+
+  console.log(preQualificationData);
+
   const onSubmit = (values, { resetForm }) => {
     const formData = new FormData();
     formData.append("applicantIncome", values.applicantIncome);
@@ -55,23 +79,24 @@ const index = () => {
     axios
       .get(`${baseURL}/v2/prequalifications`, {
         headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4IiwidHlwZSI6IkJVWUVSIiwiaWF0IjoxNjMzOTQwNzg1LCJleHAiOjE2MzQxOTk5ODV9.hn6gcL3aARVOzWesKh7iq9F7OMULfkRVaHYD5m_cqgk",
+          authorization: localStorage.getItem("authToken"),
         },
       })
       .then((res) => {
-        console.log(res.data.data.id);
+        console.log(res.data.data);
+        axios
+          .put(
+            `${baseURL}/v2/prequalifications/${res.data.data.prequalification.id}`,
+            formData,
+            {
+              headers: {
+                authorization: localStorage.getItem("authToken"),
+              },
+            }
+          )
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err));
       })
-      .catch((err) => console.log(err));
-
-    axios
-      .put(`${baseURL}/v2/prequalifications/5`, formData, {
-        headers: {
-          authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM4IiwidHlwZSI6IkJVWUVSIiwiaWF0IjoxNjMzOTQwNzg1LCJleHAiOjE2MzQxOTk5ODV9.hn6gcL3aARVOzWesKh7iq9F7OMULfkRVaHYD5m_cqgk",
-        },
-      })
-      .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
   return (

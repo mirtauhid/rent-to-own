@@ -28,7 +28,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
             </div>
             <div>
                 <h1 className="text-xl text-gray-400 font-bold pt-6 ">About this home</h1>
-                <p className="text-sm font-open-sans text-gray-900 pt-5">
+                <p className="text-base font-open-sans text-gray-900 pt-3" style={{lineHeight:"27px"}}>
                     {propertyDetails?.description}
                 </p>
                 {/* <a className="cursor-pointer text-xs text-primary pt-3">See more</a> */}
