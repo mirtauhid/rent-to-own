@@ -7,12 +7,12 @@ const index = ({ property, showVertically }) => {
                 showVertically
                     ? <ul className="pl-6 py-3 list-disc">
                         {property?.map(item => (
-                            item.Feature.interior === false ? <li className="text-md">{item.Feature?.name}</li> : null
+                            item.Feature.interior === false ? <li key={item.Feature?.id}  className="text-md">{item.Feature?.name}</li> : null
                         ))}
                     </ul>
                     : <div className="gap-8 flex flex-wrap py-5">
                         {property?.map(item => (
-                            item.Feature.interior === false ? <p className="text-md">{item.Feature?.name}</p> : null
+                            item.Feature.interior === false ? <p key={item.Feature?.id}  className="text-md">{item.Feature?.name}</p> : null
                         ))}
                     </div>
             }

@@ -12,7 +12,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
         <div>
             <div className="flex flex-row">
                 <div>
-                    <h1 className="text-primary text-2xl font-medium">${pricePerMonth}</h1>
+                    <h1 className="text-primary text-2xl font-medium">CA$ {pricePerMonth}</h1>
                     <p className="text-xs text-gray-500">per month</p>
                 </div>
                 <div className="ml-4">
@@ -34,7 +34,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
             </div>
             <div>
                 <h1 className="text-xl text-gray-400 font-bold pt-6 ">About this home</h1>
-                <p className="text-base font-open-sans text-gray-900 pt-3" style={{lineHeight:"27px"}}>
+                <div className="text-base font-open-sans text-gray-900 pt-3" style={{lineHeight:"27px"}}>
                 {
                     !isLongText
                         ? description
@@ -61,8 +61,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
                             }
                         </div>
                 }
-                </p>
-                {/* <a className="cursor-pointer text-xs text-primary pt-3">See more</a> */}
+                </div>
             </div>
         </div>
     )
