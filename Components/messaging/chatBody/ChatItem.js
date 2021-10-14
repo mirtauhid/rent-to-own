@@ -36,7 +36,7 @@ export default class ChatItem extends Component {
           </div>
         </div>
         {this.props?.user === "me" ? (
-          <Avatar isOnline="active" image={this.props.sUserImage} size/>
+          <Avatar isOnline="active" image={this.props.sUserImage ? this.props.sUserImage : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"} size/>
         ) : null}
       </div>
     );

@@ -12,7 +12,6 @@ import ListPropertyWarningModal from "../../../Components/Modal/ListPropertyWarn
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
-  
 
   const [showNav, setShowNav] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
@@ -132,7 +131,7 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
   const router = useRouter(); 
 
   const auth = useSelector((state)=>state.auth);
-  
+  const loggedInUser = useSelector((state) => state.auth?.userData);
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(signOut());
@@ -185,7 +184,14 @@ const HeaderNavBar = ({ showNav, setShowNav }) => {
       } transition duration-300`}
     >
       <ul>
-        <li className="mt-2 cursor-pointer">Messages</li>
+        <Link
+          href={{
+            pathname: "/messaging",
+            query: { buyer: loggedInUser?.type === "BUYER" ? "available" : "unavailable" },
+          }}
+        >
+          <li className="mt-2 cursor-pointer">Messages</li> 
+        </Link>
         <li className="mt-2 cursor-pointer" onClick={handleProfileClick}>Profile Settings</li>
 
         <li className="mt-2 cursor-pointer">Help</li>

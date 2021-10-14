@@ -29,11 +29,17 @@ const Message = () => {
     const [newMessages, setNewMessages] = useState();
     const [newMessages2, setNewMessages2] = useState();
     const loggedInUser = useSelector((state) => state.auth?.userData);
+    const currentUser = useSelector((state) => state.auth?.userData?.id);
+    console.log(loggedInUser);
     const router = useRouter()
     const {
-        query: { buyerid, sellerid },
+        query: { buyer, sellerid },
     } = router
     const [selectedUser, setSelectedUser] = useState();
+
+    console.log('====================================');
+    console.log(buyer);
+    console.log('====================================');
 
     const handleConversation = () => {
         const createMsgs = async() => {
@@ -50,13 +56,15 @@ const Message = () => {
             await userroomRef.add({
                 lastSeen: firebase.firestore.FieldValue.serverTimestamp(),
                 roomId: r.id,
-                userId: parseInt(buyerid),
+                userId: parseInt(currentUser),
             });
             setActiveRoom(r.id)
             setStartMessage(!startMessage);
         }
         createMsgs();
     }
+
+    useEffect(()=>{}, [handleConversation])
 
     //message
     const [messages, setMessages] = useState([]);
@@ -76,18 +84,18 @@ const Message = () => {
     }
 
     const fetching = async () => {
-        if(buyerid) {
-            await firestore.collection('userRooms').where('userId', '==', parseInt(buyerid)).onSnapshot(snapshots => {
+        if(currentUser) {
+            await firestore.collection('userRooms').where('userId', '==', parseInt(currentUser)).onSnapshot(snapshots => {
                 setRooms(snapshotToArray(snapshots))
             });
         }
     }
 
     const fetchingTotalRooms = () => {
-        if(buyerid) {
+        if(currentUser) {
             firestore.collection('userRooms').onSnapshot(snapshots => {
                 const data = snapshotToArray(snapshots);
-                const roomId = data.filter(item => item.userId == buyerid).map((item) => item.roomId)
+                const roomId = data.filter(item => item.userId == currentUser).map((item) => item.roomId)
                 const ans = data.filter(item => (
                     item.userId == sellerid && roomId.includes(item.roomId)
                 ))
@@ -101,7 +109,7 @@ const Message = () => {
 
     useEffect(() => {
         fetchingTotalRooms()
-    }, [buyerid]);
+    }, [currentUser]);
 
     const changeRoom = async (roomid) => {
         if(activeRoom !== roomid) {
@@ -137,48 +145,57 @@ const Message = () => {
 
     useEffect( () => {
         fetching();
-    }, [buyerid])
+    }, [currentUser])
+
+    useEffect( () => {}, [buyer])
 
     useEffect( () => {
 
     }, [rooms])
+
+
 
     return (
         <HomeLayout>
             {rooms && loggedInUser ? 
             <div className="container px-4 mx-auto p-5 relative w-full __main">
                 <div className="flex flex-wrap justify-center">
-                    <div className="flex items-center justify-center">
-                        <SubModal isOpen={startMessage} isMiddle={true}>
-                            {isConversationAvailable == true ? (
-                                <div>
-                                    <p>Previous Conversation found. Press OK to continue with the conversation.</p>
-                                    <div 
-                                        onClick={() => setStartMessage(!startMessage)}
-                                        className="flex justify-center"
-                                    >
-                                        <div className="rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center">
-                                            <p>OK</p>
+                    {loggedInUser.type == "SELLER" ? (
+                        null
+                    ) : buyer && buyer == 'available' ? (
+                        null
+                    ) : (
+                        <div className="flex items-center justify-center">
+                            <SubModal isOpen={startMessage} isMiddle={true}>
+                                {isConversationAvailable == true ? (
+                                    <div>
+                                        <p>Previous Conversation found. Press OK to continue with the conversation.</p>
+                                        <div className="flex justify-center">
+                                            <div 
+                                                onClick={() => setStartMessage(!startMessage)}
+                                                className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center"
+                                            >
+                                                <p>OK</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )  : (
-                                <div>
-                                    <div className="flex justify-center">
-                                        <p>Are you sure to start a new conversation</p>
-                                    </div>
-                                    <div 
-                                        onClick={handleConversation}
-                                        className="flex justify-center"
-                                    >
-                                        <div className="rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center">
-                                            <p>Confirm</p>
+                                )  : (
+                                    <div>
+                                        <div className="flex justify-center text-center">
+                                            <p>No previous conversation found with this user. Are you sure to start a new conversation</p>
+                                        </div>
+                                        <div className="flex justify-center">
+                                            <div 
+                                                onClick={handleConversation}
+                                                className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center">
+                                                <p>Confirm</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        </SubModal>
-                    </div>
+                                )}
+                            </SubModal>
+                        </div>
+                    )}
                     <SubModal isOpen={messageVisible}>
                         <div 
                             onClick={() => setMessageVisible(!messageVisible)}

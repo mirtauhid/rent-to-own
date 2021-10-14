@@ -31,7 +31,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
             <Link
                 href={{
                   pathname: "/messaging",
-                  query: { buyerid: loggedInUser?.id, sellerid: propertyDetails?.User.id },
+                  query: { sellerid: propertyDetails?.User.id },
                 }}
             >
                 <a className={"text-xs lg:text-sm py-2  block"}>
