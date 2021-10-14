@@ -4,6 +4,7 @@ import baseURL from '../../Helpers/httpRequest';
 const initialState = {
     allareas: null,
     allcities: [],
+    userDesc: null,
     status: null
 };
 
@@ -39,6 +40,22 @@ export const getCities = createAsyncThunk (
     }
 )
 
+export const getUserDesc = createAsyncThunk (
+    'areas/getUserDesc',
+    async ({userId}) => {
+        try {
+            const response = await fetch(`${baseURL}/v2/public/users/${userId}`) ;
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+            const resData = await response.json();
+            return resData.data;
+        }catch(err) {
+            throw err;
+        }
+    }
+)
+
 export const areasSlice = createSlice({
   name: "areas",
   initialState,
@@ -61,6 +78,17 @@ export const areasSlice = createSlice({
         state.status = 'success'
     },
     [getCities.rejected]: (state, action) => {
+        state.status = 'failed'
+    },
+    //
+    [getUserDesc.pending]: (state, action) => {
+        state.status = 'loading'
+    },
+    [getUserDesc.fulfilled]: (state, { payload }) => {
+        state.userDesc = payload
+        state.status = 'success'
+    },
+    [getUserDesc.rejected]: (state, action) => {
         state.status = 'failed'
     },
   },

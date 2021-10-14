@@ -103,8 +103,8 @@
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
     border-radius: 8px;
+    margin-top: 15px;
   }
   .sendNewMessage button {
     width: 36px;

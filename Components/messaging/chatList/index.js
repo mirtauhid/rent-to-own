@@ -1,11 +1,9 @@
 import React from 'react';
 import ChatListItems from "./ChatListItems";
 import style from "./style.module.css";
-import { useDispatch, useSelector } from "react-redux";
 
 const index = props => {
-    const users = useSelector((state) => state.message.users);
-    const rooms = props.users;
+    const rooms = props.rooms;
     return (
         <div className="md:max-w-[320px]">
             <h1 className="font-semibold">Messages</h1>
@@ -14,14 +12,18 @@ const index = props => {
             {rooms?.map((item, index) => {
                 return (
                 <ChatListItems
+                    setSelectedUser={props.setSelectedUser}
+                    selectedId={props.selectedId}
                     setSelectedId={props.setSelectedId}
-                    name={item.name}
+                    name={item.roomId}
+                    roomId={item.roomId}
+                    image={item.image}
                     key={index}
-                    // userId={item.id}
-                    // animationDelay={index + 1}
+                    changeRoom={props.changeRoom}
+                    userId={item.userId}
+                    animationDelay={index + 1}
                     // active={item.active ? "active" : ""}
                     // isOnline={item.isOnline ? "active" : ""}
-                    // image={item.image}
                 />
                 );
             })}
