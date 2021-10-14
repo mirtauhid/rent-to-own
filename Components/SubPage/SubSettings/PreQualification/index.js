@@ -10,6 +10,7 @@ import axios from "axios";
 import baseURL from "../../../../Helpers/httpRequest";
 import {FcProcess} from "react-icons/fc"
 
+
 //formik properties starts
 
 // const phoneRegExp =
@@ -64,8 +65,6 @@ const index = () => {
     CRA: null,
   };
 
-  console.log(preQualificationData);
-
   const onSubmit = (values, { resetForm }) => {
     const formData = new FormData();
     formData.append("applicantIncome", values.applicantIncome);
@@ -100,7 +99,8 @@ const index = () => {
   return (
     <>
       {preQualificationData?.status === "PENDING" || edit ? (
-        <div className="border-2 px-5 my-10">
+        <>
+        <div className="border-2 px-5 my-10 rounded-md">
           <Requirement />
           <Formik
             initialValues={initialValues}
@@ -128,6 +128,8 @@ const index = () => {
             </button>
           ) : null}
         </div>
+        
+        </>
       ) : preQualificationData?.status === "PROCESSING" ? (
         <div className="border-2 px-5 py-5 my-10">
           <FcProcess className="md:text-2xl mx-auto" />

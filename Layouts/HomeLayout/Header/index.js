@@ -42,9 +42,14 @@ const Header = () => {
       .catch((err) => console.log(err));
   },[])
 
+ 
+
   return (
     <>
-      <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
+    
+
+
+      <header className={"shadow-md px-5 md:px-20 lg:px-28"} >
         <div className="py-7">
           <div className="grid grid-cols-1 smd:grid-cols-2">
             <div>
@@ -253,5 +258,6 @@ const HeaderNavBar = ({ showNav, setShowNav, setShowWarning }) => {
     </div>
   );
 };
+
 
 export default Header;

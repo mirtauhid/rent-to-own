@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { FaFacebookF, FaTwitter, FaTelegramPlane, FaInstagram } from 'react-icons/fa'
 
+
 const Footer = () => (
+  
   <footer className={"py-7 border-t "}>
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-12 pl-5 md:pl-20">
@@ -174,6 +176,21 @@ const Footer = () => (
     </div>
   </footer>
 );
+
+
+
+
+function twak(){
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src="https://embed.tawk.to/6167c082f7c0440a591e1c5f/1fhukg0ft";
+s1.charset="UTF-8";
+s1.setAttribute("crossorigin","*");
+s0.parentNode.insertBefore(s1,s0);
+}
+
+
 
 
 export default Footer
