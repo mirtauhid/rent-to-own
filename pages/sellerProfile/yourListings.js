@@ -5,7 +5,7 @@ import HomeLayout from '../../Layouts/HomeLayout';
 const YourListings = () => {
     return (
         <HomeLayout>
-            <YourListingsPage/>
+            <YourListingsPage />
         </HomeLayout>
     );
 };

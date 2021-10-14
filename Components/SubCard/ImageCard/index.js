@@ -22,7 +22,7 @@ const index = ({item, title, host, price, images}) => {
                         </a>
                     </Link>
                     <p className="text-xs text-gray-400 pt-1">{host}</p>
-                    <h1 className="text-xl mt-2 font-bold flex-1 text-primary">${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h1>
+                    <h1 className="text-xl mt-2 font-bold flex-1 text-primary">CA$ {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h1>
 
                     <div className="bg-green-200 flex flex-row items-center p-3 rounded mt-3">
                         <IoMdTimer />
