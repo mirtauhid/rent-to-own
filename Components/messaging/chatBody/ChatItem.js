@@ -20,13 +20,13 @@ export default class ChatItem extends Component {
         <div>
           {this.props.messageImages ? (
             this.props.messageImages?.map((item, index) => (
-              <img className={`bg-gray-200 flex mx-2 mt-2 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md" : "rounded-br-md"}`}
+              <img className={`bg-gray-200 flex mx-2 mt-2 min-w-[300px] max-w-[400px]  rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md" : "rounded-br-md"}`}
                 src={item}
                 key={index}
               />
             ))
           ) : (
-            <div className={`bg-gray-100 flex p-4 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 bg-blue-100" : "rounded-br-md ml-2"}`}>
+            <div className={`bg-gray-100 flex p-4 w-[200px] md:w-[300px] lg:w-[400px] xl:w-[500px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 bg-blue-100" : "rounded-br-md ml-2"}`}>
               <div className={style["chat__msg"]}>{this.props.msg}</div>
             </div>
           )}

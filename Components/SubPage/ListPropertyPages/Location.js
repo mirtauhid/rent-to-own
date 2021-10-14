@@ -96,8 +96,8 @@ const Location = ({ steps, setSteps, formik }) => {
                     Search Your Address
                 </h3>
                 {isLoaded && <Search
-                    setSearch={(value) => console.log(value)}
-                    setLatLng={(value) => console.log(value)}
+                    setSearch={(value) => {}}
+                    setLatLng={(value) => {}}
                     setLocationData={setLocationData}
                     inputPlaceholder="Search your address" />}
                 {

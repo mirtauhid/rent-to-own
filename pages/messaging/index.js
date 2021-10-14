@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HomeLayout from '../../Layouts/HomeLayout';
 import ChatList from '../../Components/messaging/chatList';
 import ChatBody from '../../Components/messaging/chatBody';
+import MobileChatBody from '../../Components/messaging/chatBody/MobileChatBody';
 //import DetailsContent from '../../Components/messaging/detailsContent';
 import SubModal from '../../Components/messaging/SubModal';
 import { FaWindowClose } from 'react-icons/fa';
@@ -30,16 +31,11 @@ const Message = () => {
     const [newMessages2, setNewMessages2] = useState();
     const loggedInUser = useSelector((state) => state.auth?.userData);
     const currentUser = useSelector((state) => state.auth?.userData?.id);
-    console.log(loggedInUser);
     const router = useRouter()
     const {
         query: { buyer, sellerid },
     } = router
     const [selectedUser, setSelectedUser] = useState();
-
-    console.log('====================================');
-    console.log(buyer);
-    console.log('====================================');
 
     const handleConversation = () => {
         const createMsgs = async() => {
@@ -99,7 +95,6 @@ const Message = () => {
                 const ans = data.filter(item => (
                     item.userId == sellerid && roomId.includes(item.roomId)
                 ))
-                console.log(ans);
                 setIsConversationAvailable(!!ans.length)
             });
         }
@@ -203,7 +198,7 @@ const Message = () => {
                         >
                             <FaWindowClose height={24} width={16}/>
                         </div>
-                        <ChatBody 
+                        <MobileChatBody 
                             selectedUser={selectedUser}
                             selectedId={selectedId} messages={messages} 
                             activeRoom={activeRoom} firebase={firebase} 
@@ -237,7 +232,7 @@ const Message = () => {
                     }
                     
                     {messages && activeRoom && loggedInUser ? 
-                    <div className="hidden md:block" >
+                    <div className="hidden md:block " >
                         <ChatBody 
                             selectedUser={selectedUser}
                             selectedId={selectedId} messages={messages} 

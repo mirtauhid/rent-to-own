@@ -24,6 +24,9 @@
   .settings .btn-nobg {
     color: #000;
   }
+  .chat__items__mobile {
+    width: 70%
+  }
   .content__body {
     height: calc(100vh - calc(100vh / 2.4));
     overflow: auto;
@@ -74,6 +77,9 @@
     font-size: 14px;
     color: #8693d3;
     user-select: none;
+  }
+  .defaultWidth {
+    min-width: "90%";
   }
   .chat__msg {
     user-select: none;
