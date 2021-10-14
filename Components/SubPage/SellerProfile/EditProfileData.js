@@ -5,10 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { BsCardImage } from 'react-icons/bs';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import baseURL from '../../../Helpers/httpRequest';
-import { onSelectFile } from '../../../Helpers/imageHandlers';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import baseURL from '../../../Helpers/httpRequest';
+import { onSelectFile } from '../../../Helpers/imageHandlers';
 
 const EditProfileData = () => {
     const [photo, setPhoto] = useState(null)
@@ -84,7 +84,7 @@ const EditProfileData = () => {
             })
             .catch((err)=>{
                     // For toast
-                    toast.error("Address changining failed!", {
+                    toast.error("Profile data chaging failed!", {
                       theme: "colored",
                       autoClose: 2000,
                   });

@@ -12,7 +12,7 @@ const HomeLayout = ({children}) => {
                 <link rel="shortcut icon" type="image/jpg" href="/images/fav.jpg"/>
                 <link rel="shortcut icon" type="image/x-icon" href="/images/fav.jpg" />
                 <link rel="apple-touch-icon-precomposed" type="image/png" href="/images/fav.jpg" />
-
+                
             </Head>
             <Header />
             {
