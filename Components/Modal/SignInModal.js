@@ -73,7 +73,6 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
               headers: { Authorization: res.data.data.token}
             })
               .then((res) => {
-                console.log(res.data.data);
                 if (res.data.success) {
                   // loading end
                   setLoading(false);

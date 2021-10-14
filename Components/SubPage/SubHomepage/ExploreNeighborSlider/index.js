@@ -62,7 +62,6 @@ const ExploreNeighborSlider = () => {
           {sliderData?.map((item, index) => {
             
             if (index % 2 === 0) {
-              console.log(item)
               return (
                 <div
                   style={{ width: "250px", marginRight: "12px" }}

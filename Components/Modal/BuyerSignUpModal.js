@@ -336,7 +336,6 @@ const LogIn = () => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
         },
     });
 
