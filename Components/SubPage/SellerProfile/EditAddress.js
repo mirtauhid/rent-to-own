@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import baseURL from '../../../Helpers/httpRequest';
 
-const EditAddress = () => {
+const EditAddress = ({fullWidth}) => {
     const [userAddress, setUserAddress] = useState({
         street: '',
         apt: '',
@@ -78,7 +78,7 @@ const EditAddress = () => {
     return (
         <form
             onSubmit={formik.handleSubmit}
-            className="lg:w-2/3">
+            className={!fullWidth && "lg:w-2/3"}>
             <ToastContainer
                 position="top-center"
                 limit={2}

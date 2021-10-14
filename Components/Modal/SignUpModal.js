@@ -119,7 +119,7 @@ const SignUpModal = ({ showSignUpModal, setShowSignUpModal, setShowSignInModal, 
                 .catch((err) => {
                     // loading end
                     setLoading(false);
-                    setError({ status: true, msg: err.response.data.message })
+                    err? setError({ status: true, msg: err?.response?.data.message }):null
                 })
         },
     });
