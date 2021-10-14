@@ -16,7 +16,7 @@ const Carousel = ({images}) => {
         <Slider {...settings}>
 
           {
-            images?.map((item)=>{
+            images?.map((item, index)=>{
               return (
                 <div className="w-full h-80" key={item.id}>
                   <img

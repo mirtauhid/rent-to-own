@@ -10,33 +10,33 @@ export default class ChatItem extends Component {
     return (
       <div
         style={{ animationDelay: `0.8s` }}
-        className={`flex ${this.props?.user === "me" ? "justify-end items-end" : null} mb-6 mx-2`}
+        className={`flex ${this.props?.user === "me" ? "justify-end items-end ml-10" : "ml-0 mr-14"} mb-6 mx-5`}
       >
         {this.props?.user != "me" ? (
           <div className="flex justify-end items-end">
-            <Avatar isOnline="active" image={this.props.image} size />
+            <Avatar isOnline="active" image={this.props.image ? this.props.image : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"} size />
           </div>
         ) : null}
         <div>
           {this.props.messageImages ? (
-            this.props.messageImages.map((item, index) => (
+            this.props.messageImages?.map((item, index) => (
               <img className={`bg-gray-200 flex mx-2 mt-2 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md" : "rounded-br-md"}`}
                 src={item}
                 key={index}
               />
             ))
           ) : (
-            <div className={`bg-gray-100 flex p-4 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 lr-12" : "rounded-br-md ml-2 mr-12"}`}>
+            <div className={`bg-gray-100 flex p-4 min-w-[200px] max-w-[250px] lg:max-w-[380px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 bg-blue-100" : "rounded-br-md ml-2"}`}>
               <div className={style["chat__msg"]}>{this.props.msg}</div>
             </div>
           )}
-          <div className="flex justify-between text-xs px-4 mr-5">
-              <span className="text-gray-400">16 mins ago</span>
-              <span className="text-gray-400">Seen 1.03PM</span>
+          <div className="flex justify-center text-xs">
+              <span className="text-gray-400">{this.props.createdAt?.toDate().toDateString()}</span>
+              <span className="text-gray-400 ml-5">{this.props.createdAt?.toDate().toLocaleTimeString('en-US')}</span>
           </div>
         </div>
         {this.props?.user === "me" ? (
-          <Avatar isOnline="active" image={this.props.image} size/>
+          <Avatar isOnline="active" image={this.props.sUserImage ? this.props.sUserImage : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"} size/>
         ) : null}
       </div>
     );
