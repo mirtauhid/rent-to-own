@@ -1,35 +1,40 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import Requirement from "./Requirement";
 import PreQualified from "./PreQualified";
 import DocumentUploadSection from "./DocumentUploadSection";
+import { useRouter } from "next/router";
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import baseURL from "../../../../Helpers/httpRequest";
+import {FcProcess} from "react-icons/fc"
 
 //formik properties starts
-
-
 
 // const phoneRegExp =
 //   /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
 
-const validationSchema = Yup.object().shape({
-  applicantIncome: Yup.number()
-    .required("Required")
-    .typeError("This field should be number"),
-  downpayment: Yup.number()
-    .required("Required")
-    .typeError("This field should be number"),
-  LOE: Yup.mixed().required("Required"),
-  downpaymentDoc: Yup.mixed().required("Required"),
-  CRA: Yup.mixed().required("Required"),
-},[]);
+const validationSchema = Yup.object().shape(
+  {
+    applicantIncome: Yup.number()
+      .required("Required")
+      .typeError("This field should be number"),
+    downpayment: Yup.number()
+      .required("Required")
+      .typeError("This field should be number"),
+    LOE: Yup.mixed().required("Required"),
+    downpaymentDoc: Yup.mixed().required("Required"),
+    CRA: Yup.mixed().required("Required"),
+  },
+  []
+);
 
 const index = () => {
-
   const [preQualificationData, setPreQualificationData] = useState();
+  const [edit,setEdit] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     axios
@@ -39,19 +44,21 @@ const index = () => {
         },
       })
       .then((res) => {
-        setPreQualificationData(res.data.data);
+        setPreQualificationData(res.data.data.prequalification);
       })
       .catch((err) => console.log(err));
+  }, []);
 
-      
-
-      
-  },[]);
+  console.log(preQualificationData);
 
   const initialValues = {
-    applicantIncome: null,
-    coApplicantIncome: null,
-    downpayment: null,
+    applicantIncome: preQualificationData
+      ? preQualificationData.applicantIncome
+      : "",
+    coApplicantIncome: preQualificationData
+      ? preQualificationData.coApplicantIncome
+      : "",
+    downpayment: preQualificationData ? preQualificationData.downpayment : "",
     LOE: null,
     downpaymentDoc: null,
     CRA: null,
@@ -67,14 +74,6 @@ const index = () => {
     formData.append("LOE", values.LOE);
     formData.append("downpaymentDoc", values.downpaymentDoc);
     formData.append("CRA", values.CRA);
-    // console.log(formData.get("applicantIncome"));
-    // console.log(formData.get("coApplicantIncome"));
-    // console.log(formData.get("downpayment"));
-    // console.log(formData.get("LOE"));
-    // console.log(formData.get("downpaymentDoc"));
-    // console.log(formData.get("CRA"));
-    console.log(values);
-    console.log(JSON.stringify(formData));
 
     axios
       .get(`${baseURL}/v2/prequalifications`, {
@@ -83,7 +82,6 @@ const index = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.data);
         axios
           .put(
             `${baseURL}/v2/prequalifications/${res.data.data.prequalification.id}`,
@@ -94,31 +92,53 @@ const index = () => {
               },
             }
           )
-          .then((res) => console.log(res))
+          .then((res) => router.reload())
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
   return (
-    <div className="border-2 px-5 my-10">
-      <Requirement />
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      >
-        <Form>
-          <PreQualified />
-          <DocumentUploadSection />
-          <button
-            className="bg-primary text-white font-bold p-2 rounded-md md:w-1/2 mb-5 mt-5"
-            type="submit"
+    <>
+      {preQualificationData?.status === "PENDING" || edit ? (
+        <div className="border-2 px-5 my-10">
+          <Requirement />
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
           >
-            Submit
-          </button>
-        </Form>
-      </Formik>
-    </div>
+            <Form>
+              <PreQualified />
+              <DocumentUploadSection />
+              <button
+                className="bg-primary text-white font-bold p-2 rounded-md w-full md:w-1/2 block mb-5"
+                type="submit"
+              >
+                Submit
+              </button>
+            </Form>
+          </Formik>
+          {preQualificationData?.status === "PROCESSING" ? (
+            <button
+              className="bg-red-300 text-white font-bold p-2 rounded-md w-full md:w-1/2 mb-5"
+              type="button"
+              onClick={()=>setEdit(false)}
+            >
+              Cancel Editing
+            </button>
+          ) : null}
+        </div>
+      ) : preQualificationData?.status === "PROCESSING" ? (
+        <div className="border-2 px-5 py-5 my-10">
+          <FcProcess className="md:text-2xl mx-auto" />
+          <p className="md:text-2xl mt-3 text-center">
+            Your documents is submitted. We will get back to you shortly after
+            reviewing . Thank you for Staying with Rent-To-Own.
+          </p>
+          <p onClick={() => setEdit(true)} className="text-center text-lg cursor-pointer mt-3 text-primary font-bold underline">Edit your submission</p>
+        </div>
+      ) : null}
+    </>
   );
 };
 
