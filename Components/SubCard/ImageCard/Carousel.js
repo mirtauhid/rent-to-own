@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 
 const Carousel = ({images}) => {
@@ -18,7 +18,7 @@ const Carousel = ({images}) => {
           {
             images?.map((item, index)=>{
               return (
-                <div className="w-full h-80" key={index}>
+                <div className="w-full h-80" key={item.id}>
                   <img
                     className="w-full h-full object-cover"
                     src={item?.src.secure_url}

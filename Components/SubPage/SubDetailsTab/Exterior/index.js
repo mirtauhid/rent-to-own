@@ -1,14 +1,22 @@
 import React from 'react'
 
-const index = ({property}) => {
+const index = ({ property, showVertically }) => {
     return (
-        <div className="gap-8 flex flex-wrap py-5">
-                {property?.map((item, index) => (
-                    item.Feature.interior === false ? <div key={index}>
-                        <p className="text-md">{item.Feature?.name}</p>
-                    </div> : null
-                ))}
-        </div>
+        <>
+            {
+                showVertically
+                    ? <ul className="pl-6 py-3 list-disc">
+                        {property?.map(item => (
+                            item.Feature.interior === false ? <li className="text-md">{item.Feature?.name}</li> : null
+                        ))}
+                    </ul>
+                    : <div className="gap-8 flex flex-wrap py-5">
+                        {property?.map(item => (
+                            item.Feature.interior === false ? <p className="text-md">{item.Feature?.name}</p> : null
+                        ))}
+                    </div>
+            }
+        </>
     )
 }
 

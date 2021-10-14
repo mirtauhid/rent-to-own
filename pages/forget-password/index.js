@@ -1,10 +1,10 @@
-import ForgetPasswordModal from "../../Components/Modal/ForgetPassword"
+import ForgetPasswordUpdate from "../../Components/Modal/ForgetPasswordUpdate"
 import HomeLayout from "../../Layouts/HomeLayout"
 
 const ForgetPassword = () => {
     return (
         <HomeLayout>
-            <ForgetPasswordModal />
+            <ForgetPasswordUpdate />
         </HomeLayout>
     )
 }
