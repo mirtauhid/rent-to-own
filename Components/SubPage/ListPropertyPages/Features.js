@@ -21,7 +21,6 @@ const Features = ({ formik, steps, setSteps }) => {
             })
             .catch((err) => {
                 setLoading(false)
-                console.log(err.response);
             })
     }, [])
 

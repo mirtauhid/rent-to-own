@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef, CSSProperties, useEffect } from "react";
 import Avatar from '../chatList/Avatar';
-import ChatItem from "./ChatItem";
+import ChatItem from "./MobileChatItem";
 import style from './style.module.css';
 import { FaPlus } from 'react-icons/fa';
 import { BiSend } from 'react-icons/bi';
@@ -12,12 +12,7 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
     const messagesEndRef = useRef(null)
     const [content, setContent] = useState('')
     const dispatch = useDispatch();
-    //const conversations = useSelector((state) => state.message);
     const loggedInUser = useSelector((state) => state.auth.userData);
-    //const chat = conversations?.chats.find(item => item.userId === selectedId);
-    //const users = useSelector((state) => state.message.users);
-    //const user = users?.find(item => item.id === selectedId);
-    //const roomKey = rooms?.find(item => item.roomId === activeRoom && user1 === item.userId)
 
     const setValue = (e) => setContent(e.target.value);
     useEffect(() => {
@@ -43,11 +38,6 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
             type: 'TEXT',
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         });
-        
-        // const roomRef = firestore.collection('userRooms').doc(roomKey?.key)
-        // const res = await roomRef.update({
-        //     lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-        // });
     }
 
     useEffect(() => {
@@ -55,8 +45,8 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
     }, [loggedInUser])
 
     return (
-        <div className="pl-5 ">
-            <div className="flex items-center">
+        <div className="">
+            <div className="pl-5 flex items-center">
                 <img
                     className="h-8 w-8 rounded-full"
                     src={selectedUser?.image?.secure_url ? selectedUser?.image?.secure_url : "https://res.cloudinary.com/jingalalatech/image/upload/v1634006214/user-dummy-200x200-1_czlwxk_oevsbo.png"}
@@ -67,7 +57,7 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
             {/* body */}
             <div className={style["content__body"]}>
                 <div className={style["chat__items"]}>
-                    <div>
+                    <div className="pl-3">
                     {messages && loggedInUser?.id ? messages?.map((itm, index) => {
                         return (
                             <div key={index}>

@@ -28,7 +28,6 @@ const ContactUs = () => {
         },
         validate,
         onSubmit: (values) => {
-            console.log(values);
         },
     });
     return (
