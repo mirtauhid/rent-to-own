@@ -46,10 +46,7 @@ const Header = () => {
 
   return (
     <>
-    
-
-
-      <header className={"shadow-md px-5 md:px-20 lg:px-28"} >
+      <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
         <div className="py-7">
           <div className="grid grid-cols-1 smd:grid-cols-2">
             <div>
@@ -94,7 +91,11 @@ const Header = () => {
                   </li>
                 </Link>
 
-                <HeaderNavBar showNav={showNav} setShowNav={setShowNav} setShowWarning={setShowWarning}/>
+                <HeaderNavBar
+                  showNav={showNav}
+                  setShowNav={setShowNav}
+                  setShowWarning={setShowWarning}
+                />
 
                 {auth.isLoggedIn ? (
                   <li
@@ -159,18 +160,27 @@ const Header = () => {
       </header>
       {showWarning && (
         <div>
-          <p
-            className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
-            style={{ background: "#edb95e" }}
-          >
-            Your account is not verified yet. Please visit{" "}
-            <span className="text-white font-extrabold hover:underline">
-              <Link href="/settings?name=prequalification">
-                Pre-Qualification
-              </Link>
-            </span>{" "}
-            to upload required documents.
-          </p>
+          {auth.userData.type === "BUYER" ? (
+            <p
+              className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
+              style={{ background: "#edb95e" }}
+            >
+              Your account is not verified yet. Please visit{" "}
+              <span className="text-white font-extrabold hover:underline">
+                <Link href="/settings?name=prequalification">
+                  Pre-Qualification
+                </Link>
+              </span>{" "}
+              to upload required documents.
+            </p>
+          ) : (
+            <p
+              className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
+              style={{ background: "#edb95e" }}
+            >
+              Your account is not verified yet. Please contact admin for verifying your account.
+            </p>
+          )}
         </div>
       )}
     </>
