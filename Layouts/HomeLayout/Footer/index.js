@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { FaFacebookF, FaTwitter, FaTelegramPlane, FaInstagram } from 'react-icons/fa'
+import Link from 'next/link';
+import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => (
   <footer className={"py-7 border-t "}>

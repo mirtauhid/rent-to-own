@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import Slider from '../../Slider/index';
 import Link from "next/link";
+import React, { useEffect } from 'react';
 import { useSelector } from "react-redux";
+import Slider from '../../Slider/index';
 
 const index = ({ propertyDetails, setPricePerMonth }) => {
   const loggedInUser = useSelector((state) => state.auth?.userData);
@@ -22,7 +22,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
       <div className="flex justify-between">
         <h1 className="text-2xl font-medium">Price</h1>
         <div>
-          <h1 className="text-2xl font-medium">${price}</h1>
+          <h1 className="text-2xl font-medium">CA$ {price}</h1>
         </div>
       </div>
       {
@@ -67,10 +67,10 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
         <p className="text-xs text-gray-800 font-medium">
           Property fair market value today
         </p>
-        <p className="text-xs text-gray-800 font-medium">${price}</p>
+        <p className="text-xs text-gray-800 font-medium">CA$ {price}</p>
       </div>
       <p className="text-xs text-gray-300">
-        Mimimun of $200,000; maximum$50,000
+        Mimimun of CA$ 200,000; maximum CA$ 50,000
       </p>
       <div className="mt-5 flex justify-between">
         <div className="flex flex-row relative">
@@ -80,7 +80,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
         </div>
       </div>
       <p className="text-xs text-gray-300 ">
-        Mimimun of $200,000; maximum$50,000
+        Mimimun of CA$ 200,000; maximum CA$ 50,000
       </p>
 
       <div className="pt-4"></div>
@@ -115,7 +115,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
         <p className="text-xs text-gray-800 font-medium">
           Rent-to-own monthly payments
         </p>
-        <p className="text-sm font-medium text-gray-800">${pricePerMonth}</p>
+        <p className="text-sm font-medium text-gray-800">CA$ {pricePerMonth}</p>
       </div>
     </div>
   );

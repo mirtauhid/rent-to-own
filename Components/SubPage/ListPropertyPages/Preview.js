@@ -67,7 +67,7 @@ const Preview = ({ steps, setSteps, formik }) => {
             <div className="my-5 shadow border border-gray-100 rounded p-4">
                 <h2 className="text-xl font-bold mb-5">Fair market value</h2>
                 <div className="mb-3">
-                    <p>${formik.values?.price}</p>
+                    <p>CA$ {formik.values?.price}</p>
                 </div>
             </div>
 

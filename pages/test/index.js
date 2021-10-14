@@ -1,6 +1,6 @@
-import MakeAnOffer from "../../Components/Modal/MakeAnOffer/";
+
+import ImageSlider from "../../Components/ImageSlider";
 import HomeLayout from "../../Layouts/HomeLayout";
-import ImageSlider from "../../Components/ImageSlider"
 
 const data = [
   {
@@ -15,7 +15,7 @@ const data = [
   {
     img: "/images/Homepage/ExploreNeighborhoodSlidePhotos/NoPath - Copy (53).png",
   },
-];
+]; 
 
 const Test = () => {
     return (
