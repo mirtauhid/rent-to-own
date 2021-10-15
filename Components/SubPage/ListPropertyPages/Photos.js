@@ -19,7 +19,6 @@ const Photos = ({ steps, setSteps, formik }) => {
             setSteps({ ...steps, fifth: true })
         }
     }
-    console.log(formik.errors);
     return (
         <div className="p-6">
             <h2 className="uppercase text-center text-2xl font-bold my-5">ADD A FEW PHOTOS</h2>
