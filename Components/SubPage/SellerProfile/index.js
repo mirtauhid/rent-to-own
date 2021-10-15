@@ -3,7 +3,7 @@ import React from 'react';
 
 const SellerProfilePages = ({activeUrl, children }) => {
     return(
-        <div className="container mx-auto py-7">
+        <div className="px-5 md:px-20 lg:px-28 my-5">
             <div className="md:flex">
                 <div className="md:w-1/4 px-3 py-8">
                     <Link href="/sellerProfile/yourListings">
