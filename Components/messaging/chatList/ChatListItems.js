@@ -76,12 +76,12 @@ const ChatListItems = props => {
         isOnline={true}
       />
 
-      <div className="ml-4 w-56">
+      <div className="ml-4 w-56 lg:w-72">
         <div className="">
           <p className="font-semibold text-sm">{userDescription?.firstName}</p>
         </div>
         <div className="flex relative">
-          <p className="text-xs mt-1 text-gray-500 w-36">{lastmsg}</p>
+          <p className="text-xs mt-1 text-gray-500 w-40 lg:max-w-72">{lastmsg}</p>
           {/* <p className="text-xs text-gray-500 absolute right-2 top-1">32 mins ago</p> */}
         </div>
       </div>

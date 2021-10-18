@@ -5,7 +5,7 @@ import style from "./style.module.css";
 const index = props => {
     const rooms = props.rooms;
     return (
-        <div className="md:max-w-[320px]">
+        <div className="max-w-[320px] lg:max-w-[500px]">
             <h1 className="font-semibold">Messages</h1>
             <div className="border mt-6"></div>
             <div className={style["chatlist__items"]}>
