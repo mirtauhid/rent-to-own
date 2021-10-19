@@ -175,7 +175,7 @@ const Header = () => {
       </header>
       {showWarning && (
         <div>
-          {auth.userData.type === "BUYER" ? (
+          {auth.userData?.type === "BUYER" ? (
             <p
               className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
               style={{ background: "#edb95e" }}
