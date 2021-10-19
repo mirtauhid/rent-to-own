@@ -1,5 +1,5 @@
-import React from 'react'
-import SellersWinCard from './SellersWinCard'
+import React from 'react';
+import SellersWinCard from './SellersWinCard';
 
 const data = [
   {
@@ -34,7 +34,7 @@ const HowSellersWin = () => {
           </p>
           <p className="text-gray-500 text-xs md:text-base">
             With Rent-to-Own Realty, individuals looking to sell their homes
-            have access to
+            have access to:
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-5">
