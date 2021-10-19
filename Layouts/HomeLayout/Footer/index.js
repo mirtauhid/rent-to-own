@@ -3,7 +3,7 @@ import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTwitter } from 'react-icon
 
 
 const Footer = () => (
-  
+
   <footer className={"py-7 border-t "}>
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-12 pl-5 md:pl-20">
@@ -155,22 +155,18 @@ const Footer = () => (
         </span>
 
         <p className="px-5 md:px-20 text-justify mt-5">
-          Legal Disclaimers - Rent-to-Own.com is a global private sale franchise
-          system and marketplace. Each Rent-to-Own.com franchise is
-          independently owned and operated (collectively "Us" or "We"). We are
-          not real estate brokers or agents. We represent neither the buyer nor
-          the seller. We do not trade in real estate. We neither warranty nor
-          make any representations as to the outcome of a property sale. *PRO
-          Services may include services which are performed for our customers by
-          independent third party service providers. Such services are not
-          performed or provided by us. *"List Now. Pay Later." (our Pay Nothing
-          Upfront Program) is a deferred payment program offered through third
-          party providers and is offered on approved credit (certain conditions
-          do apply). Some services, program features and website functions are
-          only available in certain participating franchise areas. "Explore how
-          you could save thousands" is to illustrate the financial benefits of
-          using the Rent-to-Own.com private selling service versus paying
-          commission to a real estate agent whose commissions are negotiable.
+          Legal Disclaimer – RentToOwnRealty.com is a national rent-to-own private sale system and
+          marketplace. RentToOwnRealty.com is independently owned and operated (collectively "Us", “Our”, or
+          "We") and do not act as real estate brokers or agents. We represent neither the buyer nor the seller.
+          We do not trade in real estate. We neither warranty nor make any representations as to the outcome
+          of a property sale or rent-to-own program. Rent-to-Own Services may include services which are
+          performed for our customers by independent third party service providers. Such services are not
+          performed or provided by us. Our Pay Nothing Upfront Program, is a deferred payment program
+          offered on approved credit (certain conditions do apply). Some services, program features, and
+          website functions are only available in certain participating areas and property types. "Guaranteed to
+          receive a qualified offer for 5% more than the fair market value of your home today or your money
+          back!" is to illustrate the financial benefits of selling in 3-years through a rent-to-own model versus
+          selling through traditional means today.
         </p>
       </div>
     </div>
@@ -180,14 +176,14 @@ const Footer = () => (
 
 
 
-function twak(){
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src="https://embed.tawk.to/6167c082f7c0440a591e1c5f/1fhukg0ft";
-s1.charset="UTF-8";
-s1.setAttribute("crossorigin","*");
-s0.parentNode.insertBefore(s1,s0);
+function twak() {
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+  s1.async = true;
+  s1.src = "https://embed.tawk.to/6167c082f7c0440a591e1c5f/1fhukg0ft";
+  s1.charset = "UTF-8";
+  s1.setAttribute("crossorigin", "*");
+  s0.parentNode.insertBefore(s1, s0);
 }
 
 
