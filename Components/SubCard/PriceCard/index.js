@@ -4,16 +4,50 @@ import { useSelector } from "react-redux";
 import Slider from '../../Slider/index';
 
 const index = ({ propertyDetails, setPricePerMonth }) => {
+
+  //calculates the payment for a loan based on constant payments
+  function PMT(ir, np, pv, fv, type) {
+      /*
+      * ir   - interest rate per month
+      * np   - number of periods (months)
+      * pv   - present value
+      * fv   - future value
+      * type - when the payments are due:
+      *        0: end of the period, e.g. end of month (default)
+      *        1: beginning of period
+      */
+      let pmt, pvif;
+
+      fv || (fv = 0);
+      type || (type = 0);
+
+      if (ir === 0)
+          return -(pv + fv)/np;
+
+      pvif = Math.pow(1 + ir, np);
+      pmt = - ir * (pv * pvif + fv) / (pvif - 1);
+
+      if (type === 1)
+          pmt /= (1 + ir);
+
+      return pmt;
+  }
+  const average = (array) => array.reduce((a, b) => a + b) / array.length;
   const loggedInUser = useSelector((state) => state.auth?.userData);
   const auth = useSelector((state) => state.auth);
   const [downPay, setDownPay] = React.useState(3);
-  const [minMaxMonth, setMinMaxMonth] = React.useState(12);
+  const [minMaxMonth, setMinMaxMonth] = React.useState(36);
   const price = propertyDetails?.price;
-  const pricePerMonth = parseInt(
-    (price - (price * downPay) / 100) / minMaxMonth
-  )
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  //calculation price
+  const purchasePrice = price + price * 0.05 * (minMaxMonth/36);
+  const landTaxPay = purchasePrice * -0.02
+  const discountRateApplied = 0.25;
+  const monthlyRentAddition = Math.max(downPay-3, 0)* price/100;
+  const addIncreRentPerPeriod = Math.round(PMT(discountRateApplied/12, minMaxMonth, monthlyRentAddition, 0, 0)/10)*10
+  const increRentPerPeriod = Math.round(PMT(discountRateApplied/12, minMaxMonth, landTaxPay, 0, 0)/10)*10
+  const pricePerMonth = Math.round(
+    price * (average([9.6, 11.4])*1/100) * 0.9/12 + addIncreRentPerPeriod + increRentPerPeriod
+  ).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") ;
   useEffect(() => {
     setPricePerMonth(pricePerMonth);
   }, [pricePerMonth]);
@@ -22,7 +56,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
       <div className="flex justify-between">
         <h1 className="text-2xl font-medium">Price</h1>
         <div>
-          <h1 className="text-2xl font-medium">CA$ {price}</h1>
+          <h1 className="text-2xl font-medium">CA$ {price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h1>
         </div>
       </div>
       {
@@ -67,7 +101,7 @@ const index = ({ propertyDetails, setPricePerMonth }) => {
         <p className="text-xs text-gray-800 font-medium">
           Property fair market value today
         </p>
-        <p className="text-xs text-gray-800 font-medium">CA$ {price}</p>
+        <p className="text-xs text-gray-800 font-medium">CA$ {price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
       </div>
       <p className="text-xs text-gray-300">
         Mimimun of CA$ 200,000; maximum CA$ 50,000
