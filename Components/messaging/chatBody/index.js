@@ -32,6 +32,13 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
         scrollToBottom()
     }, [messages]);
 
+    const enterKeyPress = event => {
+        if (event.code === "Enter" || event.code === "NumpadEnter") {
+          event.preventDefault();
+          sendMsg();
+        }
+    };
+
     const sendMsg = async() => {
         let msg = content;
         setContent('');
@@ -104,6 +111,7 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
                         value={content} 
                         onChange={setValue}
                         className="w-full max-w-16 p-1"
+                        onKeyDown={(e) => enterKeyPress(e) }
                         //className="shadow appearance-none border border-gray-700 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
                     />
                     </div>
