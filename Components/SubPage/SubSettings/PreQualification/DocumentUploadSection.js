@@ -33,8 +33,12 @@ const DocumentUploadSection = () => {
   // };
   return (
     <section className="mb-10 rounded-lg">
-
-      <p className="text-gray-600 mt-5 text-lg font-bold">Upload the following documents :</p>
+      <p className="text-gray-600 mt-5 text-lg font-bold">
+        Upload the following documents :
+      </p>
+      <p className="text-yellow-500 mt-5 text-lg font-bold">
+        ** Only PDF and Images are allowed as documents. 
+      </p>
 
       <FileInputField label="Recent letter of employment" fieldName="LOE" />
       <FileInputField

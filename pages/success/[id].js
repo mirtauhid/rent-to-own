@@ -1,6 +1,7 @@
 import React from 'react'
 import HomeLayout from '../../Layouts/HomeLayout';
 import { BsCheckCircle } from "react-icons/bs";
+import Link from 'next/link';
 
 const CardImage = ({item}) => {
     return (
@@ -19,10 +20,16 @@ const CardImage = ({item}) => {
                             </div>
                         </div>
                         <div className="pt-8 pb-5">
-                            <button
+                        <Link
+                            href={{
+                                pathname: "/sellerProfile/yourListings",
+                            }}
+                        > 
+                            <a
                                 type="submit"
                                 className="bg-primary rounded-full text-white py-2 px-5"
-                            >Start Listing</button>
+                            >Start Listing</a>
+                        </Link>
                         </div>
                     </div>
                 </div>
