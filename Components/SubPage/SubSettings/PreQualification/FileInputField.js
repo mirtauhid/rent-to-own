@@ -54,6 +54,7 @@ const FileInputField = ({ label, fieldName }) => {
                     }}
                     hidden
                     multiple
+                    accept="application/pdf,image/*"
                   />
                   <label
                     htmlFor={fieldName}
