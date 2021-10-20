@@ -27,6 +27,7 @@ const ListPropertyPages = ({ children }) => {
   const router = useRouter()
 
   const { userData } = useSelector((state) => state.auth);
+  const [propertyId, setPropertyId] = useState();
 
   const validate = (values) => {
     const errors = {};
@@ -95,14 +96,14 @@ const ListPropertyPages = ({ children }) => {
     },
     enableReinitialize: true,
     validate,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       // For toast
       toast.warning("Your request processing!", {
           theme: "colored",
           autoClose: 5000,
       });
 
-      axios({
+      await axios({
         method: "POST",
         url: `${baseURL}/v2/public/property`,
         data: values,
@@ -115,9 +116,21 @@ const ListPropertyPages = ({ children }) => {
                 theme: "colored",
                 autoClose: 3000,
             });
+            console.log('resdata', res.data?.data.property.id);
+            axios({
+              method: "POST",
+              url: `https://rent-to-own.zetech.us/api/v2/payments`,
+              data: { propertyId: res.data?.data.property.id },
+              headers: {Authorization: localStorage.getItem("authToken")}
+            }). then(response => {
+                console.log(response.data?.data.url);
+                router.push(response.data?.data.url)
+            }).catch((error) => {
+                console.log(error);
+            })
             // Dynamic routing
-            router.push("/sellerProfile/yourListings")
-          }
+            //router.push("/sellerProfile/yourListings")
+          } 
         })
         .catch((err) => {
           // For toast
@@ -126,6 +139,15 @@ const ListPropertyPages = ({ children }) => {
               autoClose: 2000,
           });
         })
+        console.log(localStorage.getItem("authToken"));
+        console.log('redata',propertyId);
+        {propertyId && axios({
+          method: "POST",
+          url: `${baseURL}/v2/payments`,
+          data: { propertyId: propertyId },
+          headers: {Authorization: localStorage.getItem("authToken")}
+        })}
+        console.log("payment page");
     },
   });
   
