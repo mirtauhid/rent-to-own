@@ -41,21 +41,40 @@ const Header = () => {
     }
     document && handleTest()
 }, [])
-  useEffect(()=>{
-    axios
-      .get(`${baseURL}/v2/prequalifications`, {
-        headers: {
-          authorization: localStorage.getItem("authToken"),
-        },
+  
+useEffect(() => {
+  if (localStorage.getItem("authToken")) {
+    // verifying token
+    axios({
+      method: "POST",
+      url: `${baseURL}/v2/auth/verify`,
+      headers: { Authorization: localStorage.getItem("authToken") },
+    })
+      .then((userData) => {
+        if (userData.data.success) {
+          axios
+            .get(`${baseURL}/v2/prequalifications`, {
+              headers: {
+                authorization: localStorage.getItem("authToken"),
+              },
+            })
+            .then((res) => {
+              console.log(res, userData.data.data);
+              (userData.data.data.type === "BUYER" &&
+                res.data.data.prequalification.status === "PENDING") ||
+              (userData.data.data.type === "SELLER" &&
+                userData.data.data.verified === false)
+                ? setShowWarning(true)
+                : null;
+            })
+            .catch((err) => console.log(err));
+        }
       })
-      .then((res) => {
-        console.log(res);
-        res.data.data.prequalification.status === "PENDING"
-          ? setShowWarning(true)
-          : null;
-      })
-      .catch((err) => console.log(err));
-  },[])
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+}, []);
 
  
 
@@ -175,7 +194,7 @@ const Header = () => {
       </header>
       {showWarning && (
         <div>
-          {auth.userData.type === "BUYER" ? (
+          {auth.userData?.type === "BUYER" ? (
             <p
               className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
               style={{ background: "#edb95e" }}
