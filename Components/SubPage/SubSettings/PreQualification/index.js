@@ -10,12 +10,6 @@ import axios from "axios";
 import baseURL from "../../../../Helpers/httpRequest";
 import {FcProcess} from "react-icons/fc"
 
-
-//formik properties starts
-
-// const phoneRegExp =
-//   /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
-
 const validationSchema = Yup.object().shape(
   {
     applicantIncome: Yup.number()
