@@ -14,7 +14,7 @@ const ChatListItems = props => {
     props.setSelectedId(props.roomId)
     props.setSelectedUser(userDescription);
   };
-  const lastmsg = lastMessage ? lastMessage[0]?.msg.slice(0, 45) + (lastMessage[0]?.msg.length > 35 ? "..." : "") : null
+  const lastmsg = lastMessage ? lastMessage[0]?.msg.slice(0, 30) + (lastMessage[0]?.msg.length > 30 ? "..." : "") : null
 
   const getInfo = async (userId) => {
     if (userId) {

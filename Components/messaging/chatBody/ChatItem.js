@@ -10,7 +10,7 @@ export default class ChatItem extends Component {
     return (
       <div
         style={{ animationDelay: `0.8s` }}
-        className={`flex ${this.props?.user === "me" ? "justify-end items-end ml-10" : "ml-0 mr-14"} mb-6 mx-5`}
+        className={`flex flex-wrap ${this.props?.user === "me" ? "justify-end items-end ml-10" : "ml-0 mr-14"} mb-6 mx-5`}
       >
         {this.props?.user != "me" ? (
           <div className="flex justify-end items-end">
@@ -26,8 +26,8 @@ export default class ChatItem extends Component {
               />
             ))
           ) : (
-            <div className={`bg-gray-100 flex p-4 w-[200px] md:w-[300px] lg:w-[400px] xl:w-[500px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 bg-blue-100" : "rounded-br-md ml-2"}`}>
-              <div className={style["chat__msg"]}>{this.props.msg}</div>
+            <div className={`bg-gray-100 flex flex-wrap p-4 w-[200px] md:w-[300px] lg:w-[400px] xl:w-[500px] rounded-t-md ${this.props?.user === "me" ? "rounded-bl-md mr-2 bg-blue-100" : "rounded-br-md ml-2"}`}>
+              <p className={`${style["chat__msg"]} break-all`}>{this.props.msg}</p>
             </div>
           )}
           <div className="flex justify-center text-xs">

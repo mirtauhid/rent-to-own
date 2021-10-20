@@ -1,6 +1,7 @@
 
 import moment from 'moment';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const SubOfferPreview = () => {
@@ -11,10 +12,12 @@ const SubOfferPreview = () => {
     const offerData = offer?.offerData;
     const buyerData = auth?.userData;
     const sellerData = property?.propertyDetails?.User;
-    console.log("propertyDetails", propertyDetails);
-    console.log("offerData", offerData);
-    console.log("buyerData", buyerData);
-    console.log("sellerData", sellerData);
+
+    const router = useRouter();
+    useEffect(() => {
+        !offerData && router.push('/')
+    }, [])
+
     return (
         <div className="container mx-auto py-7">
             <div className="lg:flex">
@@ -39,9 +42,9 @@ const SubOfferPreview = () => {
                     </div>
 
                     <div className="pl-2">
-                        <div className="w-1/2 m-auto mt-5 p-4 rounded bg-gray-100 text-center">
+                        <div className=" m-auto mt-5 p-4 rounded bg-gray-100 text-center">
                             <h3 className="text-2xl font-medium my-2">Offer amount</h3>
-                            <h3 className="text-3xl font-medium my-2">${propertyDetails?.price}</h3>
+                            <h3 className="text-3xl font-medium my-2">${propertyDetails?.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
                             <p className="text-sm my-2">(100% of asking price)</p>
                         </div>
 
