@@ -3,8 +3,8 @@ import TimeLine from './TimeLine';
 
 const ThirdStep = ({ steps, setSteps, formik }) => {
     return (
-        <div className="px-5">
-            <h2 className="text-primary font-medium text-center lg:text-2xl xl:text-3xl">Conditions</h2>
+        <div className="px-5 pb-5">
+            <h2 className="text-primary font-medium text-center lg:text-2xl xl:text-3xl">Notes / Additional Conditons</h2>
             {/* For importing timeline  */}
             <TimeLine steps={steps} />
 
@@ -12,63 +12,33 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                 <img src="/images/conditions.svg" alt="Deal" className={'w-16 block mx-auto'} />
             </div>
 
-            <h2 className="text-2xl font-medium">Check any conditions related to the sale. </h2>
-            <div className="bg-gray-50 p-3 my-8">
-                <div className="mb-1 p-2">
-                    <label className=" block text-gray-500 font-bold">
-                        <input
-                            className="mr-2 leading-tight"
-                            type="checkbox"
-                            name="anOtherPropertySell"
-                            checked={formik.values.anOtherPropertySell}
-                            onClick={formik.handleChange} />
-                        <span className="text-sm">
-                            Buyer needs to sell another property first.
-                        </span>
-                    </label>
-                </div>
+            <div className="w-full mb-2 p-2">
+                <label className="block text-md font-bold ml-1">Preferred Closing Date (optional)</label>
+                <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="date"
+                    name="closingDate"
+                    value={formik.values.closingDate}
+                    onChange={formik.handleChange}
+                />
+            </div>
 
-                <div className="mb-1 p-2">
-                    <label className=" block text-gray-500 font-bold">
-                        <input
-                            className="mr-2 leading-tight"
-                            type="checkbox"
-                            name="inspection" 
-                            checked={formik.values.inspection}
-                            onClick={formik.handleChange}/>
-                        <span className="text-sm">
-                            Buyer to obtain satisfactory property inspection.
-                        </span>
-                    </label>
-                </div>
-
-                <div className="mb-1 p-2">
-                    <label className=" block text-gray-500 font-bold">
-                        <input
-                            className="mr-2 leading-tight"
-                            type="checkbox"
-                            name="appraisal" 
-                            checked={formik.values.appraisal}
-                            onClick={formik.handleChange}/>
-                        <span className="text-sm">
-                            Buyer to obtain a satisfactory appraisal.
-                        </span>
-                    </label>
-                </div>
-
-                <div className="mb-1 p-2">
-                    <label className=" block text-gray-500 font-bold">
-                        <input
-                            className="mr-2 leading-tight"
-                            type="checkbox"
-                            name="appropriateFinancing" 
-                            checked={formik.values.appropriateFinancing}
-                            onClick={formik.handleChange}/>
-                        <span className="text-sm">
-                            Buyer needs to obtain appropriate financing.
-                        </span>
-                    </label>
-                </div>
+            <div className="w-full mb-2 p-2">
+                <label className="block text-md font-bold ml-1">Any notes or custom terms to add?</label>
+                <textarea
+                    className="resize-none mt-1 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    placeholder="Enter notes here..."
+                    rows="5"
+                    name="terms"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.terms}
+                ></textarea>
+                {
+                    formik.touched.terms && formik.errors.terms &&
+                    <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.terms}</div>
+                }
             </div>
 
             <div className="flex justify-between px-5">
@@ -78,7 +48,12 @@ const ThirdStep = ({ steps, setSteps, formik }) => {
                     className="border-2 border-primary rounded py-2 px-6 mx-2 text-primary"> Back</button>
                 <button
                     type="submit"
-                    onClick={() => setSteps({ ...steps, third: true })}
+                    onClick={() => {
+                        if (formik.values.terms) {
+                            setSteps({ ...steps, third: true })
+                            formik.handleSubmit()
+                        }
+                    }}
                     className=" bg-green-400 text-white rounded py-2 px-6">Next Step</button>
             </div>
         </div>

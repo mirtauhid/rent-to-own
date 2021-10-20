@@ -16,7 +16,7 @@ const Pricing = ({ steps, setSteps, formik }) => {
                     Write in the fair market value
                 </label>
                 <div className="flex shadow appearance-none border rounded w-full text-secondary leading-tight">
-                    <span className="bg-gray-200 w-14 py-2 px-3">CA$</span>
+                    <span className="bg-gray-200 w-14 py-2 px-3">$</span>
                     <input
                         className="px-3 w-full focus:outline-none focus:shadow-outline"
                         id="price"

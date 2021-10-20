@@ -12,7 +12,7 @@ const Introduction = ({propertyDetails, pricePerMonth}) => {
         <div>
             <div className="flex flex-row">
                 <div>
-                    <h1 className="text-primary text-2xl font-medium">CA$ {pricePerMonth}</h1>
+                    <h1 className="text-primary text-2xl font-medium">${pricePerMonth}</h1>
                     <p className="text-xs text-gray-500">per month</p>
                 </div>
                 <div className="ml-4">
