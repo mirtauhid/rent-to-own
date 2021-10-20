@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import baseURL from "../../../../Helpers/httpRequest";
-import {FcProcess} from "react-icons/fc"
+import { FcProcess } from "react-icons/fc";
 
 const validationSchema = Yup.object().shape(
   {
@@ -27,7 +27,7 @@ const validationSchema = Yup.object().shape(
 
 const index = () => {
   const [preQualificationData, setPreQualificationData] = useState();
-  const [edit,setEdit] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const router = useRouter();
 
@@ -64,9 +64,11 @@ const index = () => {
     formData.append("applicantIncome", values.applicantIncome);
     formData.append("coApplicantIncome", values.coApplicantIncome);
     formData.append("downpayment", values.downpayment);
-    formData.append("LOE", values.LOE);
-    formData.append("downpaymentDoc", values.downpaymentDoc);
-    formData.append("CRA", values.CRA);
+    values.LOE?.forEach((item) => formData.append("LOE", item));
+    values.downpaymentDoc?.forEach((item) =>
+      formData.append("downpaymentDoc", item)
+    );
+    values.CRA?.forEach((item) => formData.append("CRA", item));
 
     axios
       .get(`${baseURL}/v2/prequalifications`, {
@@ -85,7 +87,7 @@ const index = () => {
               },
             }
           )
-          .then((res) => router.reload())
+          .then((res) => console.log(res))
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
@@ -94,35 +96,34 @@ const index = () => {
     <>
       {preQualificationData?.status === "PENDING" || edit ? (
         <>
-        <div className="border-2 px-5 my-10 rounded-md">
-          <Requirement />
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-          >
-            <Form>
-              <PreQualified />
-              <DocumentUploadSection />
-              <button
-                className="bg-primary text-white font-bold p-2 rounded-md w-full md:w-1/2 block mb-5"
-                type="submit"
-              >
-                Submit
-              </button>
-            </Form>
-          </Formik>
-          {preQualificationData?.status === "PROCESSING" ? (
-            <button
-              className="bg-red-300 text-white font-bold p-2 rounded-md w-full md:w-1/2 mb-5"
-              type="button"
-              onClick={()=>setEdit(false)}
+          <div className="border-2 px-5 my-10 rounded-md">
+            <Requirement />
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
             >
-              Cancel Editing
-            </button>
-          ) : null}
-        </div>
-        
+              <Form>
+                <PreQualified />
+                <DocumentUploadSection />
+                <button
+                  className="bg-primary text-white font-bold p-2 rounded-md w-full md:w-1/2 block mb-5"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </Form>
+            </Formik>
+            {preQualificationData?.status === "PROCESSING" ? (
+              <button
+                className="bg-red-300 text-white font-bold p-2 rounded-md w-full md:w-1/2 mb-5"
+                type="button"
+                onClick={() => setEdit(false)}
+              >
+                Cancel Editing
+              </button>
+            ) : null}
+          </div>
         </>
       ) : preQualificationData?.status === "PROCESSING" ? (
         <div className="border-2 px-5 py-5 my-10">
@@ -131,7 +132,12 @@ const index = () => {
             Your documents is submitted. We will get back to you shortly after
             reviewing . Thank you for Staying with Rent-To-Own.
           </p>
-          <p onClick={() => setEdit(true)} className="text-center text-lg cursor-pointer mt-3 text-primary font-bold underline">Edit your submission</p>
+          <p
+            onClick={() => setEdit(true)}
+            className="text-center text-lg cursor-pointer mt-3 text-primary font-bold underline"
+          >
+            Edit your submission
+          </p>
         </div>
       ) : null}
     </>
