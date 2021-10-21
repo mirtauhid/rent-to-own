@@ -34,6 +34,7 @@ const CustomModal = ({ children, isOpen, customClasses, isMiddle }) => {
             style={customStyles}
             isOpen={isOpen}>
             <div
+                style={{maxHeight:"90vh",overflow:"auto"}}
                 className={customClasses ? customClasses : "rounded-2xl px-6 pt-3 pb-6 m-auto bg-white w-3/4 md:w-2/3 lg:w-2/5 xl:1/3 my-6"} >
                 {/* Children goes here */}
                 {children}

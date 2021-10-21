@@ -13,23 +13,23 @@ const SecondStep = ({ steps, setSteps, formik }) => {
             </div>
 
             <div className="w-full mb-2 p-2">
-                <label className="text-2xl font-medium mx-3" htmlFor="listItems">
+                <label className="text-2xl font-medium mx-3" htmlFor="includedItems">
                     List any items, appliances, or fittings that you would like to remain at the property.
                 </label>
                 <textarea
                     className="resize-none mt-5 shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
-                    id="listItems"
+                    id="includedItems"
                     type="text"
                     placeholder="List items here..."
                     rows="10"
-                    name="listItems"
+                    name="includedItems"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.listItems}
+                    value={formik.values.includedItems}
                 ></textarea>
                 {
-                    formik.touched.listItems && formik.errors.listItems &&
-                    <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.listItems}</div>
+                    formik.touched.includedItems && formik.errors.includedItems &&
+                    <div className="text-sm text-red-500 mt-2 ml-1">{formik.errors.includedItems}</div>
                 }
             </div>
 
@@ -41,7 +41,7 @@ const SecondStep = ({ steps, setSteps, formik }) => {
                 <button
                     type="submit"
                     onClick={() => {
-                        if (formik.values.listItems) {
+                        if (formik.values.includedItems) {
                             setSteps({ ...steps, second: true })
                         }
                     }}
