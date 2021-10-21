@@ -4,14 +4,16 @@ import { onSelectFile } from '../../../Helpers/imageHandlers';
 
 const Photos = ({ steps, setSteps, formik }) => {
     const handleFileUpload = (e) => {
+        formik.setFieldValue('images', [...formik.values?.images, e.target.files[0]])
         onSelectFile(e)
             .then(data => {
                 const { base64, file } = data;
-                formik.setFieldValue('images', [...formik.values?.images, base64])
+                formik.setFieldValue('base64s', [...formik.values?.base64s, base64])
             })
     }
     const handleDeleteImg = (index) => {
         formik.setFieldValue('images', formik.values?.images?.filter((photo, i) => i != index))
+        formik.setFieldValue('base64s', formik.values?.base64s?.filter((photo, i) => i != index))
     }
 
     const handleNext = () => {
@@ -24,7 +26,7 @@ const Photos = ({ steps, setSteps, formik }) => {
             <h2 className="uppercase text-center text-2xl font-bold my-5">ADD A FEW PHOTOS</h2>
             <div className="md:flex md:flex-wrap w-full mb-2 p-2">
                 {
-                    formik.values?.images?.map((photo, index) => {
+                    formik.values?.base64s?.map((photo, index) => {
                         return (
                             <div key={photo} className="md:w-1/2 text-secondary text-sm font-bold mb-2 p-2 ">
                                 <div className="border-2 relative border-dashed overflow-hidden rounded-lg h-80 md:h-60 lg:h-80">
