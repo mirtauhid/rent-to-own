@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import baseURL from '../../Helpers/httpRequest';
@@ -44,7 +44,7 @@ const ForgetPasswordUpdate = () => {
                     // For toast
                     toast.success(res?.data?.message, {
                         theme: "colored",
-                        autoClose: 5000,
+                        autoClose: 5000
                     });
                     setTimeout(() => push('/'), 5000)
                     setLoading(false)
@@ -123,17 +123,17 @@ const ForgetPasswordUpdate = () => {
                         </div>
 
                         <div className="w-full mb-2 p-2">
-                            <button 
-                            type={loading ? "button" : "submit"}
-                            className="w-full flex justify-center items-center bg-primary text-white rounded py-2"
-                            disabled={loading}>
-                                                        {
-                                loading &&
-                                <span className="animate-spin flex justify-center items-center w-7">
-                                    <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
-                                </span>
-                            }
-                            {loading ? "Loading..." : "Change password"}
+                            <button
+                                type={loading ? "button" : "submit"}
+                                className="w-full flex justify-center items-center bg-primary text-white rounded py-2"
+                                disabled={loading}>
+                                {
+                                    loading &&
+                                    <span className="animate-spin flex justify-center items-center w-7">
+                                        <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                                    </span>
+                                }
+                                {loading ? "Loading..." : "Change password"}
                             </button>
                         </div>
                     </form>

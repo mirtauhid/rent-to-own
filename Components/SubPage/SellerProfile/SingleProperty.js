@@ -31,11 +31,6 @@ const SingleProperty = ({ propertyData }) => {
                 <Link href={`/property/edit?propertyid=${id}`}>
                     <a className="absolute right-0 top-0 bg-primary text-white text-sm rounded py-2 px-4">Edit</a>
                 </Link>
-                <button 
-                    className="absolute left-0 top-0 bg-primary text-white text-sm rounded py-2 px-4"
-                    onClick={payment}
-                >Pay
-                </button>
                 <img src={PropertyImages?.[0]?.src?.secure_url} className="w-full h-full object-cover border" alt="" />
             </div>
             <Link href={`/housesearch/${id}`}>
