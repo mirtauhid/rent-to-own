@@ -44,8 +44,6 @@ const index = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(preQualificationData);
-
   const initialValues = {
     applicantIncome: preQualificationData
       ? preQualificationData.applicantIncome
@@ -87,7 +85,7 @@ const index = () => {
               },
             }
           )
-          .then((res) => console.log(res))
+          .then((res) => router.reload())
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
@@ -137,6 +135,28 @@ const index = () => {
             className="text-center text-lg cursor-pointer mt-3 text-primary font-bold underline"
           >
             Edit your submission
+          </p>
+        </div>
+      ) : preQualificationData?.status === "APPROVED" ? (
+        <div className="border-2 px-5 py-5 my-10">
+          <FcProcess className="md:text-2xl mx-auto" />
+          <p className="md:text-2xl mt-3 text-center">
+            Congratulations. Your profile is verified. You are allowed to
+            provide offer for maximum $
+            {(preQualificationData.applicantIncome +
+              preQualificationData.applicantIncome) *
+              4 >
+            500000
+              ? "500,000"
+              : (preQualificationData.applicantIncome +
+                  preQualificationData.applicantIncome) *
+                4}
+          </p>
+          <p
+            onClick={() => setEdit(true)}
+            className="text-center text-lg cursor-pointer mt-3 text-primary font-bold underline"
+          >
+            I would like to re-submit
           </p>
         </div>
       ) : null}
