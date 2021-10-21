@@ -81,7 +81,7 @@ const ListPropertyPages = ({ children }) => {
       amOwner: false,
       isAgree: false,
       isInsurance: false,
-      featureIds:[],
+      featureIds: [],
       address: "",
       street: "",
       latitude: "",
@@ -90,79 +90,94 @@ const ListPropertyPages = ({ children }) => {
       zipCode: "",
       country: "",
       cityId: 3,
-      apt: "",
       price: "",
       images: [],
+      base64s: []
     },
     enableReinitialize: true,
     validate,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       // For toast
       toast.warning("Your request processing!", {
-          theme: "colored",
-          autoClose: 5000,
+        theme: "colored",
+        autoClose: 5000,
       });
 
-      await axios({
+      const formData = new FormData();
+      for (var key in values) {
+        if (key === 'images') {
+          values.images?.forEach((item) => formData.append("images", item));
+        } else if (key === 'featureIds') {
+          formData.append("featureIds", JSON.stringify(values?.featureIds))
+        } else if (key !== 'base64s') {
+          formData.append(key, values[key]);
+        }
+      }
+
+      axios({
         method: "POST",
-        url: `${baseURL}/v2/public/property`,
-        data: values,
-        headers: {Authorization: localStorage.getItem("authToken")}
+        url: `${baseURL}/v3/public/property`,
+        data: formData,
+        headers: {
+          Authorization: localStorage.getItem("authToken"),
+          'Content-Type': 'multipart/form-data'
+        }
       })
         .then((res) => {
           if (res.data?.status_code) {
             // For toast
             toast.success("Property listed successfully!", {
-                theme: "colored",
-                autoClose: 3000,
+              theme: "colored",
+              autoClose: 3000,
             });
             console.log('resdata', res.data?.data.property.id);
             axios({
               method: "POST",
               url: `https://rent-to-own.zetech.us/api/v2/payments`,
               data: { propertyId: res.data?.data.property.id },
-              headers: {Authorization: localStorage.getItem("authToken")}
-            }). then(response => {
-                console.log(response.data?.data.url);
-                router.push(response.data?.data.url)
+              headers: { Authorization: localStorage.getItem("authToken") }
+            }).then(response => {
+              console.log(response.data?.data.url);
+              router.push(response.data?.data.url)
             }).catch((error) => {
-                console.log(error);
+              console.log(error);
             })
             // Dynamic routing
             //router.push("/sellerProfile/yourListings")
-          } 
+          }
         })
         .catch((err) => {
           // For toast
           toast.error("Property listing failed!", {
-              theme: "colored",
-              autoClose: 2000,
+            theme: "colored",
+            autoClose: 2000,
           });
         })
-        console.log(localStorage.getItem("authToken"));
-        console.log('redata',propertyId);
-        {propertyId && axios({
+      console.log(localStorage.getItem("authToken"));
+      console.log('redata', propertyId);
+      {
+        propertyId && axios({
           method: "POST",
           url: `${baseURL}/v2/payments`,
           data: { propertyId: propertyId },
-          headers: {Authorization: localStorage.getItem("authToken")}
-        })}
-        console.log("payment page");
+          headers: { Authorization: localStorage.getItem("authToken") }
+        })
+      }
+      console.log("payment page");
     },
   });
-  
   return (
     <div className="container mx-auto py-7">
-       <ToastContainer
-                position="top-center"
-                limit={2}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover />
+      <ToastContainer
+        position="top-center"
+        limit={2}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover />
       <div className="md:flex">
         <div className="md:w-1/4 px-3">
           <TimeLine steps={steps} />
@@ -186,12 +201,12 @@ const ListPropertyPages = ({ children }) => {
             )}
 
             {/* This is for the 3rd step (Pricing Page) */}
-            {steps.first && steps.second && steps.third && !steps.fourth &&  (
+            {steps.first && steps.second && steps.third && !steps.fourth && (
               <Pricing steps={steps} setSteps={setSteps} formik={formik} />
             )}
 
             {/* This is for the 4th step (Photos Page) */}
-            {steps.first && steps.second && steps.third  && steps.fourth && !steps.fifth && (
+            {steps.first && steps.second && steps.third && steps.fourth && !steps.fifth && (
               <Photos steps={steps} setSteps={setSteps} formik={formik} />
             )}
 

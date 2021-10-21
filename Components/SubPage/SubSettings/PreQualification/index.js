@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Requirement from "./Requirement";
-import PreQualified from "./PreQualified";
-import DocumentUploadSection from "./DocumentUploadSection";
-import { useRouter } from "next/router";
-
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
-import baseURL from "../../../../Helpers/httpRequest";
+import { Form, Formik } from "formik";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { FcProcess } from "react-icons/fc";
+import * as Yup from "yup";
+import baseURL from "../../../../Helpers/httpRequest";
+import DocumentUploadSection from "./DocumentUploadSection";
+import PreQualified from "./PreQualified";
+import Requirement from "./Requirement";
+
 
 const validationSchema = Yup.object().shape(
   {
