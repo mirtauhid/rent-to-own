@@ -212,7 +212,7 @@ useEffect(() => {
               className="mx-5 my-2 px-5 py-2 text-white rounded-md text-center"
               style={{ background: "#edb95e" }}
             >
-              Your account is not verified yet. Please contact admin for verifying your account.
+              Your account is not verified yet. Please check your email inbox or spam box for verification link.
             </p>
           )}
         </div>
