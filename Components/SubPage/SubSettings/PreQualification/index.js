@@ -112,7 +112,8 @@ const index = () => {
                 </button>
               </Form>
             </Formik>
-            {preQualificationData?.status === "PROCESSING" ? (
+            {preQualificationData?.status === "PROCESSING" ||
+            preQualificationData?.status === "APPROVED" ? (
               <button
                 className="bg-red-300 text-white font-bold p-2 rounded-md w-full md:w-1/2 mb-5"
                 type="button"
