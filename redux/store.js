@@ -1,19 +1,21 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import areasReducer from './slices/areas';
 import authReducer from "./slices/auth";
 import counterReducer from "./slices/counter";
-import chatReducer from './slices/messaging';
-import propertyReducer from './slices/property';
-import areasReducer from './slices/areas';
 import mapReducer from './slices/map';
+import chatReducer from './slices/messaging';
+import offerReducer from "./slices/offer";
+import propertyReducer from './slices/property';
 
 
 const RootReducer = combineReducers({
   counter: counterReducer,
-  auth:authReducer,
+  auth: authReducer,
   message: chatReducer,
   property: propertyReducer,
   areas: areasReducer,
-  map: mapReducer
+  map: mapReducer,
+  offer: offerReducer
 })
 
 
