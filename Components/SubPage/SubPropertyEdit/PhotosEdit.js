@@ -13,7 +13,7 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
             url: `${baseURL}/v2/properties/${propertyid}/images`
         })
             .then(res => setPropertyImages(res.data?.data))
-            .catch((err) => console.log(err))
+            .catch((err) => setPropertyImages([]))
     }
 
     const handleFileUpload = (e) => {
@@ -55,35 +55,43 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
             })
     }
     const handleDeleteImg = (photoId) => {
-        // For toast
-        toast.warning("Your request processing!", {
-            theme: "colored",
-            autoClose: 5000,
-        });
-        axios({
-            method: "DELETE",
-            url: `${baseURL}/v3/properties/${propertyid}/images/${photoId}`,
-            headers: { Authorization: localStorage.getItem("authToken") }
-        })
-            .then(res => {
-                // For toast
-                toast.success("Image deleted!", {
-                    theme: "colored",
-                    autoClose: 5000,
-                });
-                // Updating image array
-                handleUpdateImages()
+        if (propertyImages.length > 1) {
+            // For toast
+            toast.warning("Your request processing!", {
+                theme: "colored",
+                autoClose: 5000,
+            });
+            axios({
+                method: "DELETE",
+                url: `${baseURL}/v3/properties/${propertyid}/images/${photoId}`,
+                headers: { Authorization: localStorage.getItem("authToken") }
             })
-            .catch((err) => {
-                // For toast
-                toast.error("Image deleting failed!", {
-                    theme: "colored",
-                    autoClose: 5000,
-                });
-                // Updating image array
-                handleUpdateImages()
-                console.log(err)
-            })
+                .then(res => {
+                    // For toast
+                    toast.success("Image deleted!", {
+                        theme: "colored",
+                        autoClose: 5000,
+                    });
+                    // Updating image array
+                    handleUpdateImages()
+                })
+                .catch((err) => {
+                    // For toast
+                    toast.error("Image deleting failed!", {
+                        theme: "colored",
+                        autoClose: 5000,
+                    });
+                    // Updating image array
+                    handleUpdateImages()
+                    console.log(err)
+                })
+        } else {
+            // For toast
+            toast.error("There is only one image in the property. You can not delete it!", {
+                theme: "colored",
+                autoClose: 7000,
+            });
+        }
     }
     return (
         <>

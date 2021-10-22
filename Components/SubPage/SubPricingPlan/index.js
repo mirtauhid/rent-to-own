@@ -6,12 +6,12 @@ import SubPricing from './SubPricing'
 
 const SubPricingPlan = () => {
     return (
-        <div>
+        <>
             <SubHeroSection/>
             <SubPricing/>
             <SubGetStarted/>
             <UserReview/>
-        </div>
+        </>
     )
 }
 

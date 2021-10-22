@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import HomeLayout from '../../Layouts/HomeLayout';
-import ChatList from '../../Components/messaging/chatList';
-import ChatBody from '../../Components/messaging/chatBody';
-import MobileChatBody from '../../Components/messaging/chatBody/MobileChatBody';
-//import DetailsContent from '../../Components/messaging/detailsContent';
-import SubModal from '../../Components/messaging/SubModal';
-import { FaWindowClose } from 'react-icons/fa';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import { FaWindowClose } from 'react-icons/fa';
+import { useSelector } from "react-redux";
+import ChatBody from '../../Components/messaging/chatBody';
+import MobileChatBody from '../../Components/messaging/chatBody/MobileChatBody';
+import ChatList from '../../Components/messaging/chatList';
+//import DetailsContent from '../../Components/messaging/detailsContent';
+import SubModal from '../../Components/messaging/SubModal';
+import UsersOnly from '../../Components/ProtectedRoutes/UsersOnly';
+import HomeLayout from '../../Layouts/HomeLayout';
 
 const Message = () => {
     const firebaseConfig = {
@@ -38,7 +39,7 @@ const Message = () => {
     const [selectedUser, setSelectedUser] = useState();
 
     const handleConversation = () => {
-        const createMsgs = async() => {
+        const createMsgs = async () => {
             const roomRef = firestore.collection('rooms');
             const r = await roomRef.add({
                 lastActivity: firebase.firestore.FieldValue.serverTimestamp(),
@@ -60,7 +61,7 @@ const Message = () => {
         createMsgs();
     }
 
-    useEffect(()=>{}, [handleConversation])
+    useEffect(() => { }, [handleConversation])
 
     //message
     const [messages, setMessages] = useState([]);
@@ -80,7 +81,7 @@ const Message = () => {
     }
 
     const fetching = async () => {
-        if(currentUser) {
+        if (currentUser) {
             await firestore.collection('userRooms').where('userId', '==', parseInt(currentUser)).onSnapshot(snapshots => {
                 setRooms(snapshotToArray(snapshots))
             });
@@ -88,7 +89,7 @@ const Message = () => {
     }
 
     const fetchingTotalRooms = () => {
-        if(currentUser) {
+        if (currentUser) {
             firestore.collection('userRooms').onSnapshot(snapshots => {
                 const data = snapshotToArray(snapshots);
                 const roomId = data.filter(item => item.userId == currentUser).map((item) => item.roomId)
@@ -100,14 +101,14 @@ const Message = () => {
         }
     }
 
-    useEffect(() => {}, [isConversationAvailable])
+    useEffect(() => { }, [isConversationAvailable])
 
     useEffect(() => {
         fetchingTotalRooms()
     }, [currentUser]);
 
     const changeRoom = async (roomid) => {
-        if(activeRoom !== roomid) {
+        if (activeRoom !== roomid) {
             firestore.collection('messages').where('roomId', '==', `${roomid}`).orderBy('createdAt', 'desc').onSnapshot(snapshots => {
                 setActiveRoom(roomid);
                 setMessages(snapshotToArray(snapshots).reverse())
@@ -126,7 +127,7 @@ const Message = () => {
     }
 
     useEffect(() => {
-        if(activeRoom) {
+        if (activeRoom) {
             firestore.collection('messages').where('roomId', '==', `${activeRoom}`).orderBy('createdAt', 'desc').onSnapshot(snapshots => {
                 const data = snapshotToArray(snapshots).reverse();
                 setMessages(data)
@@ -138,13 +139,13 @@ const Message = () => {
     //     fetchingUser();
     // }, []);
 
-    useEffect( () => {
+    useEffect(() => {
         fetching();
     }, [currentUser])
 
-    useEffect( () => {}, [buyer])
+    useEffect(() => { }, [buyer])
 
-    useEffect( () => {
+    useEffect(() => {
 
     }, [rooms])
 
@@ -152,108 +153,110 @@ const Message = () => {
 
     return (
         <HomeLayout>
-            {rooms && loggedInUser ? 
-            <div className="container px-4 mx-auto p-5 relative w-full __main">
-                <div className="flex flex-wrap justify-center">
-                    {loggedInUser.type == "SELLER" ? (
-                        null
-                    ) : buyer && buyer == 'available' ? (
-                        null
-                    ) : (
-                        <div className="flex items-center justify-center">
-                            <SubModal isOpen={startMessage} isMiddle={true}>
-                                {isConversationAvailable == true ? (
-                                    <div>
-                                        <p>Previous Conversation found. Press OK to continue with the conversation.</p>
-                                        <div className="flex justify-center">
-                                            <div 
-                                                onClick={() => setStartMessage(!startMessage)}
-                                                className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center"
-                                            >
-                                                <p>OK</p>
+            <UsersOnly>
+                {rooms && loggedInUser ?
+                    <div className="container px-4 mx-auto p-5 relative w-full __main">
+                        <div className="flex flex-wrap justify-center">
+                            {loggedInUser.type == "SELLER" ? (
+                                null
+                            ) : buyer && buyer == 'available' ? (
+                                null
+                            ) : (
+                                <div className="flex items-center justify-center">
+                                    <SubModal isOpen={startMessage} isMiddle={true}>
+                                        {isConversationAvailable == true ? (
+                                            <div>
+                                                <p>Previous Conversation found. Press OK to continue with the conversation.</p>
+                                                <div className="flex justify-center">
+                                                    <div
+                                                        onClick={() => setStartMessage(!startMessage)}
+                                                        className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center"
+                                                    >
+                                                        <p>OK</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )  : (
-                                    <div>
-                                        <div className="flex justify-center text-center">
-                                            <p>No previous conversation found with this user. Are you sure to start a new conversation</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <div 
-                                                onClick={handleConversation}
-                                                className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center">
-                                                <p>Confirm</p>
+                                        ) : (
+                                            <div>
+                                                <div className="flex justify-center text-center">
+                                                    <p>No previous conversation found with this user. Are you sure to start a new conversation</p>
+                                                </div>
+                                                <div className="flex justify-center">
+                                                    <div
+                                                        onClick={handleConversation}
+                                                        className="cursor-pointer rounded-md mt-5 h-10 w-20 bg-green-200 flex justify-center items-center">
+                                                        <p>Confirm</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )}
+                                        )}
+                                    </SubModal>
+                                </div>
+                            )}
+                            <SubModal isOpen={messageVisible}>
+                                <div
+                                    onClick={() => setMessageVisible(!messageVisible)}
+                                    className="flex justify-end"
+                                >
+                                    <FaWindowClose height={24} width={16} />
+                                </div>
+                                <MobileChatBody
+                                    selectedUser={selectedUser}
+                                    selectedId={selectedId} messages={messages}
+                                    activeRoom={activeRoom} firebase={firebase}
+                                    firestore={firestore} rooms={rooms}
+                                    rooms={rooms}
+                                    loggedInUser={loggedInUser?.id}
+                                />
                             </SubModal>
-                        </div>
-                    )}
-                    <SubModal isOpen={messageVisible}>
-                        <div 
-                            onClick={() => setMessageVisible(!messageVisible)}
-                            className="flex justify-end"
-                        >
-                            <FaWindowClose height={24} width={16}/>
-                        </div>
-                        <MobileChatBody 
-                            selectedUser={selectedUser}
-                            selectedId={selectedId} messages={messages} 
-                            activeRoom={activeRoom} firebase={firebase} 
-                            firestore={firestore} rooms={rooms}
-                            rooms={rooms}
-                            loggedInUser={loggedInUser?.id}
-                        />
-                    </SubModal>
-                    {rooms && 
-                        <div 
-                            className="hidden md:block"
-                        >
-                            <ChatList 
-                                selectedId={selectedId} setSelectedId={setSelectedId} 
-                                changeRoom={changeRoom} rooms={rooms}
-                                setSelectedUser={setSelectedUser}
-                            />
-                        </div>
-                    }
-                    {rooms && 
-                        <div 
-                            onClick={() => setMessageVisible(!messageVisible)}
-                            className="block md:hidden"
-                        >
-                            <ChatList 
-                                selectedId={selectedId} setSelectedId={setSelectedId} 
-                                changeRoom={changeRoom}  rooms={rooms}
-                                setSelectedUser={setSelectedUser}
-                            />
-                        </div>
-                    }
-                    
-                    {messages && activeRoom && loggedInUser ? 
-                    <div className="hidden md:block " >
-                        <ChatBody 
-                            selectedUser={selectedUser}
-                            selectedId={selectedId} messages={messages} 
-                            activeRoom={activeRoom} firebase={firebase} 
-                            firestore={firestore} rooms={rooms}
-                            rooms={rooms}
-                            loggedInUser={loggedInUser?.id}
-                        />
-                    </div> : null}
-                    {/* <div className="hidden xl:block" >
+                            {rooms &&
+                                <div
+                                    className="hidden md:block"
+                                >
+                                    <ChatList
+                                        selectedId={selectedId} setSelectedId={setSelectedId}
+                                        changeRoom={changeRoom} rooms={rooms}
+                                        setSelectedUser={setSelectedUser}
+                                    />
+                                </div>
+                            }
+                            {rooms &&
+                                <div
+                                    onClick={() => setMessageVisible(!messageVisible)}
+                                    className="block md:hidden"
+                                >
+                                    <ChatList
+                                        selectedId={selectedId} setSelectedId={setSelectedId}
+                                        changeRoom={changeRoom} rooms={rooms}
+                                        setSelectedUser={setSelectedUser}
+                                    />
+                                </div>
+                            }
+
+                            {messages && activeRoom && loggedInUser ?
+                                <div className="hidden md:block " >
+                                    <ChatBody
+                                        selectedUser={selectedUser}
+                                        selectedId={selectedId} messages={messages}
+                                        activeRoom={activeRoom} firebase={firebase}
+                                        firestore={firestore} rooms={rooms}
+                                        rooms={rooms}
+                                        loggedInUser={loggedInUser?.id}
+                                    />
+                                </div> : null}
+                            {/* <div className="hidden xl:block" >
                         <DetailsContent />
                     </div> */}
-                </div>
-            </div> : 
-            <div className="container px-4 mx-auto p-5 relative w-full __main">
-                <div className="">
-                    <p>Loading</p>
-                </div>
-            </div>}
+                        </div>
+                    </div> :
+                    <div className="container px-4 mx-auto p-5 relative w-full __main">
+                        <div className="">
+                            <p>Loading</p>
+                        </div>
+                    </div>}
+            </UsersOnly>
         </HomeLayout>
-        
+
     )
 }
 

@@ -61,7 +61,6 @@ const SubPropertyEdit = () => {
                     PropertyImages,
                     PropertyAddresses,
                 } = res.data?.data;
-                console.log(res.data?.data);
                 const { apt, cityId, country, latitude, longitude, street, zipCode } = PropertyAddresses[0];
                 setPropertyImages(PropertyImages)
                 setPropertyData({
@@ -121,7 +120,6 @@ const SubPropertyEdit = () => {
                 .then((res) => {
                     if (res.data?.success) {
                         setIsLoading(false);
-                        console.log(res.data);
                         // Dynamic routing
                         router.push("/sellerProfile/yourListings")
                     }
