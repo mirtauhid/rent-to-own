@@ -137,7 +137,6 @@ const ListPropertyPages = ({ children }) => {
               data: { propertyId: res.data?.data.property.id },
               headers: { Authorization: localStorage.getItem("authToken") }
             }).then(response => {
-              console.log(response.data?.data.url);
               router.push(response.data?.data.url)
             }).catch((error) => {
               console.log(error);

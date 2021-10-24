@@ -53,7 +53,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
     onSubmit: (values, { resetForm }) => {
       // loading started
       setLoading(true);
-      setError({status:false,msg:""})
+      setError({ status: false, msg: "" })
 
       // axios request for checking sign in
       axios({
@@ -63,41 +63,49 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
       })
         .then((res) => {
           if (res.data.success) {
-            // Saving token to local-storage
-            localStorage.setItem('authToken', res.data.data.token)
+            // Checking is the user verified or not
+            if (res?.data?.data?.user?.verified) {
+              // Saving token to local-storage
+              localStorage.setItem('authToken', res.data.data.token)
 
-            // verifying token
-            axios({
-              method: "POST",
-              url: `${baseURL}/v2/auth/verify`,
-              headers: { Authorization: res.data.data.token}
-            })
-              .then((res) => {
-                if (res.data.success) {
+              // verifying token
+              axios({
+                method: "POST",
+                url: `${baseURL}/v2/auth/verify`,
+                headers: { Authorization: res.data.data.token }
+              })
+                .then((res) => {
+                  if (res.data?.success) {
+                    // loading end
+                    setLoading(false);
+                    // Making error empty
+                    setError({ status: false, msg: "" })
+                    // Updating redux
+                    dispatch(signIn(res.data?.data));
+                    // Dynamic routing
+                    res.data.data.type === "SELLER"
+                      ? router.push(redirectLink)
+                      : null;
+                    // Closing the modal
+                    setShowSignInModal(false);
+                    resetForm({});
+                  } else {
+                    // loading end
+                    setLoading(false);
+                    setError({ status: true, msg: "Error occurred. Please try again!" })
+                  }
+                })
+                .catch((err) => {
                   // loading end
                   setLoading(false);
-                  // Making error empty
-                  setError({ status: false, msg: "" })
-                  // Updating redux
-                  dispatch(signIn(res.data?.data));
-                  // Dynamic routing
-                  res.data.data.type === "SELLER"
-                    ? router.push(redirectLink)
-                    : null;
-                  // Closing the modal
-                  setShowSignInModal(false);
-                  resetForm({});
-                } else {
-                  // loading end
-                  setLoading(false);
-                  setError({ status: true, msg: "Error occurred. Please try again!" })
-                }
-              })
-              .catch((err) => {
-                // loading end
-                setLoading(false);
-                setError({ status: true, msg: err.response?.data.message })
-              })
+                  setError({ status: true, msg: err.response?.data.message })
+                })
+            } else {
+              // loading end
+              setLoading(false);
+              setError({ status: true, msg: <>Your email is not verified! please check email inbox or spam-box for the verification link. Or, <a className="text-primary font-medium" href="/account-verification?resend=verification-link">Re-send verification link</a> </> })
+            }
+
           } else {
             // loading end
             setLoading(false);
@@ -124,7 +132,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
           <FaTimes />
         </button>
       </div>
-      <h2 className="uppercase text-center font-bold text-2xl mb-10 mt-3">
+      <h2 className="uppercase text-center font-bold text-2xl mb-6 mt-2">
         Log In
       </h2>
 
@@ -183,14 +191,14 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
         </div>
 
         <div className="w-full mb-2 p-2  text-right">
-          <button 
-          onClick={() => {
-            setShowForgetPasswordModal(true)
-            setShowSignInModal(false)
-            setShowSignUpModal(false)
-          }}
-          type="button"
-          className="inline-block font-bold">
+          <button
+            onClick={() => {
+              setShowForgetPasswordModal(true)
+              setShowSignInModal(false)
+              setShowSignUpModal(false)
+            }}
+            type="button"
+            className="inline-block font-bold">
             Forget Password
           </button>
         </div>

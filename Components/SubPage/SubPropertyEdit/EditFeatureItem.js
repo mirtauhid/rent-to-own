@@ -17,7 +17,6 @@ const EditFeatureItem = ({ featureData, propertyid, selectedFeatures, getSelecte
             headers: { Authorization: localStorage.getItem("authToken") }
         })
             .then((res) => {
-                console.log(res.data);
                 getSelectedFeatures()
             })
             .catch((err) => {

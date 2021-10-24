@@ -59,7 +59,6 @@ useEffect(() => {
               },
             })
             .then((res) => {
-              console.log(res, userData.data.data);
               (userData.data.data.type === "BUYER" &&
                 res.data.data.prequalification.status === "PENDING") ||
               (userData.data.data.type === "SELLER" &&
