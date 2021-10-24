@@ -26,7 +26,14 @@ const EditProfileData = () => {
     useEffect(() => {
         if (userData) {
             const {image,firstName,lastName,gender, dob,phoneNumber} = userData;
-            setUserProfileData({image,firstName,lastName,gender, dob,phoneNumber});
+            setUserProfileData({
+              image,
+              firstName,
+              lastName,
+              gender, 
+              dob: dob ? moment(dob).format("YYYY-MM-DD") : "",
+              phoneNumber
+            });
             image?.secure_url && setPhoto(image?.secure_url)
         }
         
@@ -129,8 +136,8 @@ const EditProfileData = () => {
                 className="hidden"
                 type="file"
                 placeholder="Please enter your upload here..."
-                name="upload"
-                id="upload"
+                name="image"
+                id="image"
                 accept="image/*"
                 onChange={handleFileUpload}
               />
@@ -152,7 +159,7 @@ const EditProfileData = () => {
               type="text"
               placeholder="First Name"
               name="firstName"
-              value={formik.values.firstName}
+              value={formik?.values?.firstName}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
@@ -168,7 +175,7 @@ const EditProfileData = () => {
               type="text"
               placeholder="Last Name"
               name="lastName"
-              value={formik.values.lastName}
+              value={formik?.values?.lastName}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
@@ -207,7 +214,7 @@ const EditProfileData = () => {
               type="date"
               placeholder="DOB"
               name="dob"
-              value={moment(formik.values.dob).format("YYYY-MM-DD")}
+              value={formik.values.dob}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
