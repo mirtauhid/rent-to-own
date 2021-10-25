@@ -1,15 +1,13 @@
-import React, {useEffect} from 'react';
-import PropertyImage from '../../Components/SubCard/PropertyImage';
-import ReactSlider from 'react-slider';
-import { BiDownArrow, BiRightArrow } from "react-icons/bi";
-import HomeLayout from '../../Layouts/HomeLayout';
-import { useRouter } from "next/router";
 import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { BiDownArrow, BiRightArrow } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperty, getListingType, getFilteredData } from '../../redux/slices/property';
-import { getProvience, getCities } from '../../redux/slices/areas';
-import { stCity } from '../../redux/slices/property';
-import Router from 'next/router'
+import ReactSlider from 'react-slider';
+import PropertyImage from '../../Components/SubCard/PropertyImage';
+import HomeLayout from '../../Layouts/HomeLayout';
+import { getCities, getProvience } from '../../redux/slices/areas';
+import { getFilteredData, getListingType, getProperty, stCity } from '../../redux/slices/property';
 
 const Property = () => {
     const dispatch = useDispatch();
@@ -333,9 +331,7 @@ const Property = () => {
                                     renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
                                     pearling
                                     minDistance={10}
-                                    //onBeforeChange={(value, index) => console.log(`onBeforeChange: ${JSON.stringify({ value, index })}`)}
                                     onChange={(value, index) => setPrice(value) }
-                                    //onAfterChange={(value, index) => console.log(`onAfterChange: ${JSON.stringify({ value, index })}`)}
                                 />
                             </div>
 

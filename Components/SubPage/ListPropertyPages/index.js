@@ -130,7 +130,7 @@ const ListPropertyPages = ({ children }) => {
               theme: "colored",
               autoClose: 3000,
             });
-            console.log('resdata', res.data?.data.property.id);
+            
             axios({
               method: "POST",
               url: `https://rent-to-own.zetech.us/api/v2/payments`,
@@ -139,7 +139,7 @@ const ListPropertyPages = ({ children }) => {
             }).then(response => {
               router.push(response.data?.data.url)
             }).catch((error) => {
-              console.log(error);
+              
             })
             // Dynamic routing
             //router.push("/sellerProfile/yourListings")
@@ -152,8 +152,7 @@ const ListPropertyPages = ({ children }) => {
             autoClose: 2000,
           });
         })
-      console.log(localStorage.getItem("authToken"));
-      console.log('redata', propertyId);
+        
       {
         propertyId && axios({
           method: "POST",
@@ -162,7 +161,7 @@ const ListPropertyPages = ({ children }) => {
           headers: { Authorization: localStorage.getItem("authToken") }
         })
       }
-      console.log("payment page");
+      
     },
   });
   return (

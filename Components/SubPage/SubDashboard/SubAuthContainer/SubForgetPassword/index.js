@@ -33,7 +33,6 @@ const SubForgetPassword = () => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
             alert(JSON.stringify(values, null, 2));
         },
     });

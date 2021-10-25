@@ -21,7 +21,7 @@ const SingleProperty = ({ propertyData }) => {
                 router.push(res?.data?.data?.url);
             })
             .catch((err) => {
-                console.log(err);
+                
             })
     }
 

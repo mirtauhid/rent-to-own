@@ -41,7 +41,9 @@ const index = () => {
       .then((res) => {
         setPreQualificationData(res.data.data.prequalification);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        
+      });
   }, []);
 
   const initialValues = {
@@ -86,9 +88,13 @@ const index = () => {
             }
           )
           .then((res) => router.reload())
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            
+          });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        
+      });
   };
   return (
     <>

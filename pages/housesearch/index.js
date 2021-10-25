@@ -150,7 +150,7 @@ function Search ({ panTo, isLoaded, setSearchCoordinates }) {
       setSearchCoordinates({lat, lng})
       panTo({ lat, lng });
     } catch (error) {
-      console.log("😱 Error: ", error);
+      
     }
   };
 

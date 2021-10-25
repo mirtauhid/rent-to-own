@@ -51,7 +51,6 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
                 });
                 // Updating image array
                 handleUpdateImages()
-                console.log(err)
             })
     }
     const handleDeleteImg = (photoId) => {
@@ -83,7 +82,6 @@ const PhotosEdit = ({ propertyid, propertyImages, setPropertyImages }) => {
                     });
                     // Updating image array
                     handleUpdateImages()
-                    console.log(err)
                 })
         } else {
             // For toast
