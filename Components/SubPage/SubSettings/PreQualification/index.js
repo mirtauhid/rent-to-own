@@ -43,7 +43,7 @@ const index = () => {
         setPreQualificationData(res.data.data.prequalification);
       })
       .catch((err) => {
-
+        
       });
   }, []);
 
