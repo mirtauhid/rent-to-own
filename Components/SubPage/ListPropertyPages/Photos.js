@@ -66,7 +66,7 @@ const Photos = ({ steps, setSteps, formik }) => {
                 <div className="text-md text-red-500 mt-2 ml-1">{formik.errors.images}</div>
             }
 
-            <p className="my-5 text-sm ml-2 mb-8">Tip: Choose the top 8-10 photos of your home from different angles in good light that really show the space.</p>
+            <p className="my-5 text-sm ml-2 mb-8">Tip: Choose the top 3-5 photos of your home from different angles in good light that really show the space. <b>And the total size of photos must be less then 50MB.</b></p>
 
             <div className="w-full flex justify-between mb-2 p-2">
                 <button

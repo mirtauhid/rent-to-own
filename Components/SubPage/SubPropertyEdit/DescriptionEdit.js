@@ -15,7 +15,9 @@ const DescriptionEdit = ({ formik }) => {
             .then((res) => {
                 setListingTypes(res.data.data);
             })
-            .catch((err) => console.log(err.response))
+            .catch((err) => {
+                
+            })
     }, [])
     return (
         <div className="lg:w-3/4 xl:w-3/5 mx-auto  my-5 shadow border border-gray-100 rounded p-4">

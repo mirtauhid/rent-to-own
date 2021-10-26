@@ -1,92 +1,50 @@
-import React from 'react'
+import React from 'react';
 import Question from './Question';
 
 const data = [
   {
-    question: "What’s the catch?",
-    answer: "No catch. Selling on your own is simple AND rewarding.",
+    question: "How difficult or time-consuming is this going to be?",
+    answer: "RTOR’s goal is to give you the tools and knowledge to sell your home via a rent-to-own program in a simple and transparent manner. RTOR will connect you with qualified prospects who are interested in buying your home, give you access to our tools and legal documents, and set the stage for you to complete your home sale journey via a rent-to-own program that is designed to maximize your profit. Ultimately you will see things through to the finish line, but we will be here to guide you and answer any questions along the way.",
   },
   {
-    question: "Are you a brokerage?",
+    question: "Are you a real estate brokerage?",
     answer:
-      "No. We’re a full-service real estate marketing platform designed to help you take control, sell privately, and save thousands of unnecessary commission in the process.",
+      "No. We’re Canada’s only rent-to-own marketplace designed to connect home buyers and sellers utilizing a rent-to-own program to help achieve their home ownership/selling goals.",
   },
   {
     question: "Is rent-to-own right for me?",
     answer:
-      "Absolutely so, as our solutions are matched to your needs. If you’re looking for more control over the sale of your property, are comfortable with web-based tools, and have no problem talking to people, you’ll probably be keen on our standard services. If you prefer taking more of a back-seat approach, depending where you live, we have a range of professional and premium service packages where a local Property Marketing Expert can help you navigate the entire selling process.",
+      "There are many reasons why rent-to-own may be the right solution for you as a home seller. Some of the those include: selling your home for a larger net profit margin versus traditional sale methods, some aspects of your property may be less desirable to traditional buyers, current market conditions may pose some challenges in getting a sale, and savings of thousands of dollars in commissions.",
   },
   {
-    question: "What are your fees?",
+    question: "What are your fees and do I have to pay up front?",
     answer:
-      "Our flat-fee services vary by location. Let us know where and what you’ll be selling, and we’ll match you right away with marketing packages and special offers available in your area.",
+      "RTOR charges sellers a listing fee of $499, which we refund 100% if we don’t find you a buyer within 90 days. If we do find you a buyer, RTOR’s 3% fee is simply taken from the buyer’s deposit. Sellers don’t pay this up front.",
   },
   {
-    question: "Do I have to pay up front?",
+    question: "What’s the difference between selling in a traditional way and selling through RTOR?",
     answer:
-      "Most of our package options (where available) feature a “List now, pay later” option.",
+      "Selling your home via rent-to-own can maximize your profits, alleviate selling challenges due to property aspects or market conditions, and avoid paying costly commissions. Traditional sale methods often don’t address or impact these important matters.",
   },
   {
-    question: "Am I on my own?",
+    question: "Am I on my own? Do I have to take the calls?",
     answer:
-      "Never. All of our property marketing packages come with varying degrees of expert assistance and live support.",
+      "All general inquiries about RTOR, how the rent-to-own program works, and Pre-Approving/finding buyers is handled by RTOR. All showings/home visits are arranged and conducted by the seller and buyer amongst themselves at a mutually convenient time. You know your house best, now it’s time to show to show your Pre-Approved buyer around! Our experienced and knowledgeable team operates 7 days a week and can help answer any questions you may have along the way.",
   },
   {
-    question: "Won’t an agent help me sell faster?",
+    question: "Someone contacted me directly to rent-to-own my house....now what?",
     answer:
-      "Not necessarily. Selling isn’t complicated – all you need is a well-described property that is priced in line with your local market, and exposure to buyers. We can help with all this.",
+      "You’ll want to make sure the buyer meets the minimum criteria and is Pre- Approved by RTOR. Before any showings or commitments, simply have the buyer contact us to get qualified. Then we’ll present you with their application, and you will conduct your own showing if desired. If both parties want to officially enter into a rent-to-own agreement, RTOR will coordinate accordingly.",
   },
   {
-    question: "Will buyer's agents shun me if I sell privately?",
+    question: "I’m interested in selling my home through your rent to own marketplace, how do I know the buyer is qualified?",
     answer:
-      "No. Agents want to find the right home for their clients and if your property fits their needs, they will have a vested interest to bring them by. However, for their assistance in bringing you prospective buyers, they may negotiate a buyer-side commission before doing so. Any fees you agree to pay would be between you and the respective agent.",
+      "Every buyer is vetted by our Team and must meet the minimum criteria in order to qualify for your specific property. This includes income/employment verification, confirmation of deposit/down payment funds, ID verification, a credit check, and additional due diligence to ensure we are aligning only the best qualified buyers with you.",
   },
   {
-    question: "Do I have to take calls?",
+    question: "My house is currently listed for sale with a Realtor, can I switch?",
     answer:
-      "No. You’ll communicate with buyers online while our support team handles telephone inquiries and bookings on your behalf. Whether, or when, you choose to give a buyer your number is entirely up to you.",
-  },
-
-  {
-    question: "Who shows the house?",
-    answer:
-      "You know your property best and will most often conduct showings to private buyers on your own schedule. Alternatively, if you take advantage of our lockbox service (where available), buyer’s agents would be able to bring their clients by when you’re not around as well.",
-  },
-
-  {
-    question: "If there is no franchise rep in my area, what are my options?",
-    answer:
-      "If full-service is not available in your area, we can still assist you virtually with our standard offering, which provides all the online tools and support you need to sell successfully on your own. Alternatively, if you’re interested in joining the Future of Real Estate®, perhaps you’d like to learn about franchise opportunities near you.",
-  },
-
-  {
-    question: "How do showings work?",
-    answer:
-      "You have complete control over when you show the place, Once your availability is set, buyers can request showings directly online or via our support centre. Once a showing is booked, you greet the buyer at the appropriate time, and provide them a VIP tour like nobody else could. If you have a lockbox available, buyer’s agents will be able to show the place on their own as well.",
-  },
-
-  {
-    question: "What about open houses?",
-    answer:
-      "From your seller dashboard, you can create an open house event anytime you choose. Once created, the event will be promoted on your listing, and be sent via alert to everyone who is following it too.",
-  },
-
-  {
-    question: "I received an offer, now what?",
-    answer:
-      "Awesome! It's time to get your transaction details over to the professional who is helping you close your deal. If there's a buyer's agent in the mix, they will draft an Agreement of Purchase and Sale.",
-  },
-
-  {
-    question: "I’m using an agent now, can I switch?",
-    answer:
-      "If your listing is expiring soon, you’re wise to consider switching to a private sale. This will allow you more control and pricing flexibility as you won’t have any selling commission to pay.",
-  },
-
-  {
-    question: "Is it safe to upload my info?",
-    answer:
-      "Absolutely. Your data is secured with banking-level encryption (256-bit) and is never sold to third parties. You can view our privacy policy here.",
+      "Normally, if your home is already listed for sale with a Realtor, you will have an obligation to that agreement/contract for a certain period of time. However, if that is expiring at some point or if you decide to take your home off MLS, speak with us to see when and if it makes sense for you to sell your home via a rent-to-own program.",
   },
 ];
 

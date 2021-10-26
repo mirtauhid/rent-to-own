@@ -66,11 +66,13 @@ useEffect(() => {
                 ? setShowWarning(true)
                 : null;
             })
-            .catch((err) => console.log("marker:"+err));
+            .catch((err) => {
+              
+            });
         }
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }
 }, []);
