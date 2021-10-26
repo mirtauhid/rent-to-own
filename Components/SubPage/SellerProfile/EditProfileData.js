@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import moment from 'moment';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { BsCardImage } from 'react-icons/bs';
 import { FaCloudUploadAlt } from 'react-icons/fa';
@@ -22,6 +23,8 @@ const EditProfileData = () => {
     })
 
     const { userData } = useSelector((state) => state.auth);
+
+    const router = useRouter()
 
     useEffect(() => {
         if (userData) {
@@ -88,6 +91,7 @@ const EditProfileData = () => {
                       theme: "colored",
                       autoClose: 2000,
                   });
+                  setTimeout(()=>router.reload(),2000)
             })
             .catch((err)=>{
                     // For toast
@@ -115,7 +119,7 @@ const EditProfileData = () => {
         <h3 className="text-xl my-4 font-medium">Your profile picture</h3>
         <div className="flex w-full">
           <div className=" w-40 text-secondary text-sm font-bold mb-2">
-            <label className="cursor-pointer" htmlFor="upload">
+            <label className="cursor-pointer" htmlFor="image">
               {photo ? (
                 <div className="relative h-40 w-40 overflow-hidden rounded-lg border-2 border-dashed rounded-lg">
                   <BsCardImage className="absolute inline-block text-4xl bg-white rounded px-1 bottom-0 right-0" />
