@@ -87,7 +87,6 @@ const SubPropertyEdit = () => {
             })
             .catch((err) => {
                 setIsLoading(false)
-                console.log(err)
             })
     }, [router?.query?.propertyid])
     const validate = (values) => {
@@ -126,7 +125,6 @@ const SubPropertyEdit = () => {
                 })
                 .catch((err) => {
                     setIsLoading(false);
-                    console.log(err)
                 })
         },
     });

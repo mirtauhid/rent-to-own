@@ -23,7 +23,6 @@ const DocumentUploadSection = () => {
   //   setFileName(e.target.files[0]?.name);
 
   //   const base64 = await convertBase64(e.target.files[0]);
-  //   console.log(base64);
 
   //   if (base64 instanceof Error) {
   //     return;

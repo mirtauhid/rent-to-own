@@ -22,7 +22,6 @@ const FeatureEdit = ({ propertyid }) => {
             })
             .catch((err) => {
                 getSelectedFeatures();
-                console.log(err.response);
             })
     }, [])
 
@@ -38,7 +37,6 @@ const FeatureEdit = ({ propertyid }) => {
                 setLoading(false)
             })
             .catch((err) => {
-                console.log(err.response)
                 setLoading(false)
             })
     }

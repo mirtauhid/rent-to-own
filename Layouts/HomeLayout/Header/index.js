@@ -59,6 +59,7 @@ useEffect(() => {
               },
             })
             .then((res) => {
+           
               (userData.data.data.type === "BUYER" &&
                 res.data.data.prequalification.status === "PENDING") ||
               (userData.data.data.type === "SELLER" &&
@@ -66,11 +67,13 @@ useEffect(() => {
                 ? setShowWarning(true)
                 : null;
             })
-            .catch((err) => console.log("marker:"+err));
+            .catch((err) => {
+              
+            });
         }
       })
       .catch((err) => {
-        console.log(err);
+        
       });
   }
 }, []);

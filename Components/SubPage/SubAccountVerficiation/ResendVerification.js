@@ -37,7 +37,6 @@ const ResendVerification = () => {
                 data: values
             })
                 .then((res) => {
-                    console.log(res?.data);
                     // For toast
                     toast.success(res?.data?.message, {
                         theme: "colored",
@@ -48,7 +47,6 @@ const ResendVerification = () => {
                     resetForm()
                 })
                 .catch((err) => {
-                    console.log(err.response);
                     // For toast
                     toast.error(err?.response?.data?.message, {
                         theme: "colored",
