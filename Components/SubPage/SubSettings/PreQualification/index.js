@@ -28,6 +28,7 @@ const validationSchema = Yup.object().shape(
 const index = () => {
   const [preQualificationData, setPreQualificationData] = useState();
   const [edit, setEdit] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -42,7 +43,7 @@ const index = () => {
         setPreQualificationData(res.data.data.prequalification);
       })
       .catch((err) => {
-        
+
       });
   }, []);
 
@@ -60,9 +61,12 @@ const index = () => {
   };
 
   const onSubmit = (values, { resetForm }) => {
+    // Started loading
+    setLoading(true)
+    
     const formData = new FormData();
     formData.append("applicantIncome", values.applicantIncome);
-    formData.append("coApplicantIncome", values.coApplicantIncome? values.coApplicantIncome:0);
+    formData.append("coApplicantIncome", values.coApplicantIncome ? values.coApplicantIncome : 0);
     formData.append("downpayment", values.downpayment);
     values.LOE?.forEach((item) => formData.append("LOE", item));
     values.downpaymentDoc?.forEach((item) =>
@@ -87,13 +91,17 @@ const index = () => {
               },
             }
           )
-          .then((res) => router.reload())
+          .then((res) => {
+            // End loading
+            setLoading(false)
+            router.reload()
+          })
           .catch((err) => {
-            
+
           });
       })
       .catch((err) => {
-        
+
       });
   };
   return (
@@ -111,15 +119,22 @@ const index = () => {
                 <PreQualified />
                 <DocumentUploadSection />
                 <button
-                  className="bg-primary text-white font-bold p-2 rounded-md w-full md:w-1/2 block mb-5"
-                  type="submit"
+                  className="flex justify-center items-center bg-primary text-white font-bold p-2 rounded-md w-full md:w-1/2 block mb-5"
+                  type={loading ? "button" : "submit"}
+                  disabled={loading}
                 >
-                  Submit
+                  {
+                    loading &&
+                    <span className="animate-spin flex justify-center items-center w-7">
+                      <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                    </span>
+                  }
+                  {loading ? "Loading..." : "Submit"}
                 </button>
               </Form>
             </Formik>
             {preQualificationData?.status === "PROCESSING" ||
-            preQualificationData?.status === "APPROVED" ? (
+              preQualificationData?.status === "APPROVED" ? (
               <button
                 className="bg-red-300 text-white font-bold p-2 rounded-md w-full md:w-1/2 mb-5"
                 type="button"
@@ -153,11 +168,11 @@ const index = () => {
             {(preQualificationData.applicantIncome +
               preQualificationData.coApplicantIncome) *
               4 >
-            500000
+              500000
               ? "500,000"
               : (preQualificationData.applicantIncome +
-                  preQualificationData.coApplicantIncome) *
-                4}
+                preQualificationData.coApplicantIncome) *
+              4}
           </p>
           <p
             onClick={() => setEdit(true)}
