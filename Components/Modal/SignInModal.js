@@ -85,7 +85,7 @@ const SignInModal = ({ showSignInModal, setShowSignInModal, setShowSignUpModal, 
                     // Dynamic routing
                     res.data.data.type === "SELLER"
                       ? router.push(redirectLink)
-                      : null;
+                      : router.reload();
                     // Closing the modal
                     setShowSignInModal(false);
                     resetForm({});

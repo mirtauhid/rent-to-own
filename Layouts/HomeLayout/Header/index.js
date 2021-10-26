@@ -2,7 +2,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaCheckCircle, FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import ForgetPasswordModal from "../../../Components/Modal/ForgetPassword";
 import ListPropertyWarningModal from "../../../Components/Modal/ListPropertyWarningModal";
@@ -20,6 +20,7 @@ const Header = () => {
   const [showForgetPasswordModal, setShowForgetPasswordModal] = useState(false);
   const [redirectLink, setRedirectLink] = useState("/");
   const [showWarning, setShowWarning] = useState(false);
+  const [preQualified, setPreQualified] = useState(false)
 
   const handleSingInWithRedirect = (customLink) => {
     setRedirectLink(customLink);
@@ -28,57 +29,59 @@ const Header = () => {
 
   useEffect(() => {
     const handleTest = () => {
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document?.createElement("script");
-            var s0 = document?.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/6167c082f7c0440a591e1c5f/1fhukg0ft';
-            s1.charset = 'UTF - 8';
-            s1?.setAttribute('crossorigin', '*');
-            s0?.parentNode?.insertBefore(s1, s0);
-        })();
+      var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document?.createElement("script");
+        var s0 = document?.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/6167c082f7c0440a591e1c5f/1fhukg0ft';
+        s1.charset = 'UTF - 8';
+        s1?.setAttribute('crossorigin', '*');
+        s0?.parentNode?.insertBefore(s1, s0);
+      })();
     }
     document && handleTest()
-}, [])
-  
-useEffect(() => {
-  if (localStorage.getItem("authToken")) {
-    // verifying token
-    axios({
-      method: "POST",
-      url: `${baseURL}/v2/auth/verify`,
-      headers: { Authorization: localStorage.getItem("authToken") },
-    })
-      .then((userData) => {
-        if (userData.data.success) {
-          axios
-            .get(`${baseURL}/v2/prequalifications`, {
-              headers: {
-                authorization: localStorage.getItem("authToken"),
-              },
-            })
-            .then((res) => {
-           
-              (userData.data.data.type === "BUYER" &&
-                res.data.data.prequalification.status === "PENDING") ||
-              (userData.data.data.type === "SELLER" &&
-                userData.data.data.verified === false)
-                ? setShowWarning(true)
-                : null;
-            })
-            .catch((err) => {
-              
-            });
-        }
-      })
-      .catch((err) => {
-        
-      });
-  }
-}, []);
+  }, [])
 
- 
+  useEffect(() => {
+    if (localStorage.getItem("authToken")) {
+      // verifying token
+      axios({
+        method: "POST",
+        url: `${baseURL}/v2/auth/verify`,
+        headers: { Authorization: localStorage.getItem("authToken") },
+      })
+        .then((userData) => {
+          if (userData.data.success) {
+            axios
+              .get(`${baseURL}/v2/prequalifications`, {
+                headers: {
+                  authorization: localStorage.getItem("authToken"),
+                },
+              })
+              .then((res) => {
+                // Updating pre-qualified status
+                setPreQualified(res?.data?.data?.prequalification?.status === "APPROVED");
+
+                (userData.data.data.type === "BUYER" &&
+                  res.data.data.prequalification.status === "PENDING") ||
+                  (userData.data.data.type === "SELLER" &&
+                    userData.data.data.verified === false)
+                  ? setShowWarning(true)
+                  : null;
+              })
+              .catch((err) => {
+
+              });
+          }
+        })
+        .catch((err) => {
+
+        });
+    }
+  }, []);
+
+
 
   return (
     <>
@@ -119,8 +122,8 @@ useEffect(() => {
                       !auth.isLoggedIn
                         ? handleSingInWithRedirect("/pricingplan")
                         : auth.userData?.type === "BUYER"
-                        ? setShowWarningModal(true)
-                        : null
+                          ? setShowWarningModal(true)
+                          : null
                     }
                   >
                     List your property
@@ -139,11 +142,29 @@ useEffect(() => {
                       "font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 "
                     }
                   >
-                    <FaUserCircle
-                      fill={"#07c7a2"}
-                      className="text-3xl"
-                      onClick={() => setShowNav(!showNav)}
-                    />
+                    <div className="w-10 h-10 relative"
+                      onClick={() => setShowNav(!showNav)}>
+                      {
+                        preQualified &&
+                        <div className="z-10 absolute bottom-1 -right-1">
+                          <FaCheckCircle
+                            className="bg-white rounded-full text-lg"
+                            fill={"#07c7a2"} />
+                        </div>
+                      }
+                      <div className="w-10 h-10 rounded-full overflow-hidden">
+                        {
+                          auth?.userData?.image?.secure_url
+                            ? <img
+                              src={auth?.userData?.image?.secure_url}
+                              className="w-full h-full object-cover" />
+                            : <FaUserCircle
+                              fill={"#07c7a2"}
+                              className="w-full h-full object-cover"
+                            />
+                        }
+                      </div>
+                    </div>
                   </li>
                 ) : (
                   <>
@@ -266,7 +287,7 @@ const HeaderNavBar = ({ showNav, setShowNav, setShowWarning }) => {
     })
       .then((res) => {
         res.data.data.type === "SELLER"
-          ? router.push("/sellerProfile/accountSettings")
+          ? router.push("/sellerProfile/profileSettings")
           : router.push("/settings?name=profile");
       })
       .catch((err) => {
@@ -276,9 +297,8 @@ const HeaderNavBar = ({ showNav, setShowNav, setShowWarning }) => {
 
   return (
     <div
-      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${
-        showNav ? "block" : "hidden"
-      } transition duration-300`}
+      className={`absolute border shadow-md right-1/4 sm:right-0 top-10 bg-white z-10 px-5 py-3 rounded-md font-semibold text-gray-500 ${showNav ? "block" : "hidden"
+        } transition duration-300`}
     >
       <ul>
         <Link
