@@ -27,7 +27,7 @@ const LocationEdit = ({ formik }) => {
                 setCities(res.data?.data?.cities);
             })
             .catch((err) => {
-                console.log(err);
+                
             })
     }, [])
     
@@ -91,8 +91,8 @@ const LocationEdit = ({ formik }) => {
                     Search Your Address
                 </h3>
                 {isLoaded && <Search
-                    setSearch={(value) => console.log(value)}
-                    setLatLng={(value) => console.log(value)}
+                    setSearch={(value) => console.log("")}
+                    setLatLng={(value) => console.log("")}
                     setLocationData={setLocationData}
                     inputPlaceholder="Search your address" />}
                 {

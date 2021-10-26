@@ -3,7 +3,7 @@ import HomeLayout from "../../Layouts/HomeLayout";
 
 const Notification = () => {
     const router = useRouter()
-    console.log(router);
+    
     return (
         <HomeLayout>
             <div className="lg:w-1/2 md:w-2/3 mx-auto my-24 text-center px-4">

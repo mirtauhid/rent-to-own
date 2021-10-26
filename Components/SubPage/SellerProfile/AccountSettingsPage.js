@@ -59,12 +59,10 @@ const AccountSettingsPage = () => {
                     // loading end
                     setLoading(false);
                     setError({ status: true, msg: err.response?.data?.message })
-                    
-                    console.log(err)
                 })
         },
     });
-    console.log(formik.values);
+    
     return (
         <SellerProfileLayout activeUrl="accountSettings">
             <div className="px-6 py-10">

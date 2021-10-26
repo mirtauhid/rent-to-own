@@ -41,7 +41,9 @@ const index = () => {
       .then((res) => {
         setPreQualificationData(res.data.data.prequalification);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        
+      });
   }, []);
 
   const initialValues = {
@@ -60,7 +62,7 @@ const index = () => {
   const onSubmit = (values, { resetForm }) => {
     const formData = new FormData();
     formData.append("applicantIncome", values.applicantIncome);
-    formData.append("coApplicantIncome", values.coApplicantIncome);
+    formData.append("coApplicantIncome", values.coApplicantIncome? values.coApplicantIncome:0);
     formData.append("downpayment", values.downpayment);
     values.LOE?.forEach((item) => formData.append("LOE", item));
     values.downpaymentDoc?.forEach((item) =>
@@ -86,9 +88,13 @@ const index = () => {
             }
           )
           .then((res) => router.reload())
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            
+          });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        
+      });
   };
   return (
     <>
@@ -128,8 +134,8 @@ const index = () => {
         <div className="border-2 px-5 py-5 my-10">
           <FcProcess className="md:text-2xl mx-auto" />
           <p className="md:text-2xl mt-3 text-center">
-            Your documents is submitted. We will get back to you shortly after
-            reviewing . Thank you for Staying with Rent-To-Own.
+            Your documents are submitted. We will get back to you shortly after
+            reviewing . Thank you for staying with Rent-To-Own.
           </p>
           <p
             onClick={() => setEdit(true)}
@@ -145,12 +151,12 @@ const index = () => {
             Congratulations. Your profile is verified. You are allowed to
             provide offer for maximum $
             {(preQualificationData.applicantIncome +
-              preQualificationData.applicantIncome) *
+              preQualificationData.coApplicantIncome) *
               4 >
             500000
               ? "500,000"
               : (preQualificationData.applicantIncome +
-                  preQualificationData.applicantIncome) *
+                  preQualificationData.coApplicantIncome) *
                 4}
           </p>
           <p

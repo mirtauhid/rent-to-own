@@ -8,8 +8,6 @@ import style from "./style.module.css";
 const SubSettings = () => {
   const router = useRouter();
 
-  console.log(router.query.name);
-
 
   return (
     <div className={`${style["settings-wrapper"]}`}>

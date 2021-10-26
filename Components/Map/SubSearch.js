@@ -57,7 +57,7 @@ const Search = ({ setSearch, setLatLng, setLocationData, inputPlaceholder }) => 
         // panTo({ lat, lng });
         setLatLng({lat, lng})
       } catch (error) {
-        console.log("😱 Error: ", error);
+        
       }
     };
   

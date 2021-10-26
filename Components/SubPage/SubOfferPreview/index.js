@@ -50,7 +50,7 @@ const SubOfferPreview = () => {
 
                         <div className="mt-5">
                             <h3 className="text-2xl">Included Items</h3>
-                            <p className="ml-4">{offerData?.includedItems}</p>
+                            <p className="ml-4"><pre>{offerData?.includedItems}</pre></p>
                         </div>
 
                         <div className="mt-5">

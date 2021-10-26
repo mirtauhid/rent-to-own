@@ -8,7 +8,6 @@ const EditFeatureItem = ({ featureData, propertyid, selectedFeatures, getSelecte
         const url = e.target.checked
             ? `${baseURL}/v2/properties/${propertyid}/features`
             : `${baseURL}/v2/properties/${propertyid}/features/${selectedFeatures?.find(item => item?.featureId === featureData.id)?.id}`
-            console.log("method",method,"url",url);
 
         axios({
             method,
@@ -20,7 +19,6 @@ const EditFeatureItem = ({ featureData, propertyid, selectedFeatures, getSelecte
                 getSelectedFeatures()
             })
             .catch((err) => {
-                console.log(err.response);
                 getSelectedFeatures()
             })
     }
