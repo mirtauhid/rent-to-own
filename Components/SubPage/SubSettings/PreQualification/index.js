@@ -151,12 +151,12 @@ const index = () => {
             Congratulations. Your profile is verified. You are allowed to
             provide offer for maximum $
             {(preQualificationData.applicantIncome +
-              preQualificationData.applicantIncome) *
+              preQualificationData.coApplicantIncome) *
               4 >
             500000
               ? "500,000"
               : (preQualificationData.applicantIncome +
-                  preQualificationData.applicantIncome) *
+                  preQualificationData.coApplicantIncome) *
                 4}
           </p>
           <p
