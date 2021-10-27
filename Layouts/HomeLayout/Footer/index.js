@@ -155,18 +155,16 @@ const Footer = () => (
         </span>
 
         <p className="px-5 md:px-20 text-justify mt-5">
-          Legal Disclaimer – RentToOwnRealty.com is a national rent-to-own private sale system and
-          marketplace. RentToOwnRealty.com is independently owned and operated (collectively "Us", “Our”, or
-          "We") and do not act as real estate brokers or agents. We represent neither the buyer nor the seller.
-          We do not trade in real estate. We neither warranty nor make any representations as to the outcome
-          of a property sale or rent-to-own program. Rent-to-Own Services may include services which are
-          performed for our customers by independent third party service providers. Such services are not
-          performed or provided by us. Our Pay Nothing Upfront Program, is a deferred payment program
-          offered on approved credit (certain conditions do apply). Some services, program features, and
-          website functions are only available in certain participating areas and property types. "Guaranteed to
-          receive a qualified offer for 5% more than the fair market value of your home today or your money
-          back!" is to illustrate the financial benefits of selling in 3-years through a rent-to-own model versus
-          selling through traditional means today.
+          Legal Disclaimer: RentToOwnRealty.ca (collectively "RentToOwnRealty.ca", "Us",
+          "Our", or "We") is a national rent-to-own private sale system and marketplace.
+          RentToOwnRealty.ca is independently owned and operated and does not act as a real
+          estate brokers or agent. We represent neither the buyer nor the seller. We do not trade
+          in real estate. We neither warranty nor make any representations as to the outcome of
+          a property sale or rent-to-own program. Rent-to-Own Services may include services
+          which are performed for our customers by independent third-party service providers.
+          "Guaranteed to receive a qualified offer for 5% more than the fair market value of your
+          home today or your money back!" is to illustrate the financial benefits of selling in 3-
+          years through a rent-to-own model versus selling through traditional means today.
         </p>
       </div>
     </div>
