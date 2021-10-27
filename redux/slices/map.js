@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import baseURL from '../../Helpers/httpRequest';
 
 const initialState = {
@@ -61,6 +61,7 @@ export const mapSlice = createSlice({
         state.status = 'success'
     },
     [getFilterLocation.rejected]: (state, action) => {
+        state.filterLocation = null;
         state.status = 'failed'
     },
   },

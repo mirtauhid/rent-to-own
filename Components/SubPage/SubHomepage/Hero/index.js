@@ -1,11 +1,11 @@
-import React from 'react';
-import Link from 'next/link';
-import SubSearch from '../../../Map/SubSearch';
 import {
-  useLoadScript,
+  useLoadScript
 } from "@react-google-maps/api";
+import Link from 'next/link';
+import React from 'react';
+import SubSearch from '../../../Map/SubSearch';
+import style from "./style.module.css";
 const libraries = ["places"];
-import style from "./style.module.css"
 
 const index = () => {
     const [search, setSearch] = React.useState();
@@ -38,7 +38,7 @@ const index = () => {
                   query: { search: search },
                 }}
               >
-                <div className="bg-green-500 w-32 lg:w-48 mt-3 py-2 rounded-md text-center lg:text-xl text-white font-bold lg:mt-5">
+                <div className="bg-green-500 w-32 lg:w-48 mt-3 py-2 rounded-md text-center lg:text-xl text-white font-bold lg:mt-5 cursor-pointer">
                   Search
                 </div>
               </Link>
