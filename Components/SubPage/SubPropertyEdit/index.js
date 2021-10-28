@@ -99,7 +99,13 @@ const SubPropertyEdit = () => {
         if (!values.squareFootage) { errors.squareFootage = "Required"; }
 
         // For Price Validation
-        if (!values.price) { errors.price = "Please input a valid value!"; }
+        if (!values.price) {
+            errors.price = "Please input a valid value!";
+        } else if (values.price < 200000) {
+            errors.price = "Less than 200,000 is not acceptable!";
+        } else if (values.price > 1150000) {
+            errors.price = "More than 1,150,000 is not acceptable!";
+        }
 
         return errors;
     };
@@ -114,7 +120,7 @@ const SubPropertyEdit = () => {
                 method: "PUT",
                 url: `${baseURL}/v2/public/property/${router?.query.propertyid}`,
                 data: values,
-                headers: {Authorization: localStorage.getItem("authToken")}
+                headers: { Authorization: localStorage.getItem("authToken") }
             })
                 .then((res) => {
                     if (res.data?.success) {

@@ -16,9 +16,9 @@ import TimeLine from "./TimeLine";
 
 const ListPropertyPages = ({ children }) => {
   const [steps, setSteps] = useState({
-    first: false,
-    second: false,
-    third: false,
+    first: true,
+    second: true,
+    third: true,
     fourth: false,
     fifth: false,
   });
@@ -58,6 +58,10 @@ const ListPropertyPages = ({ children }) => {
     // For Price Validation
     if (!values.price) {
       errors.price = "Please input a valid value!";
+    }else if (values.price < 200000) {
+      errors.price = "Less than 200,000 is not acceptable!";
+    }else if (values.price > 1150000) {
+      errors.price = "More than 1,150,000 is not acceptable!";
     }
 
     // For Photos Validation

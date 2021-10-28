@@ -88,22 +88,20 @@ const Header = () => {
       <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
         <div className="py-7">
           <div className="grid grid-cols-1 smd:grid-cols-2">
-            <div>
-              <div
-                className={
-                  "h-10 flex justify-center smd:justify-start mb-5 smd:mb-0"
-                }
-              >
-                <Link href={"/"}>
-                  <a className={"h-full cursor-pointer"}>
-                    <img
-                      src="/images/logo.png"
-                      alt="logo"
-                      className={"h-full"}
-                    />
-                  </a>
-                </Link>
-              </div>
+            <div
+              className={
+                "h-10 flex justify-center smd:justify-start mb-5 smd:mb-0"
+              }
+            >
+              <Link href={"/"}>
+                <a className={"h-full cursor-pointer"}>
+                  <img
+                    src="/images/logo.png"
+                    alt="logo"
+                    className={"h-full"}
+                  />
+                </a>
+              </Link>
             </div>
             <div
               className={
@@ -114,21 +112,29 @@ const Header = () => {
                 <Link
                   href={auth.userData?.type === "SELLER" ? "/pricingplan" : "#"}
                 >
-                  <li
-                    className={
-                      "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
-                    }
-                    onClick={() =>
-                      !auth.isLoggedIn
-                        ? handleSingInWithRedirect("/pricingplan")
-                        : auth.userData?.type === "BUYER"
-                          ? setShowWarningModal(true)
-                          : null
-                    }
-                  >
-                    List your property
-                  </li>
+                  <a>
+                    <li
+                      className="mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
+                      onClick={() =>
+                        !auth.isLoggedIn
+                          ? handleSingInWithRedirect("/pricingplan")
+                          : auth.userData?.type === "BUYER"
+                            ? setShowWarningModal(true)
+                            : null
+                      }
+                    >
+                      + List your property
+                    </li>
+                  </a>
                 </Link>
+                {
+                  auth?.isLoggedIn &&
+                  <Link href={`/messaging?buyer=${auth?.userData?.type === "BUYER" ? "available" : "unavailable"}`}>
+                    <a>
+                      <li className="mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1">Inbox</li>
+                    </a>
+                  </Link>
+                }
 
                 <HeaderNavBar
                   showNav={showNav}

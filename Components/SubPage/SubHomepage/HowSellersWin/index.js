@@ -8,17 +8,17 @@ const data = [
       "Access to a community of hundreds of thoroughly pre-qualified rent-to-own applicants that are eager to become homeowners",
   },
   {
-    logo: "/images/Homepage/Page-1.svg",
+    logo: "/images/Homepage/piggy-bank.svg",
     content:
       " An opportunity to save upwards of $30k in realtor costs, continue to pay down your mortgage throughout the rent-to-own term, in addition to receive ancillary rental income",
   },
   {
-    logo: "/images/Homepage/rental.svg",
+    logo: "/images/Homepage/money-bag.svg",
     content:
       "Aside from the karma points of selling to deserving Canadians, Rent-to-Own Realty unlocks the most lucrative approach to selling your home",
   },
   {
-    logo: "/images/Homepage/rental (1).svg",
+    logo: "/images/Homepage/certificate.svg",
     content:
       "A fully turnkey program with top-tier clients with the expectation that nothing more than depositing your pre-dated cheques should be required for these predefined & fully contractual programs",
   },

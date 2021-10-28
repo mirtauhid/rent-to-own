@@ -8,7 +8,7 @@ const data = [
       " Effortlessly search thousands of real-time availability of rent-to-own properties filtering by location, property type, number of bedrooms, and more",
   },
   {
-    logo: "/images/Homepage/house-rental.svg",
+    logo: "/images/Homepage/real-estate.svg",
     content:
       " A streamlined application process to easily apply to live rent-to-own programs in your desired area",
   },
@@ -18,7 +18,7 @@ const data = [
       "Standardized rent-to-own agreements and comprehensive a network of professionals",
   },
   {
-    logo: "/images/Homepage/price.svg",
+    logo: "/images/Homepage/buy.svg",
     content:
       "A proven model helping Canadian’s achieve home-ownership as early as possible and ‘lock-in’ at today’s prices before they escalate out of reach",
   },
