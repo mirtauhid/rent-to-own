@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 const SingleImageCard = ({name,img,id}) => {
     return (
@@ -15,7 +15,7 @@ const SingleImageCard = ({name,img,id}) => {
               query: { state: id },
             }}
           >
-            <p className="text-white text-xl lg:text-2xl font-bold uppercase hover:underline cursor-pointer">
+            <p className="text-white text-xl lg:text-2xl font-bold capitalize hover:underline cursor-pointer">
               {name}
             </p>
           </Link>
