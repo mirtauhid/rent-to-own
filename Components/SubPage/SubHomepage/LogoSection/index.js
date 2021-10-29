@@ -12,7 +12,7 @@ const LogoSection = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-6">
+      <div className="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-5">
         {data.map(({ img },index) => {
           return <Logo img={img} key={index}/>;
         })}
