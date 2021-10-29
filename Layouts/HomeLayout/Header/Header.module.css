@@ -1,0 +1,28 @@
+.headerWrapper {
+    min-height: 72px;
+    display: grid;
+}
+
+.menuWrapper {
+    height: 72px;
+}
+
+.menuItem {
+    display: block;
+    line-height: 70px;
+    border-bottom: 4px solid transparent;
+    transition: 0.3s all;
+}
+.menuItem:hover {
+    border-bottom: 4px solid #00dbb1;
+}
+@media only screen and (max-width: 639px) {
+    .headerWrapper {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+@media only screen and (min-width: 640px) {
+    .headerWrapper {
+        grid-template-columns: 200px 1fr;
+    }
+} ;

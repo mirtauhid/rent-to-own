@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const RentToOwnCard = ({title,imgSrc,content,btnText}) => {
     return (
@@ -7,7 +7,7 @@ const RentToOwnCard = ({title,imgSrc,content,btnText}) => {
           {title}
         </p>
         <div className="w-16 h-16 mx-auto mt-3 mb-3">
-          <img src={imgSrc} alt="" />
+          <img src={imgSrc} alt="" className="h-full" />
         </div>
 
         <p className="text-center text-sm md:text-base text-gray-500 h-56 xs:h-48">

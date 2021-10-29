@@ -235,7 +235,7 @@ const Property = () => {
                                 <div className="pt-2 text-xs">
                                     <input 
                                         type="radio" 
-                                        className="pl-4 checked:bg-red"
+                                        className="pl-4 checked:bg-red "
                                         value={listingType1[0]?.id}
                                         name="listingType"
                                         onChange={onChangeValue("listingType")}
@@ -272,7 +272,7 @@ const Property = () => {
                             {areaData?.map(item => (
                                 <div className=" mt-2 text-sm" key={item?.id}>
                                     <div className="grid grid-cols-2">
-                                        <p>{item?.state.toUpperCase()}</p>
+                                        <p className="capitalize">{item?.state}</p>
                                         <div className="justify-self-end mt-1 cursor-pointer" 
                                             onClick={() => setAreaData(
                                                 areaData?.map(state => {

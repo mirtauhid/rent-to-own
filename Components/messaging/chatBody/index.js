@@ -1,14 +1,12 @@
-import React, { Component, useState, useRef, CSSProperties, useEffect } from "react";
-import Avatar from '../chatList/Avatar';
-import ChatItem from "./ChatItem";
-import style from './style.module.css';
-import { FaPlus } from 'react-icons/fa';
+import firebase from 'firebase/compat/app';
+import React, { useEffect, useRef, useState } from "react";
 import { BiSend } from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
 import { getConversation } from '../../../redux/slices/messaging';
-import firebase from 'firebase/compat/app';
+import ChatItem from "./ChatItem";
+import style from './style.module.css';
 
-const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selectedUser}) => {
+const index = ({ selectedId, messages, user1, activeRoom, firestore, rooms, selectedUser }) => {
     const messagesEndRef = useRef(null)
     const [content, setContent] = useState('')
     const dispatch = useDispatch();
@@ -33,24 +31,27 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
     }, [messages]);
 
     const enterKeyPress = event => {
-        if (event.code === "Enter" || event.code === "NumpadEnter") {
-          event.preventDefault();
-          sendMsg();
+        if (content.length) {
+            if (event.code === "Enter" || event.code === "NumpadEnter") {
+                event.preventDefault();
+                sendMsg();
+            }
         }
     };
 
-    const sendMsg = async() => {
+    const sendMsg = async () => {
         let msg = content;
         setContent('');
-        const messagesRef = firestore.collection('messages');
-        await messagesRef.add({
-            userId: parseInt(loggedInUser.id),
-            roomId: activeRoom,
-            msg,
-            type: 'TEXT',
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        });
-        
+        if (msg.length) {
+            const messagesRef = firestore.collection('messages');
+            await messagesRef.add({
+                userId: parseInt(loggedInUser.id),
+                roomId: activeRoom,
+                msg,
+                type: 'TEXT',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+        }
         // const roomRef = firestore.collection('userRooms').doc(roomKey?.key)
         // const res = await roomRef.update({
         //     lastSeen: firebase.firestore.FieldValue.serverTimestamp()
@@ -58,7 +59,7 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
     }
 
     useEffect(() => {
-        
+
     }, [loggedInUser])
 
     return (
@@ -75,26 +76,26 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
             <div className={style["content__body"]}>
                 <div className={style["chat__items"]}>
                     <div>
-                    {messages && loggedInUser?.id ? messages?.map((itm, index) => {
-                        return (
-                            <div key={index}>
-                                <ChatItem
-                                    animationDelay={index + 2}
-                                    key={index}
-                                    user={itm.userId === parseInt(loggedInUser?.id) ? "me" : "other"}
-                                    msg={itm.msg}
-                                    createdAt={itm.createdAt}
-                                    image={selectedUser?.image?.secure_url}
-                                    sUserImage={loggedInUser?.image?.secure_url}
-                                />
+                        {messages && loggedInUser?.id ? messages?.map((itm, index) => {
+                            return (
+                                <div key={index}>
+                                    <ChatItem
+                                        animationDelay={index + 2}
+                                        key={index}
+                                        user={itm.userId === parseInt(loggedInUser?.id) ? "me" : "other"}
+                                        msg={itm.msg}
+                                        createdAt={itm.createdAt}
+                                        image={selectedUser?.image?.secure_url}
+                                        sUserImage={loggedInUser?.image?.secure_url}
+                                    />
+                                </div>
+                            );
+                        }) : (
+                            <div className="flex items-center justify-center h-full min-h-[400px] w-[250px]">
+                                <p className="text-gray-300 p-4 text-center">Sorry no conversation found</p>
                             </div>
-                        );
-                    }) : (
-                        <div className="flex items-center justify-center h-full min-h-[400px] w-[250px]">
-                            <p className="text-gray-300 p-4 text-center">Sorry no conversation found</p>
-                        </div>
-                    )}
-                    <div ref={messagesEndRef} />
+                        )}
+                        <div ref={messagesEndRef} />
                     </div>
                 </div>
             </div>
@@ -105,22 +106,22 @@ const index = ({selectedId, messages, user1, activeRoom, firestore, rooms, selec
                         <FaPlus fill={"#00dbb1"}/>
                     </button> */}
                     <div className="border w-full h-auto max-h-16 flex items-center">
-                    <input
-                        type="text"
-                        placeholder="Type a message here"
-                        value={content} 
-                        onChange={setValue}
-                        className="w-full max-w-16 p-1"
-                        onKeyDown={(e) => enterKeyPress(e) }
+                        <input
+                            type="text"
+                            placeholder="Type a message here"
+                            value={content}
+                            onChange={setValue}
+                            className="w-full max-w-16 p-1"
+                            onKeyDown={(e) => enterKeyPress(e)}
                         //className="shadow appearance-none border border-gray-700 rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
-                    />
+                        />
                     </div>
-                    <button 
-                        className="flex justify-center items-center" 
+                    <button
+                        className="flex justify-center items-center"
                         id="sendMsgBtn"
-                        onClick={() => sendMsg() }
+                        onClick={() => sendMsg()}
                     >
-                        <BiSend fill={"#00dbb1"}/>
+                        <BiSend fill={"#00dbb1"} />
                     </button>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import SignInModal from "../../../Components/Modal/SignInModal";
 import SignUpModal from "../../../Components/Modal/SignUpModal";
 import baseURL from "../../../Helpers/httpRequest";
 import { signIn, signOut } from "../../../redux/slices/auth";
+import classes from './Header.module.css';
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
@@ -85,39 +86,35 @@ const Header = () => {
 
   return (
     <>
-      <header className={"shadow-md px-5 md:px-20 lg:px-28"}>
-        <div className="py-7">
-          <div className="grid grid-cols-1 smd:grid-cols-2">
-            <div>
-              <div
-                className={
-                  "h-10 flex justify-center smd:justify-start mb-5 smd:mb-0"
-                }
+      <header className={"shadow-md px-5 md:px-20 lg:px-28 mb-3"}>
+        <div className={classes?.headerWrapper}>
+          <div
+            className={
+              "h-full flex items-center justify-center smd:justify-start mb-5 smd:mb-0"
+            }
+          >
+            <Link href={"/"}>
+              <a className={"h-10 cursor-pointer"}>
+                <img
+                  src="/images/logo.png"
+                  alt="logo"
+                  className={"h-full"}
+                />
+              </a>
+            </Link>
+          </div>
+          <div
+            className={
+              "flex justify-center items-center smd:justify-end relative"
+            }
+          >
+            <ul className={`flex items-center ${classes?.menuWrapper}`}>
+              <Link
+                href={auth.userData?.type === "SELLER" ? "/pricingplan" : "#"}
               >
-                <Link href={"/"}>
-                  <a className={"h-full cursor-pointer"}>
-                    <img
-                      src="/images/logo.png"
-                      alt="logo"
-                      className={"h-full"}
-                    />
-                  </a>
-                </Link>
-              </div>
-            </div>
-            <div
-              className={
-                "flex justify-center items-center smd:justify-end relative"
-              }
-            >
-              <ul className="flex items-center">
-                <Link
-                  href={auth.userData?.type === "SELLER" ? "/pricingplan" : "#"}
-                >
+                <a>
                   <li
-                    className={
-                      "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
-                    }
+                    className={`px-4 font-mons font-semibold text-xs xs:text-sm cursor-pointer ${classes?.menuItem}`}
                     onClick={() =>
                       !auth.isLoggedIn
                         ? handleSingInWithRedirect("/pricingplan")
@@ -126,68 +123,74 @@ const Header = () => {
                           : null
                     }
                   >
-                    List your property
+                    + List your property
                   </li>
+                </a>
+              </Link>
+              {
+                auth?.isLoggedIn &&
+                <Link href={`/messaging?buyer=${auth?.userData?.type === "BUYER" ? "available" : "unavailable"}`}>
+                  <a>
+                    <li className={`px-4 font-mons font-semibold text-xs xs:text-sm cursor-pointer ${classes?.menuItem}`}>Inbox</li>
+                  </a>
                 </Link>
+              }
 
-                <HeaderNavBar
-                  showNav={showNav}
-                  setShowNav={setShowNav}
-                  setShowWarning={setShowWarning}
-                />
+              <HeaderNavBar
+                showNav={showNav}
+                setShowNav={setShowNav}
+                setShowWarning={setShowWarning}
+              />
 
-                {auth.isLoggedIn ? (
+              {auth.isLoggedIn ? (
+                <li
+                  className={
+                    "font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 ml-3 "
+                  }
+                >
+                  <div className="w-10 h-10 relative"
+                    onClick={() => setShowNav(!showNav)}>
+                    {
+                      preQualified &&
+                      <div className="z-10 absolute bottom-1 -right-1">
+                        <FaCheckCircle
+                          className="bg-white rounded-full text-lg"
+                          fill={"#07c7a2"} />
+                      </div>
+                    }
+                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                      {
+                        auth?.userData?.image?.secure_url
+                          ? <img
+                            src={auth?.userData?.image?.secure_url}
+                            className="w-full h-full object-cover" />
+                          : <FaUserCircle
+                            fill={"#07c7a2"}
+                            className="w-full h-full object-cover"
+                          />
+                      }
+                    </div>
+                  </div>
+                </li>
+              ) : (
+                <>
+                  <li
+                    className={`px-4 font-mons font-semibold text-xs xs:text-sm cursor-pointer ${classes?.menuItem}`}
+                    onClick={() => setShowSignUpModal(true)}
+                  >
+                    Sign up
+                  </li>
                   <li
                     className={
-                      "font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1 "
+                      "mx-3 hover:shadow border-primary text-xs xs:text-sm px-4 cursor-pointer py-1 border rounded bg-primary text-white transition-all duration-300 font-semibold"
                     }
+                    onClick={() => setShowSignInModal(true)}
                   >
-                    <div className="w-10 h-10 relative"
-                      onClick={() => setShowNav(!showNav)}>
-                      {
-                        preQualified &&
-                        <div className="z-10 absolute bottom-1 -right-1">
-                          <FaCheckCircle
-                            className="bg-white rounded-full text-lg"
-                            fill={"#07c7a2"} />
-                        </div>
-                      }
-                      <div className="w-10 h-10 rounded-full overflow-hidden">
-                        {
-                          auth?.userData?.image?.secure_url
-                            ? <img
-                              src={auth?.userData?.image?.secure_url}
-                              className="w-full h-full object-cover" />
-                            : <FaUserCircle
-                              fill={"#07c7a2"}
-                              className="w-full h-full object-cover"
-                            />
-                        }
-                      </div>
-                    </div>
+                    Login
                   </li>
-                ) : (
-                  <>
-                    <li
-                      className={
-                        "mx-3 font-mons font-semibold text-xs xs:text-sm cursor-pointer px-1"
-                      }
-                      onClick={() => setShowSignUpModal(true)}
-                    >
-                      Sign up
-                    </li>
-                    <li
-                      className={
-                        "mx-3 hover:shadow border-primary text-xs xs:text-sm px-4 cursor-pointer py-1 border rounded bg-primary text-white transition-all duration-300 font-semibold"
-                      }
-                      onClick={() => setShowSignInModal(true)}
-                    >
-                      Login
-                    </li>
-                  </>
-                )}
-              </ul>
-            </div>
+                </>
+              )}
+            </ul>
           </div>
         </div>
         <SignUpModal
