@@ -1,6 +1,7 @@
 import axios from 'axios';
 import HelloSign from 'hellosign-embedded';
 import React from 'react';
+import baseURL from '../../../Helpers/httpRequest';
 
 const Preview = ({ steps, setSteps, formik }) => {
   const client = new HelloSign({
@@ -11,14 +12,11 @@ const Preview = ({ steps, setSteps, formik }) => {
   const signHandler = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      'http://localhost:5000/api/v3/signs/seller-sign',
-      {
-        name: 'Mir',
-        email: 'mail.tauhidul@gmail.com',
-        role: 'Client',
-      }
-    );
+    const response = await axios.post(`${baseURL}/v3/signs/seller-sign`, {
+      name: 'Mir',
+      email: 'mail.tauhidul@gmail.com',
+      role: 'Client',
+    });
     if (response && response.data.signature_request.signing_url) {
       console.log(response.data);
       console.log(response.data.signature_request.signing_url);
